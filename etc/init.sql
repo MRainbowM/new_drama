@@ -1,0 +1,1 @@
+CREATE DATABASE new_drama;
