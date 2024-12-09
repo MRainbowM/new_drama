@@ -1,3 +1,4 @@
+import Container from '../components/Container/Container'
 import '../styles/globals.scss'
 
 import { PT_Sans_Narrow } from 'next/font/google'
@@ -15,7 +16,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={font.className}>
-                {children}
+                <Container>
+                    {children}
+                </Container>
             </body>
         </html>
     )
