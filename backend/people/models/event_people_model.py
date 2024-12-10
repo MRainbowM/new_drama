@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from basis.models.dates_abstract_model import DatesAbstract
-from event.models import Event
+from event.models.event_model import Event
 from .people_model import People
 from ..choices import PEOPLE_TAG_LIST
 

@@ -14,7 +14,23 @@ class Event(DatesAbstract):
     name = models.CharField(_('Название спектакля'), max_length=256, unique=True)
     slug = models.CharField(_('Слаг названия'), max_length=256, unique=True)
     short_description = models.TextField(_('Краткое описание'))
-    description = models.TextField(_('Подробное описание'))
+    description = models.TextField(_('Подробное описание'), default='', blank=True)
+    dramatist = models.ForeignKey(
+        to='people.People',
+        on_delete=models.SET_NULL,
+        verbose_name=_('Драматург'),
+        null=True,
+        blank=True,
+        related_name='dramatist'
+    )
+    producer = models.ForeignKey(
+        to='people.People',
+        on_delete=models.SET_NULL,
+        verbose_name=_('Режиссер'),
+        null=True,
+        blank=True,
+        related_name='producer'
+    )
     is_enable = models.BooleanField(_('Показывать в репертуаре'), default=True)
     cover = models.ImageField(
         _('Обложка спектакля'),
