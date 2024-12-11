@@ -30,8 +30,8 @@ class EventDetailSchema(ModelSchema):
 
 
 class EventPreviewSchema(ModelSchema):
-    dramatist: PeoplePreviewSchema
-    producer: PeoplePreviewSchema
+    dramatist: Optional[PeoplePreviewSchema]
+    producer: Optional[PeoplePreviewSchema]
 
     class Config:
         model = Event
