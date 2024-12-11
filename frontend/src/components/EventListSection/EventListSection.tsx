@@ -40,16 +40,24 @@ export default async function EventListSection(
                                     {item.name}
                                 </span>
                                 <span className={styles.description}>
-                                    Смешная история о страшном
+                                    {item.short_description}
                                 </span>
                             </div>
                             <div className={styles.rightCol}>
-                                <span>
-                                    Драматург: Наталья Милантьева
-                                </span>
-                                <span>
-                                    Режиссер: Вадим Карионов
-                                </span>
+                                {
+                                    item.dramatist ? (
+                                        <span>
+                                            Драматург: {item.dramatist.first_name} {item.dramatist.last_name}
+                                        </span>
+                                    ) : (<></>)
+                                }
+                                {
+                                    item.dramatist ? (
+                                        <span>
+                                            Режиссер: {item.producer.first_name} {item.producer.last_name}
+                                        </span>
+                                    ) : (<></>)
+                                }
                             </div>
                         </div>
                         <div className={styles.btn}>

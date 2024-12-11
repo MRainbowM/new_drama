@@ -3,7 +3,7 @@ from typing import Optional
 from charset_normalizer.md import List
 from ninja import ModelSchema, FilterSchema, Field
 
-from people.schemes import EventPeopleOutSchema
+from people.schemes import EventPeopleOutSchema, PeoplePreviewSchema
 from .event_image_schemes import EventImageOutSchema
 from ..models import Event
 
@@ -30,6 +30,9 @@ class EventDetailSchema(ModelSchema):
 
 
 class EventPreviewSchema(ModelSchema):
+    dramatist: PeoplePreviewSchema
+    producer: PeoplePreviewSchema
+
     class Config:
         model = Event
         model_fields = [
