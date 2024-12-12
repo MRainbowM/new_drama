@@ -17,12 +17,6 @@
     border-radius: 16px;
     // min-width: 237px;
 
-
-    img {
-        height: 100%;
-        object-fit: cover;
-    }
-
     .title {
         width: 100%;
         font-size: 28px;
@@ -42,11 +36,14 @@
 
 .text {
     display: flex;
+    overflow: hidden;
+    position: relative;
 
     .leftCol {
         display: flex;
         flex-direction: column;
-        max-width: 237px;
+        max-width: 200px;
+        width: 100%;
     }
 
     .rightCol {
@@ -55,7 +52,8 @@
         justify-content: flex-end;
         margin-left: auto;
 
-        display: none;
+        width: 0;
+        height: 0;
     }
 }
 
@@ -77,15 +75,25 @@
 
     .text {
         .rightCol {
-            display: flex;
+            // display: flex;
+            width: auto;
+            height: auto;
+            // opacity: 1;
+            // right: 0;
+
         }
     }
 }
 
 .notActive {
     width: calc((100% - (100% / 2.5)) / (var(--col-count) - 1));
+
     .text {
         display: none;
+
+        .rightCol {
+            // opacity: 0;
+        }
     }
 
     .btn {
