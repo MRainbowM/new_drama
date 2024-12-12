@@ -21,6 +21,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/event/program": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Получить программку спектакля по текущей дате */
+        get: operations["event_api_get_event_program_by_date"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/event/event/list": {
         parameters: {
             query?: never;
@@ -108,6 +125,8 @@ export interface components {
         };
         /** EventPreviewSchema */
         EventPreviewSchema: {
+            dramatist: components["schemas"]["PeoplePreviewSchema"];
+            producer: components["schemas"]["PeoplePreviewSchema"];
             /** ID */
             id?: number | null;
             /** Название спектакля */
@@ -142,6 +161,38 @@ export interface components {
             is_premiere: boolean;
             /** Link To Buy Ticket */
             link_to_buy_ticket: string;
+        };
+        /** PeoplePreviewSchema */
+        PeoplePreviewSchema: {
+            /** ID */
+            id?: number | null;
+            /** Имя */
+            first_name: string;
+            /** Фамилия */
+            last_name: string;
+            /** Слаг имени */
+            slug: string;
+            /**
+             * Тег
+             * @description Фильтр на странице "Коллектив"
+             */
+            tag?: string | null;
+            /**
+             * Фотография
+             * @default
+             */
+            photo: string | null;
+        };
+        /** EventProgramSchema */
+        EventProgramSchema: {
+            /**
+             * Программка спектакля
+             * @description PDF файл с программой спектакля
+             * @default
+             */
+            program_pdf: string | null;
+            /** Название спектакля */
+            name: string;
         };
         /** EventFilterSchema */
         EventFilterSchema: {
@@ -178,8 +229,11 @@ export interface components {
              * @default 0
              */
             min_age_limit: number;
-            /** Подробное описание */
-            description: string;
+            /**
+             * Подробное описание
+             * @default
+             */
+            description: string | null;
             /**
              * Длительность спектакля
              * Format: time
@@ -224,27 +278,6 @@ export interface components {
              * @default 0
              */
             sort: number;
-        };
-        /** PeoplePreviewSchema */
-        PeoplePreviewSchema: {
-            /** ID */
-            id?: number | null;
-            /** Имя */
-            first_name: string;
-            /** Фамилия */
-            last_name: string;
-            /** Слаг имени */
-            slug: string;
-            /**
-             * Тег
-             * @description Фильтр на странице "Коллектив"
-             */
-            tag?: string | null;
-            /**
-             * Фотография
-             * @default
-             */
-            photo: string | null;
         };
         /** PeopleDetailSchema */
         PeopleDetailSchema: {
@@ -315,6 +348,28 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["EventShowOutSchema"][];
+                };
+            };
+        };
+    };
+    event_api_get_event_program_by_date: {
+        parameters: {
+            query?: {
+                event_date?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventProgramSchema"];
                 };
             };
         };
