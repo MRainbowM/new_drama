@@ -1,6 +1,9 @@
 .root {
+    --col-count: 6;
+
     padding: 0 10px;
-    width: 100%;
+    width: calc(100% / var(--col-count));
+    transition: 0.3s;
 }
 
 .item {
@@ -12,7 +15,8 @@
     justify-content: flex-end;
     gap: 10px;
     border-radius: 16px;
-    min-width: 237px;
+    // min-width: 237px;
+
 
     img {
         height: 100%;
@@ -25,24 +29,14 @@
         font-weight: bold;
         text-transform: uppercase;
         line-height: 1;
+        min-height: 56px;
     }
 
     .description {
         width: 100%;
         font-size: 14px;
         line-height: 1;
-    }
-
-    .btn {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        height: 40px;
-        width: 100%;
-        padding: 8px 20px;
-        border: 1px solid var(--color-white);
-        border-radius: 32px;
+        min-height: 28px;
     }
 }
 
@@ -58,18 +52,73 @@
     .rightCol {
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
+        justify-content: flex-end;
         margin-left: auto;
 
         display: none;
     }
 }
 
+.btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+    padding: 8px 20px;
+    border: 1px solid var(--color-white);
+    border-radius: 32px;
+}
+
 .active {
-    color: red;
-    grid-column: 3 span;
+    // grid-column: 3 span;
+    width: calc(100% / 2.5);
+
+    .text {
+        .rightCol {
+            display: flex;
+        }
+    }
 }
 
 .notActive {
-    color: orange;
+    width: calc((100% - (100% / 2.5)) / (var(--col-count) - 1));
+    .text {
+        display: none;
+    }
+
+    .btn {
+        display: none;
+    }
+}
+
+@media (max-width: 1400px) {
+    .root {
+        --col-count: 5;
+    }
+}
+
+@media (max-width: 1200px) {
+    .root {
+        --col-count: 4;
+    }
+}
+
+@media (max-width: 1000px) {
+    .root {
+        --col-count: 3;
+    }
+}
+
+@media (max-width: 700px) {
+    .root {
+        --col-count: 2;
+    }
+}
+
+@media (max-width: 550px) {
+    .root {
+        --col-count: 1;
+    }
 }
