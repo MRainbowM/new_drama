@@ -12,18 +12,24 @@ export default function EventPreviewContainer(
     { eventList }: EventPreviewContainerProps
 ) {
     const [isActive, setActive] = useState(false)
+    const [activeIndex, setActiveIndex] = useState(null)
 
     return (
         <div
             className={styles.root}
             onMouseOver={() => setActive(true)}
-            onMouseOut={() => setActive(false)}
+            onMouseOut={() => {
+                setActive(false)
+                setActiveIndex(null)
+            }}
         >
-            {eventList.map(item => (
+            {eventList.map((item, index) => (
                 <EventPreview
                     key={item.id}
                     event={item}
                     isActiveContainer={isActive}
+                    onMouseOver={() => setActiveIndex(index)}
+                    isActive={activeIndex === index}
                 />
             ))}
         </div>

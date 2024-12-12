@@ -6,53 +6,58 @@ import clsx from "clsx"
 
 interface EventPreviewProps {
     event: components['schemas']['EventPreviewSchema'],
-    isActiveContainer: boolean
+    isActiveContainer: boolean,
+    isActive: boolean,
+    onMouseOver: () => void
 }
 
 export default function EventPreview(
-    { event, isActiveContainer }: EventPreviewProps
+    { event, isActiveContainer, isActive, onMouseOver }: EventPreviewProps
 ) {
-    const [isActive, setActive] = useState(false)
-
     return (
         <div
             className={clsx(
-                styles.item,
-                { [styles.active]: isActive && isActiveContainer},
-                { [styles.notActive]: !isActive && isActiveContainer}
+                styles.root,
+                { [styles.active]: isActive && isActiveContainer },
+                { [styles.notActive]: !isActive && isActiveContainer }
             )}
-            style={{ backgroundImage: `url(http://0.0.0.0:8011/${event.preview_cover})` }}
-            onMouseOver={() => setActive(true)}
-            onMouseOut={() => setActive(false)}
+
+            onMouseOver={onMouseOver}
         >
-            <div className={styles.text}>
-                <div className={styles.leftCol}>
-                    <span className={styles.title}>
-                        {event.name}
-                    </span>
-                    <span className={styles.description}>
-                        {event.short_description}
-                    </span>
+            <div
+                className={styles.item}
+                style={{ backgroundImage: `url(http://0.0.0.0:8011/${event.preview_cover})` }}
+            >
+
+                <div className={styles.text}>
+                    <div className={styles.leftCol}>
+                        <span className={styles.title}>
+                            {event.name}
+                        </span>
+                        <span className={styles.description}>
+                            {event.short_description}
+                        </span>
+                    </div>
+                    <div className={styles.rightCol}>
+                        {
+                            event.dramatist ? (
+                                <span>
+                                    Драматург: {event.dramatist.first_name} {event.dramatist.last_name}
+                                </span>
+                            ) : (<></>)
+                        }
+                        {
+                            event.dramatist ? (
+                                <span>
+                                    Режиссер: {event.producer.first_name} {event.producer.last_name}
+                                </span>
+                            ) : (<></>)
+                        }
+                    </div>
                 </div>
-                <div className={styles.rightCol}>
-                    {
-                        event.dramatist ? (
-                            <span>
-                                Драматург: {event.dramatist.first_name} {event.dramatist.last_name}
-                            </span>
-                        ) : (<></>)
-                    }
-                    {
-                        event.dramatist ? (
-                            <span>
-                                Режиссер: {event.producer.first_name} {event.producer.last_name}
-                            </span>
-                        ) : (<></>)
-                    }
+                <div className={styles.btn}>
+                    <span>О спектакле</span>
                 </div>
-            </div>
-            <div className={styles.btn}>
-                <span>О спектакле</span>
             </div>
         </div>
     );
