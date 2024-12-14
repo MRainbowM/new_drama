@@ -25,8 +25,8 @@ a {
   text-decoration: none;
 }
 
-h3 {
-  font-weight: bold;
+h1, h2, h3 {
+  font-weight: unset;
 }
 
 @media (prefers-color-scheme: dark) {

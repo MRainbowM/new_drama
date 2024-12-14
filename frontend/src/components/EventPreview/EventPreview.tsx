@@ -1,7 +1,6 @@
 'use client'
 import { components } from '../../api/schema'
 import styles from './EventPreview.module.scss'
-import { useState } from "react"
 import clsx from "clsx"
 
 interface EventPreviewProps {
