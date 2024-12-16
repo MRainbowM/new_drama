@@ -1,7 +1,6 @@
 import styles from './EventPreviewSection.module.scss'
 import { apiClient } from '../../api/client'
 import EventPreviewList from '../EventPreviewContainer/EventPreviewContainer';
-import Arrow from 'public/static/images/arrow.svg'
 
 export default async function EventPreviewSection() {
     // Репертуар
@@ -21,24 +20,9 @@ export default async function EventPreviewSection() {
     return (
         <section className={styles.root}>
             <h2>Все спектакли</h2>
-            <div className={styles.container}>
-                <div className={styles.arrowLeft}>
-                    <div className={styles.arrow}>
-                        <Arrow />
-                    </div>
-                </div>
-
-                <EventPreviewList
-                    eventList={response.data}
-                />
-
-                <div className={styles.arrowRight}>
-                    <div className={styles.arrow}>
-                        <Arrow />
-                    </div>
-                </div>
-            </div>
-
+            <EventPreviewList
+                eventList={response.data}
+            />
         </section>
     )
 }
