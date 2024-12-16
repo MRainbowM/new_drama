@@ -4,15 +4,10 @@
 
 .list {
     display: flex;
-    // display: grid;
-    // grid-template-columns: 1fr 1fr 1fr 1fr;
-    // gap: 20px;
     justify-content: space-between;
-    width: 100%;
-    margin: 0 -10px;
-
+    width: calc(100% + 20px);
+    margin-left: -10px;
     flex-direction: column;
     flex-wrap: wrap;
     height: 560px;
-    width: 100%;
 }
