@@ -4,12 +4,11 @@ html,
 body {
   max-width: 100vw;
   letter-spacing: 0.5px;
-  background-color: black;
+  background-color: var(--color-background);
 }
 
 body {
   color: var(--color-white);
-  background: var(--color-black);
   font-family: 'Arial', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
