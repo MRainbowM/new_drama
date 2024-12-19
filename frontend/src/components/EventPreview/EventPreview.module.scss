@@ -15,7 +15,6 @@
     justify-content: flex-end;
     gap: 10px;
     border-radius: 16px;
-    // min-width: 237px;
 
     .title {
         width: 100%;
@@ -70,17 +69,12 @@
 }
 
 .active {
-    // grid-column: 3 span;
     width: calc(100% / 2.5);
 
     .text {
         .rightCol {
-            // display: flex;
             width: auto;
             height: auto;
-            // opacity: 1;
-            // right: 0;
-
         }
     }
 }
