@@ -9,6 +9,12 @@
 
 .months {
     text-transform: uppercase;
+    gap: 28px;
     color: var(--color-red);
-    
+    font-size: 24px;
+    font-weight: bold;
+
+    span {
+        padding: 10px 12px;
+    }
 }

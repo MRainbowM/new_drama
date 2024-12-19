@@ -8,19 +8,17 @@ interface ScheduleListProps {
     months: string[]
 }
 
-export default  function ScheduleList(
+export default function ScheduleList(
     { events, months }: ScheduleListProps
 ) {
     return (
         <div className={styles.root}>
             <div className={styles.filters}>
-            {months.map(month => (
-                    <div
-                        className={styles.months}
-                    >
-                        <span>{monthToName[month]}</span>
-                    </div>
-                ))}
+                <div className={styles.months} >
+                    {months.map(month => (
+                        <span key={month}>{monthToName[month]}</span>
+                    ))}
+                </div>
             </div>
         </div>
     );
