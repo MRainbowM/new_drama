@@ -16,6 +16,7 @@
         object-fit: cover;
         mask-repeat: no-repeat;
         mask-image: var(--mask-large, '');
+        mask-position: center;
 
         @media (max-width: 700px) {
             mask-image: var(--mask-small, '');
