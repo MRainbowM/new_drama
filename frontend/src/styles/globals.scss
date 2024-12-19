@@ -25,8 +25,14 @@ a {
   text-decoration: none;
 }
 
-h1, h2, h3 {
+h1,
+h3 {
   font-weight: unset;
+}
+
+h2 {
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 @media (prefers-color-scheme: dark) {
