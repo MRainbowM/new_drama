@@ -4,6 +4,7 @@ import { components } from '../../api/schema'
 import { monthToName } from './../../constants/months'
 import { useState } from "react"
 import clsx from "clsx"
+import ScheduleItem from '../ScheduleItem/ScheduleItem'
 
 interface ScheduleListProps {
     events: components['schemas']['EventShowOutSchema'][],
@@ -17,6 +18,11 @@ export default function ScheduleList(
 
     const onClickMonth = (monthValue) => {
         changeMonth(() => monthValue);
+    }
+
+    function isSelectMonth(event) {
+        const eventDate = new Date(event.start_at);
+        return eventDate.getMonth().toString() === selectMonthValue;
     }
 
     return (
@@ -33,7 +39,15 @@ export default function ScheduleList(
                 ))}
             </div>
 
-            
+            <div className={styles.list}>
+                {events.filter(isSelectMonth).map(item => (
+                    <ScheduleItem
+                        event={item}
+                        key={item.id}
+                    />
+                ))}
+            </div>
+
         </div>
     );
 }
