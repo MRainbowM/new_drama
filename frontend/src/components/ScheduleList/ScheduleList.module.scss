@@ -2,19 +2,27 @@
     width: 100%;
 }
 
-.filters {
-    width: 100%;
-    border-bottom: 1px solid var(--color-red);
-}
-
 .months {
     text-transform: uppercase;
     gap: 28px;
-    color: var(--color-red);
+    color: var(--color-white);
     font-size: 24px;
     font-weight: bold;
+    padding-bottom: 11px;
+    border-bottom: 1px solid var(--color-red-with-alpha);
 
     span {
         padding: 10px 12px;
+        cursor: pointer;
+
+        &:hover {
+            color: var(--color-red);
+        }
+    }
+
+    .select {
+        color: var(--color-red);
+        border-bottom: 2px solid var(--color-red);
+        cursor: auto;
     }
 }
