@@ -5,7 +5,6 @@
 
 .left {
     display: flex;
-
 }
 
 .dateCol {
@@ -37,7 +36,7 @@
 
     .description {
         font-size: 18px;
-        padding: 0 20px;
+        margin-left: 20px;
     }
 }
 
@@ -46,14 +45,15 @@
     margin-left: auto;
     width: 365px;
     justify-content: space-between;
-}
 
-.age {
-    display: flex;
-    align-items: center;
-    font-weight: bold;
-    font-size: 18px;
-    width: 40px;
+    .age {
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        font-size: 18px;
+        width: 40px;
+        height: 40px;
+    }
 }
 
 .btnCol {
@@ -66,5 +66,78 @@
         text-transform: uppercase;
         font-size: 16px;
         border: 1px solid var(--color-white);
+    }
+}
+
+@media (max-width: 1180px) {
+    .dateCol {
+        flex-direction: column;
+
+        .time {
+            margin: 0;
+        }
+    }
+
+    .titleCol {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .description {
+            margin: 0;
+        }
+    }
+
+    .right {
+        width: unset;
+
+        .age {
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .root {
+        padding: 12px 0;
+    }
+
+    .left {
+        flex-direction: column;
+
+        .dateCol {
+            flex-direction: row;
+
+            .time {
+                margin-left: 20px;
+            }
+        }
+
+        .titleCol {
+            margin: 0;
+        }
+    }
+
+    .right {
+        align-items: center;
+
+        .btnBuy {
+            width: 150px;
+        }
+    }
+}
+
+@media (max-width: 650px) {
+    .root {
+        flex-direction: column;
+    }
+
+    .right {
+        width: 100%;
+        margin-top: 20px;
+
+        .age {
+            margin: 0;
+        }
     }
 }
