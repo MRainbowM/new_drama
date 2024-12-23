@@ -1,0 +1,12 @@
+.root {
+    position: fixed;
+    background-position: center;
+    object-fit: cover;
+}
+
+.active {
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    max-height: 300px;
+}

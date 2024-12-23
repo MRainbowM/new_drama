@@ -1,4 +1,22 @@
 .root {
+    padding: 12px 0;
+    cursor: pointer;
+}
+
+.active {
+    z-index: 2;
+
+    .container {
+        background-color: var(--color-white);
+        color: var(--color-black);
+
+        .btnBuy {
+            border: 1px solid var(--color-black);
+        }
+    }
+}
+
+.container {
     display: flex;
     padding: 12px 10px;
 }
@@ -9,6 +27,7 @@
 
 .dateCol {
     display: flex;
+    align-items: center;
 
     .date {
         font-weight: bold;
@@ -32,6 +51,10 @@
     .name {
         font-weight: bold;
         font-size: 24px;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 
     .description {
@@ -45,6 +68,7 @@
     margin-left: auto;
     width: 365px;
     justify-content: space-between;
+    align-items: center;
 
     .age {
         display: flex;
@@ -66,12 +90,19 @@
         text-transform: uppercase;
         font-size: 16px;
         border: 1px solid var(--color-white);
+
+        &:hover {
+            background-color: var(--color-red);
+            color: var(--color-white);
+            border: none;
+        }
     }
 }
 
 @media (max-width: 1180px) {
     .dateCol {
         flex-direction: column;
+        align-items: flex-start;
 
         .time {
             margin: 0;
@@ -98,7 +129,7 @@
 }
 
 @media (max-width: 900px) {
-    .root {
+    .container {
         padding: 12px 0;
     }
 
@@ -107,6 +138,7 @@
 
         .dateCol {
             flex-direction: row;
+            align-items: center;
 
             .time {
                 margin-left: 20px;
@@ -128,7 +160,7 @@
 }
 
 @media (max-width: 650px) {
-    .root {
+    .container {
         flex-direction: column;
     }
 

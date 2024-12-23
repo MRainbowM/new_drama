@@ -17,7 +17,7 @@ export default async function ScheduleSection() {
             }
         }
     });
-    
+
     if (response.error) {
         console.log(response.error);
         throw new Error('error'); //TODO
@@ -43,7 +43,6 @@ export default async function ScheduleSection() {
                         events={response.data}
                         months={months}
                     />
-
                 </section>
             ) : (
                 <></>
