@@ -11,12 +11,12 @@ interface ScheduleCursorProps {
 export default function ScheduleCursor(
     { isActive, cover }: ScheduleCursorProps
 ) {
-    const cursorsReview = useRef<HTMLDivElement>(null);
+    const cursorSchedule = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const handleMouseMove = (e) => {
-            cursorsReview.current.style.left = (e.clientX - 250) + 'px';
-            cursorsReview.current.style.top = (e.clientY - 150) + 'px';
+            cursorSchedule.current.style.left = (e.clientX - 250) + 'px';
+            cursorSchedule.current.style.top = (e.clientY - 150) + 'px';
         }
         window.addEventListener("mousemove", handleMouseMove);
         return () => {
@@ -26,7 +26,7 @@ export default function ScheduleCursor(
 
     return (
         <div
-            ref={cursorsReview}
+            ref={cursorSchedule}
             className={clsx(
                 styles.root,
                 { [styles.active]: isActive }
