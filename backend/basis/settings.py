@@ -26,7 +26,8 @@ INSTALLED_APPS = [
     'basis',
     'ninja',
     'event',
-    'people'
+    'people',
+    'info'
 ]
 
 MIDDLEWARE = [
