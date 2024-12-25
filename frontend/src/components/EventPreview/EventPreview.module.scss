@@ -1,13 +1,15 @@
 .root {
     --col-count: 6;
 
+    height: 100%;
     padding: 0 10px;
     width: calc(100% / var(--col-count));
     transition: 0.3s width;
 }
 
 .item {
-    height: 560px;
+    // height: 560px;
+    height: 100%;
     background-position: center;
     display: flex;
     flex-direction: column;
