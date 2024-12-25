@@ -2,6 +2,8 @@
 import SliderItem from '../SliderItem/SliderItem';
 import styles from './SliderSection.module.scss'
 import React, { useRef, useState } from 'react';
+import Image from 'next/image'
+import RestImg from 'public/images/rest.png'
 
 export default function SliderSection() {
     const container = useRef<HTMLDivElement>(null);
@@ -19,6 +21,13 @@ export default function SliderSection() {
 
                     <div className={styles.coverContainer}>
                         <div className={styles.cover}>
+                            <Image
+                                className={styles.previewCoverImg}
+                                src={RestImg.src}
+                                width={500}
+                                height={500}
+                                alt={''}
+                            />
                         </div>
                     </div>
                 </div>
