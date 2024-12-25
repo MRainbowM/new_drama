@@ -1,6 +1,6 @@
 import styles from './Hero.module.scss'
-import NDlarge from 'public/static/images/hero_2.svg?url'
-import NDsmall from 'public/static/images/hero_1.svg?url'
+import NDlarge from 'public/images/hero_2.svg?url'
+import NDsmall from 'public/images/hero_1.svg?url'
 
 
 export default function Hero() {

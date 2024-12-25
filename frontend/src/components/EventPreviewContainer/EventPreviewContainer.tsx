@@ -4,7 +4,7 @@ import { components } from '../../api/schema'
 import EventPreview from '../EventPreview/EventPreview';
 import { useState } from "react"
 import useEmblaCarousel from 'embla-carousel-react'
-import Arrow from 'public/static/images/arrow.svg'
+import Arrow from 'public/images/arrow.svg'
 
 
 interface EventPreviewContainerProps {
