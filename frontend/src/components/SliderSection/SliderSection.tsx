@@ -1,9 +1,7 @@
 'use client'
 import SliderItem from '../SliderItem/SliderItem';
 import styles from './SliderSection.module.scss'
-import React, { useRef, useEffect, useState } from 'react';
-
-import { MouseParallax, ScrollParallax } from "react-just-parallax";
+import React, { useRef, useState } from 'react';
 
 export default function SliderSection() {
     const container = useRef<HTMLDivElement>(null);
@@ -13,13 +11,15 @@ export default function SliderSection() {
     return (
 
         <section className={styles.root}>
-            <h2>В наших стенах</h2>
             <div className={styles.container}>
                 <div className={styles.left}>
+                    <div className={styles.title}>
+                        <h2>В наших стенах</h2>
+                    </div>
 
-                    {/* {activeItem} */}
-                    <div className={styles.cover}>
-                        
+                    <div className={styles.coverContainer}>
+                        <div className={styles.cover}>
+                        </div>
                     </div>
                 </div>
                 <div className={styles.right}>
