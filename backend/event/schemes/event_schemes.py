@@ -1,6 +1,5 @@
-from typing import Optional
+from typing import Optional, List
 
-from charset_normalizer.md import List
 from ninja import ModelSchema, FilterSchema, Field
 
 from people.schemes import EventPeopleOutSchema, PeoplePreviewSchema
