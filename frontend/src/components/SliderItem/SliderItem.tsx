@@ -15,8 +15,7 @@ export default function SliderItem(
 ) {
 
     const { ref, inView, entry } = useInView({
-        threshold: 0.9,
-        // rootMargin: '100%'
+        threshold: 0.75
     });
 
     useEffect(() => { if (inView) { onView(); } }, [inView])
@@ -44,8 +43,6 @@ export default function SliderItem(
                     </div>
                 </div>
             </ScrollParallax>
-
-
         </div>
     );
 }

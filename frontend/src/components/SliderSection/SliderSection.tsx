@@ -2,35 +2,21 @@
 import SliderItem from '../SliderItem/SliderItem';
 import styles from './SliderSection.module.scss'
 import React, { useRef, useState } from 'react';
-import Image from 'next/image'
-import RestImg from 'public/images/rest.png'
+
+import SliderLeftContainer from '../SliderLeftContainer/SliderLeftContainer';
 
 export default function SliderSection() {
-    const container = useRef<HTMLDivElement>(null);
 
     const [activeItem, setActiveItem] = useState(0)
+
 
     return (
 
         <section className={styles.root}>
             <div className={styles.container}>
-                <div className={styles.left}>
-                    <div className={styles.title}>
-                        <h2>В наших стенах</h2>
-                    </div>
-
-                    <div className={styles.coverContainer}>
-                        <div className={styles.cover}>
-                            <Image
-                                className={styles.previewCoverImg}
-                                src={RestImg.src}
-                                width={500}
-                                height={500}
-                                alt={''}
-                            />
-                        </div>
-                    </div>
-                </div>
+                <SliderLeftContainer
+                    activeItem={activeItem}
+                />
                 <div className={styles.right}>
 
                     <SliderItem

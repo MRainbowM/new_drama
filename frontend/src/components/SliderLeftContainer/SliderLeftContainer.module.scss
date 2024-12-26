@@ -1,0 +1,79 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 50%;
+    border-bottom: 1px solid var(--color-white-with-alpha-50);
+}
+
+.title {
+    width: 100%;
+
+    h2 {
+        font-size: var(--font-size-h2-main);
+        color: var(--color-h2-main);
+        margin-left: var(--container-margin-lr);
+        margin-top: 40px;
+    }
+}
+
+.coverContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+
+
+    .cover {
+        width: 100%;
+        max-width: 460px;
+        position: relative;
+        overflow: hidden;
+
+        &:before {
+            content: '';
+            display: block;
+            padding-top: 100%;
+            /* Обеспечивает квадратные пропорции */
+        }
+    }
+}
+
+
+.coverWrap {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: top 1s;
+}
+
+.imgSquare {
+    position: relative;
+    overflow: hidden;
+
+    &:before {
+        content: '';
+        display: block;
+        padding-top: 100%;
+        /* Обеспечивает квадратные пропорции */
+    }
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        object-fit: cover;
+    }
+}
