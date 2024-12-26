@@ -12,7 +12,7 @@ interface SliderListProps {
 export default function SliderList(
     { data }: SliderListProps
 ) {
-
+    // Видимый элемент списка
     const [activeItem, setActiveItem] = useState(0)
 
     return (
@@ -21,32 +21,15 @@ export default function SliderList(
                 activeItem={activeItem}
             />
             <div className={styles.right}>
-
-                <SliderItem
-                    onView={() => {
-                        setActiveItem(0)
-                    }}
-                    color='yellow'
-                    title='ресторан «премьера»'
-                />
-
-                <SliderItem
-                    onView={() => {
-                        setActiveItem(1)
-                    }}
-                    color='blue'
-                    title='аренда'
-                />
-                <SliderItem
-                    onView={() => {
-                        setActiveItem(2)
-                    }}
-                    color='green'
-                    title='qwewq'
-                />
-
+                {data.map((item, index) => (
+                    <SliderItem
+                        onView={() => {
+                            setActiveItem(index)
+                        }}
+                        data={item}
+                    />
+                ))}
             </div>
         </div>
     );
-
 }

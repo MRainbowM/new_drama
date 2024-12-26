@@ -1,44 +1,45 @@
 import styles from './SliderItem.module.scss'
 import { useInView } from "react-intersection-observer";
-import React, { useRef, useEffect } from 'react';
-import { MouseParallax, ScrollParallax } from "react-just-parallax";
-
+import React, { useEffect } from 'react';
+import { ScrollParallax } from "react-just-parallax";
+import { components } from '../../api/schema'
 
 interface SliderItemProps {
     onView: () => void,
-    color: string,
-    title: string
+    data: components['schemas']['InfoBlockOutSchema']
 }
 
 export default function SliderItem(
-    { onView, color, title }: SliderItemProps
+    { onView, data }: SliderItemProps
 ) {
 
     const { ref, inView, entry } = useInView({
-        threshold: 0.75
+        threshold: 0.75 // Процент видимости блока
     });
 
     useEffect(() => { if (inView) { onView(); } }, [inView])
 
     return (
         <div className={styles.root}
-            // style={{ background: color }}
             ref={ref}
         >
             <ScrollParallax>
                 <div className={styles.container}>
                     <div className={styles.content}>
-                        <h3>{title}</h3>
+                        <h3>{data.title}</h3>
 
                         <div className={styles.text}>
-                            <p>Один из главных театральных реформаторов Константин Сергеевич Станиславский, разрабатывая тренинги для своей Системы, постигал философию индийских йогов с их учениями о пране – таинственной душевной субстанции, которая связывает человека с космосом.</p>
-                            <p>Первая студия Художественного театра читала систему «Хатха-йоги» и пробовала на себе практики, связанные с дыханием и с высвобождением своей внутренней энергии в пространство. </p>
+                            {data.content}
                         </div>
 
                         <div className={styles.btnRow}>
-                            <div className={styles.btn}>
-                                <span>Написать в Telegram</span>
-                            </div>
+                            <a
+                                className={styles.btn}
+                                href={data.btn_link}
+                                target='_blank'
+                            >
+                                <span>{data.btn_text}</span>
+                            </a>
                         </div>
                     </div>
                 </div>
