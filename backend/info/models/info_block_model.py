@@ -26,6 +26,11 @@ class InfoBlock(DatesAbstract):
         help_text='Картинка инфо-блока'
     )
     is_enable = models.BooleanField(_('Показывать на сайте'), default=True)
+    sort = models.IntegerField(
+        _('Сортировка'),
+        default=0,
+        help_text='Порядок отображения на сайте (от меньшего к большему)'
+    )
 
     class Meta:
         verbose_name = _('Инфо-блок')
