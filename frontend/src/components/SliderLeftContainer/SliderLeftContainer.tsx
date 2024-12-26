@@ -26,7 +26,10 @@ export default function SliderLeftContainer(
                         style={{ top: `${activeItem * (-100)}%` }}
                     >
                         {data.map((item, index) => (
-                            <div className={styles.imgSquare}>
+                            <div
+                                className={styles.imgSquare}
+                                key={item.id}
+                            >
                                 <Image
                                     className={clsx(
                                         { [styles.active]: index == activeItem }

@@ -24,6 +24,7 @@ export default function SliderList(
             <div className={styles.right}>
                 {data.map((item, index) => (
                     <SliderItem
+                        key={item.id}
                         onView={() => {
                             setActiveItem(index)
                         }}
