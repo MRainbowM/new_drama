@@ -1,10 +1,17 @@
 'use client'
 import styles from './SliderList.module.scss'
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import SliderItem from '../SliderItem/SliderItem';
 import SliderLeftContainer from '../SliderLeftContainer/SliderLeftContainer';
+import { components } from '../../api/schema'
 
-export default function SliderList() {
+interface SliderListProps {
+    data: components['schemas']['InfoBlockOutSchema'][]
+}
+
+export default function SliderList(
+    { data }: SliderListProps
+) {
 
     const [activeItem, setActiveItem] = useState(0)
 
