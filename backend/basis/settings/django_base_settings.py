@@ -11,8 +11,7 @@ DEBUG = env.bool('DEBUG')
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Application definition
 
@@ -27,7 +26,9 @@ INSTALLED_APPS = [
     'ninja',
     'event',
     'people',
-    'info'
+    'info',
+
+    'django_ckeditor_5',
 ]
 
 MIDDLEWARE = [
@@ -60,14 +61,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'basis.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
     'default': env.dict('DATABASES')
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -87,7 +86,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -100,7 +98,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -121,7 +118,6 @@ if DEBUG:
     STATICFILES_DIRS = [
         BASE_DIR / 'static',
     ]
-
 
 # Базовая ссылка на сервис покупки билетов
 TICKET_SERVICE_BASE_URL = env('TICKET_SERVICE_BASE_URL')

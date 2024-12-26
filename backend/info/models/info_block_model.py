@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django_ckeditor_5.fields import CKEditor5Field
 
 from basis.models.dates_abstract_model import DatesAbstract
 from .services.info_block_cover_path import info_block_cover_path
@@ -7,7 +8,7 @@ from .services.info_block_cover_path import info_block_cover_path
 
 class InfoBlock(DatesAbstract):
     title = models.CharField(_('Заголовок'), max_length=512)
-    content = models.TextField(_('Текст'))
+    content = CKEditor5Field(_('Текст'), config_name='extends')
     btn_text = models.CharField(
         _('Текст кнопки действия'),
         max_length=256,
