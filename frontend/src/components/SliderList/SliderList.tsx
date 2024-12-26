@@ -19,6 +19,7 @@ export default function SliderList(
         <div className={styles.root}>
             <SliderLeftContainer
                 activeItem={activeItem}
+                data={data}
             />
             <div className={styles.right}>
                 {data.map((item, index) => (
