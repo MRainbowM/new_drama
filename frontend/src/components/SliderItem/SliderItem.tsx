@@ -28,8 +28,10 @@ export default function SliderItem(
                     <div className={styles.content}>
                         <h3>{data.title}</h3>
 
-                        <div className={styles.text}>
-                            {data.content}
+                        <div
+                            className={styles.text}
+                            dangerouslySetInnerHTML={{ __html: data.content }}
+                        >
                         </div>
 
                         <div className={styles.btnRow}>
