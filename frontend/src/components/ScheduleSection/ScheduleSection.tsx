@@ -5,7 +5,9 @@ import ScheduleList from '../ScheduleList/ScheduleList';
 
 export default async function ScheduleSection() {
     const currentDate = new Date();
-    const startDate = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-01`
+    const month = currentDate.getMonth() + 1;
+    const monthString = month < 10 ? `0${month}`: month;
+    const startDate = `${currentDate.getFullYear()}-${monthString}-01`
 
 
     // Спектакли в афише
@@ -21,6 +23,7 @@ export default async function ScheduleSection() {
     if (response.error) {
         console.log(response.error);
         throw new Error('error'); //TODO
+        return (<></>);
     }
 
     let months = [] // Месяцы со спектаклями
