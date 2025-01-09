@@ -25,7 +25,7 @@ export default function EventPreview(
         >
             <div
                 className={styles.item}
-                style={{ backgroundImage: `url(http://0.0.0.0:8011/${event.preview_cover})` }}
+                style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_API_URL}${event.preview_cover})` }}
             >
 
                 <div className={styles.text}>
