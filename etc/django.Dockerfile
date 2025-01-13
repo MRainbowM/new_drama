@@ -11,6 +11,8 @@ RUN apt -y install libz-dev libjpeg-dev libfreetype6-dev python-dev
 WORKDIR /backend
 
 COPY ./backend/requirements.txt /backend/requirements.txt
+COPY ./backend/static /backend/static
 
 RUN pip install -U pip && pip install -U setuptools && pip install -r requirements.txt
 
+CMD ["python", "manage.py", "runserver"]
