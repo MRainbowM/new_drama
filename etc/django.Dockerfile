@@ -1,5 +1,5 @@
 FROM python:3.11.3
-ENV PYTHONUNBUFFERED 1 
+ENV PYTHONUNBUFFERED=1 
 
 RUN mkdir -p /backend 
 RUN mkdir -p /backend/static 

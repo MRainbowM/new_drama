@@ -1,0 +1,52 @@
+version: "3.8"
+
+networks:
+    new_drama:
+
+
+services:
+    nginx:
+        image: nginx:stable-alpine
+        ports:
+            - "80:80"
+        depends_on:
+            - django-new-drama
+            - postgres-new-drama
+
+        networks:
+            - new_drama
+
+    django-new-drama:
+        container_name: django-new-drama
+        build:
+            dockerfile: etc/django.Dockerfile
+            context: .
+        command: gunicorn basis.wsgi:application --bind 0.0.0.0:8000
+        ports:
+            - 8000:8000
+        environment:
+            - C_FORCE_ROOT=true
+        links:
+            - postgres-new-drama:postgres-new-drama.local
+        volumes:
+            - ./backend:/backend
+
+        networks:
+            - new_drama
+
+    postgres-new-drama:
+        container_name: postgres-new-drama
+        image: postgres:15.3
+        environment:
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_USER=postgres
+        volumes:
+            - ./etc/init.sql:/docker-entrypoint-initdb.d/init.sql
+            - postgres-volume-new-drama:/var/lib/postgresql/data
+
+        networks:
+            - new_drama
+
+volumes:
+    postgres-volume-new-drama:
+    pgadmin-volume-new-drama:
