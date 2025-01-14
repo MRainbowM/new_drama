@@ -33,6 +33,9 @@ docker-compose exec django-new-drama python3 manage.py migrate
 ```sh
 docker-compose exec django-new-drama python3 manage.py createsuperuser
 ```
+```sh
+docker compose exec django-new-drama python3 manage.py createsuperuser
+```
 
 ### Создание приложения
 ```sh
@@ -53,6 +56,11 @@ npm run dev
 # Разработка
 
 ## Frontend
+
+### Установка зависимостей
+```sh
+npm install
+```
 
 ### Генерация схем данных api из сваггера
 ```sh
