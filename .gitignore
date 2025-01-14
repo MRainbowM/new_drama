@@ -33,6 +33,8 @@ backend/static/drf-yasg
 backend/static/modeltranslation
 backend/static/mptt
 backend/static/rest_framework
+backend/static/django_ckeditor_5
+backend/static/ninja
 backend/csv_files
 
 .idea
