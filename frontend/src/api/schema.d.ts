@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-    "/api/event/event_show/list": {
+    "/event/event_show/list": {
         parameters: {
             query?: never;
             header?: never;
@@ -21,7 +21,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/event/program": {
+    "/event/program": {
         parameters: {
             query?: never;
             header?: never;
@@ -38,7 +38,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/event/event/list": {
+    "/event/event/list": {
         parameters: {
             query?: never;
             header?: never;
@@ -55,7 +55,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/event/event/{slug}": {
+    "/event/event/{slug}": {
         parameters: {
             query?: never;
             header?: never;
@@ -72,7 +72,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/people/list": {
+    "/people/list": {
         parameters: {
             query?: never;
             header?: never;
@@ -89,7 +89,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/people/{slug}": {
+    "/people/{slug}": {
         parameters: {
             query?: never;
             header?: never;
@@ -106,7 +106,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/info/info_block/list": {
+    "/info/info_block/list": {
         parameters: {
             query?: never;
             header?: never;
@@ -253,7 +253,7 @@ export interface components {
             description: string | null;
             /**
              * Длительность спектакля
-             * Format: time
+             * Format: duration
              */
             duration: string;
             /**

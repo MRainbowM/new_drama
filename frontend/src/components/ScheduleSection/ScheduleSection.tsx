@@ -11,7 +11,7 @@ export default async function ScheduleSection() {
 
 
     // Спектакли в афише
-    const response = await apiClient.GET('/api/event/event_show/list', {
+    const response = await apiClient.GET('/event/event_show/list', {
         params: {
             query: {
                 is_enable: true,

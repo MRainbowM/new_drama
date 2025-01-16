@@ -5,7 +5,7 @@ import { apiClient } from '../../api/client'
 
 export default async function SliderSection() {
 
-    const response = await apiClient.GET('/api/info/info_block/list', {
+    const response = await apiClient.GET('/info/info_block/list', {
         params: {
             query: {
                 is_enable: true

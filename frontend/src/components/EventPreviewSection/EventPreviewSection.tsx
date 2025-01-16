@@ -4,7 +4,7 @@ import EventPreviewList from '../EventPreviewContainer/EventPreviewContainer';
 
 export default async function EventPreviewSection() {
     // Репертуар
-    const response = await apiClient.GET('/api/event/event/list', {
+    const response = await apiClient.GET('/event/event/list', {
         params: {
             query: {
                 is_enable: true
