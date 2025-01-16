@@ -67,4 +67,9 @@ npm install
 npm run api-generate
 ```
 
+# Продакшен
 
+## Запуск докер-контейнеров
+```sh
+docker compose up --build
+```
