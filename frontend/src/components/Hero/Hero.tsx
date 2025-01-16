@@ -4,7 +4,7 @@ import NDsmall from 'public/images/hero_1.svg?url'
 
 
 export default function Hero() {
-    const videoPath = `${process.env.NEXT_PUBLIC_API_URL}/static/video/hero.MP4`;
+    const videoPath = `${process.env.BACKEND_STATIC_URL}/video/hero.MP4`;
 
 
     return (
