@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+    django-new-drama:
+        container_name: django-new-drama
+        build:
+            dockerfile: etc/django.Dockerfile
+            context: .
+        command: bash -c "while true; do echo 'I am alive!'; sleep 3600; done"
+        ports:
+            - 8011:8011
+            - 3003:3003
+        environment:
+            - C_FORCE_ROOT=true
+        links:
+            - postgres-new-drama:postgres-new-drama.local
+        volumes:
+            - ./backend:/backend
+        
+ 
+    postgres-new-drama:
+        container_name: postgres-new-drama
+        image: postgres:15.3
+        environment:
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_USER=postgres
+        volumes:
+            - ./etc/init.sql:/docker-entrypoint-initdb.d/init.sql
+            - postgres-volume-new-drama:/var/lib/postgresql/data
+    
+
+volumes:
+    postgres-volume-new-drama:
+    pgadmin-volume-new-drama:
+   
+
+                   
