@@ -4,6 +4,8 @@ import ScheduleSection from '../components/ScheduleSection/ScheduleSection';
 import SliderSection from '../components/SliderSection/SliderSection';
 import '../styles/page.scss'
 
+export const dynamic = 'force-dynamic';
+
 export default async function MainPage() {
     return (<>
         <Hero />

@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  productionBrowserSourceMaps: true,
+  reactProductionProfiling: true,
   images: {
     loader: 'custom',
     loaderFile: './src/loaders/image-loader.js',
