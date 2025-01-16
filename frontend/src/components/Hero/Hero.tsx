@@ -4,6 +4,9 @@ import NDsmall from 'public/images/hero_1.svg?url'
 
 
 export default function Hero() {
+    const videoPath = `${process.env.NEXT_PUBLIC_API_URL}/static/video/hero.MP4`;
+
+
     return (
         <div className={styles.root}>
             <div className={styles.mainVideo} >
@@ -19,7 +22,8 @@ export default function Hero() {
                         '--mask-small': `url(${NDsmall.src})`,
                     } as React.CSSProperties}
                 >
-                    <source src='http://0.0.0.0:8011/static/video/hero.MP4' type="video/mp4" />
+                    <source src={videoPath} type="video/mp4" />
+
                 </video>
             </div>
         </div>
