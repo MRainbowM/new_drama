@@ -31,7 +31,7 @@ export default function ScheduleCursor(
                 styles.root,
                 { [styles.active]: isActive }
             )}
-            style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_API_URL}${cover})` }}
+            style={{ backgroundImage: `url(${cover})` }}
         >
         </div>
     );
