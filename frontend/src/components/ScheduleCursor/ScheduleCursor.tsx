@@ -2,6 +2,7 @@
 import styles from './ScheduleCursor.module.scss'
 import React, { useRef, useEffect } from 'react';
 import clsx from "clsx"
+import myImageLoader from '../../loaders/image-loader'
 
 interface ScheduleCursorProps {
     isActive: boolean,
@@ -11,6 +12,8 @@ interface ScheduleCursorProps {
 export default function ScheduleCursor(
     { isActive, cover }: ScheduleCursorProps
 ) {
+    const backgroundImageSrc = myImageLoader({src: cover})
+
     const cursorSchedule = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -31,7 +34,7 @@ export default function ScheduleCursor(
                 styles.root,
                 { [styles.active]: isActive }
             )}
-            style={{ backgroundImage: `url(${cover})` }}
+            style={{ backgroundImage: `url(${backgroundImageSrc})` }}
         >
         </div>
     );

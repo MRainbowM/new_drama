@@ -2,6 +2,7 @@
 import { components } from '../../api/schema'
 import styles from './EventPreview.module.scss'
 import clsx from "clsx"
+import myImageLoader from '../../loaders/image-loader'
 
 interface EventPreviewProps {
     event: components['schemas']['EventPreviewSchema'],
@@ -13,6 +14,8 @@ interface EventPreviewProps {
 export default function EventPreview(
     { event, isActiveContainer, isActive, onMouseOver }: EventPreviewProps
 ) {
+    const backgroundImageSrc = myImageLoader({src: event.preview_cover})
+
     return (
         <div
             className={clsx(
@@ -25,7 +28,7 @@ export default function EventPreview(
         >
             <div
                 className={styles.item}
-                style={{ backgroundImage: `url(${event.preview_cover})` }}
+                style={{ backgroundImage: `url(${backgroundImageSrc})` }}
             >
 
                 <div className={styles.text}>
