@@ -109,10 +109,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-# STATIC_URL = 'static/'
 STATIC_URL = '/static/'
+STATIC_ROOT =  BASE_DIR / 'static'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+if DEBUG:
+    # STATIC_ROOT = ''
+    STATICFILES_DIRS = [
+        BASE_DIR / 'staticfiles',
+    ]
+
 
 MEDIA_URL = env('MEDIA_URL')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -121,13 +126,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Debug settings
-if DEBUG:
-    STATIC_ROOT = ''
-    STATICFILES_DIRS = [
-        BASE_DIR / 'static',
-    ]
 
 # Базовая ссылка на сервис покупки билетов
 TICKET_SERVICE_BASE_URL = env('TICKET_SERVICE_BASE_URL')
