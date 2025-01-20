@@ -18,6 +18,10 @@ export default async function SliderSection() {
         throw new Error('error'); //TODO
     }
 
+    if (response.data.length == 0) {
+        return <></>;
+    }
+    
     return (
 
         <section className={styles.root}>
