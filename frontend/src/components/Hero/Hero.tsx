@@ -22,8 +22,7 @@ export default function Hero() {
                         '--mask-small': `url(${NDsmall.src})`,
                     } as React.CSSProperties}
                 >
-                    {/* <source src={videoPath} type="video/mp4" /> */}
-                    <source src='/static/video/hero.mp4' type="video/mp4" />
+                    <source src={videoPath} type="video/mp4" />
 
 
                 </video>
