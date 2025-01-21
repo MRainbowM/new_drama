@@ -1,12 +1,7 @@
 import Container from '../components/Container/Container'
 import '../styles/globals.scss'
-
-import { PT_Sans_Narrow } from 'next/font/google'
-
-const font = PT_Sans_Narrow({
-    weight: ['400', '700'],
-    subsets: ['latin', 'cyrillic'],
-})
+import { sans_narrow, montserrat } from './fonts'
+import clsx from "clsx"
 
 export default function RootLayout({
     children,
@@ -15,7 +10,12 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={font.className}>
+            <body
+                className={clsx(
+                    sans_narrow.className,
+                    `${montserrat.variable} font-sans`
+                )}
+            >
                 <Container>
                     {children}
                 </Container>
