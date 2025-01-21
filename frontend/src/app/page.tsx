@@ -1,3 +1,4 @@
+import ContactSection from '../components/ContactSection/ContactSection';
 import EventPreviewSection from '../components/EventPreviewSection/EventPreviewSection';
 import Hero from '../components/Hero/Hero';
 import ScheduleSection from '../components/ScheduleSection/ScheduleSection';
@@ -12,5 +13,6 @@ export default async function MainPage() {
         <ScheduleSection />
         <EventPreviewSection />
         <SliderSection />
+        <ContactSection />
     </>);
 }
