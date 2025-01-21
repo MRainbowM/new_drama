@@ -44,9 +44,9 @@ export default async function ContactSection() {
                         <h3>Соц сети</h3>
 
                         <div className={styles.dataRow}>
-                            <a href="">Telegram</a>
-                            <a href="">Inst</a>
-                            <a href="">Vk</a>
+                            <a href="" target="__blank">Telegram</a>
+                            <a href="" target="__blank">Inst</a>
+                            <a href="https://vk.com/novayadrama" target="__blank">Vk</a>
                         </div>
                     </div>
 

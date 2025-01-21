@@ -1,5 +1,6 @@
 .root {
     --width-circle: 316px;
+    --btn-width: 137px;
 
     width: calc(100% + var(--container-margin-lr) * 2);
     margin-left: calc(-1 * var(--container-margin-lr));
@@ -17,9 +18,7 @@
     background-color: var(--color-white);
     z-index: 1;
     border-radius: 100%;
-    // top: -105px;
-    left: calc(100% / 2 - (var(--width-circle) /  2));
-
+    left: calc(100% / 2 - (var(--width-circle) / 2));
 }
 
 .header {
@@ -84,8 +83,8 @@
 
 
 .btn {
-    height: 137px;
-    width: 137px;
+    height: var(--btn-width);
+    width: var(--btn-width);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -95,4 +94,51 @@
     border-radius: 100%;
     font-weight: bold;
     font-size: 20px;
+}
+
+@media (max-width: 1600px) {
+    .root {
+        width: 100vw;
+    }
+}
+
+
+@media (max-width: 1350px) {
+    .contacts {
+        gap: unset;
+        justify-content: space-between;
+        width: calc(100% - var(--btn-width) - 50px);
+
+    }
+}
+
+@media (max-width: 1100px) {
+    .contacts {
+        width: calc(100% - var(--btn-width) - 15px);
+        flex-wrap: wrap;
+
+        .item {
+            width: 50%;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+@media (max-width: 720px) {
+    .root {
+        --btn-width: 110px;
+    }
+
+    .contacts {
+        .item {
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 320px) {
+    .circle {
+        width: 100%;
+        left: 0;
+    }
 }
