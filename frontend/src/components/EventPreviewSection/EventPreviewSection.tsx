@@ -18,7 +18,7 @@ export default async function EventPreviewSection() {
     }
 
     return (
-        <section className={styles.root}>
+        <section className={styles.root} id="events">
             <h2>Все спектакли</h2>
             <EventPreviewList
                 eventList={response.data}

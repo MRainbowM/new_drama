@@ -1,0 +1,66 @@
+.root {
+    display: flex;
+    padding-top: 75px;
+    padding-bottom: 150px
+}
+
+.left {
+    display: flex;
+    width: 50%;
+}
+
+.name {
+    font-weight: bold;
+    font-size: 24px;
+    text-transform: uppercase;
+    width: 44%;
+}
+
+.menu {
+    display: flex;
+    font-weight: bold;
+    font-size: 80px;
+    text-transform: uppercase;
+
+
+    .menuCol {
+        display: flex;
+        flex-direction: column;
+
+        a {
+            line-height: 1;
+        }
+    }
+}
+
+.right {
+    width: 50%;
+    padding-left: 65px;
+
+    .address {
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 55px;     
+    }
+
+    .phone {
+        font-weight: bold;
+        font-size: 24px;
+        margin-top: 25px;
+    }
+
+    .email {
+        font-size: 18px;
+        margin-top: 5px;
+    }
+}
+
+.social {
+    display: flex;
+    gap: 18px;
+    margin-top: 25px;
+
+    svg {
+        width: 32px;
+    }
+}

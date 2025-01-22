@@ -3,7 +3,7 @@ import styles from './ContactSection.module.scss'
 
 export default async function ContactSection() {
     return (
-        <section className={styles.root}>
+        <section className={styles.root} id="contacts">
             <div className={styles.circle}>
 
             </div>
@@ -45,7 +45,7 @@ export default async function ContactSection() {
 
                         <div className={styles.dataRow}>
                             <a href="" target="__blank">Telegram</a>
-                            <a href="" target="__blank">Inst</a>
+                            <a href={'https://www.instagram.com/novaya_drama_irkutsk'} target="__blank">Inst</a>
                             <a href="https://vk.com/novayadrama" target="__blank">Vk</a>
                         </div>
                     </div>

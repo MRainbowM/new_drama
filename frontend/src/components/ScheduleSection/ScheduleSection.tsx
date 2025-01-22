@@ -39,7 +39,7 @@ export default async function ScheduleSection() {
     return (
         <>
             {response.data.length > 0 ? (
-                <section className={styles.root}>
+                <section className={styles.root} id="schedule">
                     <h2>Афиша</h2>
 
                     <ScheduleList
