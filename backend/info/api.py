@@ -3,8 +3,8 @@ from typing import List
 from django.utils.translation import gettext_lazy as _
 from ninja import Query, Router
 
-from .models import InfoBlock
-from .schemes import InfoBlockOutSchema, InfoBlockFilterSchema
+from .models import InfoBlock, Viewer
+from .schemes import InfoBlockOutSchema, InfoBlockFilterSchema, ViewerOutSchema, ViewerFilterSchema
 
 router = Router()
 
@@ -20,3 +20,16 @@ def get_info_block_list(request, filters: InfoBlockFilterSchema = Query(...)):
     info_block_list = filters.filter(info_block_list).order_by('sort')
 
     return info_block_list
+
+
+@router.get(
+    '/viewer/list',
+    response=List[ViewerOutSchema],
+    tags=[_('Инфо-блоки')],
+    summary=_('Получить список зрителей')
+)
+def get_viewer_list(request, filters: ViewerFilterSchema = Query(...)):
+    viewer_list = Viewer.objects.all()
+    viewer_list = filters.filter(viewer_list).order_by('sort')
+
+    return viewer_list
