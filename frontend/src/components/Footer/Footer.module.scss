@@ -1,19 +1,14 @@
 .root {
-    display: flex;
+    display: grid;
     padding-top: 75px;
-    padding-bottom: 150px
-}
-
-.left {
-    display: flex;
-    width: 50%;
+    padding-bottom: 150px;
+    grid-template-columns: 22% 28% 50%;
 }
 
 .name {
     font-weight: bold;
     font-size: 24px;
     text-transform: uppercase;
-    width: 44%;
 }
 
 .menu {
@@ -21,26 +16,21 @@
     font-weight: bold;
     font-size: 80px;
     text-transform: uppercase;
+    flex-direction: column;
 
-
-    .menuCol {
-        display: flex;
-        flex-direction: column;
-
-        a {
-            line-height: 1;
-        }
+    a {
+        line-height: 1;
     }
+
 }
 
-.right {
-    width: 50%;
+.contacts {
     padding-left: 65px;
 
     .address {
         text-transform: uppercase;
         font-weight: bold;
-        font-size: 55px;     
+        font-size: 55px;
     }
 
     .phone {
@@ -63,4 +53,77 @@
     svg {
         width: 32px;
     }
+}
+
+@media (max-width: 1250px) {
+    .root {
+        grid-template-columns: 1fr 1fr;
+        padding-bottom: 100px;
+    }
+
+    .menu {
+        font-size: 72px;
+    }
+
+    .name {
+        grid-column: 2 span;
+        margin-bottom: 35px;
+    }
+
+    .contacts {
+        padding: 0;
+
+        .address {
+            font-size: 48px;
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .contacts {
+        .address {
+            font-size: 35px;
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .menu {
+        font-size: 52px;
+    }
+
+    .contacts {
+        .address {
+            font-size: 30px;
+        }
+
+        .phone {
+            margin-top: 10px;
+        }
+
+        .social {
+            margin-top: 10px;
+        }
+
+    }
+}
+
+@media (max-width: 650px) {
+    .root {
+        grid-template-columns: 1fr;
+        padding-bottom: 75px;
+    }
+
+    .name {
+        grid-column: 1 span;
+    }
+
+    .contacts {
+        margin-top: 30px;
+
+        .social {
+            margin-top: 20px;
+        }
+    }
+
 }

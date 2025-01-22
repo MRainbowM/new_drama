@@ -8,20 +8,17 @@ import YT from 'public/images/yt.svg'
 export default async function Footer() {
     return (
         <footer className={styles.root}>
-            <div className={styles.left}>
-                <div className={styles.name}>
-                    <span>Театр Новая Драма</span>
-                </div>
-                <div className={styles.menu}>
-                    <div className={styles.menuCol}>
-                        <a href="/#schedule">Афиша</a>
-                        <a href="/#events">Спектакли</a>
-                        <a href="/#contacts">Контакты</a>
-                    </div>
-                </div>
+            <div className={styles.name}>
+                <span>Театр Новая Драма</span>
             </div>
 
-            <div className={styles.right}>
+            <div className={styles.menu}>
+                <a href="/#schedule">Афиша</a>
+                <a href="/#events">Спектакли</a>
+                <a href="/#contacts">Контакты</a>
+            </div>
+
+            <div className={styles.contacts}>
                 <div className={styles.address}>
                     <span>Иркутск, Кожова, 38</span>
                 </div>
