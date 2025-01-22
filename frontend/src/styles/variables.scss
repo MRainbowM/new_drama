@@ -11,6 +11,10 @@
 
     --container-margin-lr: calc(80px / 2);
 
+    @media (max-width: 500px) {
+        --container-margin-lr: calc(40px / 2);
+    }
+
     --font-size-h2-main: 32px;
     --color-h2-main: var(--color-red);
 }
