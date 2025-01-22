@@ -18,6 +18,7 @@ class Viewer(DatesAbstract):
         null=True,
         blank=True
     )
+    is_enable = models.BooleanField(_('Показывать на сайте'), default=True)
 
     class Meta:
         verbose_name = _('Зритель')
