@@ -1,6 +1,7 @@
 import styles from './ViewerSection.module.scss'
 import { apiClient } from '../../api/client'
 import ViewerList from '../ViewerList/ViewerList';
+import ViewerText from '../ViewerText/ViewerText'
 
 export default async function ViewerSection() {
     // Получение списка фотографий зрителей
@@ -21,9 +22,14 @@ export default async function ViewerSection() {
     return (
         <section className={styles.root}>
             <h2>Наши зрители</h2>
-            <ViewerList
-                viewerList={response.data}
-            />
+
+            <div className={styles.content}>
+                <ViewerText />
+                <ViewerList
+                    viewerList={response.data}
+                />
+            </div>
+
         </section>
     );
 }
