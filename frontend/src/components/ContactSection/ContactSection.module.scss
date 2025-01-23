@@ -4,6 +4,7 @@
 
     width: calc(100% + var(--container-margin-lr) * 2);
     margin-left: calc(-1 * var(--container-margin-lr));
+    margin-top: 160px;
 
     display: flex;
     flex-direction: column;
@@ -113,6 +114,10 @@
 }
 
 @media (max-width: 1100px) {
+    .root {
+        margin-top: 100px;
+    }
+
     .contacts {
         width: calc(100% - var(--btn-width) - 15px);
         flex-wrap: wrap;
