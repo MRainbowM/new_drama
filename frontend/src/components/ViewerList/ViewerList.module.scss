@@ -1,0 +1,26 @@
+.root {
+    width: 100%;
+}
+
+.text {
+    max-width: 200px;
+    font-family: var(--font-montserrat);
+    font-size: 16px;
+    color: var(--color-white);
+    font-weight: 500;
+
+}
+
+.social {
+    display: flex;
+    margin-top: 25px;
+    gap: 20px;
+
+    .link {
+        color: var(--color-red);
+        width: 32px;
+        background-color: var(--color-white);
+        height: 32px;
+        border-radius: 100%;
+    }
+}
