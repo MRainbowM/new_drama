@@ -4,7 +4,8 @@ import { components } from '../../api/schema'
 import EventPreview from '../EventPreview/EventPreview';
 import { useState } from "react"
 import useEmblaCarousel from 'embla-carousel-react'
-import Arrow from 'public/images/arrow.svg'
+import ArrowLeft from '../ArrowLeft/ArrowLeft';
+import ArrowRight from '../ArrowRight/ArrowRight';
 
 
 interface EventPreviewContainerProps {
@@ -14,27 +15,18 @@ interface EventPreviewContainerProps {
 export default function EventPreviewContainer(
     { eventList }: EventPreviewContainerProps
 ) {
-    const [isActive, setActive] = useState(false)
-    const [activeIndex, setActiveIndex] = useState(null)
+    const [isActive, setActive] = useState(false);
+    const [activeIndex, setActiveIndex] = useState(null);
 
     const [emblaRef, emblaApi] = useEmblaCarousel({
         loop: true,
         dragFree: false,
         align: 'start'
-    })
+    });
 
     return (
         <div className={styles.root}>
-            <div className={styles.arrowLeft}>
-                <div
-                    className={styles.arrow}
-                    onClick={() => {
-                        emblaApi.scrollPrev()
-                    }}
-                >
-                    <Arrow />
-                </div>
-            </div>
+            <ArrowLeft emblaApi={emblaApi} />
             <div className={styles.wrap} ref={emblaRef}>
                 <div
                     className={styles.list}
@@ -55,16 +47,7 @@ export default function EventPreviewContainer(
                     ))}
                 </div>
             </div>
-            <div className={styles.arrowRight}>
-                <div
-                    className={styles.arrow}
-                    onClick={() => {
-                        emblaApi.scrollNext()
-                    }}
-                >
-                    <Arrow />
-                </div>
-            </div>
+            <ArrowRight emblaApi={emblaApi}/>
         </div>
     );
 }
