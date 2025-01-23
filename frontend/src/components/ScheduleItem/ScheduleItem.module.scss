@@ -3,18 +3,7 @@
     cursor: pointer;
 }
 
-.active {
-    z-index: 2;
 
-    .container {
-        background-color: var(--color-white);
-        color: var(--color-black);
-
-        .btnBuy {
-            border: 1px solid var(--color-black);
-        }
-    }
-}
 
 .container {
     display: flex;
@@ -90,14 +79,45 @@
         text-transform: uppercase;
         font-size: 16px;
         border: 1px solid var(--color-white);
+    }
+}
 
-        &:hover {
-            background-color: var(--color-red);
-            color: var(--color-white);
-            border: none;
+@media not all and (hover: none) {
+
+    // Только НЕ для тач устройств
+    .active {
+        z-index: 2;
+
+        .container {
+            background-color: var(--color-white);
+            color: var(--color-black);
+
+            .btnBuy {
+                border: 1px solid var(--color-black);
+            }
+        }
+    }
+
+    .btnBuy:hover {
+        background-color: var(--color-red);
+        color: var(--color-white);
+        border: none;
+    }
+}
+
+@media (hover: none) {
+
+    // Только для тач устройств
+    .titleCol {
+        .name {
+            &:hover {
+                text-decoration: none;
+            }
         }
     }
 }
+
+
 
 @media (max-width: 1180px) {
     .dateCol {
@@ -170,28 +190,6 @@
 
         .age {
             margin: 0;
-        }
-    }
-}
-
-@media (hover: none) {
-    .titleCol {
-        .name {
-            &:hover {
-                text-decoration: none;
-            }
-        }
-    }
-
-    .active {
-        .container {
-            background-color: unset;
-            color: var(--color-white);
-
-            .btnBuy {
-                border: 1px solid var(--color-white);
-                background-color:unset;
-            }
         }
     }
 }

@@ -70,32 +70,34 @@
     border-radius: 32px;
 }
 
-.active {
-    width: calc(100% / 2.5);
 
-    .text {
-        .rightCol {
-            width: auto;
-            height: auto;
+
+@media not all and (hover: none) { 
+    // Только НЕ для тач устройств
+    .active {
+        width: calc(100% / 2.5);
+
+        .text {
+            .rightCol {
+                width: auto;
+                height: auto;
+            }
+        }
+    }
+
+    .notActive {
+        width: calc((100% - (100% / 2.5)) / (var(--col-count) - 1));
+
+        .text {
+            display: none;
+        }
+
+        .btn {
+            display: none;
         }
     }
 }
 
-.notActive {
-    width: calc((100% - (100% / 2.5)) / (var(--col-count) - 1));
-
-    .text {
-        display: none;
-
-        .rightCol {
-            // opacity: 0;
-        }
-    }
-
-    .btn {
-        display: none;
-    }
-}
 
 @media (max-width: 1400px) {
     .root {
