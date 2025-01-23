@@ -394,6 +394,11 @@ export interface components {
              * @description Изображение на главной
              */
             image: string;
+            /**
+             * Никнейм
+             * @default
+             */
+            nickname: string | null;
         };
     };
     responses: never;
