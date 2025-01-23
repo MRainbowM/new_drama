@@ -4,6 +4,7 @@ import VK from 'public/images/vk.svg'
 import TG from 'public/images/tg.svg'
 import IG from 'public/images/ig.svg'
 import YT from 'public/images/yt.svg'
+import { socialIG, socialTG, socialVK, socialYT } from '../../constants/social'
 
 export default async function Footer() {
     return (
@@ -30,23 +31,19 @@ export default async function Footer() {
                 </div>
                 <div className={styles.social}>
                     <Link
-                        className={styles.link}
-                        href={'https://vk.com/novayadrama'}
+                        href={socialVK}
                         target='_blank'
                     ><VK /></Link>
                     <Link
-                        className={styles.link}
-                        href={'https://t.me/novayadrama'}
+                        href={socialTG}
                         target='_blank'
                     ><TG /></Link>
                     <Link
-                        className={styles.link}
-                        href={'https://www.instagram.com/novaya_drama_irkutsk'}
+                        href={socialIG}
                         target='_blank'
                     ><IG /></Link>
                     <Link
-                        className={styles.link}
-                        href={'https://www.youtube.com/channel/UCVrDmCTXE3vJpFqJja7rwEQ'}
+                        href={socialYT}
                         target='_blank'
                     ><YT /></Link>
                 </div>
