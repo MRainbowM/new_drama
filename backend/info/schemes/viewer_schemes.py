@@ -9,7 +9,7 @@ class ViewerOutSchema(ModelSchema):
     class Config:
         model = Viewer
         model_fields = [
-            'id', 'image'
+            'id', 'image', 'nickname'
         ]
 
 
