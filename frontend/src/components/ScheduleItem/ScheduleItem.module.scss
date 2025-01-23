@@ -173,3 +173,25 @@
         }
     }
 }
+
+@media (hover: none) {
+    .titleCol {
+        .name {
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+
+    .active {
+        .container {
+            background-color: unset;
+            color: var(--color-white);
+
+            .btnBuy {
+                border: 1px solid var(--color-white);
+                background-color:unset;
+            }
+        }
+    }
+}
