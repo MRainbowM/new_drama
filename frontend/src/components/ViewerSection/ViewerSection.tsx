@@ -19,6 +19,10 @@ export default async function ViewerSection() {
         return (<></>);
     }
 
+    if (response.data.length == 0) {
+        return(<></>);
+    }
+
     return (
         <section className={styles.root}>
             <h2>Наши зрители</h2>
