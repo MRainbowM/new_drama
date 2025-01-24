@@ -1,7 +1,6 @@
 .root {
     display: flex;
     flex-direction: column;
-    padding-bottom: 80px;
 
     h2 {
         text-transform: uppercase;
@@ -27,5 +26,14 @@
 
     a {
         text-decoration: underline;
+    }
+}
+
+@media (max-width: 1200px) {
+    .text {
+        margin-bottom: 40px;
+    }
+    .content  {
+        flex-direction: column;
     }
 }
