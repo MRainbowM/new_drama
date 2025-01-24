@@ -6,10 +6,10 @@ import ViewerItem from '../ViewerItem/ViewerItem'
 import ArrowLeft from '../ArrowLeft/ArrowLeft'
 import ArrowRight from '../ArrowRight/ArrowRight'
 
+
 interface ViewerListProps {
     viewerList: components['schemas']['ViewerOutSchema'][]
 }
-
 
 export default function ViewerList(
     { viewerList }: ViewerListProps

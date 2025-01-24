@@ -2,7 +2,7 @@ import VK from 'public/images/vk.svg'
 import TG from 'public/images/tg.svg'
 import IG from 'public/images/ig.svg'
 import Link from 'next/link'
-import { socialIG, socialTG, socialVK } from '../../constants/social'
+import { socialIG, socialTG, socialVK } from '../../constants/links'
 import styles from './ViewerText.module.scss'
 
 export default function ViewerText() {
