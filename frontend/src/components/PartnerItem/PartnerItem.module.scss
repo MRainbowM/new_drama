@@ -1,10 +1,13 @@
 .root {
+    --col-count: 4;
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 250px;
-    width: 100%;
+
     padding: 0px 20px;
+
+    width: calc(100% / var(--col-count));
 
     span {
         font-family: var(--font-montserrat);
@@ -19,6 +22,36 @@
     width: 100%;
     height: 100%;
     max-width: 150px;
-    min-width: 100px;
     min-height: 90px;
+}
+
+
+@media (max-width: 1400px) {
+    .root {
+        --col-count: 3;
+    }
+}
+
+@media (max-width: 1200px) {
+    .root {
+        --col-count: 4;
+    }
+}
+
+@media (max-width: 1000px) {
+    .root {
+        --col-count: 3;
+    }
+}
+
+@media (max-width: 800px) {
+    .root {
+        --col-count: 2;
+    }
+}
+
+@media (max-width: 550px) {
+    .root {
+        --col-count: 1;
+    }
 }
