@@ -31,9 +31,22 @@
 
 @media (max-width: 1200px) {
     .text {
-        margin-bottom: 40px;
+        padding-bottom: 40px;
     }
-    .content  {
+
+    .content {
         flex-direction: column;
+    }
+}
+
+@media (max-width: 600px) {
+    .text {
+        padding-right: 40px;
+    }
+}
+
+@media (max-width: 400px) {
+    .text {
+        padding-right: 0;
     }
 }

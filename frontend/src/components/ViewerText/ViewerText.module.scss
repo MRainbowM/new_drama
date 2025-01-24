@@ -39,3 +39,10 @@
         padding-bottom: 20px;
     }
 }
+
+
+@media (max-width: 400px) {
+    .root {
+        padding-right: 0;
+    }
+}
