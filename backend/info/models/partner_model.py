@@ -11,8 +11,8 @@ from .services.partner_logo_path import partner_logo_path
 def validate_svg(file):
     # Проверяем расширение файла
     ext = os.path.splitext(file.name)[1].lower()
-    if ext != '.svg':
-        raise ValidationError(_('Поддерживаются только файлы в формате SVG.'))
+    if ext not in ['.svg', '.png']:
+        raise ValidationError(_('Поддерживаются только файлы в форматaх SVG и PNG.'))
 
 
 class Partner(DatesAbstract):
