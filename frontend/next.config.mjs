@@ -3,6 +3,7 @@ const nextConfig = {
   productionBrowserSourceMaps: true,
   reactProductionProfiling: true,
   images: {
+    dangerouslyAllowSVG: true,
     loader: 'custom',
     loaderFile: './src/loaders/image-loader.js',
   },
