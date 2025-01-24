@@ -1,0 +1,16 @@
+.root {
+    position: relative;
+    width: 100%;
+}
+
+.wrap {
+    overflow: hidden;
+}
+
+.list {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 140px;
+}
