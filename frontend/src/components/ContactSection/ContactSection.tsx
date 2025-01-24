@@ -1,3 +1,4 @@
+import { contactEmail, contactPhone, contactPhoneTitle, socialIG, socialTG, socialVK } from '../../constants/links';
 import styles from './ContactSection.module.scss'
 
 
@@ -20,7 +21,7 @@ export default async function ContactSection() {
                         <h3>Телефон</h3>
 
                         <div className={styles.dataRow}>
-                            <a href="tel:+79245303336">+7 (924) 530-33-36</a>
+                            <a href={`tel:${contactPhone}`}>{contactPhoneTitle}</a>
                         </div>
                     </div>
 
@@ -36,7 +37,7 @@ export default async function ContactSection() {
                         <h3>Написать нам</h3>
 
                         <div className={styles.dataRow}>
-                            <a href="mailto:novaya-drama@yandex.ru">novaya-drama@yandex.ru</a>
+                            <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
                         </div>
                     </div>
 
@@ -44,9 +45,9 @@ export default async function ContactSection() {
                         <h3>Соц сети</h3>
 
                         <div className={styles.dataRow}>
-                            <a href="" target="__blank">Telegram</a>
-                            <a href={'https://www.instagram.com/novaya_drama_irkutsk'} target="__blank">Inst</a>
-                            <a href="https://vk.com/novayadrama" target="__blank">Vk</a>
+                            <a href={socialTG} target="__blank">Telegram</a>
+                            <a href={socialIG} target="__blank">Inst</a>
+                            <a href={socialVK} target="__blank">Vk</a>
                         </div>
                     </div>
 
