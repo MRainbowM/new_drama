@@ -4,7 +4,7 @@ import VK from 'public/images/vk.svg'
 import TG from 'public/images/tg.svg'
 import IG from 'public/images/ig.svg'
 import YT from 'public/images/yt.svg'
-import { socialIG, socialTG, socialVK, socialYT } from '../../constants/social'
+import { contactEmail, contactPhone, contactPhoneTitle, socialIG, socialTG, socialVK, socialYT } from '../../constants/links'
 
 export default async function Footer() {
     return (
@@ -24,10 +24,10 @@ export default async function Footer() {
                     <span>Иркутск, Кожова, 38</span>
                 </div>
                 <div className={styles.phone}>
-                    <a href="tel:+79245303336">+7 (924) 530-33-36</a>
+                    <a href={`tel:${contactPhone}`}>{contactPhoneTitle}</a>
                 </div>
                 <div className={styles.email}>
-                    <a href="mailto:novaya-drama@yandex.ru">novaya-drama@yandex.ru</a>
+                    <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
                 </div>
                 <div className={styles.social}>
                     <Link
