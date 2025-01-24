@@ -3,8 +3,12 @@ from typing import List
 from django.utils.translation import gettext_lazy as _
 from ninja import Query, Router
 
-from .models import InfoBlock, Viewer
-from .schemes import InfoBlockOutSchema, InfoBlockFilterSchema, ViewerOutSchema, ViewerFilterSchema
+from .models import InfoBlock, Viewer, Partner
+from .schemes import (
+    InfoBlockOutSchema, InfoBlockFilterSchema,
+    ViewerOutSchema, ViewerFilterSchema,
+    PartnerFilterSchema, PartnerOutSchema
+)
 
 router = Router()
 
@@ -33,3 +37,16 @@ def get_viewer_list(request, filters: ViewerFilterSchema = Query(...)):
     viewer_list = filters.filter(viewer_list).order_by('sort')
 
     return viewer_list
+
+
+@router.get(
+    '/partner/list',
+    response=List[PartnerOutSchema],
+    tags=[_('Инфо-блоки')],
+    summary=_('Получить список партнеров')
+)
+def get_partner_list(request, filters: PartnerFilterSchema = Query(...)):
+    partner_list = Partner.objects.all()
+    partner_list = filters.filter(partner_list).order_by('sort')
+
+    return partner_list
