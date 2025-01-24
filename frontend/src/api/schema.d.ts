@@ -140,6 +140,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/info/partner/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Получить список партнеров */
+        get: operations["info_api_get_partner_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -400,6 +417,23 @@ export interface components {
              */
             nickname: string | null;
         };
+        /** PartnerFilterSchema */
+        PartnerFilterSchema: {
+            /** Is Enable */
+            is_enable?: boolean | null;
+        };
+        /** PartnerOutSchema */
+        PartnerOutSchema: {
+            /** ID */
+            id?: number | null;
+            /** Название */
+            name: string;
+            /**
+             * Логотип
+             * @description Логотип компании на главной
+             */
+            logo: string;
+        };
     };
     responses: never;
     parameters: never;
@@ -583,6 +617,28 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ViewerOutSchema"][];
+                };
+            };
+        };
+    };
+    info_api_get_partner_list: {
+        parameters: {
+            query?: {
+                is_enable?: boolean | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PartnerOutSchema"][];
                 };
             };
         };
