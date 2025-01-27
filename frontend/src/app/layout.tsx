@@ -21,7 +21,7 @@ export default function RootLayout({
             >
                 <RunningLine />
                 <Container>       
-                    {/* <Header /> */}
+                    <Header />
                     {children}
                     <Footer />
                 </Container>

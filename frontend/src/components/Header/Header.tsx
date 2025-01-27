@@ -21,7 +21,15 @@ export default function Header() {
                     <Link href='/'><Logo /></Link>
                 </div>
                 <div className={styles.rightCol}>
-
+                    <Link href='/'>
+                        <span>Ресторан</span>
+                    </Link>
+                    <Link href='/'>
+                        <span>Аренда</span>
+                    </Link>
+                    <Link href='/#partner'>
+                        <span>Партнеры</span>
+                    </Link>
                 </div>
             </div>
         </header>

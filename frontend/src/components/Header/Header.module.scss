@@ -23,9 +23,25 @@
     }
 }
 
-.leftCol {
+.leftCol,
+.rightCol {
     display: flex;
     justify-content: space-between;
 }
 
-.rightCol {}
+@media (max-width: 900px) {
+    .menu {
+        grid-template-columns: 1fr 120px 1fr;
+    }
+}
+
+
+@media (max-width: 700px) {
+    .leftCol,
+    .rightCol {
+        a {
+            display: none;
+        }
+    }
+
+}
