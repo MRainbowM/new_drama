@@ -21,7 +21,12 @@
         @media (max-width: 700px) {
             mask-image: var(--mask-small, '');
             height: 100%;
-            margin-bottom: 70px;
         }
+    }
+}
+
+@media (max-width: 700px) {
+    .root {
+        margin-bottom: 70px;
     }
 }
