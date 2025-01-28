@@ -1,10 +1,9 @@
 .root {
     width: 100%;
-    height: 100vh;
+    height: calc(100vh + var(--gap-between-sections));
     max-height: calc(700px + var(--gap-between-sections));
     display: flex;
     flex-direction: column;
-    padding-bottom: 50px;
     padding-top: var(--gap-between-sections);
 
     h2 {
