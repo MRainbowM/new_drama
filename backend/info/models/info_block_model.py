@@ -7,7 +7,7 @@ from .services.info_block_cover_path import info_block_cover_path
 
 
 class InfoBlock(DatesAbstract):
-    title = models.CharField(_('Заголовок'), max_length=512)
+    title = models.CharField(_('Заголовок'), max_length=512, unique=True)
     content = CKEditor5Field(_('Текст'), config_name='extends')
     btn_text = models.CharField(
         _('Текст кнопки действия'),
@@ -27,6 +27,17 @@ class InfoBlock(DatesAbstract):
         help_text='Картинка инфо-блока'
     )
     is_enable = models.BooleanField(_('Показывать на сайте'), default=True)
+    in_menu = models.BooleanField(
+        _('Добавить пункт в меню'),
+        default=False,
+        help_text='Добавляет якорную ссылку в меню (хедер)'
+    )
+    menu_title = models.CharField(
+        _('Заголовок в меню'),
+        max_length=256,
+        help_text='Текст якорной ссылки, который будет отображаться в меню (хедере)'
+    )
+    menu_title_slug = models.CharField(_('Якорная ссылка'), max_length=256, unique=True)
     sort = models.IntegerField(
         _('Сортировка'),
         default=0,

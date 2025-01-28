@@ -7,4 +7,7 @@ class InfoConfig(AppConfig):
     name = 'info'
     verbose_name = _('Инфо-блоки')
 
+    def ready(self):
+        import info.signals  # noqa
+
 

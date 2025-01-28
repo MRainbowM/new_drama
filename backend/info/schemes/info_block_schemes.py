@@ -5,6 +5,14 @@ from ninja import FilterSchema, Field, ModelSchema
 from ..models import InfoBlock
 
 
+class MenuInfoBlockOutSchema(ModelSchema):
+    class Config:
+        model = InfoBlock
+        model_fields = [
+            'id', 'menu_title', 'menu_title_slug'
+        ]
+
+
 class InfoBlockOutSchema(ModelSchema):
     class Config:
         model = InfoBlock
@@ -16,3 +24,4 @@ class InfoBlockOutSchema(ModelSchema):
 
 class InfoBlockFilterSchema(FilterSchema):
     is_enable: Optional[bool] = Field(None, q='is_enable')
+    in_menu: Optional[bool] = Field(None, q='in_menu')

@@ -6,6 +6,7 @@ from ninja import Query, Router
 from .models import InfoBlock, Viewer, Partner
 from .schemes import (
     InfoBlockOutSchema, InfoBlockFilterSchema,
+    MenuInfoBlockOutSchema,
     ViewerOutSchema, ViewerFilterSchema,
     PartnerFilterSchema, PartnerOutSchema
 )
@@ -20,6 +21,19 @@ router = Router()
     summary=_('Получить список инфо-блоков')
 )
 def get_info_block_list(request, filters: InfoBlockFilterSchema = Query(...)):
+    info_block_list = InfoBlock.objects.all()
+    info_block_list = filters.filter(info_block_list).order_by('sort')
+
+    return info_block_list
+
+
+@router.get(
+    '/info_block/menu/list',
+    response=List[MenuInfoBlockOutSchema],
+    tags=[_('Инфо-блоки')],
+    summary=_('Получить список инфо-блоков в меню')
+)
+def get_menu_info_block_list(request, filters: InfoBlockFilterSchema = Query(...)):
     info_block_list = InfoBlock.objects.all()
     info_block_list = filters.filter(info_block_list).order_by('sort')
 
