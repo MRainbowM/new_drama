@@ -18,6 +18,9 @@
     // --color-background: #565656;
     --color-background: #111111;
 
+    --arrow-bgc-default: rgba(30, 30, 30, 0.6);
+    --arrow-bgc-hover: rgba(30, 30, 30, 0.8);
+
     --container-margin-lr: calc(80px / 2);
 
     @media (max-width: 500px) {

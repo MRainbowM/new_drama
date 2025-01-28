@@ -19,6 +19,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    background-color: var(--arrow-bgc-default);
     border-radius: 100%;
+
+    &:hover {
+        background-color: var(--arrow-bgc-hover);
+    }
 }
