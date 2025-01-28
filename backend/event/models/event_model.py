@@ -35,12 +35,12 @@ class Event(DatesAbstract):
     cover = models.ImageField(
         _('Обложка спектакля'),
         upload_to=event_cover_path,
-        help_text='Горизонтальное изображение в карточке спектакля'
+        help_text='Изображение в списке спектаклей'
     )
     preview_cover = models.ImageField(
         _('Обложка в афише'),
         upload_to=event_cover_path,
-        help_text='Обложка спектакля в афише на главной странице'
+        help_text='Изображение курсора при наведении на спектакль в афише'
     )
     min_age_limit = models.IntegerField(
         _('Возрастное ограничение'),

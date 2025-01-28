@@ -35,7 +35,7 @@ class EventPreviewSchema(ModelSchema):
     class Config:
         model = Event
         model_fields = [
-            'id', 'name', 'slug', 'short_description', 'preview_cover', 'min_age_limit',
+            'id', 'name', 'slug', 'short_description', 'cover', 'preview_cover', 'min_age_limit',
         ]
 
 
