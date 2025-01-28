@@ -18,7 +18,7 @@ class InfoBlockOutSchema(ModelSchema):
         model = InfoBlock
         model_fields = [
             'id', 'title', 'content', 'btn_text',
-            'btn_link', 'cover'
+            'btn_link', 'cover', 'menu_title_slug'
         ]
 
 

@@ -123,6 +123,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/info/info_block/menu/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Получить список инфо-блоков в меню */
+        get: operations["info_api_get_menu_info_block_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/info/viewer/list": {
         parameters: {
             query?: never;
@@ -372,6 +389,8 @@ export interface components {
         InfoBlockFilterSchema: {
             /** Is Enable */
             is_enable?: boolean | null;
+            /** In Menu */
+            in_menu?: boolean | null;
         };
         /** InfoBlockOutSchema */
         InfoBlockOutSchema: {
@@ -396,6 +415,20 @@ export interface components {
              * @description Картинка инфо-блока
              */
             cover: string;
+            /** Якорная ссылка */
+            menu_title_slug: string;
+        };
+        /** MenuInfoBlockOutSchema */
+        MenuInfoBlockOutSchema: {
+            /** ID */
+            id?: number | null;
+            /**
+             * Заголовок в меню
+             * @description Текст якорной ссылки, который будет отображаться в меню (хедере)
+             */
+            menu_title: string;
+            /** Якорная ссылка */
+            menu_title_slug: string;
         };
         /** ViewerFilterSchema */
         ViewerFilterSchema: {
@@ -581,6 +614,7 @@ export interface operations {
         parameters: {
             query?: {
                 is_enable?: boolean | null;
+                in_menu?: boolean | null;
             };
             header?: never;
             path?: never;
@@ -595,6 +629,29 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["InfoBlockOutSchema"][];
+                };
+            };
+        };
+    };
+    info_api_get_menu_info_block_list: {
+        parameters: {
+            query?: {
+                is_enable?: boolean | null;
+                in_menu?: boolean | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MenuInfoBlockOutSchema"][];
                 };
             };
         };
