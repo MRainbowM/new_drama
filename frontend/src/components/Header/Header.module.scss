@@ -1,11 +1,22 @@
 .root {
-    padding: 25px 0;
+    --padding-top: 25px;
+
+    max-width: var(--container-width);
+
+    margin: 0 auto;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: var(--color-background);
+
 }
 
 .menu {
     display: grid;
     grid-template-columns: 1fr 250px 1fr;
 
+    height: calc(var(--logo-height) + var(--padding-top) * 2);
+    padding: var(--padding-top) var(--container-margin-lr);
     align-items: center;
 
     a {
@@ -17,16 +28,29 @@
     display: flex;
     justify-content: center;
 
+    a {
+        position: absolute;
+        top: var(--padding-top);
+    }
+
     svg {
-        width: 62px;
-        height: 62px;
+        width: var(--logo-height);
+        height: var(--logo-height);
     }
 }
 
 .leftCol,
 .rightCol {
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.hide {
+    height: 0px;
+    overflow: hidden;
+    padding: 0;
 }
 
 @media (max-width: 900px) {
@@ -37,6 +61,7 @@
 
 
 @media (max-width: 700px) {
+
     .leftCol,
     .rightCol {
         a {

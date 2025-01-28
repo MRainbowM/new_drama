@@ -20,8 +20,8 @@ export default function RootLayout({
                 )}
             >
                 <RunningLine />
+                <Header />
                 <Container>       
-                    <Header />
                     {children}
                     <Footer />
                 </Container>
