@@ -38,6 +38,7 @@
 }
 
 .items {
+    height: var(--running-line-height);
     flex-shrink: 0;
     display: flex;
     gap: 20px;
@@ -57,7 +58,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 4px 0;
     transition: all 0.1s ease-in-out;
 }
 

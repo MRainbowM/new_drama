@@ -1,5 +1,5 @@
 .root {
-    height: calc(100vh - 120px - 35px); // минус высота хедера и бегущей строки
+    height: calc(100vh - 120px - var(--running-line-height)); // минус высота хедера и бегущей строки
     position: relative;
 }
 
