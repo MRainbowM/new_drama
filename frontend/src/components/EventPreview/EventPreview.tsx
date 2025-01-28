@@ -14,7 +14,7 @@ interface EventPreviewProps {
 export default function EventPreview(
     { event, isActiveContainer, isActive, onMouseOver }: EventPreviewProps
 ) {
-    const backgroundImageSrc = myImageLoader({src: event.preview_cover})
+    const backgroundImageSrc = myImageLoader({src: event.cover})
 
     return (
         <div

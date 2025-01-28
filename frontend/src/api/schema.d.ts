@@ -204,8 +204,13 @@ export interface components {
             /** Краткое описание */
             short_description: string;
             /**
+             * Обложка спектакля
+             * @description Изображение в списке спектаклей
+             */
+            cover: string;
+            /**
              * Обложка в афише
-             * @description Обложка спектакля в афише на главной странице
+             * @description Изображение курсора при наведении на спектакль в афише
              */
             preview_cover: string;
             /**
@@ -283,12 +288,12 @@ export interface components {
             short_description: string;
             /**
              * Обложка спектакля
-             * @description Горизонтальное изображение в карточке спектакля
+             * @description Изображение в списке спектаклей
              */
             cover: string;
             /**
              * Обложка в афише
-             * @description Обложка спектакля в афише на главной странице
+             * @description Изображение курсора при наведении на спектакль в афише
              */
             preview_cover: string;
             /**
