@@ -23,17 +23,12 @@ export default function HeaderMenu(
 
     const onScroll = useCallback(event => {
         const { scrollTop } = document.scrollingElement;
-        console.log(scrollTop, scrollPoint);
 
-        
         if (scrollTop > scrollPoint && scrollTop > 0) {
             setActive(false);
         } else {
             setActive(true);
-        }
-        setTimeout(() => {
-            //todo
-        }, 400);
+        } 
 
         scrollPoint = scrollTop;
     }, []);
@@ -49,12 +44,10 @@ export default function HeaderMenu(
 
 
     return <div
-        // className={styles.menu}
         className={clsx(
             styles.menu,
             { [styles.hide]: !isActive }
         )}
-
     >
         <div className={styles.leftCol}>
             {leftItems.map(item => (
