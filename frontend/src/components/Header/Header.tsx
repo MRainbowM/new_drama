@@ -1,7 +1,6 @@
 import styles from './Header.module.scss'
-import Logo from 'public/images/nd.svg'
-import Link from 'next/link'
 import { apiClient } from '../../api/client'
+import HeaderMenu from '../HeaderMenu/HeaderMenu'
 
 export default async function Header() {
     // Инфо-блоки в меню
@@ -35,31 +34,9 @@ export default async function Header() {
         ));
     }
 
-    const middleIdx = Math.floor(menuItems.length / 2);
-    const leftItems = menuItems.slice(0, middleIdx);
-    const rightItems = menuItems.slice(middleIdx, menuItems.length);
-
     return (
         <header className={styles.root}>
-            <div className={styles.menu}>
-                <div className={styles.leftCol}>
-                    {leftItems.map(item => (
-                        <Link href={item.href}>
-                            <span>{item.title}</span>
-                        </Link>
-                    ))}
-                </div>
-                <div className={styles.logo}>
-                    <Link href='/'><Logo /></Link>
-                </div>
-                <div className={styles.rightCol}>
-                    {rightItems.map(item => (
-                        <Link href={item.href}>
-                            <span>{item.title}</span>
-                        </Link>
-                    ))}
-                </div>
-            </div>
+            <HeaderMenu items={menuItems} />
         </header>
     );
 }
