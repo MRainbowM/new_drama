@@ -23,7 +23,7 @@ export default async function PartnerSection() {
     }
 
     return (
-        <section className={styles.root}>
+        <section className={styles.root} id="partner">
             <h2>Наши друзья и партнеры</h2>
 
             <div className={styles.content}>
