@@ -3,8 +3,6 @@
     cursor: pointer;
 }
 
-
-
 .container {
     display: flex;
     padding: 12px 10px;
@@ -94,14 +92,14 @@
 
             .btnBuy {
                 border: 1px solid var(--color-black);
+
+                &:hover {
+                    background-color: var(--color-red);
+                    color: var(--color-white);
+                    border: 1px solid var(--color-red);
+                }
             }
         }
-    }
-
-    .btnBuy:hover {
-        background-color: var(--color-red);
-        color: var(--color-white);
-        border: none;
     }
 }
 
