@@ -6,6 +6,8 @@ import '../styles/globals.scss'
 import { sans_narrow, montserrat } from './fonts'
 import clsx from "clsx"
 
+export const dynamic = 'force-dynamic';
+
 export default function RootLayout({
     children,
 }: {
