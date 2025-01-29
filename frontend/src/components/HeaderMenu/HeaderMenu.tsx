@@ -43,8 +43,7 @@ export default function HeaderMenu(
         return () => {
             window.removeEventListener("scroll", onScroll, {});
         }
-    }, []);
-
+    }, [onScroll]);
 
     // Открыние/закрытие меню в мобилке
     const refContainer = useRef<HTMLElement>();
