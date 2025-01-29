@@ -1,10 +1,18 @@
 :root {
+    // Высота бегущей строки
     --running-line-height: 35px;
 
+    // Высота/ширина лого в хедере
     --logo-height: 62px;
 
+    @media (max-width: 700px) {
+        --logo-height: 50px;
+    }
+
+    // Ширина основного контейнера с контентом
     --container-width: 1600px;
 
+    // Отступ между секциями на главной странице
     --gap-between-sections: 120px;
 
     --color-white: #FFFFFF;

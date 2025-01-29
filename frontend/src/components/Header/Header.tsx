@@ -35,8 +35,6 @@ export default async function Header() {
     }
 
     return (
-        <header className={styles.root}>
-            <HeaderMenu items={menuItems} />
-        </header>
+        <HeaderMenu items={menuItems} />
     );
 }

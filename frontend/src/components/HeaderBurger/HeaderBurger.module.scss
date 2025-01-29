@@ -1,0 +1,41 @@
+.burger {
+    position: absolute;
+    top: calc(var(--header-height) / 2 - 22px / 2);
+    right: var(--container-margin-lr);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 22px;
+
+    // height: var(--header-height);
+    cursor: pointer;
+    user-select: none;
+}
+
+.lineTop,
+.lineMid,
+.lineBot {
+    width: 25px;
+    height: 3px;
+    background-color: currentColor;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .2s ease all;
+    transition: .2s ease all;
+    user-select: none;
+}
+
+.lineTop.open {
+    -webkit-transform: rotate(45deg);
+    transform: translateY(10px) rotate(45deg);
+}
+
+.lineMid.open {
+    opacity: 0;
+}
+
+.lineBot.open {
+    -webkit-transform: rotate(45deg);
+    transform: translateY(-9px) rotate(-45deg);
+}
