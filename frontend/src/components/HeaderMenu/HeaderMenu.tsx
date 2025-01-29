@@ -3,7 +3,7 @@ import styles from './HeaderMenu.module.scss'
 import Logo from 'public/images/nd.svg'
 import Link from 'next/link'
 import clsx from "clsx"
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 interface HeaderMenuProps {
     items: { href: string, title: string }[]
@@ -16,21 +16,20 @@ export default function HeaderMenu(
     const leftItems = items.slice(0, middleIdx);
     const rightItems = items.slice(middleIdx, items.length);
 
-    let scrollPoint = 0;
+    const scrollPoint = useRef(0);
 
-    const [isActive, setActive] = useState(true)
-
+    const [isActive, setActive] = useState(true);
 
     const onScroll = useCallback(event => {
         const { scrollTop } = document.scrollingElement;
 
-        if (scrollTop > scrollPoint && scrollTop > 0) {
+        if (scrollTop > scrollPoint.current && scrollTop > 0) {
             setActive(false);
         } else {
             setActive(true);
         } 
 
-        scrollPoint = scrollTop;
+        scrollPoint.current = scrollTop;
     }, []);
 
     useEffect(() => {
