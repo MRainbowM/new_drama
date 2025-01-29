@@ -82,8 +82,8 @@ export default function HeaderMenu(
                 onClick={onClickAccordion}
             >
                 <div className={styles.leftCol}>
-                    {leftItems.map(item => (
-                        <Link href={item.href}>
+                    {leftItems.map((item, index) => (
+                        <Link href={item.href} key={index}>
                             <span>{item.title}</span>
                         </Link>
                     ))}
@@ -92,8 +92,8 @@ export default function HeaderMenu(
                     <Link href='/'><Logo /></Link>
                 </div>
                 <div className={styles.rightCol}>
-                    {rightItems.map(item => (
-                        <Link href={item.href}>
+                    {rightItems.map((item, index) => (
+                        <Link href={item.href} key={index}>
                             <span>{item.title}</span>
                         </Link>
                     ))}
