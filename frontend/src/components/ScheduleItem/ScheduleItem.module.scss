@@ -1,5 +1,4 @@
 .root {
-    padding: 12px 0;
     cursor: pointer;
 }
 
@@ -24,7 +23,18 @@
     .time {
         display: flex;
         align-items: center;
-        margin-left: 20px;
+        margin-left: 15px;
+        font-size: 18px;
+    }
+
+    .premiere {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 105px;
+        text-transform: uppercase;
+        color: var(--color-red);
+        font-weight: bold;
         font-size: 18px;
     }
 }
@@ -33,7 +43,6 @@
     display: flex;
     align-items: center;
     text-transform: uppercase;
-    margin-left: 80px;
 
     .name {
         font-weight: bold;
@@ -125,6 +134,10 @@
         .time {
             margin: 0;
         }
+
+        .premiere {
+            justify-content: start;
+        }
     }
 
     .titleCol {
@@ -165,6 +178,10 @@
 
         .titleCol {
             margin: 0;
+        }
+
+        .premiere {
+            justify-content: center;
         }
     }
 
