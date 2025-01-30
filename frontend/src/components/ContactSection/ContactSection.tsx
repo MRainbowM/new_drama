@@ -1,7 +1,8 @@
-import { contactEmail, contactPhone, contactPhoneTitle, socialIG, socialTG, socialVK } from '../../constants/links';
+import { contactEmail, contactPhone, contactPhoneTitle, contactTicketBuy, socialIG, socialTG, socialVK } from '../../constants/links';
 import styles from './ContactSection.module.scss'
 import MapImg from 'public/images/map.png'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default async function ContactSection() {
     return (
@@ -46,17 +47,26 @@ export default async function ContactSection() {
                         <h3>Соц сети</h3>
 
                         <div className={styles.dataRow}>
-                            <a href={socialTG} target="__blank">Telegram</a>
-                            <a href={socialIG} target="__blank">Inst</a>
-                            <a href={socialVK} target="__blank">Vk</a>
+                            <Link href={socialTG} target="__blank">
+                                <span>Telegram</span>
+                            </Link>
+                            <Link href={socialIG} target="__blank">
+                                <span>Inst</span>
+                            </Link>
+                            <Link href={socialVK} target="__blank">
+                                <span>Vk</span>
+                            </Link>
                         </div>
                     </div>
-
                 </div>
 
-                <div className={styles.btn}>
+                <Link
+                    href={contactTicketBuy}
+                    className={styles.btn}
+                    target="__blank"
+                >
                     <span>Билеты</span>
-                </div>
+                </Link>
 
             </div>
 
