@@ -25,6 +25,17 @@
     min-height: 90px;
 }
 
+@media not all and (hover: none) {
+    // Только НЕ для тач устройств
+
+    .logo {
+        opacity: 0.7;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
 
 @media (max-width: 1400px) {
     .root {
