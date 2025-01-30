@@ -42,6 +42,13 @@ export default function ScheduleItem(
                                     )}
                                 </span>
                             </div>
+                            <div className={styles.premiere}>
+                            {(
+                                event.is_premiere ? (
+                                    <span>Премьера</span>
+                                ) : (<></>)
+                            )}
+                            </div>
                         </div>
                         <div className={styles.titleCol}>
                             <span className={styles.name}>
