@@ -16,6 +16,27 @@
     }
 }
 
+@media not all and (hover: none) {
+    // Только НЕ для тач устройств
+
+    .root {
+        &:before {
+            content: '';
+            position: absolute;
+            width: calc(100% - 20px);
+            height: 100%;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+            border-radius: 16px;
+        }
+
+        &:hover {
+            &:before {
+                opacity: 0;
+            }
+        }
+    }
+}
+
 @media (max-width: 1350px) {
     .root {
         --col-count: 4;
@@ -33,6 +54,7 @@
         --col-count: 2;
     }
 }
+
 @media (max-width: 700px) {
     .root {
         --col-count: 3;
