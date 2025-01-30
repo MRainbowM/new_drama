@@ -3,6 +3,7 @@ import { components } from '../../api/schema'
 import ScheduleCursor from '../ScheduleCursor/ScheduleCursor';
 import { useState } from "react"
 import clsx from "clsx"
+import Link from 'next/link';
 
 interface ScheduleItemProps {
     event: components['schemas']['EventShowOutSchema']
@@ -43,11 +44,11 @@ export default function ScheduleItem(
                                 </span>
                             </div>
                             <div className={styles.premiere}>
-                            {(
-                                event.is_premiere ? (
-                                    <span>Премьера</span>
-                                ) : (<></>)
-                            )}
+                                {(
+                                    event.is_premiere ? (
+                                        <span>Премьера</span>
+                                    ) : (<></>)
+                                )}
                             </div>
                         </div>
                         <div className={styles.titleCol}>
@@ -68,9 +69,13 @@ export default function ScheduleItem(
                             )}
                         </div>
                         <div className={styles.btnCol}>
-                            <div className={styles.btnBuy}>
+                            <Link
+                                href={event.link_to_buy_ticket}
+                                target='_blank'
+                                className={styles.btnBuy}
+                            >
                                 <span>Купить билет</span>
-                            </div>
+                            </Link>
                         </div>
                     </div>
                 </div>
