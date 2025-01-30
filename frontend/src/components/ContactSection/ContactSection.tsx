@@ -1,6 +1,7 @@
 import { contactEmail, contactPhone, contactPhoneTitle, socialIG, socialTG, socialVK } from '../../constants/links';
 import styles from './ContactSection.module.scss'
-
+import MapImg from 'public/images/map.png'
+import Image from 'next/image'
 
 export default async function ContactSection() {
     return (
@@ -58,6 +59,14 @@ export default async function ContactSection() {
                 </div>
 
             </div>
+
+            <Image
+                className={styles.map}
+                src={MapImg.src}
+                width={MapImg.width}
+                height={MapImg.height}
+                alt={'Иркутск, Кожова, 38'}
+            />
         </section>
     );
 }

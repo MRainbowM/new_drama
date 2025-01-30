@@ -82,7 +82,6 @@
     }
 }
 
-
 .btn {
     height: var(--btn-width);
     width: var(--btn-width);
@@ -95,6 +94,11 @@
     border-radius: 100%;
     font-weight: bold;
     font-size: 20px;
+}
+
+.map {
+    width: 100%;
+    object-fit: cover;
 }
 
 @media (max-width: 1600px) {
