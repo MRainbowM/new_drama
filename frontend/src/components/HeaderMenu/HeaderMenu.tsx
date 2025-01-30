@@ -80,6 +80,10 @@ export default function HeaderMenu(
                 )}
 
                 onClick={onClickAccordion}
+                onMouseOver={() => setActive(true)}
+                // onMouseOut={() => {
+                //     setActive(false)
+                // }}
             >
                 <div className={styles.leftCol}>
                     {leftItems.map((item, index) => (
