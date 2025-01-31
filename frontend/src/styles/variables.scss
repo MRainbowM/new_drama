@@ -4,10 +4,18 @@
 
     // Высота/ширина лого в хедере
     --logo-height: 62px;
+    // Верхний и нижний паддинги хедера
+    --header-padding-tb: 25px;
 
-    @media (max-width: 700px) {
+    --header-mobile-width: 700px;
+
+    @media (max-width: var(--header-mobile-width)) {
         --logo-height: 50px;
+        --header-padding-tb: 15px;
     }
+
+    // Высота хедера
+    --header-height: calc(var(--logo-height) + var(--header-padding-tb) * 2);
 
     // Ширина основного контейнера с контентом
     --container-width: 1600px;

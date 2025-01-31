@@ -1,7 +1,4 @@
 .root {
-    --padding-top: 25px;
-    --header-height: calc(var(--logo-height) + var(--padding-top) * 2);
-
     max-width: var(--container-width);
 
     margin: 0 auto;
@@ -37,7 +34,7 @@
 
     a {
         position: absolute;
-        top: var(--padding-top);
+        top: var(--header-padding-tb);
     }
 
     svg {
