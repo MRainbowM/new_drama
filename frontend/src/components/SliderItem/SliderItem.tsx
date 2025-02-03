@@ -16,7 +16,7 @@ export default function SliderItem(
 ) {
 
     const { ref, inView, entry } = useInView({
-        threshold: 0.75 // Процент видимости блока
+        threshold: 0.72 // Процент видимости блока
     });
 
     useEffect(() => { if (inView) { onView(); } }, [inView])

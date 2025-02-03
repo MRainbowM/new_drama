@@ -42,5 +42,10 @@
     }
 
     --font-size-h2-main: 32px;
+
+    @media (max-width: 700px) {
+        --font-size-h2-main: 28px;
+    }
+
     --color-h2-main: var(--color-red);
 }
