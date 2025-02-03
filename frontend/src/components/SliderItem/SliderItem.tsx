@@ -3,14 +3,16 @@ import { useInView } from "react-intersection-observer";
 import React, { useEffect } from 'react';
 import { ScrollParallax } from "react-just-parallax";
 import { components } from '../../api/schema'
+import clsx from 'clsx';
 
 interface SliderItemProps {
     onView: () => void,
-    data: components['schemas']['InfoBlockOutSchema']
+    data: components['schemas']['InfoBlockOutSchema'],
+    isActive: boolean
 }
 
 export default function SliderItem(
-    { onView, data }: SliderItemProps
+    { onView, data, isActive }: SliderItemProps
 ) {
 
     const { ref, inView, entry } = useInView({
@@ -20,8 +22,11 @@ export default function SliderItem(
     useEffect(() => { if (inView) { onView(); } }, [inView])
 
     return (
-        <div className={styles.root}
+        <div className={clsx(styles.root,
+            isActive && styles.mobileOnView
+        )}
             ref={ref}
+            id={data.menu_title_slug}
         >
             <ScrollParallax>
                 <div className={styles.container}>

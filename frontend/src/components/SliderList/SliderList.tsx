@@ -29,6 +29,7 @@ export default function SliderList(
                             setActiveItem(index)
                         }}
                         data={item}
+                        isActive={index == activeItem}
                     />
                 ))}
             </div>

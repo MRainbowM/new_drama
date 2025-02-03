@@ -7,9 +7,7 @@
     // Верхний и нижний паддинги хедера
     --header-padding-tb: 25px;
 
-    --header-mobile-width: 700px;
-
-    @media (max-width: var(--header-mobile-width)) {
+    @media (max-width: 700px) {
         --logo-height: 50px;
         --header-padding-tb: 15px;
     }
