@@ -14,6 +14,7 @@ export default function Hero() {
                     autoPlay
                     muted
                     loop
+                    playsInline
                     preload="auto"
                     aria-label="Video player"
                     style={{
