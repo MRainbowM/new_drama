@@ -38,7 +38,7 @@ export default function SliderLeftContainer(
             setTopImg(activeItem * -100);
         }
 
-    }, [activeItem]);
+    }, [activeItem, data]);
 
     useEffect(() => {
         //add eventlistener to window
@@ -72,10 +72,6 @@ export default function SliderLeftContainer(
                                 key={item.id}
                             >
                                 <Image
-                                    // style={{
-                                    //     // top: `${activeItem * (-100)}%`,
-                                    //     transform: `translateY(${offsetImg}px)`
-                                    // }}
                                     className={clsx(
                                         { [styles.active]: index == activeItem }
                                     )}
@@ -91,6 +87,7 @@ export default function SliderLeftContainer(
 
             {data.map((item, index) => (
                 <SliderLeftMobile
+                    key={index}
                     currentItemIdx={index}
                     activeItem={activeItem}
                     item={item}
