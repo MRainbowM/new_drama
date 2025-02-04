@@ -4,7 +4,6 @@ import Image from 'next/image'
 import clsx from "clsx"
 import { components } from '../../api/schema'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import SliderLeftMobile from '../SliderLeftMobile/SliderLeftMobile'
 import Link from 'next/link'
 
 interface SliderLeftContainerProps {
