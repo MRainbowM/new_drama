@@ -99,13 +99,13 @@ export default function SliderLeftContainer(
                 <div className={styles.mobileTextContainer}>
                     {data.map((item, index) => (
                         <div
+                            key={index}
                             className={clsx(
                                 styles.mobileData,
                                 { [styles.active]: index == activeItem }
                             )}
                         >
                             <div
-                                key={index}
                                 className={clsx(
                                     styles.mobileText,
                                     { [styles.active]: index == activeItem }
@@ -114,7 +114,6 @@ export default function SliderLeftContainer(
                             ></div>
                             <div className={styles.mobileBtn}>
                                 <Link
-                                    key={index}
                                     href={item.btn_link}
                                     target='_blank'
                                 >
