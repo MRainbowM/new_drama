@@ -5,6 +5,7 @@ import clsx from "clsx"
 import { components } from '../../api/schema'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import SliderLeftMobile from '../SliderLeftMobile/SliderLeftMobile'
+import Link from 'next/link'
 
 interface SliderLeftContainerProps {
     activeItem: number,
@@ -55,7 +56,18 @@ export default function SliderLeftContainer(
                 <h2>В наших стенах</h2>
             </div>
 
-            <div className={styles.coverContainer}>
+            <div className={styles.content}>
+                <div className={styles.mobileSubtitle}>
+                    {data.map((item, index) => (
+                        <span
+                            key={index}
+                            className={clsx({ [styles.active]: index == activeItem })}
+                        >
+                            {item.title}
+                        </span>
+                    ))}
+                </div>
+
                 <div className={styles.cover}>
                     <div
                         className={styles.coverWrap}
@@ -83,16 +95,36 @@ export default function SliderLeftContainer(
                         ))}
                     </div>
                 </div>
-            </div>
 
-            {data.map((item, index) => (
-                <SliderLeftMobile
-                    key={index}
-                    currentItemIdx={index}
-                    activeItem={activeItem}
-                    item={item}
-                />
-            ))}
+                <div className={styles.mobileTextContainer}>
+                    {data.map((item, index) => (
+                        <div
+                            className={clsx(
+                                styles.mobileData,
+                                { [styles.active]: index == activeItem }
+                            )}
+                        >
+                            <div
+                                key={index}
+                                className={clsx(
+                                    styles.mobileText,
+                                    { [styles.active]: index == activeItem }
+                                )}
+                                dangerouslySetInnerHTML={{ __html: item.content }}
+                            ></div>
+                            <div className={styles.mobileBtn}>
+                                <Link
+                                    key={index}
+                                    href={item.btn_link}
+                                    target='_blank'
+                                >
+                                    <span>{item.btn_text}</span>
+                                </Link>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 }
