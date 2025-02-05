@@ -12,38 +12,6 @@ export const dynamic = 'force-dynamic';
 
 
 export async function generateMetadata() {
-    const jsonLd = {
-        "@context": "https://schema.org",
-        "@type": "PerformingArtsTheater",
-        "name": "Театр «Новая Драма»",
-        "url": `${process.env.BASE_URL}/`,
-        "logo": `${process.env.BASE_URL}/static/logo.png`,
-        "image": `${process.env.BASE_URL}/static/theater.png`,
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "ул. Кожова, 38",
-            "addressLocality": "Иркутск",
-            "postalCode": "664022",
-            "addressCountry": "RU"
-        },
-        "telephone": contactPhoneFormat,
-        "email": contactEmail,
-        "sameAs": [
-            socialVK,
-            socialIG,
-            socialTG,
-            socialYT
-        ],
-        "description": "Театр «Новая Драма» — содружество молодых актёров, которых объединяет любовь к современной драматургии, поиск необычных сценических форм и желание работать в разных театральных жанрах.",
-        "foundingDate": "2016",
-        "founders": [
-            {
-                "@type": "Person",
-                "name": "Вадим Карионов"
-            }
-        ]
-    };
-
     // console.log(jsonLd);
     return {
         title: 'Новая Драма. Иркутск',
@@ -62,14 +30,49 @@ export async function generateMetadata() {
                 }
             ]
         },
-        other: {
-            "application/ld+json": JSON.stringify(jsonLd)
-        }
+        // other: {
+        //     "application/ld+json": JSON.stringify(jsonLd)
+        // }
     }
 }
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "PerformingArtsTheater",
+    "name": "Театр «Новая Драма»",
+    "url": `${process.env.BASE_URL}/`,
+    "logo": `${process.env.BASE_URL}/static/logo.png`,
+    "image": `${process.env.BASE_URL}/static/theater.png`,
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ул. Кожова, 38",
+        "addressLocality": "Иркутск",
+        "postalCode": "664022",
+        "addressCountry": "RU"
+    },
+    "telephone": contactPhoneFormat,
+    "email": contactEmail,
+    "sameAs": [
+        socialVK,
+        socialIG,
+        socialTG,
+        socialYT
+    ],
+    "description": "Театр «Новая Драма» — содружество молодых актёров, которых объединяет любовь к современной драматургии, поиск необычных сценических форм и желание работать в разных театральных жанрах.",
+    "foundingDate": "2016",
+    "founders": [
+        {
+            "@type": "Person",
+            "name": "Вадим Карионов"
+        }
+    ]
+};
 
 export default function MainPage() {
     return (<>
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <Hero />
         <ScheduleSection />
         <EventPreviewSection />
