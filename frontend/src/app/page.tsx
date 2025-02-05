@@ -8,11 +8,10 @@ import TheaterSection from '../components/TheaterSection/TheaterSection';
 import ViewerSection from '../components/ViewerSection/ViewerSection';
 import { contactEmail, contactPhoneFormat, socialIG, socialTG, socialVK, socialYT } from '../constants/links';
 import '../styles/page.scss'
-import Head from "next/head";
-
 export const dynamic = 'force-dynamic';
 
-export default async function MainPage() {
+
+export async function generateMetadata() {
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "PerformingArtsTheater",
@@ -44,17 +43,14 @@ export default async function MainPage() {
             }
         ]
     };
+    return {
+        title: 'Новая Драма. Иркутск',
+        openGraph: jsonLd
+    }
+}
 
-
+export default function MainPage() {
     return (<>
-        <Head>
-            <title>Новая Драма. Иркутск</title>
-            <meta name="description" content="Официальный сайт театра «Новая Драма»" />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
-        </Head>
         <Hero />
         <ScheduleSection />
         <EventPreviewSection />
