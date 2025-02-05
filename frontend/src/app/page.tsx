@@ -17,8 +17,8 @@ export async function generateMetadata() {
         "@type": "PerformingArtsTheater",
         "name": "Театр «Новая Драма»",
         "url": `${process.env.BASE_URL}/`,
-        "logo": `${process.env.BASE_URL}/logo.png`,
-        "image": `${process.env.BASE_URL}/theater.png`,
+        "logo": `${process.env.BASE_URL}/static/logo.png`,
+        "image": `${process.env.BASE_URL}/static/theater.png`,
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "ул. Кожова, 38",
