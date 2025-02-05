@@ -45,7 +45,20 @@ export async function generateMetadata() {
     };
     return {
         title: 'Новая Драма. Иркутск',
-        openGraph: jsonLd
+        description: 'Театр «Новая Драма» в Иркутске – содружество молодых актёров, которые ищут новые формы театрального искусства.',
+        url: `${process.env.BASE_URL}/`,
+        type: 'website',
+        images: [
+            {
+                url: `${process.env.BASE_URL}/static/theater.png`,
+                width: 1200,
+                height: 630,
+                alt: 'Театр «Новая Драма»'
+            }
+        ],
+        other: {
+            "application/ld+json": JSON.stringify(jsonLd)
+        }
     }
 }
 
