@@ -10,5 +10,6 @@ export const socialYT = 'https://www.youtube.com/channel/UCVrDmCTXE3vJpFqJja7rwE
 
 export const contactEmail = 'novaya-drama@yandex.ru';
 export const contactPhone = '+79245303336';
+export const contactPhoneFormat = '+7 924 530-33-36';
 export const contactPhoneTitle = '+7 (924) 530-33-36';
 export const contactTicketBuy = 'https://quicktickets.ru/irkutsk-teatr-novaya-drama';
