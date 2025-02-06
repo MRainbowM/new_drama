@@ -278,6 +278,8 @@ export interface components {
             peoples: components["schemas"]["EventPeopleOutSchema"][];
             /** Images */
             images: components["schemas"]["EventImageOutSchema"][];
+            dramatist: components["schemas"]["PeoplePreviewSchema"] | null;
+            producer: components["schemas"]["PeoplePreviewSchema"] | null;
             /** ID */
             id?: number | null;
             /** Название спектакля */
@@ -286,16 +288,6 @@ export interface components {
             slug: string;
             /** Краткое описание */
             short_description: string;
-            /**
-             * Обложка спектакля
-             * @description Изображение в списке спектаклей
-             */
-            cover: string;
-            /**
-             * Обложка в афише
-             * @description Изображение курсора при наведении на спектакль в афише
-             */
-            preview_cover: string;
             /**
              * Возрастное ограничение
              * @description Минимальный разрешенный возраст зрителя, например, 18 лет
@@ -322,6 +314,31 @@ export interface components {
              * Format: date
              */
             premiere_at: string;
+            /**
+             * Обложка спектакля
+             * @description Изображение в списке спектаклей
+             */
+            cover: string;
+            /**
+             * Обложка в афише
+             * @description Изображение курсора при наведении на спектакль в афише
+             */
+            preview_cover: string;
+            /**
+             * Обложка спектакля в карточке спектакля
+             * @description Главное изображение в карточке спектакля
+             */
+            detail_cover: string;
+            /**
+             * Фотография напротив описания спектакля
+             * @description Изображение в карточке спектакля
+             */
+            description_cover: string;
+            /**
+             * Фотография напротив списка действующих лиц спектакля
+             * @description Изображение в карточке спектакля
+             */
+            actor_cover: string;
         };
         /** EventImageOutSchema */
         EventImageOutSchema: {
