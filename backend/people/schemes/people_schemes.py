@@ -3,6 +3,14 @@ from ninja import ModelSchema
 from ..models import People
 
 
+class PeopleShortSchema(ModelSchema):
+    class Config:
+        model = People
+        model_fields = [
+            'id', 'first_name', 'last_name'
+        ]
+
+
 class PeoplePreviewSchema(ModelSchema):
     class Config:
         model = People

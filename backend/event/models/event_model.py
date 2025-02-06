@@ -42,6 +42,21 @@ class Event(DatesAbstract):
         upload_to=event_cover_path,
         help_text='Изображение курсора при наведении на спектакль в афише'
     )
+    detail_cover = models.ImageField(
+        _('Обложка спектакля в карточке спектакля'),
+        upload_to=event_cover_path,
+        help_text='Главное изображение в карточке спектакля'
+    )
+    description_cover = models.ImageField(
+        _('Фотография напротив описания спектакля'),
+        upload_to=event_cover_path,
+        help_text='Изображение в карточке спектакля'
+    )
+    actor_cover = models.ImageField(
+        _('Фотография напротив списка действующих лиц спектакля'),
+        upload_to=event_cover_path,
+        help_text='Изображение в карточке спектакля'
+    )
     min_age_limit = models.IntegerField(
         _('Возрастное ограничение'),
         help_text='Минимальный разрешенный возраст зрителя, например, 18 лет',
