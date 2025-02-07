@@ -13,7 +13,7 @@
     background-position: center;
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 20px 10px;
     justify-content: flex-end;
     gap: 10px;
     border-radius: 16px;
@@ -72,7 +72,8 @@
 
 
 
-@media not all and (hover: none) { 
+@media not all and (hover: none) {
+
     // Только НЕ для тач устройств
     .active {
         width: calc(100% / 2.5);

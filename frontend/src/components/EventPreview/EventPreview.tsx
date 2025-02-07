@@ -3,6 +3,7 @@ import { components } from '../../api/schema'
 import styles from './EventPreview.module.scss'
 import clsx from "clsx"
 import myImageLoader from '../../loaders/image-loader'
+import Link from 'next/link'
 
 interface EventPreviewProps {
     event: components['schemas']['EventPreviewSchema'],
@@ -14,7 +15,7 @@ interface EventPreviewProps {
 export default function EventPreview(
     { event, isActiveContainer, isActive, onMouseOver }: EventPreviewProps
 ) {
-    const backgroundImageSrc = myImageLoader({src: event.cover})
+    const backgroundImageSrc = myImageLoader({ src: event.cover })
 
     return (
         <div
@@ -57,9 +58,14 @@ export default function EventPreview(
                         }
                     </div>
                 </div>
-                <div className={styles.btn}>
+
+                <Link
+                    className={styles.btn}
+                    href={`/event/${event.slug}`}
+                    target="__blank"
+                >
                     <span>О спектакле</span>
-                </div>
+                </Link>
             </div>
         </div>
     );
