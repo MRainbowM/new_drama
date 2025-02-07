@@ -3,12 +3,19 @@
     margin-top: calc(-1 * var(--header-height));
 }
 
+.textFont {
+    font-family: var(--font-montserrat);
+    font-weight: 500;
+    font-size: 16px;
+}
+
 .grid {
     width: calc(100% + var(--container-margin-lr) * 2);
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-left: calc(-1* var(--container-margin-lr));
     overflow: hidden;
+
 }
 
 .cover {
@@ -36,18 +43,28 @@
         z-index: 1;
     }
 
-    &::after { // Горизонтальные бордеры
+    &::after {
+        // Горизонтальные бордеры
         inline-size: 100%;
         block-size: 1px;
         inset-inline-start: 0;
         inset-block-start: calc(100% - 1px);
     }
 
-    &::before {// Вертикальные бордеры
+    &::before {
+        // Вертикальные бордеры
         inline-size: 1px;
         block-size: 100%;
         inset-block-start: 0px;
         inset-inline-start: -1px;
+    }
+
+    h2 {
+        text-transform: uppercase;
+        color: var(--color-red);
+        font-weight: bold;
+        font-size: 20px;
+        margin-bottom: 20px;
     }
 }
 
@@ -69,12 +86,21 @@
     }
 }
 
-.authors {
+.peoples {
     display: flex;
     flex-direction: column;
 
     .row {
         display: flex;
         justify-content: space-between;
+    }
+}
+
+.gridImg {
+    height: 420px;
+
+    img {
+        object-fit: cover;
+        min-height: 100%;
     }
 }

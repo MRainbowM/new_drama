@@ -1,6 +1,7 @@
 import styles from './EventDetail.module.scss'
 import { components } from '../../api/schema'
 import Image from 'next/image'
+import clsx from "clsx"
 
 interface EventDetailProps {
     event: components['schemas']['EventDetailSchema']
@@ -37,9 +38,8 @@ export default function EventDetail(
                     </div>
                 </div>
 
-                <div className={styles.gridItem}>
-                    <div className={styles.authors}>
-
+                <div className={clsx(styles.gridItem, styles.textFont)}>
+                    <div className={styles.peoples}>
                         {
                             event.dramatist ? (
                                 <div className={styles.row}>
@@ -73,15 +73,63 @@ export default function EventDetail(
 
                             ) : (<></>)
                         }
-                        <div className={styles.row}>
-                        </div>
-
-
-
                     </div>
                 </div>
+                {
+                    event.description ? (
+                        <>
+                            <div className={clsx(styles.gridItem, styles.textFont)}>
+                                {event.description}
+                            </div>
+                            <div className={clsx(styles.gridItem, styles.gridImg)}>
+                                {
+                                    event.description_cover ? (
+                                        <Image
+                                            src={event.description_cover}
+                                            layout='fill'
+                                            priority={true}
+                                            alt={event.name}
+                                        />
+                                    ) : (<></>)
+                                }
+                            </div>
+                        </>
+                    ) : (<></>)
+                }
+                {
+                    peoplesGroupTag['actor'] ? (<>
+                        <div className={clsx(styles.gridItem, styles.textFont)}>
+                            <h2>Действующие лица</h2>
+                            <div className={styles.peoples}>
+                                {
+                                    peoplesGroupTag['actor'].map((people, index) => (
+                                        <div className={styles.row} key={index}>
+                                            <span>{`${people.role}:`}</span>
+                                            <span>
+                                                {`${people.people.first_name} ${people.people.last_name}`}
+                                            </span>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </div>
+                        <div className={clsx(styles.gridItem, styles.gridImg)}>
+                            {
+                                event.actor_cover ? (
+                                    <Image
+                                        src={event.actor_cover}
+                                        layout='fill'
+                                        priority={true}
+                                        alt={event.name}
+                                    />
+                                ) : (<></>)
+                            }
+                        </div>
+
+                    </>) : (<></>)
+                }
 
             </div>
-        </div>
+        </div >
     );
 }
