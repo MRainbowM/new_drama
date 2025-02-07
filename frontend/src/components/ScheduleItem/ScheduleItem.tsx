@@ -13,7 +13,12 @@ interface ScheduleItemProps {
 export default function ScheduleItem(
     { event }: ScheduleItemProps
 ) {
-    const [isActive, setActive] = useState(false)
+    const [isActive, setActive] = useState(false);
+    const eventDetailLink = `/event/${event.event.slug}`;
+
+    const openEventDetail = () => {
+        location.href = eventDetailLink;
+    }
 
     return (
         <>
@@ -23,7 +28,10 @@ export default function ScheduleItem(
                 onMouseOut={() => setActive(false)}
             >
                 <div className={styles.container}>
-                    <div className={styles.left}>
+                    <div
+                        className={styles.left}
+                        onClick={openEventDetail}
+                    >
                         <div className={styles.dateCol}>
                             <span className={styles.date}>
                                 {new Intl.DateTimeFormat('ru-RU', {
