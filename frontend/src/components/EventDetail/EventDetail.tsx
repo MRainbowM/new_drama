@@ -2,17 +2,19 @@ import styles from './EventDetail.module.scss'
 import { components } from '../../api/schema'
 import Image from 'next/image'
 import clsx from "clsx"
+import EventDetailTickets from '../EventDetailTickets/EventDetailTickets'
 
 interface EventDetailProps {
     event: components['schemas']['EventDetailSchema']
 }
 
 
-export default function EventDetail(
+export default async function EventDetail(
     { event }: EventDetailProps
 ) {
     const intermission = event.has_intermission === true ? 'с антрактом' : 'без антракта';
     const peoplesGroupTag = Object.groupBy(event.peoples, ({ tag }) => tag);
+
     return (
         <div className={styles.root}>
             <div className={styles.grid}>
@@ -130,6 +132,8 @@ export default function EventDetail(
                 }
 
             </div>
+
+            <EventDetailTickets event_id={event.id} />
         </div >
     );
 }
