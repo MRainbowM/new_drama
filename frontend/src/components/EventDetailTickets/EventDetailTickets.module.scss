@@ -1,4 +1,5 @@
 .root {
+    padding-top: var(--gap-between-sections);
     h2 {
         font-size: 28px;
         color: var(--color-red);
@@ -6,3 +7,11 @@
         margin-bottom: 25px;
     }
 }
+
+
+.notFoundText {
+    font-size: 16px;
+    font-family: var(--font-montserrat);
+}
+
+.social {}
