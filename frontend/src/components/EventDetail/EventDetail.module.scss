@@ -71,12 +71,12 @@
 .title {
     color: var(--color-red);
     text-transform: uppercase;
-    width: min-content;
+    // width: min-content;
     font-weight: bold;
 
     h1 {
         font-size: 60px;
-        text-wrap-mode: nowrap;
+        // text-wrap-mode: nowrap;
     }
 
     .row {
@@ -97,10 +97,26 @@
 }
 
 .gridImg {
-    height: 420px;
+    min-height: 420px;
 
     img {
         object-fit: cover;
         min-height: 100%;
+    }
+}
+
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    .cover {
+        grid-column: 1;
+    }
+}
+
+@media (max-width: 550px) {
+    .gridImg{
+        min-height: 250px;
     }
 }
