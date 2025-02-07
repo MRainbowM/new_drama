@@ -1,7 +1,6 @@
 import Container from '../components/Container/Container'
 import Footer from '../components/Footer/Footer'
 import Header from '../components/Header/Header'
-import RunningLine from '../components/RunningLine/RunningLine'
 import '../styles/globals.scss'
 import { sans_narrow, montserrat } from './fonts'
 import clsx from "clsx"
@@ -9,9 +8,10 @@ import clsx from "clsx"
 export const dynamic = 'force-dynamic';
 
 export default function RootLayout({
-    children,
+    children, runline
 }: {
-    children: React.ReactNode
+    children: React.ReactNode,
+    runline: React.ReactNode,
 }) {
     return (
         <html lang="en">
@@ -21,7 +21,7 @@ export default function RootLayout({
                     `${montserrat.variable} font-sans`
                 )}
             >
-                <RunningLine />
+               {runline}
                 <Header />
                 <Container>       
                     {children}
