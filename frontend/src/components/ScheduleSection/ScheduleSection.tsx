@@ -4,18 +4,12 @@ import ScheduleList from '../ScheduleList/ScheduleList';
 
 
 export default async function ScheduleSection() {
-    const currentDate = new Date();
-    const month = currentDate.getMonth() + 1;
-    const monthString = month < 10 ? `0${month}`: month;
-    const startDate = `${currentDate.getFullYear()}-${monthString}-01`
-
-
     // Спектакли в афише
     const response = await apiClient.GET('/event/event_show/list', {
         params: {
             query: {
                 is_enable: true,
-                start_at__gte: startDate
+                from_current_month: true
             }
         }
     });

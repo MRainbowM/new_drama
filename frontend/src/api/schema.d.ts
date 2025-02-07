@@ -180,16 +180,12 @@ export interface components {
     schemas: {
         /** EventShowFilterSchema */
         EventShowFilterSchema: {
-            /** Start At  Gte */
-            start_at__gte?: string | null;
-            /** Start At  Lte */
-            start_at__lte?: string | null;
-            /** Start At  Month  Gte */
-            start_at__month__gte?: number | null;
-            /** Start At  Year  Gte */
-            start_at__year__gte?: number | null;
             /** Is Enable */
             is_enable?: boolean | null;
+            /** Event Id */
+            event_id?: number | null;
+            /** From Current Month */
+            from_current_month?: boolean | null;
         };
         /** EventPreviewSchema */
         EventPreviewSchema: {
@@ -278,8 +274,8 @@ export interface components {
             peoples: components["schemas"]["EventPeopleOutSchema"][];
             /** Images */
             images: components["schemas"]["EventImageOutSchema"][];
-            dramatist: components["schemas"]["PeoplePreviewSchema"] | null;
-            producer: components["schemas"]["PeoplePreviewSchema"] | null;
+            dramatist: components["schemas"]["PeopleShortSchema"] | null;
+            producer: components["schemas"]["PeopleShortSchema"] | null;
             /** ID */
             id?: number | null;
             /** Название спектакля */
@@ -349,7 +345,7 @@ export interface components {
         };
         /** EventPeopleOutSchema */
         EventPeopleOutSchema: {
-            people: components["schemas"]["PeoplePreviewSchema"];
+            people: components["schemas"]["PeopleShortSchema"];
             /** ID */
             id?: number | null;
             /**
@@ -368,6 +364,15 @@ export interface components {
              * @default 0
              */
             sort: number;
+        };
+        /** PeopleShortSchema */
+        PeopleShortSchema: {
+            /** ID */
+            id?: number | null;
+            /** Имя */
+            first_name: string;
+            /** Фамилия */
+            last_name: string;
         };
         /** PeopleDetailSchema */
         PeopleDetailSchema: {
@@ -501,11 +506,9 @@ export interface operations {
     event_api_get_event_show_list: {
         parameters: {
             query?: {
-                start_at__gte?: string | null;
-                start_at__lte?: string | null;
-                start_at__month__gte?: number | null;
-                start_at__year__gte?: number | null;
                 is_enable?: boolean | null;
+                event_id?: number | null;
+                from_current_month?: boolean | null;
             };
             header?: never;
             path?: never;
