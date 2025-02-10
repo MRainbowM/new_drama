@@ -41,6 +41,13 @@
     }
 }
 
+@media (max-width: 500px) {
+    .root {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
 
 @media (max-width: 400px) {
     .root {
