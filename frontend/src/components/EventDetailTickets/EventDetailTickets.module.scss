@@ -1,10 +1,11 @@
 .root {
     padding-top: var(--gap-between-sections);
+
     h2 {
-        font-size: 28px;
+        font-size: var(--font-size-h2-main);
         color: var(--color-red);
         text-transform: uppercase;
-        margin-bottom: 25px;
+        margin-bottom: var(--margin-bottom-h2-main);
     }
 }
 
