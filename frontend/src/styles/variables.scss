@@ -47,5 +47,16 @@
         --font-size-h2-main: 28px;
     }
 
+    @media (max-width: 500px) {
+        --font-size-h2-main: 16px;
+    }
+
+    --margin-bottom-h2-main: 30px;
+
+    @media (max-width: 500px) {
+        --margin-bottom-h2-main: 15px;
+    }
+
+
     --color-h2-main: var(--color-red);
 }
