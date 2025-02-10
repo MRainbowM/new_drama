@@ -3,9 +3,9 @@ import TG from 'public/images/tg.svg'
 import IG from 'public/images/ig.svg'
 import Link from 'next/link'
 import { socialIG, socialTG, socialVK } from '../../constants/links'
-import styles from './ViewerText.module.scss'
+import styles from './ReviewText.module.scss'
 
-export default function ViewerText() {
+export default function ReviewText() {
     return (
         <div className={styles.root}>
             <span>Подписывайтесь и отмечайте нас в соц сетях, чтобы ваше фото попало на сайт ❤️</span>

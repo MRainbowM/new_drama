@@ -1,14 +1,14 @@
-import styles from './ViewerSection.module.scss'
+import styles from './ReviewSection.module.scss'
 import { apiClient } from '../../api/client'
-import ViewerList from '../ViewerList/ViewerList';
-import ViewerText from '../ViewerText/ViewerText'
+import ReviewText from '../ReviewText/ReviewText';
+import ReviewList from '../ReviewList/ReviewList';
 
-export default async function ViewerSection() {
+export async function ReviewSection() {
     // Получение списка фотографий зрителей
-    const response = await apiClient.GET('/info/viewer/list', {
+    const response = await apiClient.GET('/info/review/list', {
         params: {
             query: {
-                is_enable: true
+                is_enable_main: true
             }
         }
     });
@@ -20,7 +20,7 @@ export default async function ViewerSection() {
     }
 
     if (response.data.length == 0) {
-        return(<></>);
+        return (<></>);
     }
 
     return (
@@ -28,9 +28,9 @@ export default async function ViewerSection() {
             <h2>Наши зрители</h2>
 
             <div className={styles.content}>
-                <ViewerText />
-                <ViewerList
-                    viewerList={response.data}
+                <ReviewText />
+                <ReviewList
+                    reviewList={response.data}
                 />
             </div>
 

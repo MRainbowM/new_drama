@@ -140,15 +140,15 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/info/viewer/list": {
+    "/info/review/list": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Получить список зрителей */
-        get: operations["info_api_get_viewer_list"];
+        /** Получить список отзывов */
+        get: operations["info_api_get_review_list"];
         put?: never;
         post?: never;
         delete?: never;
@@ -457,18 +457,22 @@ export interface components {
             /** Якорная ссылка */
             menu_title_slug: string;
         };
-        /** ViewerFilterSchema */
-        ViewerFilterSchema: {
-            /** Is Enable */
-            is_enable?: boolean | null;
+        /** ReviewFilterSchema */
+        ReviewFilterSchema: {
+            /** Is Enable Main */
+            is_enable_main?: boolean | null;
+            /** Is Enable Event */
+            is_enable_event?: boolean | null;
+            /** Event Id */
+            event_id?: number | null;
         };
-        /** ViewerOutSchema */
-        ViewerOutSchema: {
+        /** ReviewOutSchema */
+        ReviewOutSchema: {
             /** ID */
             id?: number | null;
             /**
              * Фотография
-             * @description Изображение на главной
+             * @description Фото/скрин отзыва
              */
             image: string;
             /**
@@ -681,10 +685,12 @@ export interface operations {
             };
         };
     };
-    info_api_get_viewer_list: {
+    info_api_get_review_list: {
         parameters: {
             query?: {
-                is_enable?: boolean | null;
+                is_enable_main?: boolean | null;
+                is_enable_event?: boolean | null;
+                event_id?: number | null;
             };
             header?: never;
             path?: never;
@@ -698,7 +704,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ViewerOutSchema"][];
+                    "application/json": components["schemas"]["ReviewOutSchema"][];
                 };
             };
         };

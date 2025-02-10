@@ -5,7 +5,7 @@ import PartnerSection from '../components/PartnerSection/PartnerSection';
 import ScheduleSection from '../components/ScheduleSection/ScheduleSection';
 import SliderSection from '../components/SliderSection/SliderSection';
 import TheaterSection from '../components/TheaterSection/TheaterSection';
-import ViewerSection from '../components/ViewerSection/ViewerSection';
+import { ReviewSection } from '../components/ReviewSection/ReviewSection';
 import { metadataMainPageDescription, metadataMainPageJsonLd, metadataMainPageTitle } from '../constants/metadata';
 import '../styles/page.scss'
 export const dynamic = 'force-dynamic';
@@ -51,7 +51,7 @@ export default function MainPage() {
         <SliderSection />
         <PartnerSection />
         <TheaterSection />
-        <ViewerSection />
+        <ReviewSection />
         <ContactSection />
     </>);
 }

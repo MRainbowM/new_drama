@@ -3,11 +3,11 @@ from typing import List
 from django.utils.translation import gettext_lazy as _
 from ninja import Query, Router
 
-from .models import InfoBlock, Viewer, Partner
+from .models import InfoBlock, Review, Partner
 from .schemes import (
     InfoBlockOutSchema, InfoBlockFilterSchema,
     MenuInfoBlockOutSchema,
-    ViewerOutSchema, ViewerFilterSchema,
+    ReviewOutSchema, ReviewFilterSchema,
     PartnerFilterSchema, PartnerOutSchema
 )
 
@@ -41,16 +41,16 @@ def get_menu_info_block_list(request, filters: InfoBlockFilterSchema = Query(...
 
 
 @router.get(
-    '/viewer/list',
-    response=List[ViewerOutSchema],
+    '/review/list',
+    response=List[ReviewOutSchema],
     tags=[_('Инфо-блоки')],
-    summary=_('Получить список зрителей')
+    summary=_('Получить список отзывов')
 )
-def get_viewer_list(request, filters: ViewerFilterSchema = Query(...)):
-    viewer_list = Viewer.objects.all()
-    viewer_list = filters.filter(viewer_list).order_by('sort')
+def get_review_list(request, filters: ReviewFilterSchema = Query(...)):
+    review_list = Review.objects.all()
+    review_list = filters.filter(review_list).order_by('sort')
 
-    return viewer_list
+    return review_list
 
 
 @router.get(

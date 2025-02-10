@@ -4,4 +4,4 @@ from .info_block_schemes import (
     MenuInfoBlockOutSchema
 )
 from .partner_schemes import PartnerOutSchema, PartnerFilterSchema
-from .viewer_schemes import ViewerFilterSchema, ViewerOutSchema
+from .review_schemes import ReviewOutSchema, ReviewFilterSchema

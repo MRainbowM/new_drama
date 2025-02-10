@@ -1,18 +1,18 @@
 'use client'
-import styles from './ViewerList.module.scss'
+import styles from './ReviewList.module.scss'
 import { components } from '../../api/schema'
 import useEmblaCarousel from 'embla-carousel-react'
-import ViewerItem from '../ViewerItem/ViewerItem'
+import ReviewItem from '../ReviewItem/ReviewItem'
 import ArrowLeft from '../ArrowLeft/ArrowLeft'
 import ArrowRight from '../ArrowRight/ArrowRight'
 
 
-interface ViewerListProps {
-    viewerList: components['schemas']['ViewerOutSchema'][]
+interface ReviewListProps {
+    reviewList: components['schemas']['ReviewOutSchema'][]
 }
 
-export default function ViewerList(
-    { viewerList }: ViewerListProps
+export default function ReviewList(
+    { reviewList }: ReviewListProps
 ) {
     const [emblaRef, emblaApi] = useEmblaCarousel({
         loop: true,
@@ -26,10 +26,10 @@ export default function ViewerList(
 
             <div className={styles.wrap} ref={emblaRef}>
                 <div className={styles.list}>
-                    {viewerList.map((item, index) => (
-                        <ViewerItem
+                    {reviewList.map((item, index) => (
+                        <ReviewItem
                             key={item.id}
-                            viewer={item}
+                            review={item}
                         />
                     ))}
                 </div>
