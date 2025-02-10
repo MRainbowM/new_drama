@@ -110,13 +110,18 @@
     .grid {
         grid-template-columns: 1fr;
     }
+
     .cover {
         grid-column: 1;
     }
 }
 
 @media (max-width: 550px) {
-    .gridImg{
+    .gridItem {
+        padding: 20px var(--container-margin-lr);
+    }
+
+    .gridImg {
         min-height: 250px;
     }
 }
