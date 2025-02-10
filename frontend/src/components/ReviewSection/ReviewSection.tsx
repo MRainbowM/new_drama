@@ -1,5 +1,6 @@
 import { getReviewList } from '../../services/getReviewList';
 import { ReviewContent } from '../ReviewContent/ReviewContent';
+import styles from './ReviewSection.module.scss'
 
 export async function ReviewSection() {
     // Получение списка отзывов на главной
@@ -12,11 +13,12 @@ export async function ReviewSection() {
     }
 
     return (
-        <>
+        <section className={styles.root}>
+            <h2>Наши зрители</h2>
+
             <ReviewContent
-                title={'Наши зрители'}
                 reviewList={reviewList}
             />
-        </>
+        </section>
     );
 }

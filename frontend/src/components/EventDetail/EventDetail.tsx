@@ -3,6 +3,7 @@ import { components } from '../../api/schema'
 import Image from 'next/image'
 import clsx from "clsx"
 import EventDetailTickets from '../EventDetailTickets/EventDetailTickets'
+import { EventDetailReview } from '../EventDetailReview/EventDetailReview'
 
 interface EventDetailProps {
     event: components['schemas']['EventDetailSchema']
@@ -134,6 +135,7 @@ export default async function EventDetail(
             </div>
 
             <EventDetailTickets event_id={event.id} />
+            <EventDetailReview event_id={event.id} />
         </div >
     );
 }
