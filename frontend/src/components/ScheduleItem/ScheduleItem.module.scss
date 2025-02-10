@@ -18,7 +18,7 @@
 
     .date {
         font-weight: bold;
-        font-size: 24px;
+        font-size: var(--font-size-subtitle-schedule);
     }
 
     .time {
@@ -47,7 +47,7 @@
 
     .name {
         font-weight: bold;
-        font-size: 24px;
+        font-size: var(--font-size-subtitle-schedule);
 
         &:hover {
             text-decoration: underline;
@@ -197,6 +197,12 @@
 @media (max-width: 650px) {
     .container {
         flex-direction: column;
+    }
+
+    .titleCol {
+        .description {
+            font-size: 16px;
+        }
     }
 
     .right {

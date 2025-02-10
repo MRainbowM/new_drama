@@ -101,9 +101,9 @@ export default async function EventDetail(
                 }
                 {
                     peoplesGroupTag['actor'] ? (<>
-                        <div className={clsx(styles.gridItem, styles.textFont)}>
+                        <div className={clsx(styles.gridItem)}>
                             <h2>Действующие лица</h2>
-                            <div className={styles.peoples}>
+                            <div className={clsx(styles.peoples, styles.textFont)}>
                                 {
                                     peoplesGroupTag['actor'].map((people, index) => (
                                         <div className={styles.row} key={index}>
