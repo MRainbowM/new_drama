@@ -4,6 +4,7 @@
 
 @media (max-width: 700px) {
     .content {
-        flex-direction: column;
+        // flex-direction: column;
+        flex-direction: column-reverse;
     }
 }
