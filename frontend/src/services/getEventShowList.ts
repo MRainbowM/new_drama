@@ -7,7 +7,7 @@ interface GetEventShowListParams {
 }
 
 interface GetEventShowListResult {
-    /* id Массив спектаклей */
+    /* Массив спектаклей */
     events: components['schemas']['EventShowOutSchema'][],
     /* Месяцы со спектаклями */
     months: string[]
