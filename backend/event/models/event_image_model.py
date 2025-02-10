@@ -11,6 +11,7 @@ class EventImage(DatesAbstract):
 
     image = models.ImageField(_('Фото'), upload_to=event_image_path)
     event = models.ForeignKey(Event, on_delete=models.CASCADE, verbose_name=_('Спектакль'), related_name='images')
+    is_enable = models.BooleanField(_('Показывать на сайте'), default=True)
 
     class Meta:
         verbose_name = _('Фотография спектакля')
