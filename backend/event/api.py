@@ -8,16 +8,14 @@ from django.utils.translation import gettext_lazy as _
 from ninja import Query, Router
 
 from basis.settings import MEDIA_URL
-from event.models import EventShow, Event, EventImage
+from event.models import EventShow, Event
 from .schemes import (
     EventShowFilterSchema,
     EventShowOutSchema,
     EventDetailSchema,
     EventFilterSchema,
     EventPreviewSchema,
-    EventProgramSchema,
-    EventImageOutSchema,
-    EventImageFilterSchema
+    EventProgramSchema
 )
 
 router = Router()
@@ -67,18 +65,6 @@ def get_event_list(request, filters: EventFilterSchema = Query(...)):
     event_list = Event.objects.all()
     event_list = filters.filter(event_list).order_by('name')
     return event_list
-
-
-@router.get(
-    '/event/images',
-    response=List[EventImageOutSchema],
-    tags=[_('Спектакли')],
-    summary=_('Получить список фотографий спектакля')
-)
-def get_event_image_list(request, filters: EventImageFilterSchema = Query(...)):
-    image_list = EventImage.objects.all()
-    image_list = filters.filter(image_list)
-    return image_list
 
 
 @router.get(
