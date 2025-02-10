@@ -29,7 +29,7 @@ class EventDetailSchema(ModelSchema):
 
     @staticmethod
     def resolve_images(obj):
-        return obj.images.all()
+        return obj.images.filter(is_enable=True)
 
 
 class EventPreviewSchema(ModelSchema):
