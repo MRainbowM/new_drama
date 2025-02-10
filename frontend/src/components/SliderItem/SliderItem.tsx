@@ -28,7 +28,7 @@ export default function SliderItem(
             ref={ref}
             id={data.menu_title_slug}
         >
-            <ScrollParallax>
+            {/* <ScrollParallax> */}
                 <div className={styles.container}>
                     <div className={styles.content}>
                         <h3>{data.title}</h3>
@@ -50,7 +50,7 @@ export default function SliderItem(
                         </div>
                     </div>
                 </div>
-            </ScrollParallax>
+            {/* </ScrollParallax> */}
         </div>
     );
 }
