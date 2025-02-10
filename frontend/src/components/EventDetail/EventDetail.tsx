@@ -135,7 +135,11 @@ export default async function EventDetail(
 
             </div>
 
-            <EventDetailGallery images={event.images} />
+            {
+                event.images ? (
+                    <EventDetailGallery images={event.images} />
+                ) : (<></>)
+            }
             <EventDetailTickets event_id={event.id} />
             <EventDetailReview event_id={event.id} />
         </div >

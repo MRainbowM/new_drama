@@ -13,10 +13,6 @@ interface EventDetailGalleryProps {
 export default function EventDetailGallery(
     { images }: EventDetailGalleryProps
 ) {
-    if (images.length == 0) {
-        return (<></>);
-    }
-
     const [emblaRef, emblaApi] = useEmblaCarousel({
         loop: true,
         // dragFree: false,
