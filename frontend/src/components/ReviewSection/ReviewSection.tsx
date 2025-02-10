@@ -2,6 +2,7 @@ import styles from './ReviewSection.module.scss'
 import { apiClient } from '../../api/client'
 import ReviewText from '../ReviewText/ReviewText';
 import ReviewList from '../ReviewList/ReviewList';
+import { ReviewContent } from '../ReviewContent/ReviewContent';
 
 export async function ReviewSection() {
     // Получение списка фотографий зрителей
@@ -24,16 +25,11 @@ export async function ReviewSection() {
     }
 
     return (
-        <section className={styles.root}>
-            <h2>Наши зрители</h2>
-
-            <div className={styles.content}>
-                <ReviewText />
-                <ReviewList
-                    reviewList={response.data}
-                />
-            </div>
-
-        </section>
+        <>
+            <ReviewContent
+                title={'Наши зрители'}
+                reviewList={response.data}
+            />
+        </>
     );
 }

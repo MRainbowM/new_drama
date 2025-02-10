@@ -1,0 +1,18 @@
+.root {
+    h2 {
+        text-transform: uppercase;
+        color: var(--color-red);
+        margin-bottom: 30px;
+        font-size: var(--font-size-h2-main);
+    }
+}
+
+.content {
+    display: flex;
+}
+
+@media (max-width: 700px) {
+    .content {
+        flex-direction: column;
+    }
+}
