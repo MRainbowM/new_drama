@@ -69,4 +69,7 @@
 
     /**/
     --font-size-text-base: 16px;
+    @media (max-width: 500px) {
+        --font-size-text-base: 14px;
+    }
 }
