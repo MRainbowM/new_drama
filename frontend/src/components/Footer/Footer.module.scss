@@ -74,6 +74,7 @@
         margin-top: 15px;
 
         svg {
+            opacity: 0.6;
             height: 32px;
             width: 32px;
         }
@@ -83,6 +84,39 @@
 .row {
     grid-column: 2 span;
     font-size: 14px;
+}
+
+@media not all and (hover: none) {
+
+    // Только НЕ для тач устройств
+
+    .menu {
+        span {
+            opacity: 0.6;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+
+    .email,
+    .phone {
+        opacity: 0.6;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    .icons {
+        svg {
+
+            &:hover {
+                opacity: 0.9;
+            }
+        }
+    }
 }
 
 @media (max-width: 1200px) {
@@ -134,8 +168,8 @@
         grid-column: 1;
     }
 
-    .social{
-        .icons{
+    .social {
+        .icons {
             svg {
                 height: 40px;
                 width: 40px;
