@@ -3,6 +3,8 @@ import { PT_Sans_Narrow, Montserrat } from 'next/font/google'
 export const sans_narrow = PT_Sans_Narrow({
     weight: ['400', '700'],
     subsets: ['latin', 'cyrillic'],
+
+     variable: '--font-sans-narrow'
 })
 
 export const montserrat = Montserrat({

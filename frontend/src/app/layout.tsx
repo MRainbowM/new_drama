@@ -22,7 +22,8 @@ export default async function RootLayout({
             <body
                 className={clsx(
                     sans_narrow.className,
-                    `${montserrat.variable} font-sans`
+                    `${montserrat.variable} font-sans`,
+                    `${sans_narrow.variable} font-sans`
                 )}
             >
                 {runline}
