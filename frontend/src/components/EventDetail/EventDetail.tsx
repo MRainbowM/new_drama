@@ -16,6 +16,7 @@ export default async function EventDetail(
 ) {
     const intermission = event.has_intermission === true ? 'с антрактом' : 'без антракта';
     const peoplesGroupTag = Object.groupBy(event.peoples, ({ tag }) => tag);
+    const minAgeLimit = event.min_age_limit > 0 ? `${event.min_age_limit}+` : undefined;
 
     return (
         <div className={styles.root}>
@@ -82,8 +83,20 @@ export default async function EventDetail(
                 {
                     event.description ? (
                         <>
-                            <div className={clsx(styles.gridItem, styles.textFont)}>
+                            <div className={
+                                clsx(styles.gridItem,
+                                    styles.textFont,
+                                    styles.description
+                                )}
+                            >
                                 {event.description}
+                                {
+                                    minAgeLimit ? (
+                                        <span className={styles.ageLimit}  >
+                                            {minAgeLimit}
+                                        </span>
+                                    ) : (<></>)
+                                }
                             </div>
                             <div className={clsx(styles.gridItem, styles.gridImg)}>
                                 {
