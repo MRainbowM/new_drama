@@ -147,9 +147,8 @@ export default async function EventDetail(
                 }
 
             </div>
-
             {
-                event.images ? (
+                event.images && event.images.length > 0 ? (
                     <EventDetailGallery images={event.images} />
                 ) : (<></>)
             }
