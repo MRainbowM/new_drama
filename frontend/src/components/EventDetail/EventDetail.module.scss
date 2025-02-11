@@ -111,6 +111,10 @@
         grid-template-columns: 1fr;
     }
 
+    .gridImg {
+        display: none;
+    }
+
     .cover {
         grid-column: 1;
     }
