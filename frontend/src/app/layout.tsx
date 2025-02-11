@@ -4,15 +4,19 @@ import Header from '../components/Header/Header'
 import '../styles/globals.scss'
 import { sans_narrow, montserrat } from './fonts'
 import clsx from "clsx"
+import { getMenuItems } from '../services/getMenuItems';
 
 export const dynamic = 'force-dynamic';
 
-export default function RootLayout({
+export default async function RootLayout({
     children, runline
 }: {
     children: React.ReactNode,
     runline: React.ReactNode,
 }) {
+
+    const { menuItems } = await getMenuItems();
+
     return (
         <html lang="en">
             <body
@@ -21,11 +25,11 @@ export default function RootLayout({
                     `${montserrat.variable} font-sans`
                 )}
             >
-               {runline}
-                <Header />
-                <Container>       
+                {runline}
+                <Header menuItems={menuItems} />
+                <Container>
                     {children}
-                    <Footer />
+                    <Footer menuItems={menuItems} />
                 </Container>
             </body>
         </html>

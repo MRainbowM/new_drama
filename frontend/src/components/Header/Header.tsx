@@ -1,9 +1,14 @@
 import HeaderMenu from '../HeaderMenu/HeaderMenu'
 import { getMenuItems } from '../../services/getMenuItems';
 
-export default async function Header() {
-    const { menuItems } = await getMenuItems();
+interface HeaderProps {
+    /* Массив элементов меню */
+    menuItems: { href: string, title: string }[]
+}
 
+export default async function Header(
+    { menuItems }: HeaderProps
+) {
     return (
         <HeaderMenu items={menuItems} />
     );
