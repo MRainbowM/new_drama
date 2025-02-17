@@ -181,19 +181,23 @@
     .content {
         justify-content: flex-start;
         align-items: flex-start;
+
+        .cover {
+            height: var(--cover-height-mobile);
+            width: 100%;
+            max-width: unset;
+
+            &:before {
+                content: unset;
+            }
+        }
     }
 
     .title {
         padding-top: 0;
     }
 
-    .cover {
-        height: var(--cover-height-mobile);
 
-        &:before {
-            content: unset;
-        }
-    }
 
     .imgSquare {
         height: var(--cover-height-mobile);
