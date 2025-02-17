@@ -17,7 +17,9 @@ export default async function EventDetail(
     const intermission = event.has_intermission === true ? 'с антрактом' : 'без антракта';
     const peoplesGroupTag = Object.groupBy(event.peoples, ({ tag }) => tag);
     const minAgeLimit = event.min_age_limit > 0 ? `${event.min_age_limit}+` : undefined;
-
+    const premiereAt = new Intl.DateTimeFormat('ru-RU', {
+        dateStyle: 'long'
+    }).format(new Date(event.premiere_at));
     return (
         <div className={styles.root}>
             <div className={styles.grid}>
@@ -77,6 +79,15 @@ export default async function EventDetail(
                                         </span>
                                     </div>
                                 ))
+
+                            ) : (<></>)
+                        }
+                        {
+                            premiereAt ? (
+                                <div className={clsx(styles.row, styles.premiere)} >
+                                    <span>{"Дата премьеры:"}</span>
+                                    <span>{premiereAt}</span>
+                                </div>
 
                             ) : (<></>)
                         }

@@ -84,7 +84,7 @@
         gap: 25px;
         font-size: 20px;
 
-        .duration{
+        .duration {
             margin-right: 5px;
         }
     }
@@ -97,6 +97,11 @@
     .row {
         display: flex;
         justify-content: space-between;
+        margin-bottom: 5px;
+    }
+
+    .premiere {
+        margin-top: 10px;
     }
 }
 
