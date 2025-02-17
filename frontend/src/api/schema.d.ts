@@ -276,6 +276,8 @@ export interface components {
             images: components["schemas"]["EventImageOutSchema"][];
             dramatist: components["schemas"]["PeopleShortSchema"] | null;
             producer: components["schemas"]["PeopleShortSchema"] | null;
+            /** Duration Format */
+            duration_format: string | null;
             /** ID */
             id?: number | null;
             /** Название спектакля */
@@ -295,11 +297,6 @@ export interface components {
              * @default
              */
             description: string | null;
-            /**
-             * Длительность спектакля
-             * Format: duration
-             */
-            duration: string;
             /**
              * Есть антракт
              * @default false

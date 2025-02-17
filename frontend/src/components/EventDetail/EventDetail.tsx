@@ -36,7 +36,9 @@ export default async function EventDetail(
                         <div className={styles.row}>
                             <span>{event.short_description}</span>
                             <div>
-                                <span>2:20</span>
+                                <span className={styles.duration}>
+                                    {event.duration_format}
+                                </span>
                                 <span>{intermission}</span>
                             </div>
                         </div>

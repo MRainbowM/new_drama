@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('event', '0003_event_dramatist_event_producer_and_more'),
     ]
@@ -13,6 +12,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='event',
             name='duration',
-            field=models.DurationField(verbose_name='Длительность спектакля'),
+            field=models.DurationField(help_text='Формат: чч:мм:сс', verbose_name='Длительность спектакля'),
         ),
     ]

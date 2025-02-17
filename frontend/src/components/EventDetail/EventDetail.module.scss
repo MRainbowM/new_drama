@@ -81,8 +81,12 @@
 
     .row {
         display: flex;
-        justify-content: space-between;
+        gap: 25px;
         font-size: 20px;
+
+        .duration{
+            margin-right: 5px;
+        }
     }
 }
 

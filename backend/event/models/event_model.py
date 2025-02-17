@@ -63,7 +63,7 @@ class Event(DatesAbstract):
         default=0
     )
     premiere_at = models.DateField(_('Дата премьеры'))
-    duration = models.DurationField(_('Длительность спектакля'))
+    duration = models.DurationField(_('Длительность спектакля'), help_text='Формат: чч:мм:сс')
     has_intermission = models.BooleanField(_('Есть антракт'), default=False)
     program_pdf = models.FileField(
         _('Программка спектакля'),
