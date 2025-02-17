@@ -14,80 +14,30 @@ interface SliderLeftContainerProps {
 export default function SliderLeftContainer(
     { activeItem, data }: SliderLeftContainerProps
 ) {
-    const refRoot = useRef<HTMLDivElement>();
-    const refCover = useRef<HTMLDivElement>();
-    const [offsetImg, setOffsetImg] = useState(0);
-    const [topImg, setTopImg] = useState(0);
-
-    // Брейкпоинт мобильной версии
-    const mobileWidth = 700;
-
-    const onScroll = useCallback(event => {
-        if (window.innerWidth < mobileWidth) {
-            // Мобильная версия
-            setTopImg(0);
-
-            const { top } = refRoot.current.closest('section').getBoundingClientRect();
-            if (top < 0) {
-                const coverHeightMobile = 145;
-                const scrollCoefficient = window.innerHeight / coverHeightMobile * data.length / 90;
-                const maxImgTop = (refCover.current.offsetHeight / data.length * (data.length - 1));
-                const offset = top * scrollCoefficient;
-                setOffsetImg(Math.max(offset, -maxImgTop))
-            } else {
-                setOffsetImg(0);
-            }
-        } else {
-            // Десктоп
-            setOffsetImg(0);
-            setTopImg(activeItem * -100);
-        }
-
-    }, [activeItem, data]);
-
-    useEffect(() => {
-        //add eventlistener to window
-        window.addEventListener("scroll", onScroll, { passive: true });
-        // remove event on unmount to prevent a memory leak with the cleanup
-        return () => {
-            window.removeEventListener("scroll", onScroll, {});
-        }
-    }, [onScroll]);
-
     return (
-        <div className={styles.root} ref={refRoot}>
+        <div className={styles.root}>
             <div className={styles.title}>
                 <h2>В наших стенах</h2>
             </div>
 
             <div className={styles.content}>
-
-                <div className={styles.cover}>
-                    <div
-                        className={styles.coverWrap}
-                        ref={refCover}
-                        style={{
-                            top: `${topImg}%`,
-                            transform: `translateY(${offsetImg}px)`
-                        }}
-
-                    >
-                        {data.map((item, index) => (
-                            <div
-                                className={styles.imgSquare}
-                                key={item.id}
-                            >
-                                <Image
-                                    className={clsx(
-                                        { [styles.active]: index == activeItem }
-                                    )}
-                                    src={item.cover}
-                                    layout='fill'
-                                    alt={item.title}
-                                />
-                            </div>
-                        ))}
-                    </div>
+                <div className={styles.pictureList}>
+                    {data.map((item, index) => (
+                        <div
+                            className={clsx(
+                                styles.picture,
+                                { [styles.active]: index <= activeItem },
+                            )}
+                            key={item.id}
+                        >
+                            <Image
+                                className={styles.pictureImg}
+                                src={item.cover}
+                                layout='fill'
+                                alt={item.title}
+                            />
+                        </div>
+                    ))}
                 </div>
 
                 <div className={styles.mobileSubtitle}>
