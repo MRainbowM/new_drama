@@ -15,3 +15,9 @@
     flex-wrap: wrap;
     height: 560px;
 }
+
+@media (max-width: 700px) {
+    .list {
+        height: 435px;
+    }
+}
