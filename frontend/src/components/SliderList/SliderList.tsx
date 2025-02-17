@@ -13,7 +13,7 @@ export default function SliderList(
     { data }: SliderListProps
 ) {
     // Видимый элемент списка
-    const [activeItem, setActiveItem] = useState(0)
+    const [activeItem, setActiveItem] = useState(0);
 
     return (
         <div className={styles.root}>

@@ -18,7 +18,9 @@ export default function SliderLeftContainer(
     const refCover = useRef<HTMLDivElement>();
     const [offsetImg, setOffsetImg] = useState(0);
     const [topImg, setTopImg] = useState(0);
-    const mobileWidth = 700; // Брейкпоинт мобильной версии
+
+    // Брейкпоинт мобильной версии
+    const mobileWidth = 700;
 
     const onScroll = useCallback(event => {
         if (window.innerWidth < mobileWidth) {
@@ -27,8 +29,11 @@ export default function SliderLeftContainer(
 
             const { top } = refRoot.current.closest('section').getBoundingClientRect();
             if (top < 0) {
-                const maxImgTop = (refCover.current.offsetHeight / data.length * (data.length - 1))
-                setOffsetImg(Math.max(top * 0.5, -maxImgTop))
+                const coverHeightMobile = 145;
+                const scrollCoefficient = window.innerHeight / coverHeightMobile * data.length / 90;
+                const maxImgTop = (refCover.current.offsetHeight / data.length * (data.length - 1));
+                const offset = top * scrollCoefficient;
+                setOffsetImg(Math.max(offset, -maxImgTop))
             } else {
                 setOffsetImg(0);
             }
@@ -56,16 +61,6 @@ export default function SliderLeftContainer(
             </div>
 
             <div className={styles.content}>
-                <div className={styles.mobileSubtitle}>
-                    {data.map((item, index) => (
-                        <span
-                            key={index}
-                            className={clsx({ [styles.active]: index == activeItem })}
-                        >
-                            {item.title}
-                        </span>
-                    ))}
-                </div>
 
                 <div className={styles.cover}>
                     <div
@@ -93,6 +88,17 @@ export default function SliderLeftContainer(
                             </div>
                         ))}
                     </div>
+                </div>
+
+                <div className={styles.mobileSubtitle}>
+                    {data.map((item, index) => (
+                        <span
+                            key={index}
+                            className={clsx({ [styles.active]: index == activeItem })}
+                        >
+                            {item.title}
+                        </span>
+                    ))}
                 </div>
 
                 <div className={styles.mobileTextContainer}>

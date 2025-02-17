@@ -14,9 +14,9 @@ interface SliderItemProps {
 export default function SliderItem(
     { onView, data, isActive }: SliderItemProps
 ) {
-
     const { ref, inView, entry } = useInView({
-        threshold: 0.72 // Процент видимости блока
+        // Процент видимости блока
+        threshold: 0.72
     });
 
     useEffect(() => { if (inView) { onView(); } }, [inView])
@@ -29,27 +29,27 @@ export default function SliderItem(
             id={data.menu_title_slug}
         >
             {/* <ScrollParallax> */}
-                <div className={styles.container}>
-                    <div className={styles.content}>
-                        <h3>{data.title}</h3>
+            <div className={styles.container}>
+                <div className={styles.content}>
+                    <h3>{data.title}</h3>
 
-                        <div
-                            className={styles.text}
-                            dangerouslySetInnerHTML={{ __html: data.content }}
+                    <div
+                        className={styles.text}
+                        dangerouslySetInnerHTML={{ __html: data.content }}
+                    >
+                    </div>
+
+                    <div className={styles.btnRow}>
+                        <a
+                            className={styles.btn}
+                            href={data.btn_link}
+                            target='_blank'
                         >
-                        </div>
-
-                        <div className={styles.btnRow}>
-                            <a
-                                className={styles.btn}
-                                href={data.btn_link}
-                                target='_blank'
-                            >
-                                <span>{data.btn_text}</span>
-                            </a>
-                        </div>
+                            <span>{data.btn_text}</span>
+                        </a>
                     </div>
                 </div>
+            </div>
             {/* </ScrollParallax> */}
         </div>
     );
