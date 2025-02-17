@@ -15,7 +15,6 @@
     grid-template-columns: 1fr 1fr;
     margin-left: calc(-1* var(--container-margin-lr));
     overflow: hidden;
-
 }
 
 .cover {
@@ -149,6 +148,10 @@
     .title {
         h1 {
             font-size: 32px;
+        }
+
+        .row {
+            font-size: 16px;
         }
     }
 
