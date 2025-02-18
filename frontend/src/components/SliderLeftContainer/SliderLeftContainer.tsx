@@ -3,7 +3,6 @@ import styles from './SliderLeftContainer.module.scss'
 import Image from 'next/image'
 import clsx from "clsx"
 import { components } from '../../api/schema'
-import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 
 interface SliderLeftContainerProps {
