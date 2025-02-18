@@ -8,7 +8,7 @@ export const sans_narrow = PT_Sans_Narrow({
 })
 
 export const montserrat = Montserrat({
-    weight: ['500'],
+    weight: ['400', '500'],
     subsets: ['latin', 'cyrillic'],
 
     variable: '--font-montserrat'
