@@ -1,5 +1,6 @@
 .root {
     --circle-height: 500px;
+    --btn-ticket-height: 167px;
 
     position: relative;
     padding-top: var(--gap-between-sections);
@@ -42,6 +43,7 @@
 }
 
 .value {
+    z-index: 1;
     font-size: 28px;
     text-transform: uppercase;
     font-weight: bold;
@@ -86,8 +88,8 @@
     justify-content: center;
     align-items: center;
     background-color: var(--color-red);
-    height: 167px;
-    width: 167px;
+    height: var(--btn-ticket-height);
+    width: var(--btn-ticket-height);
     border-radius: 100%;
 
     span {
@@ -97,10 +99,33 @@
     }
 }
 
+@media not all and (hover: none) {
+    // Только НЕ для тач устройств
+
+    .btnTicket {
+        transition: height 0.2s, width 0.2s, bottom 0.2s, right 0.2s;
+
+        &:hover {
+            height: calc(var(--btn-ticket-height) + 10px);
+            width: calc(var(--btn-ticket-height) + 10px);
+            bottom: -10px;
+            right: -10px;
+        }
+    }
+
+    .root {
+        a {
+            &:hover {
+                text-decoration-line: underline;
+            }
+        }
+    }
+}
 
 @media (max-width:1450px) {
     .root {
         --circle-height: 350px;
+        --btn-ticket-height: 140px;
     }
 
     .grid {
@@ -108,9 +133,6 @@
     }
 
     .btnTicket {
-        height: 140px;
-        width: 140px;
-
         span {
             font-size: 14px;
         }
@@ -159,18 +181,12 @@
         margin-bottom: 50px;
     }
 
-    .btnTicket {
-        height: 140px;
-        width: 140px;
-
-        span {
-            font-size: 14px;
-        }
-    }
 }
 
 @media (max-width:750px) {
     .root {
+        --btn-ticket-height: 112px;
+
         margin-bottom: 0;
     }
 
@@ -206,9 +222,6 @@
     }
 
     .btnTicket {
-        height: 112px;
-        width: 112px;
-
         span {
             font-size: 12px;
         }
@@ -233,6 +246,4 @@
     .social {
         justify-content: space-between;
     }
-
-
 }
