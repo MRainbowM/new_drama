@@ -1,5 +1,5 @@
 .root {
-    height: calc(100vh - 120px - var(--running-line-height)); // минус высота хедера и бегущей строки
+    height: calc(100vh - var(--header-height) - var(--running-line-height));
     position: relative;
 }
 
@@ -28,5 +28,6 @@
 @media (max-width: 700px) {
     .root {
         margin-bottom: 70px;
+        height: calc(100vh - var(--header-height) - var(--running-line-height) - 100px);
     }
 }
