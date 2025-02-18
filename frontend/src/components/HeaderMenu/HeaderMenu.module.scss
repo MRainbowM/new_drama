@@ -62,7 +62,7 @@
         grid-template-columns: 1fr;
         grid-template-rows: auto 0px auto;
         padding-top: var(--header-height);
-        padding-bottom: var(--header-height);
+        padding-bottom: calc(var(--header-height) * 2);
 
         .leftCol,
         .rightCol {
