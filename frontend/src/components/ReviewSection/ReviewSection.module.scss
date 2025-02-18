@@ -1,4 +1,6 @@
 .root {
+    padding-top: var(--gap-between-sections);
+
     h2 {
         text-transform: uppercase;
         color: var(--color-red);

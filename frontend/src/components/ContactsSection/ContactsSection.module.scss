@@ -1,0 +1,237 @@
+.root {
+    --circle-height: 500px;
+
+    position: relative;
+    padding-top: var(--gap-between-sections);
+    margin-bottom: 120px;
+
+    h2 {
+        font-size: var(--font-size-h2-main);
+        color: var(--color-red);
+        text-transform: uppercase;
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: calc(var(--circle-height) - 40px);
+    padding-top: 50px;
+    padding-bottom: 115px;
+
+    .row:nth-child(2n) {
+        justify-self: flex-end;
+
+        span {
+            margin-left: auto;
+        }
+    }
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+}
+
+.key {
+    font-size: 20px;
+    font-family: var(--font-montserrat);
+    margin-bottom: 10px;
+}
+
+.value {
+    font-size: 28px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.social {
+    display: flex;
+    gap: 20px;
+}
+
+.containerPicture {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: var(--gap-between-sections);
+    left: 0;
+    right: 0;
+}
+
+.circleBorder {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--circle-height);
+    height: var(--circle-height);
+    border-radius: 100%;
+    border: 1px solid var(--color-white);
+
+}
+
+.picture {
+    height: calc(100% - 40px);
+    width: calc(100% - 40px);
+}
+
+.btnTicket {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-red);
+    height: 167px;
+    width: 167px;
+    border-radius: 100%;
+
+    span {
+        text-transform: uppercase;
+        font-size: 16px;
+        font-family: var(--font-sans-caption);
+    }
+}
+
+
+@media (max-width:1450px) {
+    .root {
+        --circle-height: 350px;
+    }
+
+    .grid {
+        padding-top: 0;
+    }
+
+    .btnTicket {
+        height: 140px;
+        width: 140px;
+
+        span {
+            font-size: 14px;
+        }
+    }
+}
+
+@media (max-width:1300px) {
+    .root {
+        --circle-height: 280px;
+    }
+
+    .grid {
+        padding: 0;
+    }
+
+    .row {
+        padding-top: 30px;
+    }
+
+    .key {
+        font-size: 14px;
+    }
+
+    .value {
+        font-size: 20px;
+    }
+
+    .picture {
+        height: calc(100% - 20px);
+        width: calc(100% - 20px);
+    }
+}
+
+
+@media (max-width:1000px) {
+    .containerPicture {
+        position: unset;
+    }
+
+    .root {
+        --circle-height: 350px;
+    }
+
+    .grid {
+        height: unset;
+        margin-bottom: 50px;
+    }
+
+    .btnTicket {
+        height: 140px;
+        width: 140px;
+
+        span {
+            font-size: 14px;
+        }
+    }
+}
+
+@media (max-width:750px) {
+    .root {
+        margin-bottom: 0;
+    }
+
+    .grid {
+        gap: 20px;
+        margin: 30px 0;
+
+        .row:nth-child(2n) {
+            justify-self: flex-start;
+
+            span {
+                margin-left: 0;
+            }
+        }
+    }
+
+    .row {
+        padding-top: 0;
+    }
+
+    .emailRow {
+        grid-column: 2 span;
+        width: 100%;
+        grid-row-start: 2;
+    }
+
+    .socialRow {
+        grid-column: 2 span;
+    }
+
+    .value {
+        font-size: 18px;
+    }
+
+    .btnTicket {
+        height: 112px;
+        width: 112px;
+
+        span {
+            font-size: 12px;
+        }
+    }
+}
+
+@media (max-width:400px) {
+
+    .root {
+        --circle-height: calc(100vw - var(--container-margin-lr) * 2);
+    }
+
+    .grid {
+        margin: 15px 0 25px 0;
+        gap: 15px;
+    }
+
+    .phoneRow {
+        justify-self: flex-end;
+    }
+
+    .social {
+        justify-content: space-between;
+    }
+
+
+}

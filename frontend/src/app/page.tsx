@@ -1,4 +1,3 @@
-import ContactSection from '../components/ContactSection/ContactSection';
 import EventPreviewSection from '../components/EventPreviewSection/EventPreviewSection';
 import Hero from '../components/Hero/Hero';
 import PartnerSection from '../components/PartnerSection/PartnerSection';
@@ -8,6 +7,7 @@ import TheaterSection from '../components/TheaterSection/TheaterSection';
 import { ReviewSection } from '../components/ReviewSection/ReviewSection';
 import { metadataMainPageDescription, metadataMainPageJsonLd, metadataMainPageTitle } from '../constants/metadata';
 import '../styles/page.scss'
+import ContactsSection from '../components/ContactsSection/ContactsSection';
 export const dynamic = 'force-dynamic';
 
 
@@ -49,9 +49,9 @@ export default function MainPage() {
         <ScheduleSection />
         <EventPreviewSection />
         <SliderSection />
+        <ReviewSection />
         <PartnerSection />
         <TheaterSection />
-        <ReviewSection />
-        <ContactSection />
+        <ContactsSection />
     </>);
 }
