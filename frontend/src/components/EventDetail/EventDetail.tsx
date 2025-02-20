@@ -20,17 +20,24 @@ export default async function EventDetail(
     const premiereAt = new Intl.DateTimeFormat('ru-RU', {
         dateStyle: 'long'
     }).format(new Date(event.premiere_at));
+
     return (
         <div className={styles.root}>
             <div className={styles.grid}>
-                <div className={styles.cover}>
-                    <Image
-                        src={event.detail_cover}
-                        layout='fill'
-                        priority={true}
-                        alt={event.name}
-                    />
-                </div>
+                {
+                    event.detail_cover ? (
+                        <div className={styles.cover}>
+                            <Image
+                                src={event.detail_cover}
+                                layout='fill'
+                                priority={true}
+                                alt={event.name}
+                            />
+                        </div>
+                    ) : (
+                        <div className={styles.defaultCover}></div>
+                    )
+                }
 
                 <div className={styles.gridItem}>
                     <div className={styles.title}>

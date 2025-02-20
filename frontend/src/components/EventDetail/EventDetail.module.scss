@@ -30,6 +30,12 @@
     }
 }
 
+.defaultCover {
+    grid-column: 2 span;
+    height: var(--header-height);
+    width: 100%;
+}
+
 .gridItem {
     padding: 65px var(--container-margin-lr);
     position: relative;
