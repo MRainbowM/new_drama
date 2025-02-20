@@ -109,7 +109,7 @@ export default async function EventDetail(
                                     styles.description
                                 )}
                             >
-                                {event.description}
+                                <div dangerouslySetInnerHTML={{ __html: event.description }}></div>
                                 {
                                     minAgeLimit ? (
                                         <span className={styles.ageLimit}  >
