@@ -141,7 +141,14 @@ export default async function EventDetail(
                                 {
                                     peoplesGroupTag['actor'].map((people, index) => (
                                         <div className={styles.row} key={index}>
-                                            <span>{`${people.role}:`}</span>
+                                            {
+                                                people.role ? (
+                                                    <span>{`${people.role}:`}</span>
+                                                ) : (
+                                                    <span></span>
+                                                )
+                                            }
+
                                             <span>
                                                 {`${people.people.first_name} ${people.people.last_name}`}
                                             </span>
