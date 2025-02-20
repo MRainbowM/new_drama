@@ -1,6 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django_ckeditor_5.fields import CKEditor5Field
 from slugify import slugify
 
 from basis.models.dates_abstract_model import DatesAbstract
@@ -13,8 +14,13 @@ class Event(DatesAbstract):
 
     name = models.CharField(_('Название спектакля'), max_length=256, unique=True)
     slug = models.CharField(_('Слаг названия'), max_length=256, unique=True)
-    short_description = models.TextField(_('Краткое описание'))
-    description = models.TextField(_('Подробное описание'), default='', blank=True)
+    short_description = models.CharField(_('Краткое описание'))
+    description = CKEditor5Field(
+        _('Подробное описание'),
+        default='',
+        blank=True,
+        config_name='extends'
+    )
     dramatist = models.ForeignKey(
         to='people.People',
         on_delete=models.SET_NULL,
@@ -35,35 +41,50 @@ class Event(DatesAbstract):
     cover = models.ImageField(
         _('Обложка спектакля'),
         upload_to=event_cover_path,
-        help_text='Изображение в списке спектаклей'
+        help_text='Изображение в списке спектаклей',
+        blank=True,
+        null=True
     )
     preview_cover = models.ImageField(
         _('Обложка в афише'),
         upload_to=event_cover_path,
-        help_text='Изображение курсора при наведении на спектакль в афише'
+        help_text='Изображение курсора при наведении на спектакль в афише',
+        blank=True,
+        null=True
     )
     detail_cover = models.ImageField(
         _('Обложка спектакля в карточке спектакля'),
         upload_to=event_cover_path,
-        help_text='Главное изображение в карточке спектакля'
+        help_text='Главное изображение в карточке спектакля',
+        blank=True,
+        null=True
     )
     description_cover = models.ImageField(
         _('Фотография напротив описания спектакля'),
         upload_to=event_cover_path,
-        help_text='Изображение в карточке спектакля'
+        help_text='Изображение в карточке спектакля',
+        blank=True,
+        null=True
     )
     actor_cover = models.ImageField(
         _('Фотография напротив списка действующих лиц спектакля'),
         upload_to=event_cover_path,
-        help_text='Изображение в карточке спектакля'
+        help_text='Изображение в карточке спектакля',
+        blank=True,
+        null=True
     )
     min_age_limit = models.IntegerField(
         _('Возрастное ограничение'),
         help_text='Минимальный разрешенный возраст зрителя, например, 18 лет',
         default=0
     )
-    premiere_at = models.DateField(_('Дата премьеры'))
-    duration = models.DurationField(_('Длительность спектакля'), help_text='Формат: чч:мм:сс')
+    premiere_at = models.DateField(_('Дата премьеры'), null=True, blank=True)
+    duration = models.DurationField(
+        _('Длительность спектакля'),
+        help_text='Формат: чч:мм:сс',
+        null=True,
+        blank=True
+    )
     has_intermission = models.BooleanField(_('Есть антракт'), default=False)
     program_pdf = models.FileField(
         _('Программка спектакля'),
