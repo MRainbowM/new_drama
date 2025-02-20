@@ -62,7 +62,6 @@ export default function EventPreview(
                 <Link
                     className={styles.btn}
                     href={`/event/${event.slug}`}
-                    target="__blank"
                 >
                     <span>О спектакле</span>
                 </Link>
