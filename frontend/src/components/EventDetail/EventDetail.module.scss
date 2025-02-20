@@ -94,9 +94,15 @@
     flex-direction: column;
 
     .row {
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
         margin-bottom: 5px;
+
+        span:nth-child(2) {
+            justify-self: flex-end;
+            margin-left: auto;
+        }
     }
 
     .premiere {
