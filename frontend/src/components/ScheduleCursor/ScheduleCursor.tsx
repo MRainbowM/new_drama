@@ -12,7 +12,8 @@ interface ScheduleCursorProps {
 export default function ScheduleCursor(
     { isActive, cover }: ScheduleCursorProps
 ) {
-    const backgroundImageSrc = myImageLoader({src: cover})
+    const backgroundImageSrc = cover ? myImageLoader({ src: cover }) : '';
+    
 
     const cursorSchedule = useRef<HTMLDivElement>(null);
 
