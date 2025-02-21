@@ -16,6 +16,10 @@ class EventImageInline(admin.TabularInline):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
+    list_display = (
+        'name', 'get_is_enable', 'short_description', 'min_age_limit',
+        'get_has_intermission', 'duration', 'premiere_at', 'slug'
+    )
     readonly_fields = ('slug', 'create_at', 'update_at')
     inlines = [EventPeopleInline, EventImageInline]
     # raw_id_fields = ('producer',)
@@ -43,3 +47,11 @@ class EventAdmin(admin.ModelAdmin):
             )
         }),
     )
+
+    @admin.display(description='Показывать в репертуаре', ordering='is_enable')
+    def get_is_enable(self, obj) -> str:
+        return '✅' if obj.is_enable else '❌'
+
+    @admin.display(description='Антракт', ordering='has_intermission')
+    def get_has_intermission(self, obj) -> str:
+        return '✅' if obj.has_intermission else '❌'
