@@ -155,6 +155,15 @@
     }
 }
 
+@media (max-width: 700px) {
+
+    // Появляется фиксированное меню сверху
+    .cover {
+        margin-top: var(--header-height);
+        height: calc(100vh - var(--header-height) - 100px);
+    }
+}
+
 @media (max-width: 600px) {
     .gridItem {
         padding: 20px var(--container-margin-lr);
