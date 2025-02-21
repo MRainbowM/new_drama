@@ -499,6 +499,12 @@ export interface components {
              * @description Логотип компании на главной
              */
             logo: string;
+            /**
+             * Ссылка на сайт партнера
+             * @description По этой ссылке пользователь переходит при клике на логотип партнера
+             * @default
+             */
+            link: string;
         };
     };
     responses: never;

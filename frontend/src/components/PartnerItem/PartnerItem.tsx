@@ -1,6 +1,7 @@
 import styles from './PartnerItem.module.scss'
 import { components } from '../../api/schema'
 import Image from 'next/image'
+import Link from 'next/link'
 
 interface PartnerItemProps {
     partner: components['schemas']['PartnerOutSchema']
@@ -12,15 +13,24 @@ export default function PartnerItem(
 ) {
     return (
         <div className={styles.root}>
-            <div className={styles.logo}>
+            <Link
+                href={partner.link}
+                target="__blank" className={styles.logo}
+            >
                 <Image
                     src={partner.logo}
                     layout='fill'
                     objectFit='contain'
                     alt={partner.name}
                 />
-            </div>
-            <span className={styles.name}>{partner.name}</span>
+            </Link>
+            <Link
+                href={partner.link}
+                target="__blank"
+                className={styles.name}
+            >
+                {partner.name}
+            </Link>
         </div>
     );
 }

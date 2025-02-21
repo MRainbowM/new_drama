@@ -29,6 +29,13 @@ class Partner(DatesAbstract):
         default=0,
         help_text='Порядок отображения на сайте (от меньшего к большему)'
     )
+    link = models.CharField(
+        _('Ссылка на сайт партнера'),
+        max_length=256,
+        default='',
+        help_text='По этой ссылке пользователь переходит ' +
+                  'при клике на логотип партнера'
+    )
 
     class Meta:
         verbose_name = _('Партнер')

@@ -2,14 +2,14 @@
 
 import django.db.models.deletion
 import django.utils.timezone
+from django.db import migrations, models
+
 import event.models.services.event_cover_path
 import event.models.services.event_image_path
 import event.models.services.event_program_pdf_path
-from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('event', '0001_initial'),
     ]
@@ -22,7 +22,10 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='event',
             name='cover',
-            field=models.ImageField(default=django.utils.timezone.now, help_text='Горизонтальное изображение в карточке спектакля', upload_to=event.models.services.event_cover_path.event_cover_path, verbose_name='Обложка спектакля'),
+            field=models.ImageField(default=django.utils.timezone.now,
+                                    help_text='Горизонтальное изображение в карточке спектакля',
+                                    upload_to=event.models.services.event_cover_path.event_cover_path,
+                                    verbose_name='Обложка спектакля'),
             preserve_default=False,
         ),
         migrations.AddField(
@@ -45,7 +48,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='event',
             name='min_age_limit',
-            field=models.IntegerField(default=0, help_text='Минимальный разрешенный возраст зрителя, например, 18 лет', verbose_name='Возрастное ограничение'),
+            field=models.IntegerField(default=0, help_text='Минимальный разрешенный возраст зрителя, например, 18 лет',
+                                      verbose_name='Возрастное ограничение'),
         ),
         migrations.AddField(
             model_name='event',
@@ -56,24 +60,35 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='event',
             name='preview_cover',
-            field=models.ImageField(default='', help_text='Обложка спектакля в афише на главной странице', upload_to=event.models.services.event_cover_path.event_cover_path, verbose_name='Обложка в афише'),
+            field=models.ImageField(default='', help_text='Обложка спектакля в афише на главной странице',
+                                    upload_to=event.models.services.event_cover_path.event_cover_path,
+                                    verbose_name='Обложка в афише'),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='event',
             name='program_pdf',
-            field=models.FileField(blank=True, default='', help_text='PDF файл с программой спектакля', null=True, upload_to=event.models.services.event_program_pdf_path.event_program_pdf_path, verbose_name='Программка спектакля'),
+            field=models.FileField(blank=True, default='', help_text='PDF файл с программой спектакля', null=True,
+                                   upload_to=event.models.services.event_program_pdf_path.event_program_pdf_path,
+                                   verbose_name='Программка спектакля'),
         ),
         migrations.AddField(
             model_name='eventshow',
             name='event',
-            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, related_name='event_shows', to='event.event', verbose_name='Спектакль'),
+            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE,
+                                    related_name='event_shows', to='event.event', verbose_name='Спектакль'),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='eventshow',
             name='link_to_buy_ticket',
-            field=models.CharField(default='', max_length=256, verbose_name='Ссылка на покупку билетов'),
+            field=models.CharField(
+                default='',
+                max_length=256,
+                verbose_name='Ссылка на покупку билетов',
+                help_text='По этой ссылке пользователь переходит ' +
+                          'при клике на кнопку "Купить билет"'
+            ),
         ),
         migrations.AlterField(
             model_name='event',
@@ -91,8 +106,11 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('create_at', models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')),
                 ('update_at', models.DateTimeField(auto_now=True, verbose_name='Дата обновления')),
-                ('image', models.ImageField(upload_to=event.models.services.event_image_path.event_image_path, verbose_name='Фото')),
-                ('event', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='event.event', verbose_name='Спектакль')),
+                ('image', models.ImageField(upload_to=event.models.services.event_image_path.event_image_path,
+                                            verbose_name='Фото')),
+                ('event',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='event.event',
+                                   verbose_name='Спектакль')),
             ],
             options={
                 'verbose_name': 'Фотография спектакля',

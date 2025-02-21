@@ -9,7 +9,7 @@ class PartnerOutSchema(ModelSchema):
     class Config:
         model = Partner
         model_fields = [
-            'id', 'name', 'logo'
+            'id', 'name', 'logo', 'link'
         ]
 
 
