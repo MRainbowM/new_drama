@@ -196,6 +196,11 @@ export interface components {
             name: string;
             /** Слаг названия */
             slug: string;
+            /**
+             * Драматург
+             * @default
+             */
+            dramatist: string | null;
             /** Краткое описание */
             short_description: string;
             /**

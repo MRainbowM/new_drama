@@ -35,7 +35,7 @@ class EventDetailSchema(ModelSchema):
     def resolve_duration_format(obj) -> str:
         if not obj.duration:
             return ''
-        
+
         duration = str(obj.duration).split(':')
         return f'{duration[0]}:{duration[1]}'
 
@@ -46,7 +46,7 @@ class EventPreviewSchema(ModelSchema):
     class Config:
         model = Event
         model_fields = [
-            'id', 'name', 'slug', 'short_description', 'cover', 'preview_cover', 'min_age_limit',
+            'id', 'name', 'slug', 'dramatist', 'short_description', 'cover', 'preview_cover', 'min_age_limit',
         ]
 
 

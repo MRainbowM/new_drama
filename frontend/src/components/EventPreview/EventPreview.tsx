@@ -44,13 +44,11 @@ export default function EventPreview(
                     <div className={styles.rightCol}>
                         {
                             event.dramatist ? (
-                                <span>
-                                    Драматург: {event.dramatist.first_name} {event.dramatist.last_name}
-                                </span>
+                                <span>Драматург: {event.dramatist}</span>
                             ) : (<></>)
                         }
                         {
-                            event.dramatist ? (
+                            event.producer ? (
                                 <span>
                                     Режиссер: {event.producer.first_name} {event.producer.last_name}
                                 </span>
