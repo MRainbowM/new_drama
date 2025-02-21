@@ -23,7 +23,13 @@ class EventShow(DatesAbstract):
     is_enable = models.BooleanField(_('Показывать в афише'), default=True)
     is_premiere = models.BooleanField(_('Премьера'), default=False)
 
-    link_to_buy_ticket = models.CharField(_('Ссылка на покупку билетов'), max_length=256, default='')
+    link_to_buy_ticket = models.CharField(
+        _('Ссылка на покупку билетов'),
+        max_length=256,
+        default='',
+        help_text='По этой ссылке пользователь переходит ' +
+                  'при клике на кнопку "Купить билет"'
+    )
 
     class Meta:
         verbose_name = _('Спектакль в афише')
