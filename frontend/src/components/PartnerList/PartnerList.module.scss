@@ -12,5 +12,7 @@
     justify-content: space-between;
     flex-direction: column;
     flex-wrap: wrap;
-    height: 140px;
+    
+    // 20px - для второй строки названия
+    height: calc(140px + 20px);
 }
