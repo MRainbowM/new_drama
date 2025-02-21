@@ -99,7 +99,7 @@
 
     .row {
         display: grid;
-        grid-template-columns: 40% 60%;
+        grid-template-columns: calc(40% - 15px) calc(60% - 15px);
         gap: 30px;
         margin-bottom: 10px;
 
@@ -190,6 +190,7 @@
     .peoples {
         .row {
             gap: 20px;
+            grid-template-columns: calc(40% - 10px) calc(60% - 10px);
         }
     }
 }
