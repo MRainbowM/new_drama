@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
             field=models.ImageField(
                 default='', help_text='Изображение в карточке спектакля',
                 upload_to=event.models.services.event_cover_path.event_cover_path,
-                verbose_name='Фотография напротив списка действующих лиц спектакля'
+                verbose_name='Фотография напротив списка действующих лиц спектакля',
             ),
             preserve_default=False,
         ),

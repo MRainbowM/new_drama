@@ -18,3 +18,4 @@ class EventImageInline(admin.TabularInline):
 class EventAdmin(admin.ModelAdmin):
     readonly_fields = ('slug',)
     inlines = [EventPeopleInline, EventImageInline]
+    # raw_id_fields = ('producer',)

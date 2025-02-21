@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='event',
             name='duration',
-            field=models.TimeField(default=django.utils.timezone.now, verbose_name='Длительность спектакля'),
+            field=models.TimeField(blank=True, null=True, verbose_name='Длительность спектакля'),
             preserve_default=False,
         ),
         migrations.AddField(
@@ -50,7 +50,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='event',
             name='premiere_at',
-            field=models.DateField(default=django.utils.timezone.now, verbose_name='Дата премьеры'),
+            field=models.DateField(blank=True, null=True, verbose_name='Дата премьеры'),
             preserve_default=False,
         ),
         migrations.AddField(

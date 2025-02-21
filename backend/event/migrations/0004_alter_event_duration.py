@@ -12,6 +12,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='event',
             name='duration',
-            field=models.DurationField(help_text='Формат: чч:мм:сс', verbose_name='Длительность спектакля'),
+            field=models.DurationField(help_text='Формат: чч:мм:сс', verbose_name='Длительность спектакля', blank=True,
+                                       null=True),
         ),
     ]

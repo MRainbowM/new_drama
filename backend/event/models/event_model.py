@@ -21,14 +21,7 @@ class Event(DatesAbstract):
         blank=True,
         config_name='extends'
     )
-    dramatist = models.ForeignKey(
-        to='people.People',
-        on_delete=models.SET_NULL,
-        verbose_name=_('Драматург'),
-        null=True,
-        blank=True,
-        related_name='dramatist'
-    )
+    dramatist = models.CharField(_('Драматург'), default='', blank=True)
     producer = models.ForeignKey(
         to='people.People',
         on_delete=models.SET_NULL,
