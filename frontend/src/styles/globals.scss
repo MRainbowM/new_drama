@@ -15,6 +15,7 @@ body::after {
   pointer-events: none;
   /* Минимальное влияние на цвета */
   mix-blend-mode: multiply;
+  background-color: #ffffff;
 }
 
 @keyframes noise-animation {
