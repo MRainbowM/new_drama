@@ -10,7 +10,6 @@ from ..models import Event
 class EventDetailSchema(ModelSchema):
     peoples: List[EventPeopleOutSchema]
     images: List[EventImageOutSchema]
-    dramatist: Optional[PeopleShortSchema]
     producer: Optional[PeopleShortSchema]
     duration_format: Optional[str]
 
@@ -42,7 +41,6 @@ class EventDetailSchema(ModelSchema):
 
 
 class EventPreviewSchema(ModelSchema):
-    dramatist: Optional[PeoplePreviewSchema]
     producer: Optional[PeoplePreviewSchema]
 
     class Config:
