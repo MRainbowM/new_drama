@@ -20,19 +20,19 @@ body::after {
 
 @keyframes noise-animation {
   0% {
-    background-image: url('/images/noise1.png');
+    background-image: url('/images/noise1.webp');
   }
 
   25% {
-    background-image: url('/images/noise2.png');
+    background-image: url('/images/noise2.webp');
   }
 
   75% {
-    background-image: url('/images/noise3.png');
+    background-image: url('/images/noise3.webp');
   }
 
   100% {
-    background-image: url('/images/noise4.png');
+    background-image: url('/images/noise4.webp');
   }
 }
 
