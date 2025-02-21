@@ -16,6 +16,11 @@ export default function ScheduleItem(
     const [isActive, setActive] = useState(false);
     const eventDetailLink = `/event/${event.event.slug}`;
 
+    // Скрыть кнопку "Купить билет", если спектакль уже прошел
+    const today = new Date();
+    const start = new Date(event.start_at);
+    const showBtnBuyTicket = today < start ? true : false;
+
     const openEventDetail = () => {
         location.href = eventDetailLink;
     }
@@ -77,13 +82,17 @@ export default function ScheduleItem(
                             )}
                         </div>
                         <div className={styles.btnCol}>
-                            <Link
-                                href={event.link_to_buy_ticket}
-                                target='_blank'
-                                className={styles.btnBuy}
-                            >
-                                <span>Купить билет</span>
-                            </Link>
+                            {
+                                showBtnBuyTicket ? (
+                                    <Link
+                                        href={event.link_to_buy_ticket}
+                                        target='_blank'
+                                        className={styles.btnBuy}
+                                    >
+                                        <span>Купить билет</span>
+                                    </Link>
+                                ) : (<></>)
+                            }
                         </div>
                     </div>
                 </div>

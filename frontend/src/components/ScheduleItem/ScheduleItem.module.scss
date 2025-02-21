@@ -1,4 +1,7 @@
 .root {
+    // Ширина кнопки "Купить билет"
+    --btn-buy-width: 200px;
+
     cursor: pointer;
 }
 
@@ -77,12 +80,14 @@
 }
 
 .btnCol {
+    min-width: var(--btn-buy-width);
+
     .btnBuy {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 40px;
-        width: 200px;
+        width: var(--btn-buy-width);
         text-transform: uppercase;
         font-size: 16px;
         border: 1px solid var(--color-white);
@@ -161,6 +166,10 @@
 }
 
 @media (max-width: 900px) {
+    .root {
+        --btn-buy-width: 150px;
+    }
+
     .container {
         padding: 12px 0;
     }
@@ -188,10 +197,6 @@
 
     .right {
         align-items: center;
-
-        .btnBuy {
-            width: 150px;
-        }
     }
 }
 
