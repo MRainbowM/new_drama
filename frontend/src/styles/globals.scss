@@ -1,5 +1,48 @@
 @import './variables.scss';
 
+
+body::after {
+  // Слой анимации с шумом
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-size: cover;
+  opacity: 0.4;
+  /* Настрой интенсивность шума */
+  pointer-events: none;
+  /* Чтобы не мешало кликам */
+
+  mix-blend-mode: soft-light;
+  /* Минимальное влияние на цвета */
+  mix-blend-mode: multiply;
+}
+
+@keyframes noise-animation {
+  0% {
+    background-image: url('/images/noise1.png');
+  }
+
+  25% {
+    background-image: url('/images/noise2.png');
+  }
+
+  50% {
+    background-image: url('/images/noise3.png');
+  }
+
+  100% {
+    background-image: url('/images/noise4.png');
+  }
+}
+
+body::after {
+  animation: noise-animation 0.3s infinite linear;
+}
+
 html,
 body {
   max-width: 100vw;
