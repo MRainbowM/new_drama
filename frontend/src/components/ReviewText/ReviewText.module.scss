@@ -24,6 +24,20 @@
     }
 }
 
+@media not all and (hover: none) {
+    // Только НЕ для тач устройств
+
+    .social {
+        .link {
+            opacity: 0.7;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+}
+
 @media (max-width: 800px) {
     .root {
         padding-left: 0;
