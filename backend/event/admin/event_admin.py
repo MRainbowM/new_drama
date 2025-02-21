@@ -16,6 +16,30 @@ class EventImageInline(admin.TabularInline):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    readonly_fields = ('slug',)
+    readonly_fields = ('slug', 'create_at', 'update_at')
     inlines = [EventPeopleInline, EventImageInline]
     # raw_id_fields = ('producer',)
+    ordering = ('name',)
+
+    fieldsets = (
+        ('Основные', {
+            'fields': (
+                'name', 'short_description', 'description',
+                'min_age_limit', 'premiere_at', 'duration',
+                'has_intermission', 'is_enable'
+            )
+        }),
+        ('Создатели', {
+            'fields': ('dramatist', 'producer')
+        }),
+        ('Служебные', {
+            'fields': ('slug', 'create_at', 'update_at')
+        }),
+        ('Медиа', {
+            'fields': (
+                'program_pdf',
+                'cover', 'preview_cover', 'detail_cover', 'description_cover',
+                'actor_cover',
+            )
+        }),
+    )
