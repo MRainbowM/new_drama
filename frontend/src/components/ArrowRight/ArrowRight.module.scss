@@ -21,6 +21,7 @@
     align-items: center;
     background-color: var(--arrow-bgc-default);
     border-radius: 100%;
+    cursor: pointer;
 
     &:hover {
         background-color: var(--arrow-bgc-hover);
