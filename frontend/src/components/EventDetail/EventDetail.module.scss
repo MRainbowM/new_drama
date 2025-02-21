@@ -76,12 +76,10 @@
 .title {
     color: var(--color-red);
     text-transform: uppercase;
-    // width: min-content;
     font-weight: bold;
 
     h1 {
         font-size: 60px;
-        // text-wrap-mode: nowrap;
     }
 
     .row {
@@ -101,9 +99,9 @@
 
     .row {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 40% 60%;
         gap: 30px;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
 
         span:nth-child(2) {
             justify-self: flex-end;
@@ -144,6 +142,10 @@
         grid-template-columns: 1fr;
     }
 
+    .defaultCover {
+        grid-column: 1;
+    }
+
     .gridImg {
         display: none;
     }
@@ -153,7 +155,7 @@
     }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 600px) {
     .gridItem {
         padding: 20px var(--container-margin-lr);
     }
@@ -174,5 +176,11 @@
 
     .gridImg {
         min-height: 250px;
+    }
+
+    .peoples {
+        .row {
+            gap: 20px;
+        }
     }
 }
