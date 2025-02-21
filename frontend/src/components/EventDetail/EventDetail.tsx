@@ -60,9 +60,7 @@ export default async function EventDetail(
                             event.dramatist ? (
                                 <div className={styles.row}>
                                     <span>Драматург:</span>
-                                    <span>
-                                        {`${event.dramatist.first_name} ${event.dramatist.last_name}`}
-                                    </span>
+                                    <span>{event.dramatist}</span>
                                 </div>
                             ) : (<></>)
                         }

@@ -189,7 +189,6 @@ export interface components {
         };
         /** EventPreviewSchema */
         EventPreviewSchema: {
-            dramatist: components["schemas"]["PeoplePreviewSchema"] | null;
             producer: components["schemas"]["PeoplePreviewSchema"] | null;
             /** ID */
             id?: number | null;
@@ -203,12 +202,12 @@ export interface components {
              * Обложка спектакля
              * @description Изображение в списке спектаклей
              */
-            cover: string;
+            cover?: string | null;
             /**
              * Обложка в афише
              * @description Изображение курсора при наведении на спектакль в афише
              */
-            preview_cover: string;
+            preview_cover?: string | null;
             /**
              * Возрастное ограничение
              * @description Минимальный разрешенный возраст зрителя, например, 18 лет
@@ -274,7 +273,6 @@ export interface components {
             peoples: components["schemas"]["EventPeopleOutSchema"][];
             /** Images */
             images: components["schemas"]["EventImageOutSchema"][];
-            dramatist: components["schemas"]["PeopleShortSchema"] | null;
             producer: components["schemas"]["PeopleShortSchema"] | null;
             /** Duration Format */
             duration_format: string | null;
@@ -302,36 +300,38 @@ export interface components {
              * @default false
              */
             has_intermission: boolean;
+            /** Дата премьеры */
+            premiere_at?: string | null;
             /**
-             * Дата премьеры
-             * Format: date
+             * Драматург
+             * @default
              */
-            premiere_at: string;
+            dramatist: string | null;
             /**
              * Обложка спектакля
              * @description Изображение в списке спектаклей
              */
-            cover: string;
+            cover?: string | null;
             /**
              * Обложка в афише
              * @description Изображение курсора при наведении на спектакль в афише
              */
-            preview_cover: string;
+            preview_cover?: string | null;
             /**
              * Обложка спектакля в карточке спектакля
              * @description Главное изображение в карточке спектакля
              */
-            detail_cover: string;
+            detail_cover?: string | null;
             /**
              * Фотография напротив описания спектакля
              * @description Изображение в карточке спектакля
              */
-            description_cover: string;
+            description_cover?: string | null;
             /**
              * Фотография напротив списка действующих лиц спектакля
              * @description Изображение в карточке спектакля
              */
-            actor_cover: string;
+            actor_cover?: string | null;
         };
         /** EventImageOutSchema */
         EventImageOutSchema: {
