@@ -5,7 +5,10 @@ import useEmblaCarousel from 'embla-carousel-react'
 import ReviewItem from '../ReviewItem/ReviewItem'
 import ArrowLeft from '../ArrowLeft/ArrowLeft'
 import ArrowRight from '../ArrowRight/ArrowRight'
-
+import * as React from "react";
+import NextJsImage from '../NextJsImage/NextJsImage'
+import "yet-another-react-lightbox/styles.css";
+import Lightbox from "yet-another-react-lightbox";
 
 interface ReviewListProps {
     reviewList: components['schemas']['ReviewOutSchema'][]
@@ -20,6 +23,24 @@ export default function ReviewList(
         align: 'start'
     });
 
+
+    // Просмотр фоток
+    const [open, setOpen] = React.useState(false);
+    const [openIndex, setOpenIndex] = React.useState(0);
+
+    const slides = [];
+
+    reviewList.forEach((review) => slides.push({
+        src: review.image,
+        height: 100,
+        width: 100
+    }));
+
+    const onClickImg = (index: number) => {
+        setOpenIndex(index);
+        setOpen(true);
+    }
+
     return (
         <div className={styles.root}>
             <ArrowLeft emblaApi={emblaApi} />
@@ -28,14 +49,23 @@ export default function ReviewList(
                 <div className={styles.list}>
                     {reviewList.map((item, index) => (
                         <ReviewItem
-                            key={item.id}
+                            index={index}
                             review={item}
+                            onClickImg={onClickImg}
                         />
                     ))}
                 </div>
             </div>
 
             <ArrowRight emblaApi={emblaApi} />
+
+            <Lightbox
+                index={openIndex}
+                open={open}
+                close={() => setOpen(false)}
+                slides={slides}
+                render={{ slide: NextJsImage }}
+            />
         </div>
     );
 }

@@ -3,15 +3,20 @@ import { components } from '../../api/schema'
 import Image from 'next/image'
 
 interface ReviewItemProps {
-    review: components['schemas']['ReviewOutSchema']
+    review: components['schemas']['ReviewOutSchema'],
+    onClickImg: Function,
+    index: number
 }
 
 
 export default function ReviewItem(
-    { review }: ReviewItemProps
+    { review, onClickImg, index }: ReviewItemProps
 ) {
     return (
-        <div className={styles.root}>
+        <div
+            className={styles.root}
+            onClick={() => onClickImg(index)}
+        >
             <Image
                 src={review.image}
                 width={500}
