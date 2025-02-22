@@ -49,6 +49,7 @@ export default function ReviewList(
                 <div className={styles.list}>
                     {reviewList.map((item, index) => (
                         <ReviewItem
+                            key={index}
                             index={index}
                             review={item}
                             onClickImg={onClickImg}
