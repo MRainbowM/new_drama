@@ -5,14 +5,14 @@ import '../styles/globals.scss'
 import { sans_narrow, montserrat, sans_caption } from './fonts'
 import clsx from "clsx"
 import { getMenuItems } from '../services/getMenuItems';
+import RunningLine from '../components/RunningLine/RunningLine'
 
 export const dynamic = 'force-dynamic';
 
 export default async function RootLayout({
-    children, runline
+    children
 }: {
     children: React.ReactNode,
-    runline: React.ReactNode,
 }) {
 
     const { menuItems } = await getMenuItems();
@@ -27,7 +27,7 @@ export default async function RootLayout({
                     `${sans_caption.variable} font-sans`,
                 )}
             >
-                {runline}
+                <RunningLine />
                 <Header menuItems={menuItems} />
                 <Container>
                     {children}
