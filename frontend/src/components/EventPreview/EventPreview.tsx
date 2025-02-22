@@ -16,9 +16,6 @@ export default function EventPreview(
     { event, isActiveContainer, isActive, onMouseOver }: EventPreviewProps
 ) {
     const backgroundImageSrc = event.cover ? myImageLoader({ src: event.cover }) : '';
-    const openEventDetail = () => {
-        location.href = `/event/${event.slug}`;
-    }
 
     return (
         <div
@@ -59,13 +56,11 @@ export default function EventPreview(
                         }
                     </div>
                 </div>
-
-                <div
+                <Link
                     className={styles.btn}
-                    onClick={openEventDetail}
-                >
+                    href={`/event/${event.slug}`}>
                     <span>О спектакле</span>
-                </div>
+                </Link>
             </div>
         </div>
     );
