@@ -10,7 +10,6 @@ body::after {
   width: 100%;
   height: 100%;
   z-index: 9999;
-  background-size: cover;
   opacity: 0.9;
   pointer-events: none;
   /* Минимальное влияние на цвета */
@@ -20,19 +19,19 @@ body::after {
 
 @keyframes noise-animation {
   0% {
-    background-image: url('/images/noise1.webp');
+    background: url('/images/noise1.webp') repeat;
   }
 
   25% {
-    background-image: url('/images/noise2.webp');
+    background: url('/images/noise2.webp') repeat;
   }
 
   75% {
-    background-image: url('/images/noise3.webp');
+    background: url('/images/noise3.webp') repeat;
   }
 
   100% {
-    background-image: url('/images/noise4.webp');
+    background: url('/images/noise4.webp') repeat;
   }
 }
 
