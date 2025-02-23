@@ -13,8 +13,6 @@ export default function ScheduleCursor(
     { isActive, cover }: ScheduleCursorProps
 ) {
     const backgroundImageSrc = cover ? myImageLoader({ src: cover }) : '';
-    
-
     const cursorSchedule = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
