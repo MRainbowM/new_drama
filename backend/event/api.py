@@ -63,7 +63,7 @@ def get_event_program_by_date(request, event_date: date = date.today()):
 )
 def get_event_list(request, filters: EventFilterSchema = Query(...)):
     event_list = Event.objects.all()
-    event_list = filters.filter(event_list).order_by('name')
+    event_list = filters.filter(event_list).order_by('?')
     return event_list
 
 
