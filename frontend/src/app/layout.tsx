@@ -6,6 +6,7 @@ import { sans_narrow, montserrat, sans_caption } from './fonts'
 import clsx from "clsx"
 import { getMenuItems } from '../services/getMenuItems';
 import RunningLine from '../components/RunningLine/RunningLine'
+import Noise from '../libs/Noise/Noise'
 
 export const dynamic = 'force-dynamic';
 
@@ -26,7 +27,16 @@ export default async function RootLayout({
                     `${sans_narrow.variable} font-sans`,
                     `${sans_caption.variable} font-sans`,
                 )}
+
+                style={{ marginTop: -21 }}
             >
+                <Noise
+                    patternSize={250}
+                    patternScaleX={1}
+                    patternScaleY={1}
+                    patternRefreshInterval={2}
+                    patternAlpha={15}
+                />
                 <RunningLine />
                 <Header menuItems={menuItems} />
                 <Container>
