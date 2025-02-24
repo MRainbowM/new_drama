@@ -17,6 +17,11 @@ export default function EventPreview(
 ) {
     const backgroundImageSrc = event.cover ? myImageLoader({ src: event.cover }) : '';
 
+    const eventDetailLink = `/event/${event.slug}`;
+    const openEventDetail = () => {
+        location.href = eventDetailLink;
+    }
+
     return (
         <div
             className={clsx(
@@ -30,6 +35,7 @@ export default function EventPreview(
             <div
                 className={styles.item}
                 style={{ backgroundImage: `url(${backgroundImageSrc})` }}
+                onClick={openEventDetail}
             >
 
                 <div className={styles.text}>
@@ -56,11 +62,10 @@ export default function EventPreview(
                         }
                     </div>
                 </div>
-                <Link
-                    className={styles.btn}
-                    href={`/event/${event.slug}`}>
+
+                <div className={styles.btn}>
                     <span>О спектакле</span>
-                </Link>
+                </div>
             </div>
         </div>
     );
