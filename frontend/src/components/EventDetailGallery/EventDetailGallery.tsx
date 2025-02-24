@@ -7,7 +7,7 @@ import { components } from '../../api/schema'
 import Image from 'next/image'
 import Lightbox from "yet-another-react-lightbox";
 import * as React from "react";
-import NextJsImage from '../NextJsImage/NextJsImage'
+import NextJsImage from '../../libs/NextJsImage/NextJsImage'
 import "yet-another-react-lightbox/styles.css";
 
 interface EventDetailGalleryProps {

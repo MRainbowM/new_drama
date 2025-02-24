@@ -6,7 +6,7 @@ import ReviewItem from '../ReviewItem/ReviewItem'
 import ArrowLeft from '../ArrowLeft/ArrowLeft'
 import ArrowRight from '../ArrowRight/ArrowRight'
 import * as React from "react";
-import NextJsImage from '../NextJsImage/NextJsImage'
+import NextJsImage from '../../libs/NextJsImage/NextJsImage'
 import "yet-another-react-lightbox/styles.css";
 import Lightbox from "yet-another-react-lightbox";
 
