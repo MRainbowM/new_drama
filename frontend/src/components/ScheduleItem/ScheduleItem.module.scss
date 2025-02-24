@@ -3,11 +3,12 @@
     --btn-buy-width: 200px;
 
     cursor: pointer;
+    padding: 4px 0;
 }
 
 .container {
     display: flex;
-    padding: 12px 10px;
+    padding: 8px 10px;
 }
 
 .left {
@@ -51,10 +52,6 @@
     .name {
         font-weight: bold;
         font-size: var(--font-size-subtitle-schedule);
-
-        &:hover {
-            text-decoration: underline;
-        }
     }
 
     .description {
@@ -97,8 +94,8 @@
 }
 
 @media not all and (hover: none) {
-
     // Только НЕ для тач устройств
+
     .active {
         z-index: 2;
 
@@ -117,21 +114,15 @@
             }
         }
     }
-}
 
-@media (hover: none) {
-
-    // Только для тач устройств
     .titleCol {
         .name {
             &:hover {
-                text-decoration: none;
+                text-decoration: underline;
             }
         }
     }
 }
-
-
 
 @media (max-width: 1180px) {
     .dateCol {
@@ -169,10 +160,11 @@
 @media (max-width: 900px) {
     .root {
         --btn-buy-width: 150px;
+        margin: 0 -10px;
     }
 
     .container {
-        padding: 12px 0;
+        padding: 8px 10px;
     }
 
     .left {
