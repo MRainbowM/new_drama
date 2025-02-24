@@ -2,6 +2,7 @@
     width: 100%;
     height: calc(100vh + var(--gap-between-sections));
     max-height: calc(700px + var(--gap-between-sections));
+    min-height: 700px;
     display: flex;
     flex-direction: column;
     padding-top: var(--gap-between-sections);
@@ -15,6 +16,7 @@
 
 @media (max-width: 700px) {
     .root {
+        min-height: 490px;
         max-height: calc(490px + var(--gap-between-sections));
     }
 }
