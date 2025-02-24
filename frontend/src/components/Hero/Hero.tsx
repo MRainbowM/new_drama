@@ -2,9 +2,9 @@ import styles from './Hero.module.scss'
 import NDlarge from 'public/images/hero_2.svg?url'
 import NDsmall from 'public/images/hero_m.svg?url'
 
-
 export default function Hero() {
     const videoPath = `${process.env.BACKEND_STATIC_URL}/video/hero.mp4`;
+    const videoPathMobile = `${process.env.BACKEND_STATIC_URL}/video/hero_mobile.mp4`;
 
     return (
         <div className={styles.root}>
@@ -22,7 +22,7 @@ export default function Hero() {
                         '--mask-small': `url(${NDsmall.src})`,
                     } as React.CSSProperties}
                 >
-
+                    <source src={videoPathMobile} type="video/mp4" media="(max-width:700px)" />
                     <source src={videoPath} type="video/mp4" />
                 </video>
             </div>
