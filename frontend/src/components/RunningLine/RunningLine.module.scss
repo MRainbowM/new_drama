@@ -4,6 +4,8 @@
     background-color: var(--color-white);
     margin: 0 auto;
     max-width: var(--container-width);
+    z-index: 1;
+    position: relative;
 }
 
 .wrap {
