@@ -9,7 +9,7 @@
     overflow: hidden;
 
     height: var(--header-height);
-    pointer-events: none;
+    // pointer-events: none;
 }
 
 .menu {
@@ -18,7 +18,7 @@
     height: 100%;
     padding: 0 var(--container-margin-lr);
     align-items: center;
-    pointer-events: all;
+    // pointer-events: all;
 
     a {
         font-size: 20px;
