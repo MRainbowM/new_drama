@@ -75,7 +75,7 @@ export default async function Footer(
             </div>
 
             <div className={styles.row}>
-                <span>© 2022 Новая Драма</span>
+                <span>© 2016 Новая Драма</span>
             </div>
 
         </footer>
