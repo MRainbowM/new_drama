@@ -7,11 +7,10 @@ import clsx from "clsx"
 import { getMenuItems } from '../services/getMenuItems';
 import RunningLine from '../components/RunningLine/RunningLine'
 import Noise from '../libs/Noise/Noise'
-
-import { Suspense } from "react";
 import Providers from './providers'
-export const dynamic = 'force-dynamic';
 import Script from "next/script";
+
+export const dynamic = 'force-dynamic';
 
 const YM_COUNTER = Number(process.env.YM_COUNTER);
 
@@ -61,7 +60,7 @@ export default async function RootLayout({
                 {/* Яндекс Метрика через next/script */}
 
             </head>
-            
+
             <body
                 className={clsx(
                     sans_narrow.className,
@@ -72,16 +71,6 @@ export default async function RootLayout({
 
                 style={{ marginTop: -21 }}
             >
-
-                {/* {
-                    process.env.YM_COUNTER ? (
-                        <Suspense >
-                            <Metrika
-                                counter={process.env.YM_COUNTER}
-                            />
-                        </Suspense>
-                    ) : (<></>)
-                } */}
 
                 <Noise
                     patternSize={250}
