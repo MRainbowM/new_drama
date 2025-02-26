@@ -7,7 +7,6 @@ import clsx from "clsx"
 import { getMenuItems } from '../services/getMenuItems';
 import RunningLine from '../components/RunningLine/RunningLine'
 import Noise from '../libs/Noise/Noise'
-import { Metrika } from '../components/YandexMetrika/YandexMetrika'
 
 import { Suspense } from "react";
 import Providers from './providers'
