@@ -36,7 +36,9 @@ export default async function RootLayout({
                 {
                     process.env.YM_COUNTER ? (
                         <Suspense >
-                            <Metrika />
+                            <Metrika
+                                counter={process.env.YM_COUNTER}
+                            />
                         </Suspense>
                     ) : (<></>)
                 }
