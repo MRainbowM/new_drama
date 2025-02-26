@@ -4,12 +4,12 @@ import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import Script from "next/script";
 
-export function Metrika() {
+export function Metrika({counter}) {
   const pathName = usePathname();
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    ym(process.env.YM_COUNTER, "hit", window.location.href);
+    ym(counter, "hit", window.location.href);
   }, [pathName, searchParams]);
 
   return (
@@ -21,7 +21,7 @@ export function Metrika() {
         k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
         (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-        ym(${process.env.YM_COUNTER}, "init", {
+        ym(${counter}, "init", {
           defer: true,
           clickmap:true,
           trackLinks:true,
