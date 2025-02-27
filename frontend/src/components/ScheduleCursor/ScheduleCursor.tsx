@@ -26,6 +26,11 @@ export default function ScheduleCursor(
         }
     }, [])
 
+
+    useEffect(() => {
+        cursorSchedule.current.style.backgroundImage = isActive ? `url(${backgroundImageSrc})` : '';
+    }, [isActive]);
+
     return (
         <div
             ref={cursorSchedule}
@@ -33,7 +38,7 @@ export default function ScheduleCursor(
                 styles.root,
                 { [styles.active]: isActive }
             )}
-            style={{ backgroundImage: `url(${backgroundImageSrc})` }}
+            // style={{ backgroundImage: `url(${backgroundImageSrc})` }}
         >
         </div>
     );
