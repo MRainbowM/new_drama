@@ -2,6 +2,7 @@
     height: calc(100vh - var(--header-height) - var(--running-line-height));
     min-height: 500px;
     position: relative;
+    overflow: hidden;
 }
 
 .mainVideo {
@@ -12,6 +13,7 @@
 
     video {
         width: 100%;
+        max-height: 100%;
         margin-bottom: auto;
         margin-top: auto;
         object-fit: cover;
