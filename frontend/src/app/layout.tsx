@@ -44,7 +44,8 @@ export default async function RootLayout({
                                     ym(${YM_COUNTER}, "init", {
                                         clickmap:true,
                                         trackLinks:true,
-                                        accurateTrackBounce:true
+                                        accurateTrackBounce:true,
+                                        webvisor:true
                                     });
                                 `,
                                 }}
