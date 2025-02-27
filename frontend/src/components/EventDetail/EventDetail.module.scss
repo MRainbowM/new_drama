@@ -113,6 +113,10 @@
 
     .premiere {
         margin-top: 10px;
+
+        span {
+            text-wrap: nowrap;
+        }
     }
 }
 
@@ -161,7 +165,8 @@
     // Появляется фиксированное меню сверху
     .cover {
         margin-top: var(--header-height);
-        height: calc(100vh - var(--header-height) - 100px);
+        height: calc(100vh / 2 - var(--header-height));
+        min-height: 250px;
     }
 }
 
