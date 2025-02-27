@@ -1,6 +1,8 @@
 import styles from './Hero.module.scss'
 import NDlarge from 'public/images/hero_2.svg?url'
 import NDsmall from 'public/images/hero_m.svg?url'
+import PosterImg from 'public/images/hero_poster.png'
+
 
 export default function Hero() {
     const videoPath = `${process.env.BACKEND_STATIC_URL}/video/hero.mp4`;
@@ -17,6 +19,7 @@ export default function Hero() {
                     playsInline
                     preload="auto"
                     aria-label="Video player"
+                    poster={PosterImg.src}
                     style={{
                         '--mask-large': `url(${NDlarge.src})`,
                         '--mask-small': `url(${NDsmall.src})`,
