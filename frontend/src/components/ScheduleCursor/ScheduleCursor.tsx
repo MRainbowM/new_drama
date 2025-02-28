@@ -6,16 +6,16 @@ import myImageLoader from '../../loaders/image-loader'
 
 interface ScheduleCursorProps {
     isActive: boolean,
-    cover: string,
-    eventId: number
+    cover: string
 }
 
 export default function ScheduleCursor(
-    { isActive, cover, eventId }: ScheduleCursorProps
+    { isActive, cover }: ScheduleCursorProps
 ) {
     const backgroundImageSrc = cover ? myImageLoader({ src: cover }) : '';
     const cursorSchedule = useRef<HTMLDivElement>(null);
 
+    // Слежение курсора за мышкой
     useEffect(() => {
         const handleMouseMove = (e) => {
             cursorSchedule.current.style.left = (e.clientX - 250) + 'px';
@@ -27,40 +27,40 @@ export default function ScheduleCursor(
         }
     }, []);
 
+    // Проверка на поддержку ховеров
+    const [isTouch, setIsTouch] = useState(false);
     useEffect(() => {
-        // Проверяем, что cover не пустой
-        if (!backgroundImageSrc) return;
+        const mediaQuery = window.matchMedia("(hover: none)");
+        setIsTouch(mediaQuery.matches);
 
-        const link = document.createElement("link");
-        link.rel = "preload";
-        link.href = backgroundImageSrc;
-        link.as = "image";
-        document.head.appendChild(link);
+        // Следим за изменениями (например, подключение мыши к планшету)
+        const handler = (e) => setIsTouch(e.matches);
+        mediaQuery.addEventListener("change", handler);
 
-        return () => {
-            // Удаляем, если компонент размонтируется
-            document.head.removeChild(link);
-        };
+        return () => mediaQuery.removeEventListener("change", handler);
+    }, []);
 
-    }, [backgroundImageSrc]);
-
-    const [background, setBackground] = useState("");
+    // Предзагрузка 
     useEffect(() => {
-        const cachedBg = localStorage.getItem(`eventCursor${eventId}`);
+        if (!isTouch) {
+            // Проверяем, что cover не пустой
+            if (!backgroundImageSrc) return;
 
-        if (cachedBg) {
-            setBackground(cachedBg);
-        } else {
-            const imgSrc = backgroundImageSrc;
-            localStorage.setItem(`eventCursor${eventId}`, imgSrc);
-            setBackground(imgSrc);
+            const link = document.createElement("link");
+            link.rel = "preload";
+            link.href = backgroundImageSrc;
+            link.as = "image";
+            document.head.appendChild(link);
+
+            return () => {
+                // Удаляем, если компонент размонтируется
+                document.head.removeChild(link);
+            };
         }
-    }, [backgroundImageSrc]);
-
+    }, [backgroundImageSrc, isTouch]);
 
     useEffect(() => {
-        // cursorSchedule.current.style.backgroundImage = isActive ? `url(${backgroundImageSrc})` : '';
-        cursorSchedule.current.style.backgroundImage = isActive ? `url(${background})` : '';
+        cursorSchedule.current.style.backgroundImage = isActive ? `url(${backgroundImageSrc})` : '';
     }, [isActive]);
 
     return (
@@ -70,7 +70,6 @@ export default function ScheduleCursor(
                 styles.root,
                 { [styles.active]: isActive }
             )}
-        // style={{ backgroundImage: `url(${backgroundImageSrc})` }}
         >
         </div>
     );

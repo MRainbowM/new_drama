@@ -100,7 +100,6 @@ export default function ScheduleItem(
             <ScheduleCursor
                 isActive={isActive}
                 cover={event.event.preview_cover}
-                eventId={event.event.id}
             />
         </>
     );
