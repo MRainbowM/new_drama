@@ -1,6 +1,6 @@
 'use client'
 import styles from './ScheduleCursor.module.scss'
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import clsx from "clsx"
 import myImageLoader from '../../loaders/image-loader'
 
@@ -15,6 +15,7 @@ export default function ScheduleCursor(
     const backgroundImageSrc = cover ? myImageLoader({ src: cover }) : '';
     const cursorSchedule = useRef<HTMLDivElement>(null);
 
+    // Слежение курсора за мышкой
     useEffect(() => {
         const handleMouseMove = (e) => {
             cursorSchedule.current.style.left = (e.clientX - 250) + 'px';
@@ -24,7 +25,43 @@ export default function ScheduleCursor(
         return () => {
             window.removeEventListener("mousemove", handleMouseMove);
         }
-    }, [])
+    }, []);
+
+    // Проверка на поддержку ховеров
+    const [isTouch, setIsTouch] = useState(false);
+    useEffect(() => {
+        const mediaQuery = window.matchMedia("(hover: none)");
+        setIsTouch(mediaQuery.matches);
+
+        // Следим за изменениями (например, подключение мыши к планшету)
+        const handler = (e) => setIsTouch(e.matches);
+        mediaQuery.addEventListener("change", handler);
+
+        return () => mediaQuery.removeEventListener("change", handler);
+    }, []);
+
+    // Предзагрузка 
+    useEffect(() => {
+        if (!isTouch) {
+            // Проверяем, что cover не пустой
+            if (!backgroundImageSrc) return;
+
+            const link = document.createElement("link");
+            link.rel = "preload";
+            link.href = backgroundImageSrc;
+            link.as = "image";
+            document.head.appendChild(link);
+
+            return () => {
+                // Удаляем, если компонент размонтируется
+                document.head.removeChild(link);
+            };
+        }
+    }, [backgroundImageSrc, isTouch]);
+
+    useEffect(() => {
+        cursorSchedule.current.style.backgroundImage = isActive ? `url(${backgroundImageSrc})` : '';
+    }, [isActive]);
 
     return (
         <div
@@ -33,7 +70,6 @@ export default function ScheduleCursor(
                 styles.root,
                 { [styles.active]: isActive }
             )}
-            style={{ backgroundImage: `url(${backgroundImageSrc})` }}
         >
         </div>
     );

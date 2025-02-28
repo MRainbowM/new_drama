@@ -21,6 +21,10 @@
     // Отступ между секциями на главной странице
     --gap-between-sections: 120px;
 
+    @media (max-width: 700px) {
+        --gap-between-sections: 100px;
+    }
+
     --color-white: #FFFFFF;
     --color-white-with-alpha-50: rgba(255, 255, 255, 0.5);
 
