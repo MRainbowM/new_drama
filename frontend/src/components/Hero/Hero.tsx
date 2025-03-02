@@ -24,8 +24,6 @@ export default function Hero() {
                         '--mask-large': `url(${NDlarge.src})`,
                         '--mask-small': `url(${NDsmall.src})`,
                     } as React.CSSProperties}
-
-                    controls
                 >
                     <source src="/api/video?is_mobile=true" type="video/mp4" media="(max-width:700px)"  />
                     <source src="/api/video?is_mobile=false" type="video/mp4"  />
