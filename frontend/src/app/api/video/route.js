@@ -1,9 +1,10 @@
-// app/api/video/route.js
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 
 export async function GET(request) {
+    // Video stream
+
     // Получаем параметр 'is_mobile' из URL или заголовков
     const { searchParams } = new URL(request.url, `http://${request.headers.get('host')}`);
     const is_mobile = searchParams.get('is_mobile');
@@ -19,15 +20,15 @@ export async function GET(request) {
     const fileSize = stat.size;
     const range = request.headers.get('range');
 
-
     // Генерация ETag на основе содержимого файла
     const fileBuffer = fs.readFileSync(videoPath);
     const fileHash = crypto.createHash('md5').update(fileBuffer).digest('hex');
 
-
-    // Заголовки кэширования
+    
     const headers = new Headers({
+        // Заголовки кэширования
         'Cache-Control': 'public, max-age=31536000, immutable', // Кэшировать на 1 год
+        // Версия видео
         'ETag': fileHash
     });
 
