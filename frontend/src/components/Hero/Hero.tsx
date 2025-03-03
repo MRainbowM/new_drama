@@ -18,7 +18,8 @@ export default function Hero() {
             ([entry]) => {
                 setIsVisible(entry.isIntersecting);
             },
-            { threshold: 0.5 } // Считаем видео видимым, если оно наполовину в зоне видимости
+            // Считаем видео видимым, если оно наполовину в зоне видимости
+            { threshold: 0.5 }
         );
 
         observer.observe(video);
@@ -37,9 +38,24 @@ export default function Hero() {
             }
         };
 
+        const handlePageHide = () => {
+            videoRef.current?.pause();
+        };
+
+        const handlePageShow = () => {
+            if (isVisible) {
+                videoRef.current?.play();
+            }
+        };
+
         document.addEventListener("visibilitychange", handleVisibilityChange);
+        window.addEventListener("pagehide", handlePageHide);
+        window.addEventListener("pageshow", handlePageShow);
+
         return () => {
             document.removeEventListener("visibilitychange", handleVisibilityChange);
+            window.removeEventListener("pagehide", handlePageHide);
+            window.removeEventListener("pageshow", handlePageShow);
         };
     }, [isVisible]);
 
