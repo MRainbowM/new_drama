@@ -10,7 +10,7 @@ export async function GET(request) {
 
     // Определяем путь к видео в зависимости от версии
     const videoPath = path.resolve(
-        is_mobile === 'mobile'
+        is_mobile
             ? 'public/video/hero_mobile.mp4'
             : 'public/video/hero.mp4'
     );
