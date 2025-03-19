@@ -18,5 +18,6 @@ node_modules
 backend/static/admin
 backend/static/django_ckeditor_5
 backend/static/ninja
+backend/static/grappelli
 
 .idea
