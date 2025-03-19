@@ -68,7 +68,7 @@ class Migration(migrations.Migration):
             model_name='event',
             name='program_pdf',
             field=models.FileField(blank=True, default='', help_text='PDF файл с программой спектакля', null=True,
-                                   upload_to=event.models.services.event_program_pdf_path.event_program_pdf_path,
+                                   upload_to=event.models.services.path.event_program_pdf_path.event_program_pdf_path,
                                    verbose_name='Программка спектакля'),
         ),
         migrations.AddField(
@@ -105,7 +105,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('create_at', models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')),
                 ('update_at', models.DateTimeField(auto_now=True, verbose_name='Дата обновления')),
-                ('image', models.ImageField(upload_to=event.models.services.event_image_path.event_image_path,
+                ('image', models.ImageField(upload_to=event.models.services.path.event_image_path.event_image_path,
                                             verbose_name='Фото')),
                 ('event',
                  models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='event.event',
