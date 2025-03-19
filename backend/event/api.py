@@ -2,13 +2,13 @@ from datetime import date
 from typing import List
 
 from django.http import Http404
-from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
 from ninja import Query, Router
 
 from basis.settings import MEDIA_URL
-from event.models import EventShow, Event
+from event.models import EventShow
+from .models.services.event_db_service import event_db_service
 from .schemes import (
     EventShowFilterSchema,
     EventShowOutSchema,
@@ -59,12 +59,11 @@ def get_event_program_by_date(request, event_date: date = date.today()):
     '/event/list',
     response=List[EventPreviewSchema],
     tags=[_('Спектакли')],
-    summary=_('Получить список всех спектаклей: репертуар')
+    summary=_('Получить список всех спектаклей: репертуар'),
+    url_name='get-event-list'
 )
-def get_event_list(request, filters: EventFilterSchema = Query(...)):
-    event_list = Event.objects.all()
-    event_list = filters.filter(event_list).order_by('?')
-    return event_list
+async def get_event_list(request, filters: EventFilterSchema = Query(...)):
+    return await event_db_service.get_list(filters)
 
 
 @router.get(
@@ -73,6 +72,9 @@ def get_event_list(request, filters: EventFilterSchema = Query(...)):
     tags=[_('Спектакли')],
     summary=_('Получить данные спектакля по slug')
 )
-def get_event_by_slug(request, slug: str):
-    event = get_object_or_404(Event, slug=slug)
+async def get_event_by_slug(request, slug: str):
+    event = await event_db_service.get_by_slug(slug=slug)
+    if not event:
+        raise Http404(_('Событие не найдено'))
+
     return event

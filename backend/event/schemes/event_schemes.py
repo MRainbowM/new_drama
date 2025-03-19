@@ -24,14 +24,6 @@ class EventDetailSchema(ModelSchema):
         ]
 
     @staticmethod
-    def resolve_peoples(obj):
-        return obj.peoples.all().order_by('sort')
-
-    @staticmethod
-    def resolve_images(obj):
-        return obj.images.filter(is_enable=True)
-
-    @staticmethod
     def resolve_duration_format(obj) -> str:
         if not obj.duration:
             return ''
