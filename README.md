@@ -21,6 +21,11 @@ docker-compose stop django-new-drama
 docker-compose exec django-new-drama python3 manage.py runserver 0.0.0.0:8011
 ```
 
+#### with uvicorn
+```sh
+docker-compose exec django-new-drama python3 -m uvicorn basis.asgi:application --reload --host 0.0.0.0 --port 8011
+```
+
 ### Создание миграций
 ```sh
 docker-compose exec django-new-drama python3 manage.py makemigrations
@@ -42,6 +47,11 @@ docker compose exec django-new-drama python3 manage.py createsuperuser
 ### Создание приложения
 ```sh
 docker-compose exec django-new-drama python3 manage.py startapp {app_name}
+```
+
+### Сборка статики Django
+```sh
+docker-compose exec django-new-drama python3 manage.py collectstatic
 ```
 
 ## Frontend
