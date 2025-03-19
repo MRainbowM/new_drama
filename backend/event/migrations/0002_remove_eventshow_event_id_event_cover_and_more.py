@@ -4,9 +4,8 @@ import django.db.models.deletion
 import django.utils.timezone
 from django.db import migrations, models
 
-import event.models.services.event_cover_path
-import event.models.services.event_image_path
-import event.models.services.event_program_pdf_path
+import event.models.services.path.event_cover_path
+import event.models.services.path.event_program_pdf_path
 
 
 class Migration(migrations.Migration):
@@ -24,7 +23,7 @@ class Migration(migrations.Migration):
             name='cover',
             field=models.ImageField(default=django.utils.timezone.now,
                                     help_text='Горизонтальное изображение в карточке спектакля',
-                                    upload_to=event.models.services.event_cover_path.event_cover_path,
+                                    upload_to=event.models.services.path.event_cover_path.event_cover_path,
                                     verbose_name='Обложка спектакля'),
             preserve_default=False,
         ),
@@ -61,7 +60,7 @@ class Migration(migrations.Migration):
             model_name='event',
             name='preview_cover',
             field=models.ImageField(default='', help_text='Обложка спектакля в афише на главной странице',
-                                    upload_to=event.models.services.event_cover_path.event_cover_path,
+                                    upload_to=event.models.services.path.event_cover_path.event_cover_path,
                                     verbose_name='Обложка в афише'),
             preserve_default=False,
         ),

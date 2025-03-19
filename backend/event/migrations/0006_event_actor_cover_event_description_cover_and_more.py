@@ -2,7 +2,7 @@
 
 from django.db import migrations, models
 
-import event.models.services.event_cover_path
+import event.models.services.path.event_cover_path
 
 
 def forwards_func(apps, schema_editor):
@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
             name='actor_cover',
             field=models.ImageField(
                 default='', help_text='Изображение в карточке спектакля',
-                upload_to=event.models.services.event_cover_path.event_cover_path,
+                upload_to=event.models.services.path.event_cover_path.event_cover_path,
                 verbose_name='Фотография напротив списка действующих лиц спектакля',
             ),
             preserve_default=False,
@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
             name='description_cover',
             field=models.ImageField(
                 default='', help_text='Изображение в карточке спектакля',
-                upload_to=event.models.services.event_cover_path.event_cover_path,
+                upload_to=event.models.services.path.event_cover_path.event_cover_path,
                 verbose_name='Фотография напротив описания спектакля'
             ),
             preserve_default=False,
@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
             name='detail_cover',
             field=models.ImageField(
                 default='', help_text='Главное изображение в карточке спектакля',
-                upload_to=event.models.services.event_cover_path.event_cover_path,
+                upload_to=event.models.services.path.event_cover_path.event_cover_path,
                 verbose_name='Обложка спектакля в карточке спектакля'
             ),
             preserve_default=False,
