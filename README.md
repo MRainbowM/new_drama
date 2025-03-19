@@ -54,6 +54,12 @@ docker-compose exec django-new-drama python3 manage.py startapp {app_name}
 docker-compose exec django-new-drama python3 manage.py collectstatic
 ```
 
+### Запуск backend тестов
+```sh
+docker-compose exec django-new-drama python3 -m pytest
+```
+
+
 ## Frontend
 
 ### Запуск фронтенда
