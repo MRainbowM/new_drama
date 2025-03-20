@@ -1,8 +1,8 @@
-import styles from './ScheduleItem.module.scss'
-import { components } from '../../api/schema'
+import styles from './ScheduleItem.module.scss';
+import { components } from '../../api/schema';
 import ScheduleCursor from '../ScheduleCursor/ScheduleCursor';
-import { useState } from "react"
-import clsx from "clsx"
+import { useState } from 'react';
+import clsx from 'clsx';
 import Link from 'next/link';
 
 interface ScheduleItemProps {
@@ -42,6 +42,7 @@ export default function ScheduleItem(
                                 {new Intl.DateTimeFormat('ru-RU', {
                                     day: 'numeric',
                                     month: 'numeric',
+                                    timeZone: process.env.NEXT_PUBLIC_TIMEZONE
                                 }).format(
                                     new Date(event.start_at)
                                 )}
@@ -51,6 +52,7 @@ export default function ScheduleItem(
                                     {new Intl.DateTimeFormat('ru-RU', {
                                         hour: 'numeric',
                                         minute: 'numeric',
+                                        timeZone: process.env.NEXT_PUBLIC_TIMEZONE
                                     }).format(
                                         new Date(event.start_at)
                                     )}
