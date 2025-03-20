@@ -8,6 +8,7 @@ import { ReviewSection } from '../components/ReviewSection/ReviewSection';
 import { metadataMainPageDescription, metadataMainPageJsonLd, metadataMainPageTitle } from '../constants/metadata';
 import '../styles/page.scss'
 import ContactsSection from '../components/ContactsSection/ContactsSection';
+import Popup from '../components/Popup/Popup';
 export const dynamic = 'force-dynamic';
 
 
@@ -45,6 +46,7 @@ export default function MainPage() {
                 )
             }}
         />
+        <Popup />
         <Hero />
         <ScheduleSection />
         <EventPreviewSection />
