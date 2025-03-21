@@ -10,7 +10,7 @@
     margin-top: calc(-1 * (var(--running-line-height) + var(--header-height)));
     margin-left: calc(-1 * var(--container-margin-lr));
 
-    background-color: var(--color-black-with-alpha-50);
+    background-color: var(--color-gray-with-alpha-80);
 }
 
 .root.close {
@@ -25,32 +25,52 @@
 
 .modal {
     display: flex;
-    flex-direction: column;
-    background-color: white;
-    max-width: 500px;
+    background-color: var(--color-black);
+    color: var(--color-white);
+    max-width: 980px;
     width: 100%;
     margin: auto;
+    border-radius: 20px;
+}
+
+.coverCol {
+    width: 50%;
+
+    .cover {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+.contentCol {
+    width: 50%;
+    display: grid;
+    grid-template-rows: 60px 1fr;
+
 }
 
 .topRow {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     width: 100%;
-    padding: 20px;
+    padding-right: 20px;
 }
 
 .btnClose {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 22px;
-    width: 22px;
-    margin-left: auto;
+    height: 20px;
+    width: 20px;
     cursor: pointer;
 
     .lineTop,
     .lineBot {
-        width: 25px;
-        height: 3px;
-        background-color: var(--color-black);
+        width: 22px;
+        height: 2px;
+        background-color: var(--color-white);
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
         -webkit-transition: .2s ease all;
@@ -60,7 +80,7 @@
 
     .lineTop {
         -webkit-transform: rotate(45deg);
-        transform: translateY(10px) rotate(45deg);
+        transform: translateY(9px) rotate(45deg);
     }
 
     .lineBot {
@@ -74,12 +94,16 @@
     flex-direction: column;
     height: 100%;
     width: 100%;
-    color: var(--color-black);
-    padding: 0 25px 62px;
-    gap: 25px;
+    padding: 0px 30px 50px;
+
+    .subtitle {
+        font-size: 16px;
+        font-family: var(--font-montserrat);
+        font-weight: 400;
+    }
 
     .title {
-        font-size: 30px;
+        font-size: 28px;
         text-transform: uppercase;
         font-weight: bold;
     }
@@ -87,6 +111,8 @@
     .text {
         margin-top: auto;
         margin-bottom: auto;
+        font-family: var(--font-montserrat);
+        font-weight: 400;
     }
 
     .btnAction {
@@ -96,12 +122,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 40px;
+            width: 100%;
+            height: 52px;
             text-transform: uppercase;
             font-size: 16px;
-            border: 1px solid var(--color-black);
             font-family: var(--font-sans-caption);
             padding: 0 15px;
+            background-color: var(--color-red);
+            border-radius: 12px;
         }
     }
 }
@@ -131,8 +159,3 @@
 
 }
 
-@media (min-width:1600px) {
-    .root {
-        margin-left: 0;
-    }
-}

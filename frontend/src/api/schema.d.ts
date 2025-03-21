@@ -527,6 +527,8 @@ export interface components {
         PopupOutSchema: {
             /** ID */
             id?: number | null;
+            /** Подзаголовок */
+            subtitle: string;
             /** Заголовок */
             title: string;
             /** Текст */
@@ -541,6 +543,11 @@ export interface components {
              * @description Ресурс, на который будет перенаправлен пользователь при клике по кнопке
              */
             btn_link: string;
+            /**
+             * Обложка
+             * @description Картинка в поп-апе
+             */
+            cover: string;
         };
     };
     responses: never;
