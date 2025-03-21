@@ -7,5 +7,5 @@ class PopupOutSchema(ModelSchema):
     class Config:
         model = Popup
         model_fields = [
-            'id', 'title', 'content', 'btn_text', 'btn_link'
+            'id', 'subtitle', 'title', 'content', 'btn_text', 'btn_link', 'cover'
         ]
