@@ -15,7 +15,7 @@ export default function PopupTimer(
     const [tick, setTick] = useState(false);
     const [[diffDays, diffHours, diffMinutes, diffSeconds], setDiff] = useState([0, 0, 0, 0]);
 
-    const [[titleHours, titleMinutes], setTitle] = useState(['', '']);
+    const [[titleHours, titleMinutes], setTitle] = useState(['часов', 'минут']);
 
     useEffect(() => {
         const currentDate = new Date();

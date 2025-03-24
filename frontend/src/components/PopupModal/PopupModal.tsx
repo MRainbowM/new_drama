@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 import PopupTimer from '../PopupTimer/PopupTimer';
+import PopupMini from '../PopupMini/PopupMini';
 
 interface PopupModalProps {
     popup: components['schemas']['PopupOutSchema']
@@ -36,58 +37,63 @@ export default function PopupModal(
     }, [onClickClose]);
 
     return (
-        <div
-            className={clsx(
-                styles.root,
-                { [styles.close]: isClose }
-            )}
-        >
-
-            <div className={styles.modal} ref={refModal}>
-                <div className={styles.coverCol} >
-                    <Image
-                        className={styles.cover}
-                        src={popup.cover}
-                        width={500}
-                        height={500}
-                        priority={true}
-                        alt={popup.title}
-                    />
-                </div>
-
-                <div className={styles.contentCol}>
-                    <div className={styles.topRow}>
-                        <div
-                            className={styles.btnClose}
-                            onClick={onClickClose}
-                        >
-                            <div className={styles.lineTop}></div>
-                            <div className={styles.lineBot}></div>
-                        </div>
-
+        <>
+            <div
+                className={clsx(
+                    styles.root,
+                    { [styles.close]: isClose }
+                )}
+            >
+                <div className={styles.modal} ref={refModal}>
+                    <div className={styles.coverCol} >
+                        <Image
+                            className={styles.cover}
+                            src={popup.cover}
+                            width={500}
+                            height={500}
+                            priority={true}
+                            alt={popup.title}
+                        />
                     </div>
 
-                    <div className={styles.content}>
-                        <div className={styles.subtitle}>
-                            {popup.subtitle}
+                    <div className={styles.contentCol}>
+                        <div className={styles.topRow}>
+                            <div
+                                className={styles.btnClose}
+                                onClick={onClickClose}
+                            >
+                                <div className={styles.lineTop}></div>
+                                <div className={styles.lineBot}></div>
+                            </div>
                         </div>
-                        <div className={styles.title}>
-                            {popup.title}
-                        </div>
-                        <div
-                            className={styles.text}
-                            dangerouslySetInnerHTML={{ __html: popup.content }}
-                        >
-                        </div>
-                        <PopupTimer endAt={new Date(popup.end_at)} />
-                        <div className={styles.btnAction}>
-                            <Link href={popup.btn_link} target="__blank">
-                                <span>{popup.btn_text}</span>
-                            </Link>
+
+                        <div className={styles.content}>
+                            <div className={styles.subtitle}>
+                                {popup.subtitle}
+                            </div>
+                            <div className={styles.title}>
+                                {popup.title}
+                            </div>
+                            <div
+                                className={styles.text}
+                                dangerouslySetInnerHTML={{ __html: popup.content }}
+                            >
+                            </div>
+                            <PopupTimer endAt={new Date(popup.end_at)} />
+                            <div className={styles.btnAction}>
+                                <Link href={popup.btn_link} target="__blank">
+                                    <span>{popup.btn_text}</span>
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <PopupMini
+                popup={popup}
+                isModalClose={isClose}
+            />
+        </>
     );
 }
