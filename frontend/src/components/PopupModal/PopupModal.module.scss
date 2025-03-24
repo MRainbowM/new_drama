@@ -1,16 +1,16 @@
 .root {
     display: flex;
 
-    max-width: var(--container-width);
     width: 100vw;
     height: 100vh;
     position: fixed;
     z-index: 100;
 
     margin-top: calc(-1 * (var(--running-line-height) + var(--header-height)));
-    margin-left: calc(-1 * var(--container-margin-lr));
 
     background-color: var(--color-gray-with-alpha-80);
+
+    left: 0;
 }
 
 .root.close {
@@ -28,9 +28,10 @@
     background-color: var(--color-black);
     color: var(--color-white);
     max-width: 980px;
-    width: 100%;
+    width: calc(100% - var(--container-margin-lr) * 2);
     margin: auto;
     border-radius: 20px;
+    overflow: hidden;
 }
 
 .coverCol {
@@ -96,6 +97,7 @@
     width: 100%;
     padding: 0px 30px 50px;
     justify-content: space-between;
+    gap: 20px;
 
     .subtitle {
         font-size: 16px;
@@ -155,5 +157,6 @@
             }
         }
     }
-
 }
+
+@media (max-width:400px) {}

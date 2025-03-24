@@ -8,7 +8,14 @@ from .services.path.popup_cover_path import popup_cover_path
 
 class Popup(DatesAbstract):
     """Поп-ап на главной"""
-    subtitle = models.CharField(_('Подзаголовок'), max_length=512)
+    subtitle = models.CharField(
+        _('Подзаголовок'),
+        max_length=512,
+        null=True,
+        blank=True,
+        default='',
+        help_text='Будет отображаться в развернутом пап-апе'
+    )
     title = models.CharField(
         _('Заголовок'),
         max_length=512,

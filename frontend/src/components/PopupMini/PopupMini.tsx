@@ -2,15 +2,16 @@ import { components } from '../../api/schema';
 import PopupTimer from '../PopupTimer/PopupTimer';
 import styles from './PopupMini.module.scss';
 import Link from 'next/link';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 interface PopupMiniProps {
     popup: components['schemas']['PopupOutSchema'],
-    isModalClose: boolean
+    isModalClose: boolean,
+    setModalClose: Dispatch<SetStateAction<boolean>>
 }
 
 export default function PopupMini(
-    { popup, isModalClose }: PopupMiniProps
+    { popup, isModalClose, setModalClose }: PopupMiniProps
 ) {
     const [isClose, setClose] = useState(false);
 
@@ -18,11 +19,18 @@ export default function PopupMini(
         setClose(true);
     }
 
+    const openModal = () => {
+        setModalClose(false);
+    }
+
     return (<>
         {
             isModalClose && !isClose ? (
                 <div className={styles.root}>
-                    <div className={styles.title}>
+                    <div
+                        className={styles.title}
+                        onClick={openModal}
+                    >
                         <span>{popup.short_title}</span>
                     </div>
                     <div>

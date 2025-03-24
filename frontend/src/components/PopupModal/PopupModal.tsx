@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import PopupTimer from '../PopupTimer/PopupTimer';
 import PopupMini from '../PopupMini/PopupMini';
+import Cookies from 'js-cookie';
 
 interface PopupModalProps {
     popup: components['schemas']['PopupOutSchema']
@@ -15,10 +16,19 @@ interface PopupModalProps {
 export default function PopupModal(
     { popup }: PopupModalProps
 ) {
-    const [isClose, setClose] = useState(false);
+    const [isClose, setClose] = useState(true);
+
+    useEffect(() => {
+        setClose(Cookies.get('isClosePopup') || false); // Читаем куку только на клиенте
+    }, []);
+
+    const saveToCookies = () => {
+        Cookies.set('isClosePopup', isClose, { expires: 1, path: "/" });
+    };
 
     const onClickClose = () => {
         setClose(true);
+        saveToCookies();
     }
 
     // При клике вне модалки - закрывать ее
@@ -93,6 +103,7 @@ export default function PopupModal(
             <PopupMini
                 popup={popup}
                 isModalClose={isClose}
+                setModalClose={setClose}
             />
         </>
     );
