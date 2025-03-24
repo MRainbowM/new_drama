@@ -548,6 +548,11 @@ export interface components {
              * @description Картинка в поп-апе
              */
             cover: string;
+            /**
+             * Дата и время окончания показа
+             * Format: date-time
+             */
+            end_at: string;
         };
     };
     responses: never;

@@ -1,0 +1,24 @@
+.root {
+    display: flex;
+    gap: 22px;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+
+    font-size: 44px;
+    font-weight: bold;
+    align-items: center;
+}
+
+.number {
+    font-weight: bold;
+    font-size: 44px;
+}
+
+.title {
+    font-family: var(--font-montserrat);
+    font-weight: 400;
+    font-size: 16px;
+}
