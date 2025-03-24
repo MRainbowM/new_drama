@@ -1,7 +1,13 @@
 .root {
+    --number-font-size: 44px;
     display: flex;
     gap: 22px;
 }
+
+.root.mini {
+    --number-font-size: 32px;
+}
+
 
 .col {
     display: flex;
@@ -14,8 +20,10 @@
 
 .number {
     font-weight: bold;
-    font-size: 44px;
+    font-size: var(--number-font-size);
 }
+
+
 
 .title {
     font-family: var(--font-montserrat);

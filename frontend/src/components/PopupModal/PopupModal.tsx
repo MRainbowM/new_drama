@@ -2,9 +2,9 @@
 import { components } from '../../api/schema';
 import styles from './PopupModal.module.scss';
 import Link from 'next/link';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
-import Image from "next/image";
+import Image from 'next/image';
 import PopupTimer from '../PopupTimer/PopupTimer';
 
 interface PopupModalProps {
@@ -79,7 +79,7 @@ export default function PopupModal(
                             dangerouslySetInnerHTML={{ __html: popup.content }}
                         >
                         </div>
-                        <PopupTimer end_at={new Date(popup.end_at)} />
+                        <PopupTimer endAt={new Date(popup.end_at)} />
                         <div className={styles.btnAction}>
                             <Link href={popup.btn_link} target="__blank">
                                 <span>{popup.btn_text}</span>

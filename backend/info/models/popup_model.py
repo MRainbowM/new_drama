@@ -9,7 +9,16 @@ from .services.path.popup_cover_path import popup_cover_path
 class Popup(DatesAbstract):
     """Поп-ап на главной"""
     subtitle = models.CharField(_('Подзаголовок'), max_length=512)
-    title = models.CharField(_('Заголовок'), max_length=512)
+    title = models.CharField(
+        _('Заголовок'),
+        max_length=512,
+        help_text='Будет отображаться в развернутом пап-апе'
+    )
+    short_title = models.CharField(
+        _('Короткий заголовок'),
+        max_length=256,
+        help_text='Будет отображаться в свернутом пап-апе'
+    )
     content = CKEditor5Field(_('Текст'), config_name='extends')
     btn_text = models.CharField(
         _('Текст кнопки действия'),

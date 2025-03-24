@@ -2,13 +2,15 @@
 import { useEffect, useState } from 'react';
 import styles from './PopupTimer.module.scss';
 import { declensionOfHours, declensionOfMinutes } from '../../services/declensionOfNumerals';
+import clsx from 'clsx';
 
 interface PopupTimerProps {
-    end_at: Date // Дата и время окончания таймера
+    endAt: Date, // Дата и время окончания таймера
+    isMini?: boolean  // Размер таймера 
 }
 
 export default function PopupTimer(
-    { end_at }: PopupTimerProps
+    { endAt, isMini }: PopupTimerProps
 ) {
     const [tick, setTick] = useState(false);
     const [[diffDays, diffHours, diffMinutes, diffSeconds], setDiff] = useState([0, 0, 0, 0]);
@@ -17,7 +19,7 @@ export default function PopupTimer(
 
     useEffect(() => {
         const currentDate = new Date();
-        const diff = (end_at.getTime() - currentDate.getTime()) / 1000;
+        const diff = (endAt.getTime() - currentDate.getTime()) / 1000;
 
         if (diff < 0) return null; // Время вышло
 
@@ -32,7 +34,7 @@ export default function PopupTimer(
             declensionOfHours({ currentNumber: diffHours }),
             declensionOfMinutes({ currentNumber: diffMinutes })
         ]);
-    }, [tick, end_at])
+    }, [tick, endAt])
 
     useEffect(() => {
         const timerID = setInterval(() => setTick(!tick), 1000);
@@ -40,31 +42,36 @@ export default function PopupTimer(
     }, [tick])
 
     return (
-        <div className={styles.root}>
+        <div
+            className={clsx(
+                styles.root,
+                { [styles.mini]: isMini }
+            )}
+        >
             <div className={styles.col}>
-                <span>{diffHours.toString().padStart(2, '0')}</span>
+                <span className={styles.number}>
+                    {diffHours.toString().padStart(2, '0')}
+                </span>
                 <span className={styles.title}>{titleHours}</span>
             </div>
             <div className={styles.col}>
                 <span>:</span>
             </div>
             <div className={styles.col}>
-                <span>{diffMinutes.toString().padStart(2, '0')}</span>
+                <span className={styles.number}>
+                    {diffMinutes.toString().padStart(2, '0')}
+                </span>
                 <span className={styles.title}>{titleMinutes}</span>
             </div>
             <div className={styles.col}>
                 <span>:</span>
             </div>
             <div className={styles.col}>
-                <span>{diffSeconds.toString().padStart(2, '0')}</span>
+                <span className={styles.number}>
+                    {diffSeconds.toString().padStart(2, '0')}
+                </span>
                 <span className={styles.title}>{'секунд'}</span>
             </div>
-
         </div>
-
-
-
-
     );
-
 }

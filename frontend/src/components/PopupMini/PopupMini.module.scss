@@ -1,0 +1,40 @@
+.root {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1360px;
+    width: calc(100% - var(--container-margin-lr));
+    height: 75px;
+    position: sticky;
+    bottom: 20px;
+    background-color: var(--color-red);
+    margin: 0 auto;
+    top: calc(100% - 75px - 20px);
+    z-index: 10;
+    border-radius: 63px;
+    padding: 0 60px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 28px;
+    text-transform: uppercase;
+}
+
+.btnAction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 100%;
+    max-width: 250px;
+    background-color: var(--color-white);
+    border-radius: 100px;
+
+    a {
+        text-transform: uppercase;
+        font-size: 16px;
+        font-family: var(--font-sans-caption);
+        color: var(--color-red)
+    }
+}

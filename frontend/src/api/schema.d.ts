@@ -529,8 +529,16 @@ export interface components {
             id?: number | null;
             /** Подзаголовок */
             subtitle: string;
-            /** Заголовок */
+            /**
+             * Заголовок
+             * @description Будет отображаться в развернутом пап-апе
+             */
             title: string;
+            /**
+             * Короткий заголовок
+             * @description Будет отображаться в свернутом пап-апе
+             */
+            short_title: string;
             /** Текст */
             content: string;
             /**
