@@ -33,12 +33,10 @@ export default function PopupMini(
                     >
                         <span>{popup.short_title}</span>
                     </div>
-                    <div>
-                        <PopupTimer
-                            endAt={new Date(popup.end_at)}
-                            isMini={true}
-                        />
-                    </div>
+                    <PopupTimer
+                        endAt={new Date(popup.end_at)}
+                        isMini={true}
+                    />
 
                     <div className={styles.btnAction}>
                         <Link href={popup.btn_link} target="__blank">

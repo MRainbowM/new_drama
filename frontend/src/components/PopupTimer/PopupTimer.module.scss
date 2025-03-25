@@ -30,3 +30,46 @@
     min-width: 70px;
     text-align: center;
 }
+
+@media (max-width:1300px) {
+    .root.mini {
+        gap: 5px;
+
+        .number {
+            font-size: 28px;
+        }
+    }
+}
+
+
+@media (max-width:950px) {
+    .root.mini {
+        gap: 22px;
+    }
+}
+
+@media (max-width:650px) {
+    .root.mini {
+
+        .number {
+            font-size: 28px;
+        }
+
+        .col {
+            font-size: 32px;
+        }
+
+        .title {
+            font-size: 14px;
+            min-width: 55px;
+        }
+    }
+}
+
+@media (max-width:350px) {
+    .root.mini {
+        width: 100%;
+        justify-content: space-evenly;
+        gap: unset;
+    }
+}

@@ -1,15 +1,17 @@
 .root {
+    --popup-height: 75px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
     max-width: 1360px;
     width: 100%;
-    height: 75px;
+    height: var(--popup-height);
     position: sticky;
     bottom: 20px;
     background-color: var(--color-red);
     margin: 0 auto;
-    top: calc(100% - 75px - 20px);
+    top: calc(100% - var(--popup-height) - 20px);
     z-index: 10;
     border-radius: 63px;
     padding: 0 60px;
@@ -39,7 +41,7 @@
         font-size: 16px;
         font-family: var(--font-sans-caption);
         color: var(--color-red);
-        font-weight: bold;   
+        font-weight: bold;
     }
 }
 
@@ -77,10 +79,112 @@
 
 @media not all and (hover: none) {
     // Только НЕ для тач устройств
+
     .title {
         &:hover {
             text-decoration-line: underline;
         }
     }
 
+    .btnAction {
+        background-color: var(--color-red);
+        border: 1px solid var(--color-white);
+
+        a {
+            color: var(--color-white)
+        }
+
+        &:hover {
+            background-color: var(--color-white);
+
+            a {
+                color: var(--color-red)
+            }
+        }
+    }
+}
+
+@media (max-width:1300px) {
+    .root {
+        padding: 0 20px;
+    }
+
+    .title {
+        font-size: 22px;
+    }
+
+    .btnAction {
+        max-width: 220px;
+    }
+}
+
+@media (max-width:950px) {
+    .root {
+        --popup-height: 155px;
+        border-radius: 12px;
+        padding: 8px 12px;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .title {
+        width: 100%;
+        font-size: 25px;
+        text-align: center;
+    }
+
+    .btnAction {
+        height: 36px;
+        border-radius: 12px;
+    }
+
+    .btnClose {
+        position: absolute;
+        right: 6px;
+        top: 3px;
+        height: 20px;
+        width: 20px;
+
+        .lineTop,
+        .lineBot {
+            width: 21px;
+            height: 2px;
+        }
+
+        .lineBot {
+            transform: translateY(-3px) rotate(-45deg);
+        }
+    }
+}
+
+@media (max-width:650px) {
+    .root {
+        padding: 0px 12px;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .btnAction {
+        max-width: unset;
+        width: 100%;
+
+        a {
+            font-size: 14px;
+            font-weight: normal;
+        }
+    }
+}
+
+@media (max-width:400px) {
+    .title {
+        text-align-last: left;
+    }
+}
+
+@media (max-width:350px) {
+    .title {
+        font-size: 18px;
+    }
 }
