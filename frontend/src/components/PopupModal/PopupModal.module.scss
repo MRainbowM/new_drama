@@ -6,11 +6,10 @@
     position: fixed;
     z-index: 100;
 
-    margin-top: calc(-1 * (var(--running-line-height) + var(--header-height)));
-
     background-color: var(--color-gray-with-alpha-80);
 
     left: 0;
+    top: 0;
 }
 
 .root.close {
@@ -24,18 +23,19 @@
 }
 
 .modal {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     background-color: var(--color-black);
     color: var(--color-white);
     max-width: 980px;
     width: calc(100% - var(--container-margin-lr) * 2);
+    max-height: calc(100% - var(--container-margin-lr) * 2);
     margin: auto;
     border-radius: 20px;
     overflow: hidden;
 }
 
 .coverCol {
-    width: 50%;
 
     .cover {
         height: 100%;
@@ -45,10 +45,8 @@
 }
 
 .contentCol {
-    width: 50%;
     display: grid;
     grid-template-rows: 60px 1fr;
-
 }
 
 .topRow {
@@ -114,6 +112,7 @@
     .text {
         font-family: var(--font-montserrat);
         font-weight: 400;
+        font-size: 16px;
     }
 
     .btnAction {
@@ -140,10 +139,11 @@
     // Только НЕ для тач устройств 
     .content {
         .btnAction {
-            a:hover {
-                background-color: var(--color-red);
-                color: var(--color-white);
-                border: 1px solid var(--color-red);
+            a {
+                &:hover {
+                    background-color: var(--color-white);
+                    color: var(--color-red);
+                }
             }
         }
     }
@@ -159,4 +159,59 @@
     }
 }
 
-@media (max-width:400px) {}
+@media (max-width:800px) {
+    .content {
+        padding: 0px 20px 20px;
+
+        .title {
+            font-size: 22px;
+        }
+    }
+}
+
+@media (max-width:700px) {
+    .modal {
+        position: relative;
+        grid-template-columns: unset;
+        grid-template-rows: 50% 50%;
+    }
+
+    .contentCol {
+        grid-template-rows: 0 1fr;
+    }
+
+    .btnClose {
+        position: absolute;
+        top: 20px;
+    }
+
+    .content {
+        gap: unset;
+        padding: 30px 20px;
+
+        .title {
+            font-size: 20px;
+        }
+
+        .subtitle,
+        .text {
+            font-size: 14px;
+        }
+    }
+}
+
+@media (max-width:450px) {
+    .modal {
+        grid-template-rows: 35% 65%;
+    }
+
+    .content {
+        padding: 25px 15px;
+
+        .btnAction {
+            a {
+                height: 45px;
+            }
+        }
+    }
+}

@@ -46,7 +46,24 @@
     .root.mini {
         gap: 22px;
     }
+
+    .root.default {
+        .number {
+            font-size: 28px;
+        }
+
+        .title {
+            font-size: 14px;
+        }
+    }
 }
+
+@media (max-width:700px) {
+    .root.default {
+        justify-content: center;
+    }
+}
+
 
 @media (max-width:650px) {
     .root.mini {
@@ -63,6 +80,14 @@
             font-size: 14px;
             min-width: 55px;
         }
+    }
+}
+
+@media (max-width:450px) {
+    .root.default {
+        width: 100%;
+        justify-content: space-evenly;
+        gap: unset;
     }
 }
 

@@ -45,8 +45,7 @@ export default function MainPage() {
                     metadataMainPageJsonLd
                 )
             }}
-        />
-        <Popup />
+        />  
         <Hero />
         <ScheduleSection />
         <EventPreviewSection />
@@ -55,5 +54,6 @@ export default function MainPage() {
         <PartnerSection />
         <TheaterSection />
         <ContactsSection />
+        <Popup />
     </>);
 }

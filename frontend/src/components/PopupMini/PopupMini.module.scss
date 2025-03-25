@@ -86,6 +86,22 @@
         }
     }
 
+    .btnClose {
+
+        .lineTop,
+        .lineBot {
+            background-color: var(--color-white-with-alpha-70);
+        }
+
+        &:hover {
+
+            .lineTop,
+            .lineBot {
+                background-color: var(--color-white);
+            }
+        }
+    }
+
     .btnAction {
         background-color: var(--color-red);
         border: 1px solid var(--color-white);

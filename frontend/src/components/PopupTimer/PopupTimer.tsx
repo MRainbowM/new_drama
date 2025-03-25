@@ -45,7 +45,8 @@ export default function PopupTimer(
         <div
             className={clsx(
                 styles.root,
-                { [styles.mini]: isMini }
+                { [styles.mini]: isMini },
+                { [styles.default]: !isMini }
             )}
         >
             <div className={styles.col}>
