@@ -78,9 +78,13 @@ export default function PopupModal(
                         </div>
 
                         <div className={styles.content}>
-                            <div className={styles.subtitle}>
-                                {popup.subtitle}
-                            </div>
+                            {
+                                popup.subtitle ? (
+                                    <div className={styles.subtitle}>
+                                        {popup.subtitle}
+                                    </div>
+                                ) : (<></>)
+                            }
                             <div className={styles.title}>
                                 {popup.title}
                             </div>
