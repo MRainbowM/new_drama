@@ -48,6 +48,10 @@
     }
 
     .root.default {
+        width: 100%;
+        justify-content: space-evenly;
+        gap: unset;
+
         .number {
             font-size: 28px;
         }
@@ -83,13 +87,7 @@
     }
 }
 
-@media (max-width:450px) {
-    .root.default {
-        width: 100%;
-        justify-content: space-evenly;
-        gap: unset;
-    }
-}
+
 
 @media (max-width:350px) {
     .root.mini {

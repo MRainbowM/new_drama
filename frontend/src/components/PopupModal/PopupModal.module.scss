@@ -1,4 +1,5 @@
 .root {
+    --max-height-modal: 520px;
     display: flex;
 
     width: 100vw;
@@ -29,13 +30,16 @@
     color: var(--color-white);
     max-width: 980px;
     width: calc(100% - var(--container-margin-lr) * 2);
-    max-height: calc(100% - var(--container-margin-lr) * 2);
+    height: 100%;
+    max-height: min(var(--max-height-modal), calc(100% - 30px));
+
     margin: auto;
     border-radius: 20px;
     overflow: hidden;
 }
 
 .coverCol {
+    max-height: var(--max-height-modal);
 
     .cover {
         height: 100%;
@@ -47,6 +51,7 @@
 .contentCol {
     display: grid;
     grid-template-rows: 60px 1fr;
+    max-height: var(--max-height-modal);
 }
 
 .topRow {
@@ -95,7 +100,6 @@
     width: 100%;
     padding: 0px 30px 50px;
     justify-content: space-between;
-    gap: 20px;
 
     .subtitle {
         font-size: 16px;
