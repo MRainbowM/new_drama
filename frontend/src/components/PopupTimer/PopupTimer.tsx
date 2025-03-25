@@ -19,9 +19,9 @@ export default function PopupTimer(
 
     useEffect(() => {
         const currentDate = new Date();
-        const diff = (endAt.getTime() - currentDate.getTime()) / 1000;
+        let diff = (endAt.getTime() - currentDate.getTime()) / 1000;
 
-        if (diff < 0) return null; // Время вышло
+        if (diff < 0) diff = 0; // Время вышло
 
         setDiff([
             Math.floor(diff / 86400), // Дни
