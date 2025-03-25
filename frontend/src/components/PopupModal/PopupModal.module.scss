@@ -202,6 +202,7 @@
 
 @media (max-width:450px) {
     .modal {
+        max-height: calc(100% - 30px - 100px);
         grid-template-rows: 35% 65%;
         margin-top: 30px;
     }
