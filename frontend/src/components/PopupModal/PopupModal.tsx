@@ -93,7 +93,7 @@ export default function PopupModal(
                                 dangerouslySetInnerHTML={{ __html: popup.content }}
                             >
                             </div>
-                            <PopupTimer endAt={new Date(popup.end_at)} />
+                            <PopupTimer endAt={popup.end_at} />
                             <div className={styles.btnAction}>
                                 <Link href={popup.btn_link} target="__blank">
                                     <span>{popup.btn_text}</span>
