@@ -17,6 +17,11 @@ export default function PopupModal(
     { popup }: PopupModalProps
 ) {
     const [isClose, setClose] = useState(true);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        setIsVisible(true);
+    }, [])
 
     useEffect(() => {
         setClose(Cookies.get('isClosePopup') || false); // Читаем куку только на клиенте
@@ -45,6 +50,8 @@ export default function PopupModal(
             document.removeEventListener('mousedown', handleClick);
         };
     }, [onClickClose]);
+
+    if (!isVisible) return;
 
     return (
         <>
@@ -93,7 +100,7 @@ export default function PopupModal(
                                 dangerouslySetInnerHTML={{ __html: popup.content }}
                             >
                             </div>
-                            <PopupTimer endAt={popup.end_at} />
+                            <PopupTimer endAt={popup.end_at} onEnd={() => setIsVisible(false)} />
                             <div className={styles.btnAction}>
                                 <Link href={popup.btn_link} target="__blank">
                                     <span>{popup.btn_text}</span>
