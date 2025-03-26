@@ -1,0 +1,225 @@
+.root {
+    --max-height-modal: 520px;
+    display: flex;
+
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 100;
+
+    background-color: var(--color-gray-with-alpha-80);
+
+    left: 0;
+    top: 0;
+}
+
+.root.close {
+    z-index: -100;
+    height: 0;
+    overflow: hidden;
+
+    .modal {
+        height: 0;
+    }
+}
+
+.modal {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: var(--color-black);
+    color: var(--color-white);
+    max-width: 980px;
+    width: calc(100% - var(--container-margin-lr) * 2);
+    height: 100%;
+    max-height: min(var(--max-height-modal), calc(100% - 30px));
+
+    margin: auto;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.coverCol {
+    max-height: var(--max-height-modal);
+
+    .cover {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+.contentCol {
+    display: grid;
+    grid-template-rows: 60px 1fr;
+    max-height: var(--max-height-modal);
+}
+
+.topRow {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    padding-right: 20px;
+}
+
+.btnClose {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+
+    .lineTop,
+    .lineBot {
+        width: 22px;
+        height: 2px;
+        background-color: var(--color-white);
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        -webkit-transition: .2s ease all;
+        transition: .2s ease all;
+        user-select: none;
+    }
+
+    .lineTop {
+        -webkit-transform: rotate(45deg);
+        transform: translateY(0px) rotate(45deg);
+    }
+
+    .lineBot {
+        -webkit-transform: rotate(45deg);
+        transform: translateY(-2px) rotate(-45deg);
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 0px 30px 50px;
+    justify-content: space-between;
+
+    .subtitle {
+        font-size: 16px;
+        font-family: var(--font-montserrat);
+        font-weight: 400;
+    }
+
+    .title {
+        font-size: 28px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .text {
+        font-family: var(--font-montserrat);
+        font-weight: 400;
+        font-size: 16px;
+    }
+
+    .btnAction {
+        display: flex;
+
+        a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 52px;
+            text-transform: uppercase;
+            font-size: 16px;
+            font-family: var(--font-sans-caption);
+            padding: 0 15px;
+            background-color: var(--color-red);
+            border-radius: 12px;
+        }
+    }
+}
+
+@media not all and (hover: none) {
+
+    // Только НЕ для тач устройств 
+    .content {
+        .btnAction {
+            a {
+                &:hover {
+                    background-color: var(--color-white);
+                    color: var(--color-red);
+                }
+            }
+        }
+    }
+
+    .btnClose {
+        &:hover {
+
+            .lineTop,
+            .lineBot {
+                background-color: var(--color-red);
+            }
+        }
+    }
+}
+
+@media (max-width:800px) {
+    .content {
+        padding: 0px 20px 20px;
+
+        .title {
+            font-size: 22px;
+        }
+    }
+}
+
+@media (max-width:700px) {
+    .modal {
+        position: relative;
+        grid-template-columns: unset;
+        grid-template-rows: 50% 50%;
+        max-height: calc(100% - 30px - 100px);
+        margin-top: 30px;
+    }
+
+    .contentCol {
+        grid-template-rows: 0 1fr;
+    }
+
+    .btnClose {
+        position: absolute;
+        top: 20px;
+    }
+
+    .content {
+        gap: unset;
+        padding: 30px 20px;
+
+        .title {
+            font-size: 20px;
+        }
+
+        .subtitle,
+        .text {
+            font-size: 14px;
+        }
+    }
+}
+
+@media (max-width:450px) {
+    .modal {
+        grid-template-rows: 35% 65%;
+        min-height: 550px;
+    }
+
+    .content {
+        padding: 25px 15px;
+
+        .btnAction {
+            a {
+                height: 45px;
+            }
+        }
+    }
+}

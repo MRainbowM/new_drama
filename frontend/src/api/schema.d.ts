@@ -174,6 +174,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/info/popup": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Получить активный поп-ап на текущий момент времени */
+        get: operations["info_api_get_active_popup"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -506,6 +523,45 @@ export interface components {
              */
             link: string;
         };
+        /** PopupOutSchema */
+        PopupOutSchema: {
+            /** ID */
+            id?: number | null;
+            /** Подзаголовок */
+            subtitle: string;
+            /**
+             * Заголовок
+             * @description Будет отображаться в развернутом пап-апе
+             */
+            title: string;
+            /**
+             * Короткий заголовок
+             * @description Будет отображаться в свернутом пап-апе
+             */
+            short_title: string;
+            /** Текст */
+            content: string;
+            /**
+             * Текст кнопки действия
+             * @description Текст будет отображаться внутри кнопки. Примеры: "Купить билет", "Перейти на сайт"
+             */
+            btn_text: string;
+            /**
+             * Ссылка кнопки
+             * @description Ресурс, на который будет перенаправлен пользователь при клике по кнопке
+             */
+            btn_link: string;
+            /**
+             * Обложка
+             * @description Картинка в поп-апе
+             */
+            cover: string;
+            /**
+             * Дата и время окончания показа
+             * Format: date-time
+             */
+            end_at: string;
+        };
     };
     responses: never;
     parameters: never;
@@ -735,6 +791,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PartnerOutSchema"][];
+                };
+            };
+        };
+    };
+    info_api_get_active_popup: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PopupOutSchema"];
                 };
             };
         };

@@ -1,14 +1,17 @@
 from typing import List
 
+from django.http import Http404
 from django.utils.translation import gettext_lazy as _
 from ninja import Query, Router
 
 from .models import InfoBlock, Review, Partner
+from .models.services.popup_db_service import popup_db_service
 from .schemes import (
     InfoBlockOutSchema, InfoBlockFilterSchema,
     MenuInfoBlockOutSchema,
     ReviewOutSchema, ReviewFilterSchema,
-    PartnerFilterSchema, PartnerOutSchema
+    PartnerFilterSchema, PartnerOutSchema,
+    PopupOutSchema
 )
 
 router = Router()
@@ -64,3 +67,18 @@ def get_partner_list(request, filters: PartnerFilterSchema = Query(...)):
     partner_list = filters.filter(partner_list).order_by('sort')
 
     return partner_list
+
+
+@router.get(
+    '/popup',
+    response=PopupOutSchema,
+    tags=[_('Поп-ап')],
+    summary=_('Получить активный поп-ап на текущий момент времени')
+)
+def get_active_popup(request):
+    popup = popup_db_service.get_active()
+
+    if popup is None:
+        raise Http404
+
+    return popup
