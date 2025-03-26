@@ -65,9 +65,10 @@
 .btnClose {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 20px;
-    width: 20px;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 30px;
     cursor: pointer;
 
     .lineTop,
@@ -84,12 +85,12 @@
 
     .lineTop {
         -webkit-transform: rotate(45deg);
-        transform: translateY(9px) rotate(45deg);
+        transform: translateY(0px) rotate(45deg);
     }
 
     .lineBot {
         -webkit-transform: rotate(45deg);
-        transform: translateY(-9px) rotate(-45deg);
+        transform: translateY(-2px) rotate(-45deg);
     }
 }
 
@@ -209,6 +210,7 @@
 @media (max-width:450px) {
     .modal {
         grid-template-rows: 35% 65%;
+        min-height: 550px;
     }
 
     .content {
