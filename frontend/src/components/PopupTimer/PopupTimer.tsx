@@ -12,14 +12,13 @@ interface PopupTimerProps {
 export default function PopupTimer(
     { endAt, isMini }: PopupTimerProps
 ) {
-    const endAtDate = new Date(endAt);
-
     const [tick, setTick] = useState(false);
     const [[diffDays, diffHours, diffMinutes, diffSeconds], setDiff] = useState([0, 0, 0, 0]);
 
     const [[titleHours, titleMinutes], setTitle] = useState(['часов', 'минут']);
 
     useEffect(() => {
+        const endAtDate = new Date(endAt);
         const currentDate = new Date();
         let diff = (endAtDate.getTime() - currentDate.getTime()) / 1000;
 
