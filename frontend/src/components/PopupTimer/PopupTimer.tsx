@@ -7,40 +7,34 @@ import clsx from 'clsx';
 interface PopupTimerProps {
     endAt: string, // Дата и время окончания таймера
     isMini?: boolean  // Размер таймера 
+    onEnd?: () => void
 }
 
 export default function PopupTimer(
-    { endAt, isMini }: PopupTimerProps
+    { endAt, isMini, onEnd }: PopupTimerProps
 ) {
     const [tick, setTick] = useState(false);
-    const [[diffDays, diffHours, diffMinutes, diffSeconds], setDiff] = useState([0, 0, 0, 0]);
-
-    const [[titleHours, titleMinutes], setTitle] = useState(['часов', 'минут']);
-
-    useEffect(() => {
-        const endAtDate = new Date(endAt);
-        const currentDate = new Date();
-        let diff = (endAtDate.getTime() - currentDate.getTime()) / 1000;
-
-        if (diff < 0) diff = 0; // Время вышло
-
-        setDiff([
-            Math.floor(diff / 86400), // Дни
-            Math.floor((diff / 3600) % 24),
-            Math.floor((diff / 60) % 60),
-            Math.floor(diff % 60)
-        ]);
-
-        setTitle([
-            declensionOfHours({ currentNumber: diffHours }),
-            declensionOfMinutes({ currentNumber: diffMinutes })
-        ]);
-    }, [tick, endAt])
 
     useEffect(() => {
         const timerID = setInterval(() => setTick(!tick), 1000);
         return () => clearInterval(timerID);
     }, [tick])
+
+    const endAtDate = new Date(endAt);
+    const currentDate = new Date();
+    const diff = (endAtDate.getTime() - currentDate.getTime()) / 1000;
+
+    if (diff < 0) {
+        onEnd?.()
+        return null;
+    }
+
+    const diffHours = Math.floor((diff / 3600) % 24)
+    const diffMinutes = Math.floor((diff / 60) % 60)
+    const diffSeconds = Math.floor(diff % 60)
+
+    const titleHours = declensionOfHours({ currentNumber: diffHours })
+    const titleMinutes = declensionOfMinutes({ currentNumber: diffMinutes })
 
     return (
         <div
