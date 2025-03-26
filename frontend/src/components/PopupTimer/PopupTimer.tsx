@@ -5,13 +5,15 @@ import { declensionOfHours, declensionOfMinutes } from '../../services/declensio
 import clsx from 'clsx';
 
 interface PopupTimerProps {
-    endAt: Date, // Дата и время окончания таймера
+    endAt: string, // Дата и время окончания таймера
     isMini?: boolean  // Размер таймера 
 }
 
 export default function PopupTimer(
     { endAt, isMini }: PopupTimerProps
 ) {
+    const endAtDate = new Date(endAt);
+
     const [tick, setTick] = useState(false);
     const [[diffDays, diffHours, diffMinutes, diffSeconds], setDiff] = useState([0, 0, 0, 0]);
 
@@ -19,7 +21,7 @@ export default function PopupTimer(
 
     useEffect(() => {
         const currentDate = new Date();
-        let diff = (endAt.getTime() - currentDate.getTime()) / 1000;
+        let diff = (endAtDate.getTime() - currentDate.getTime()) / 1000;
 
         if (diff < 0) diff = 0; // Время вышло
 

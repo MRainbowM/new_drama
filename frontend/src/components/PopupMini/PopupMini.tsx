@@ -34,7 +34,7 @@ export default function PopupMini(
                         <span>{popup.short_title}</span>
                     </div>
                     <PopupTimer
-                        endAt={new Date(popup.end_at)}
+                        endAt={popup.end_at}
                         isMini={true}
                     />
 
