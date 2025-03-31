@@ -16,6 +16,9 @@ COPY /frontend /frontend/
 # # Компилируем TypeScript в JavaScript
 # RUN npx tsc
 
+# Обновление пакетного менеджера
+RUN npm install -g npm@11.2.0
+
 # Собираем приложение
 RUN npm run build
 
