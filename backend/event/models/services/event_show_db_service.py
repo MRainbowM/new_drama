@@ -58,7 +58,7 @@ class EventShowDBService:
                 'event'
             ).first()
 
-        return await sync_to_async(query, thread_sensitive=True)()
+        return await sync_to_async(query)()
 
 
 event_show_db_service = EventShowDBService()
