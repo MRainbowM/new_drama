@@ -38,5 +38,27 @@ class EventShowDBService:
 
         return await sync_to_async(list)(query())
 
+    async def get_first(
+            self,
+            is_enable: bool = None,
+            start_at__date__gte: int = None,
+    ) -> EventShow:
+        def query() -> Query:
+            filters = Q()
+
+            if is_enable is not None:
+                filters &= Q(is_enable=is_enable)
+
+            if start_at__date__gte is not None:
+                filters &= Q(start_at__date__gte=start_at__date__gte)
+
+            return EventShow.objects.filter(
+                filters
+            ).select_related(
+                'event'
+            ).first()
+
+        return await sync_to_async(query, thread_sensitive=True)()
+
 
 event_show_db_service = EventShowDBService()

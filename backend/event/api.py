@@ -7,7 +7,6 @@ from django.utils.translation import gettext_lazy as _
 from ninja import Query, Router
 
 from basis.settings import MEDIA_URL
-from event.models import EventShow
 from .models.services.event_db_service import event_db_service
 from .models.services.event_show_db_service import event_show_db_service
 from .schemes import (
@@ -43,11 +42,11 @@ async def get_event_show_list(request, event_id: Optional[int] = None):
     tags=[_('Афиша')],
     summary=_('Получить программку спектакля по текущей дате')
 )
-def get_event_program_by_date(request, event_date: date = date.today()):
-    event_show = EventShow.objects.filter(
+async def get_event_program_by_date(request, event_date: date = date.today()):
+    event_show = await event_show_db_service.get_first(
         is_enable=True,
         start_at__date__gte=event_date
-    ).order_by('start_at').first()
+    )
 
     if event_show is None:
         raise Http404
