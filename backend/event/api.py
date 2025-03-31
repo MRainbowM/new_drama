@@ -1,5 +1,5 @@
-from datetime import date
-from typing import List
+from datetime import date, datetime
+from typing import List, Optional
 
 from django.http import Http404
 from django.shortcuts import redirect
@@ -9,8 +9,8 @@ from ninja import Query, Router
 from basis.settings import MEDIA_URL
 from event.models import EventShow
 from .models.services.event_db_service import event_db_service
+from .models.services.event_show_db_service import event_show_db_service
 from .schemes import (
-    EventShowFilterSchema,
     EventShowOutSchema,
     EventDetailSchema,
     EventFilterSchema,
@@ -25,13 +25,16 @@ router = Router()
     '/event_show/list',
     response=List[EventShowOutSchema],
     tags=[_('Афиша')],
-    summary=_('Получить список спектаклей в афише')
+    summary=_('Получить список спектаклей в афише c текущего месяца')
 )
-def get_event_show_list(request, filters: EventShowFilterSchema = Query(...)):
-    event_show_list = EventShow.objects.all()
-    event_show_list = filters.filter(event_show_list).order_by('start_at')
-
-    return event_show_list
+async def get_event_show_list(request, event_id: Optional[int] = None):
+    today = datetime.today()
+    return await event_show_db_service.get_list(
+        is_enable=True,
+        event_id=event_id,
+        start_at__month__gte=today.month,
+        start_at__year__gte=today.year
+    )
 
 
 @router.get(
