@@ -8,14 +8,18 @@ import ScheduleItem from '../ScheduleItem/ScheduleItem'
 
 interface ScheduleListProps {
     events: components['schemas']['EventShowOutSchema'][],
-    months: string[]
+    months?: string[]
 }
 
 export default function ScheduleList(
     { events, months }: ScheduleListProps
 ) {
-    const [selectMonthValue, changeMonth] = useState(months[0]);
+    let defaultMonth = null;
+    if (months && months.length > 0) {
+        defaultMonth = months[0];
+    }
 
+    const [selectMonthValue, changeMonth] = useState(defaultMonth);
     const onClickMonth = (monthValue) => {
         changeMonth(() => monthValue);
     }
@@ -27,27 +31,39 @@ export default function ScheduleList(
 
     return (
         <div className={styles.root}>
-            <div className={styles.months} >
-                {months.map(month => (
-                    <span
-                        key={month}
-                        className={clsx({ [styles.select]: selectMonthValue === month })}
-                        onClick={() => onClickMonth(month)}
-                    >
-                        {monthToName[month]}
-                    </span>
-                ))}
-            </div>
+            {
+                months && months.length > 0 ? (<>
+                    <div className={styles.months} >
+                        {months.map(month => (
+                            <span
+                                key={month}
+                                className={clsx({ [styles.select]: selectMonthValue === month })}
+                                onClick={() => onClickMonth(month)}
+                            >
+                                {monthToName[month]}
+                            </span>
+                        ))}
+                    </div>
 
-            <div className={styles.list}>
-                {events.filter(isSelectMonth).map(item => (
-                    <ScheduleItem
-                        event={item}
-                        key={item.id}
-                    />
-                ))}
-            </div>
-
+                    <div className={styles.list}>
+                        {events.filter(isSelectMonth).map(item => (
+                            <ScheduleItem
+                                event={item}
+                                key={item.id}
+                            />
+                        ))}
+                    </div>
+                </>) : (<>
+                    <div className={styles.list}>
+                        {events.map(item => (
+                            <ScheduleItem
+                                event={item}
+                                key={item.id}
+                            />
+                        ))}
+                    </div>
+                </>)
+            }
         </div>
     );
 }
