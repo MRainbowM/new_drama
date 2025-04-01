@@ -1,9 +1,10 @@
 import os
-from datetime import date, datetime
+from datetime import date
 from typing import List, Optional
 
 from django.conf import settings
 from django.http import Http404, FileResponse
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from ninja import Query, Router
 
@@ -26,7 +27,7 @@ router = Router()
     summary=_('Получить список спектаклей в афише c текущего месяца')
 )
 async def get_event_show_list(request, event_id: Optional[int] = None):
-    today = datetime.today()
+    today = timezone.localtime().date()
     return await event_show_db_service.get_list(
         is_enable=True,
         event_id=event_id,
@@ -41,7 +42,7 @@ async def get_event_show_list(request, event_id: Optional[int] = None):
     tags=[_('Афиша')],
     summary=_('Получить программку спектакля по текущей дате')
 )
-async def get_event_program_by_date(request, event_date: date = date.today()):
+async def get_event_program_by_date(request, event_date: date = timezone.localtime().date()):
     event_show = await event_show_db_service.get_first(
         is_enable=True,
         start_at__date__gte=event_date
