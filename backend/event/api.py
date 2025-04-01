@@ -62,8 +62,8 @@ async def get_event_program_by_date(request, event_date: date = date.today()):
         raise Http404(_("Файл не найден"))
 
     response = FileResponse(open(file_path, "rb"), content_type="application/pdf")
-    response["Content-Disposition"] = 'attachment; filename="program.pdf"'  # Файл будет скачиваться
-
+    # response["Content-Disposition"] = 'attachment; filename="program.pdf"'  # Файл будет скачиваться
+    response["Content-Disposition"] = 'inline; filename="program.pdf"'
     return response
 
 
