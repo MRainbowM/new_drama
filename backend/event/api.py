@@ -48,17 +48,14 @@ async def get_event_program_by_date(request, event_date: date = timezone.localti
         start_at__date__gte=event_date,
         order_by='start_at'
     )
-    print('!!!!!')
-    print(event_show)
 
     if event_show is None:
         # Нет подходящего спектакля в афише
         raise Http404(_("Спектакль не найден"))
 
     if not event_show.event.program_pdf:
-        print(event_show.event)
         # Спектакль найден, но у него нет файла с программкой
-        raise Http404(_("Программка не найдена"))
+        raise Http404(_(f"Программка не найдена, event_id={event_show.event.id}"))
 
     file_path = os.path.join(settings.MEDIA_ROOT, str(event_show.event.program_pdf))
 
