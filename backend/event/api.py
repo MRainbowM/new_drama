@@ -1,20 +1,19 @@
+import os
 from datetime import date, datetime
 from typing import List, Optional
 
-from django.http import Http404
-from django.shortcuts import redirect
+from django.conf import settings
+from django.http import Http404, FileResponse
 from django.utils.translation import gettext_lazy as _
 from ninja import Query, Router
 
-from basis.settings import MEDIA_URL
 from .models.services.event_db_service import event_db_service
 from .models.services.event_show_db_service import event_show_db_service
 from .schemes import (
     EventShowOutSchema,
     EventDetailSchema,
     EventFilterSchema,
-    EventPreviewSchema,
-    EventProgramSchema
+    EventPreviewSchema
 )
 
 router = Router()
@@ -38,7 +37,7 @@ async def get_event_show_list(request, event_id: Optional[int] = None):
 
 @router.get(
     '/program',
-    response=EventProgramSchema,
+    response=None,
     tags=[_('Афиша')],
     summary=_('Получить программку спектакля по текущей дате')
 )
@@ -49,12 +48,23 @@ async def get_event_program_by_date(request, event_date: date = date.today()):
     )
 
     if event_show is None:
-        raise Http404
+        # Нет подходящего спектакля в афише
+        raise Http404(_("Спектакль не найден"))
 
     if not event_show.event.program_pdf:
-        raise Http404
+        # Спектакль найден, но у него нет файла с программкой
+        raise Http404(_("Программка не найдена"))
 
-    return redirect(f'{MEDIA_URL}{event_show.event.program_pdf}')
+    file_path = os.path.join(settings.MEDIA_ROOT, str(event_show.event.program_pdf))
+
+    if not os.path.exists(file_path):
+        # Файл физически не существует на сервере
+        raise Http404(_("Файл не найден"))
+
+    response = FileResponse(open(file_path, "rb"), content_type="application/pdf")
+    response["Content-Disposition"] = 'attachment; filename="program.pdf"'  # Файл будет скачиваться
+
+    return response
 
 
 @router.get(
