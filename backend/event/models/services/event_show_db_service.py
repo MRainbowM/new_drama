@@ -42,6 +42,7 @@ class EventShowDBService:
             self,
             is_enable: bool = None,
             start_at__date__gte: int = None,
+            order_by: str = None
     ) -> EventShow:
         def query() -> Query:
             filters = Q()
@@ -52,11 +53,16 @@ class EventShowDBService:
             if start_at__date__gte is not None:
                 filters &= Q(start_at__date__gte=start_at__date__gte)
 
-            return EventShow.objects.filter(
+            event_show = EventShow.objects.filter(
                 filters
             ).select_related(
                 'event'
-            ).first()
+            )
+
+            if order_by is not None:
+                event_show = event_show.order_by('start_at')
+
+            return event_show.first()
 
         return await sync_to_async(query)()
 

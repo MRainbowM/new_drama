@@ -45,14 +45,18 @@ async def get_event_show_list(request, event_id: Optional[int] = None):
 async def get_event_program_by_date(request, event_date: date = timezone.localtime().date()):
     event_show = await event_show_db_service.get_first(
         is_enable=True,
-        start_at__date__gte=event_date
+        start_at__date__gte=event_date,
+        order_by='start_at'
     )
+    print('!!!!!')
+    print(event_show)
 
     if event_show is None:
         # Нет подходящего спектакля в афише
         raise Http404(_("Спектакль не найден"))
 
     if not event_show.event.program_pdf:
+        print(event_show.event)
         # Спектакль найден, но у него нет файла с программкой
         raise Http404(_("Программка не найдена"))
 
