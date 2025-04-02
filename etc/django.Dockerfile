@@ -16,5 +16,6 @@ RUN pip install -U pip && pip install -r requirements.txt
 
 CMD python manage.py migrate \
     && python manage.py collectstatic --no-input \
-    && gunicorn -b 0.0.0.0:8000 basis.wsgi:application --log-level info
+    && uvicorn basis.asgi:application --host 0.0.0.0 --port 8000
+    # && gunicorn -b 0.0.0.0:8000 basis.wsgi:application --log-level info
 

@@ -5,8 +5,8 @@ from django_ckeditor_5.fields import CKEditor5Field
 from slugify import slugify
 
 from basis.models.dates_abstract_model import DatesAbstract
-from .services.event_cover_path import event_cover_path
-from .services.event_program_pdf_path import event_program_pdf_path
+from .services.path.event_cover_path import event_cover_path
+from .services.path.event_program_pdf_path import event_program_pdf_path
 
 
 class Event(DatesAbstract):

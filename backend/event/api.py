@@ -1,21 +1,20 @@
+import os
 from datetime import date
-from typing import List
+from typing import List, Optional
 
-from django.http import Http404
-from django.shortcuts import get_object_or_404
-from django.shortcuts import redirect
+from django.conf import settings
+from django.http import Http404, FileResponse
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from ninja import Query, Router
 
-from basis.settings import MEDIA_URL
-from event.models import EventShow, Event
+from .models.services.event_db_service import event_db_service
+from .models.services.event_show_db_service import event_show_db_service
 from .schemes import (
-    EventShowFilterSchema,
     EventShowOutSchema,
     EventDetailSchema,
     EventFilterSchema,
-    EventPreviewSchema,
-    EventProgramSchema
+    EventPreviewSchema
 )
 
 router = Router()
@@ -25,46 +24,60 @@ router = Router()
     '/event_show/list',
     response=List[EventShowOutSchema],
     tags=[_('Афиша')],
-    summary=_('Получить список спектаклей в афише')
+    summary=_('Получить список спектаклей в афише c текущего месяца')
 )
-def get_event_show_list(request, filters: EventShowFilterSchema = Query(...)):
-    event_show_list = EventShow.objects.all()
-    event_show_list = filters.filter(event_show_list).order_by('start_at')
-
-    return event_show_list
+async def get_event_show_list(request, event_id: Optional[int] = None):
+    today = timezone.localtime().date()
+    return await event_show_db_service.get_list(
+        is_enable=True,
+        event_id=event_id,
+        start_at__month__gte=today.month,
+        start_at__year__gte=today.year
+    )
 
 
 @router.get(
     '/program',
-    response=EventProgramSchema,
+    response=None,
     tags=[_('Афиша')],
     summary=_('Получить программку спектакля по текущей дате')
 )
-def get_event_program_by_date(request, event_date: date = date.today()):
-    event_show = EventShow.objects.filter(
+async def get_event_program_by_date(request, event_date: date = timezone.localtime().date()):
+    event_show = await event_show_db_service.get_first(
         is_enable=True,
-        start_at__date__gte=event_date
-    ).order_by('start_at').first()
+        start_at__date__gte=event_date,
+        order_by='start_at'
+    )
 
     if event_show is None:
-        raise Http404
+        # Нет подходящего спектакля в афише
+        raise Http404(_("Спектакль не найден"))
 
     if not event_show.event.program_pdf:
-        raise Http404
+        # Спектакль найден, но у него нет файла с программкой
+        raise Http404(_(f"Программка не найдена, event_id={event_show.event.id}"))
 
-    return redirect(f'{MEDIA_URL}{event_show.event.program_pdf}')
+    file_path = os.path.join(settings.MEDIA_ROOT, str(event_show.event.program_pdf))
+
+    if not os.path.exists(file_path):
+        # Файл физически не существует на сервере
+        raise Http404(_("Файл не найден"))
+
+    response = FileResponse(open(file_path, "rb"), content_type="application/pdf")
+    # response["Content-Disposition"] = 'attachment; filename="program.pdf"'  # Файл будет скачиваться
+    response["Content-Disposition"] = 'inline; filename="program.pdf"'
+    return response
 
 
 @router.get(
     '/event/list',
     response=List[EventPreviewSchema],
     tags=[_('Спектакли')],
-    summary=_('Получить список всех спектаклей: репертуар')
+    summary=_('Получить список всех спектаклей: репертуар'),
+    url_name='get-event-list'
 )
-def get_event_list(request, filters: EventFilterSchema = Query(...)):
-    event_list = Event.objects.all()
-    event_list = filters.filter(event_list).order_by('?')
-    return event_list
+async def get_event_list(request, filters: EventFilterSchema = Query(...)):
+    return await event_db_service.get_list(filters)
 
 
 @router.get(
@@ -73,6 +86,9 @@ def get_event_list(request, filters: EventFilterSchema = Query(...)):
     tags=[_('Спектакли')],
     summary=_('Получить данные спектакля по slug')
 )
-def get_event_by_slug(request, slug: str):
-    event = get_object_or_404(Event, slug=slug)
+async def get_event_by_slug(request, slug: str):
+    event = await event_db_service.get_by_slug(slug=slug)
+    if not event:
+        raise Http404(_('Событие не найдено'))
+
     return event

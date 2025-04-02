@@ -4,9 +4,8 @@ import django.db.models.deletion
 import django.utils.timezone
 from django.db import migrations, models
 
-import event.models.services.event_cover_path
-import event.models.services.event_image_path
-import event.models.services.event_program_pdf_path
+import event.models.services.path.event_cover_path
+import event.models.services.path.event_program_pdf_path
 
 
 class Migration(migrations.Migration):
@@ -24,7 +23,7 @@ class Migration(migrations.Migration):
             name='cover',
             field=models.ImageField(default=django.utils.timezone.now,
                                     help_text='Горизонтальное изображение в карточке спектакля',
-                                    upload_to=event.models.services.event_cover_path.event_cover_path,
+                                    upload_to=event.models.services.path.event_cover_path.event_cover_path,
                                     verbose_name='Обложка спектакля'),
             preserve_default=False,
         ),
@@ -61,7 +60,7 @@ class Migration(migrations.Migration):
             model_name='event',
             name='preview_cover',
             field=models.ImageField(default='', help_text='Обложка спектакля в афише на главной странице',
-                                    upload_to=event.models.services.event_cover_path.event_cover_path,
+                                    upload_to=event.models.services.path.event_cover_path.event_cover_path,
                                     verbose_name='Обложка в афише'),
             preserve_default=False,
         ),
@@ -69,7 +68,7 @@ class Migration(migrations.Migration):
             model_name='event',
             name='program_pdf',
             field=models.FileField(blank=True, default='', help_text='PDF файл с программой спектакля', null=True,
-                                   upload_to=event.models.services.event_program_pdf_path.event_program_pdf_path,
+                                   upload_to=event.models.services.path.event_program_pdf_path.event_program_pdf_path,
                                    verbose_name='Программка спектакля'),
         ),
         migrations.AddField(
@@ -106,7 +105,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('create_at', models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')),
                 ('update_at', models.DateTimeField(auto_now=True, verbose_name='Дата обновления')),
-                ('image', models.ImageField(upload_to=event.models.services.event_image_path.event_image_path,
+                ('image', models.ImageField(upload_to=event.models.services.path.event_image_path.event_image_path,
                                             verbose_name='Фото')),
                 ('event',
                  models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='event.event',
