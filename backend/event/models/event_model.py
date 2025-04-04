@@ -40,6 +40,11 @@ class Event(DatesAbstract):
         help_text='При включенном параметре спектакль будет показан на слайдере главной страницы',
         default=True
     )
+    is_archival = models.BooleanField(
+        _('Архив'),
+        help_text='Спектакль архивный, на текущий момент его не ставят',
+        default=False
+    )
     cover = models.ImageField(
         _('Обложка спектакля'),
         upload_to=event_cover_path,

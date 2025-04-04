@@ -17,7 +17,8 @@ class EventImageInline(admin.TabularInline):
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     list_display = (
-        'name', 'get_is_enable', 'get_show_on_main_page', 'short_description', 'min_age_limit',
+        'name', 'get_is_enable', 'get_show_on_main_page', 'get_is_archival',
+        'short_description', 'min_age_limit',
         'get_has_intermission', 'duration', 'premiere_at', 'slug'
     )
     readonly_fields = ('slug', 'create_at', 'update_at')
@@ -30,7 +31,8 @@ class EventAdmin(admin.ModelAdmin):
             'fields': (
                 'name', 'short_description', 'description',
                 'min_age_limit', 'premiere_at', 'duration',
-                'has_intermission', 'is_enable'
+                'has_intermission', 'is_enable', 'show_on_main_page',
+                'is_archival'
             )
         }),
         ('Создатели', {
@@ -47,6 +49,10 @@ class EventAdmin(admin.ModelAdmin):
             )
         }),
     )
+
+    @admin.display(description='Архив', ordering='is_archival')
+    def get_is_archival(self, obj) -> str:
+        return '✅' if obj.is_archival else '❌'
 
     @admin.display(description='На сайте', ordering='is_enable')
     def get_is_enable(self, obj) -> str:
