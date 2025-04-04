@@ -1,19 +1,19 @@
 import os
 from datetime import date
 from typing import List, Optional
+from typing import Literal
 
 from django.conf import settings
 from django.http import Http404, FileResponse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from ninja import Query, Router
+from ninja import Router
 
 from .models.services.event_db_service import event_db_service
 from .models.services.event_show_db_service import event_show_db_service
 from .schemes import (
     EventShowOutSchema,
     EventDetailSchema,
-    EventFilterSchema,
     EventPreviewSchema
 )
 
@@ -76,8 +76,16 @@ async def get_event_program_by_date(request, event_date: date = timezone.localti
     summary=_('Получить список всех спектаклей: репертуар'),
     url_name='get-event-list'
 )
-async def get_event_list(request, filters: EventFilterSchema = Query(...)):
-    return await event_db_service.get_list(filters)
+async def get_event_list(
+        request,
+        show_on_main_page: bool = None,
+        order_by: Literal['?', 'name'] = None
+):
+    return await event_db_service.get_list(
+        show_on_main_page=show_on_main_page,
+        is_enable=True,
+        order_by=order_by
+    )
 
 
 @router.get(
