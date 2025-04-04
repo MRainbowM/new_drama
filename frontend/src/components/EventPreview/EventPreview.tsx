@@ -17,7 +17,7 @@ export default function EventPreview(
 ) {
     const backgroundImageSrc = event.cover ? myImageLoader({ src: event.cover }) : '';
 
-    const eventDetailLink = `/event/${event.slug}`;
+    const eventDetailLink = `/events/${event.slug}`;
     const openEventDetail = () => {
         location.href = eventDetailLink;
     }

@@ -14,7 +14,7 @@ export default function ScheduleItem(
     { event }: ScheduleItemProps
 ) {
     const [isActive, setActive] = useState(false);
-    const eventDetailLink = `/event/${event.event.slug}`;
+    const eventDetailLink = `/events/${event.event.slug}`;
 
     // Скрыть кнопку "Купить билет", если спектакль уже прошел
     const today = new Date();
