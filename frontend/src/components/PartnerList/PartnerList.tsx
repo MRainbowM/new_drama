@@ -1,10 +1,11 @@
 'use client'
-import { components } from '../../api/schema'
-import styles from './PartnerList.module.scss'
-import useEmblaCarousel from 'embla-carousel-react'
-import ArrowLeft from '../ArrowLeft/ArrowLeft'
-import ArrowRight from '../ArrowRight/ArrowRight'
-import PartnerItem from '../PartnerItem/PartnerItem'
+import { components } from '../../api/schema';
+import styles from './PartnerList.module.scss';
+import useEmblaCarousel from 'embla-carousel-react';
+import ArrowLeft from '../ArrowLeft/ArrowLeft';
+import ArrowRight from '../ArrowRight/ArrowRight';
+import PartnerItem from '../PartnerItem/PartnerItem';
+import Autoplay from 'embla-carousel-autoplay';
 
 interface PartnerListProps {
     partnerList: components['schemas']['PartnerOutSchema'][]
@@ -17,7 +18,9 @@ export default function PartnerList(
         loop: true,
         dragFree: false,
         align: 'start'
-    });
+    }, [
+        Autoplay({ playOnInit: true, delay: 2500 })
+    ]);
 
 
     return (
