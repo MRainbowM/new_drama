@@ -1,0 +1,27 @@
+.root {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--gap-between-sections);
+    border-top: 1px solid var(--color-white);
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+}
+
+.letter {
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.events {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    border-bottom: 1px solid var(--color-white);
+    padding: 30px 0 60px;
+}

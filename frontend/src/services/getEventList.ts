@@ -1,5 +1,5 @@
-import { apiClient } from '../api/client'
-import { components } from '../api/schema'
+import { apiClient } from '../api/client';
+import { components } from '../api/schema';
 
 interface GetEventListParams {
     /* Спектакли в слайдере на главной странице */
