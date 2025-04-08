@@ -31,7 +31,15 @@ export default async function EventItem(
             </div>
 
             <div className={styles.infoCol}>
-                <div className={styles.name}>{event.name}</div>
+                <div className={styles.name}>
+                    <Link
+
+                        href={`/events/${event.slug}`}
+                    >
+                        {event.name}
+                    </Link>
+                </div>
+
                 <div className={styles.description}>{event.short_description}</div>
 
                 {

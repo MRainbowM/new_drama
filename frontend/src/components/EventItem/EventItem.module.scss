@@ -99,4 +99,12 @@
             }
         }
     }
+
+    .name {
+        a {
+            &:hover {
+                color: var(--color-red);
+            }
+        }   
+    }
 }
