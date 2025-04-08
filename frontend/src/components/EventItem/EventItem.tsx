@@ -58,7 +58,15 @@ export default async function EventItem(
                     ) : (<></>)
                 }
 
-                <div className={styles.btn}>
+                <div className={styles.btnRow}>
+                    {
+                        event.is_archival ? (
+                            <span className={styles.archive}>
+                                Архив
+                            </span>
+                        ) : (<></>)
+                    }
+
                     <Link href={`/events/${event.slug}`}>
                         <span>Подробнее</span>
                     </Link>
