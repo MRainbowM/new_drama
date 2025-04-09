@@ -16,6 +16,7 @@
     height: var(--cover-height);
     width: var(--cover-width);
     position: relative;
+    background-color: var(--color-black);
 
     .cover {
         position: absolute;
@@ -23,12 +24,6 @@
         height: 100%;
         width: 100%;
         // filter: grayscale(60%);
-    }
-
-    .coverDefault {
-        height: 100%;
-        width: 100%;
-        background-color: var(--color-black);
     }
 }
 

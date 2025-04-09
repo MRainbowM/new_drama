@@ -23,9 +23,7 @@ export default function EventItem(
                                 height={380}
                                 alt={event.name}
                             />
-                        ) : (
-                            <div className={styles.coverDefault}></div>
-                        )
+                        ) : (<></>)
                     }
                     {
                         event.is_archival ? (
