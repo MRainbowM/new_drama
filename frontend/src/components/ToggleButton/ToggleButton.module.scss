@@ -28,11 +28,7 @@
 .checkbox:checked+.knob:before {
     content: '';
     left: 29px;
-    background-color: var(--color-white);
-}
-
-.checkbox:checked~.btn-bg {
-    background-color: var(--color-white);
+    background-color: var(--color-white-with-alpha-70);
 }
 
 .knob {
@@ -50,14 +46,14 @@
         text-align: center;
         line-height: 1;
         padding: 9px 4px;
-        background-color: var(--color-red);
+        background-color: var(--color-red-with-alpha-80);
         transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
     }
 }
 
 .btnBg {
     width: 100%;
-    border: 2px solid var(--color-red);
+    border: 2px solid var(--color-red-with-alpha-80);
     z-index: 1;
 }
 
@@ -71,5 +67,5 @@
 }
 
 .checkbox:checked~.btnBg {
-    border: 2px solid var(--color-white);
+    border: 2px solid var(--color-white-with-alpha-70);
 }
