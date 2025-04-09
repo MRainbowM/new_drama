@@ -7,71 +7,74 @@ interface EventItemProps {
     event: components['schemas']['EventPreviewSchema']
 }
 
-export default async function EventItem(
+export default function EventItem(
     { event }: EventItemProps
 ) {
     return (
         <div className={styles.root}>
+            <div className={styles.background}>
+                <div className={styles.coverCol}>
+                    {
+                        event.cover_in_list ? (
+                            <Image
+                                className={styles.cover}
+                                src={event.cover_in_list}
+                                width={300}
+                                height={380}
+                                alt={event.name}
+                            />
+                        ) : (
+                            <div className={styles.coverDefault}></div>
+                        )
+                    }
 
-            <div className={styles.coverCol}>
-                {
-                    event.cover_in_list ? (
-                        <Image
-                            className={styles.cover}
-                            src={event.cover_in_list}
-                            width={300}
-                            height={380}
-                            alt={event.name}
-                        />
-                    ) : (
-                        <div className={styles.coverDefault}></div>
-                    )
-                }
-
-            </div>
-
-            <div className={styles.infoCol}>
-                <div className={styles.name}>
-                    <Link
-
-                        href={`/events/${event.slug}`}
-                    >
-                        {event.name}
-                    </Link>
                 </div>
 
-                <div className={styles.description}>{event.short_description}</div>
+                <div className={styles.infoCol}>
+                    <div className={styles.name}>
+                        <Link
 
-                {
-                    event.producer ? (
-                        <span className={styles.people}>
-                            Режиссер: {`${event.producer.first_name} ${event.producer.last_name}`}
-                        </span>
-                    ) : (<></>)
-                }
+                            href={`/events/${event.slug}`}
+                        >
+                            {event.name}
+                        </Link>
+                    </div>
 
-                {
-                    event.dramatist ? (
-                        <span className={styles.people}>
-                            Драматург: {event.dramatist}
-                        </span>
-                    ) : (<></>)
-                }
+                    <div className={styles.description}>{event.short_description}</div>
 
-                <div className={styles.btnRow}>
                     {
-                        event.is_archival ? (
-                            <span className={styles.archive}>
-                                Архив
+                        event.producer ? (
+                            <span className={styles.people}>
+                                Режиссер: {`${event.producer.first_name} ${event.producer.last_name}`}
                             </span>
                         ) : (<></>)
                     }
 
-                    <Link href={`/events/${event.slug}`}>
-                        <span>Подробнее</span>
-                    </Link>
+                    {
+                        event.dramatist ? (
+                            <span className={styles.people}>
+                                Драматург: {event.dramatist}
+                            </span>
+                        ) : (<></>)
+                    }
+
+                    <div className={styles.btnRow}>
+                        {
+                            event.is_archival ? (
+                                <span className={styles.archive}>
+                                    Архив
+                                </span>
+                            ) : (<></>)
+                        }
+
+                        <Link href={`/events/${event.slug}`}>
+                            <span>Подробнее</span>
+                        </Link>
+                    </div>
                 </div>
             </div>
+
+
         </div>
     );
 }
