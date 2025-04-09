@@ -23,7 +23,7 @@ export default async function RootLayout({
     const { menuItems } = await getMenuItems();
 
     return (
-        <html lang="en">
+        <html lang="ru">
             <head>
                 {
                     YM_COUNTER ? (
