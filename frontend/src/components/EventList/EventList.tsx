@@ -49,9 +49,17 @@ export default function EvenList(
                     toggleValue={showArchive}
                     onChange={onChangeToggle}
                 />
-                <span className={styles.text}>
-                    Показать архив
-                </span>
+                {
+                    showArchive ? (
+                        <span className={styles.text}>
+                            Скрыть архив
+                        </span>
+                    ) : (
+                        <span className={styles.text}>
+                            Показать архив
+                        </span>
+                    )
+                }
             </div>
             <div className={styles.eventsContainer}>
                 {Object.keys(eventByAbc).map((letter, index) => (

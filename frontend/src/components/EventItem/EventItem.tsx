@@ -16,13 +16,17 @@ export default function EventItem(
                 <div className={styles.coverCol}>
                     {
                         event.cover_in_list ? (
-                            <Image
-                                className={styles.cover}
-                                src={event.cover_in_list}
-                                width={300}
-                                height={380}
-                                alt={event.name}
-                            />
+                            <Link
+                                href={`/events/${event.slug}`}
+                            >
+                                <Image
+                                    className={styles.cover}
+                                    src={event.cover_in_list}
+                                    width={300}
+                                    height={380}
+                                    alt={event.name}
+                                />
+                            </Link>
                         ) : (<></>)
                     }
                     {
