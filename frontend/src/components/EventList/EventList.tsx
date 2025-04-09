@@ -43,11 +43,14 @@ export default function EvenList(
 
     return (
         <div className={styles.root}>
-            <div>
+            <div className={styles.filter}>
                 <ToggleButton
                     toggleValue={showArchive}
                     onChange={onChangeToggle}
                 />
+                <span className={styles.text}>
+                    Показывать архив
+                </span>
             </div>
             <div className={styles.eventsContainer}>
                 {Object.keys(eventByAbc).map((letter, index) => (

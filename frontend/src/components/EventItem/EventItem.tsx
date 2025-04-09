@@ -27,7 +27,13 @@ export default function EventItem(
                             <div className={styles.coverDefault}></div>
                         )
                     }
-
+                    {
+                        event.is_archival ? (
+                            <span className={styles.archive}>
+                                Архив
+                            </span>
+                        ) : (<></>)
+                    }
                 </div>
 
                 <div className={styles.infoCol}>
@@ -59,14 +65,6 @@ export default function EventItem(
                     }
 
                     <div className={styles.btnRow}>
-                        {
-                            event.is_archival ? (
-                                <span className={styles.archive}>
-                                    Архив
-                                </span>
-                            ) : (<></>)
-                        }
-
                         <Link href={`/events/${event.slug}`}>
                             <span>Подробнее</span>
                         </Link>

@@ -5,6 +5,20 @@
 
 }
 
+.filter {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding-bottom: 20px;
+
+    .text {
+        text-transform: uppercase;
+        font-family: var(--font-montserrat);
+        font-weight: 400;
+        margin-left: 15px;
+    }
+}
+
 .eventsContainer {
     display: flex;
     flex-direction: column;

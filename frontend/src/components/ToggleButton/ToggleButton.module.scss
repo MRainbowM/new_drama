@@ -1,15 +1,15 @@
 .root {
     display: grid;
     position: relative;
-    height: 40px;
+    height: 30px;
 }
 
 .btn {
     position: relative;
     top: 50%;
-    width: 74px;
-    height: 36px;
-    margin: -20px auto 0 auto;
+    width: 55px;
+    height: 30px;
+    margin: -15px auto 0 auto;
     overflow: hidden;
     // border-radius: 100px;
 }
@@ -27,7 +27,7 @@
 
 .checkbox:checked+.knob:before {
     content: '';
-    left: 41px;
+    left: 29px;
     background-color: var(--color-white);
 }
 
@@ -43,9 +43,8 @@
         position: absolute;
         top: 5px;
         left: 5px;
-        width: 20px;
-        height: 8px;
-        // color: #fff;
+        width: 13px;
+        height: 2px;
         font-size: 10px;
         font-weight: bold;
         text-align: center;
