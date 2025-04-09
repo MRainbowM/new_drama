@@ -150,14 +150,6 @@
         padding: 5px 0 0 20px;
     }
 
-    .btnRow {
-        align-items: flex-start;
-
-        a {
-            margin-left: 0;
-        }
-    }
-
     .description {
         font-size: 14px;
     }
@@ -172,14 +164,6 @@
         word-break: break-all;
     }
 
-    .btnRow {
-        flex-direction: row;
-        align-items: center;
-
-        a {
-            margin-left: auto;
-        }
-    }
 }
 
 @media (max-width:650px) {
