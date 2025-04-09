@@ -43,13 +43,14 @@ export default function EvenList(
 
     return (
         <div className={styles.root}>
+            <h1>Спектакли</h1>
             <div className={styles.filter}>
                 <ToggleButton
                     toggleValue={showArchive}
                     onChange={onChangeToggle}
                 />
                 <span className={styles.text}>
-                    Показывать архив
+                    Показать архив
                 </span>
             </div>
             <div className={styles.eventsContainer}>
