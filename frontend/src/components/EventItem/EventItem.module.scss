@@ -55,6 +55,7 @@
     margin-bottom: 15px;
     margin-top: 5px;
     text-transform: uppercase;
+    hyphens: auto;
 }
 
 .people {
@@ -153,10 +154,6 @@
 @media (max-width:1000px) {
     .infoCol {
         padding: 5px 0 0 30px;
-    }
-
-    .description {
-        word-break: break-all;
     }
 
 }
