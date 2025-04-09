@@ -20,7 +20,7 @@ class EventDetailSchema(ModelSchema):
             'id', 'name', 'slug', 'short_description', 'min_age_limit',
             'description', 'has_intermission', 'premiere_at',
             'dramatist', 'producer',
-            'cover', 'preview_cover', 'detail_cover', 'description_cover', 'actor_cover',
+            'cover', 'cover_in_list', 'preview_cover', 'detail_cover', 'description_cover', 'actor_cover',
             'is_archival'
         ]
 
@@ -40,7 +40,7 @@ class EventPreviewSchema(ModelSchema):
         model = Event
         model_fields = [
             'id', 'name', 'slug', 'dramatist', 'short_description', 'cover', 'preview_cover', 'min_age_limit',
-            'is_archival'
+            'is_archival', 'cover_in_list'
         ]
 
 

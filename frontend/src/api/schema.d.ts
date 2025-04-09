@@ -212,8 +212,8 @@ export interface components {
             /** Краткое описание */
             short_description: string;
             /**
-             * Обложка спектакля
-             * @description Изображение в списке спектаклей
+             * Обложка спектакля на главной
+             * @description Изображение в списке спектаклей в слайдере на главной
              */
             cover?: string | null;
             /**
@@ -233,6 +233,11 @@ export interface components {
              * @default false
              */
             is_archival: boolean;
+            /**
+             * Обложка спектакля в списке спектаклей
+             * @description Изображение в списке спектаклей
+             */
+            cover_in_list?: string | null;
         };
         /** EventShowOutSchema */
         EventShowOutSchema: {
@@ -311,10 +316,15 @@ export interface components {
              */
             dramatist: string | null;
             /**
-             * Обложка спектакля
-             * @description Изображение в списке спектаклей
+             * Обложка спектакля на главной
+             * @description Изображение в списке спектаклей в слайдере на главной
              */
             cover?: string | null;
+            /**
+             * Обложка спектакля в списке спектаклей
+             * @description Изображение в списке спектаклей
+             */
+            cover_in_list?: string | null;
             /**
              * Обложка в афише
              * @description Изображение курсора при наведении на спектакль в афише

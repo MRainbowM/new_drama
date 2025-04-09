@@ -44,7 +44,7 @@ class EventAdmin(admin.ModelAdmin):
         ('Медиа', {
             'fields': (
                 'program_pdf',
-                'cover', 'preview_cover', 'detail_cover', 'description_cover',
+                'cover', 'cover_in_list', 'preview_cover', 'detail_cover', 'description_cover',
                 'actor_cover',
             )
         }),

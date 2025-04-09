@@ -46,7 +46,14 @@ class Event(DatesAbstract):
         default=False
     )
     cover = models.ImageField(
-        _('Обложка спектакля'),
+        _('Обложка спектакля на главной'),
+        upload_to=event_cover_path,
+        help_text='Изображение в списке спектаклей в слайдере на главной',
+        blank=True,
+        null=True
+    )
+    cover_in_list = models.ImageField(
+        _('Обложка спектакля в списке спектаклей'),
         upload_to=event_cover_path,
         help_text='Изображение в списке спектаклей',
         blank=True,
