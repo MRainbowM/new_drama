@@ -15,30 +15,23 @@ export default function EvenList(
     { events }: EvenListProps
 ) {
     const [showArchive, setShowArchive] = useState(false);
-    const getEventByAbs = (archive) => {
-        // Группировка спектаклей по первой букве названия
-        let result = {}
-        let lastLetter = null;
 
+    const filterEvents = (archive) => {
+        let result = [];
         events.forEach((event) => {
             if (archive === true || event.is_archival === false) {
-                const firstLetter = event.name[0].toUpperCase();
-                if (lastLetter != firstLetter) {
-                    lastLetter = firstLetter;
-                    result[firstLetter] = [];
-                }
-                result[firstLetter].push(event);
+                result.push(event);
             }
         });
         return result;
     }
 
-    const [eventByAbc, setEventByAbc] = useState(getEventByAbs(false));
+    const [eventList, setEventList] = useState(filterEvents(false));
 
     const onChangeToggle = () => {
         const curState = showArchive;
         setShowArchive(!curState);
-        setEventByAbc(getEventByAbs(!curState));
+        setEventList(filterEvents(!curState));
     };
 
     return (
@@ -61,29 +54,15 @@ export default function EvenList(
                     )
                 }
             </div>
-            <div className={styles.eventsContainer}>
-                {Object.keys(eventByAbc).map((letter, index) => (
-                    <div
-                        key={`${index}-${letter}`}
-                        className={styles.group}
-                    >
-                        <span className={styles.letter}>
-                            {letter}
-                        </span>
-
-                        <div className={styles.events}>
-                            {
-                                eventByAbc[letter].map((event, eventIndex) => (
-
-                                    <EventItem
-                                        key={`${eventIndex}-${event.id}`}
-                                        event={event}
-                                    />
-                                ))
-                            }
-                        </div>
-                    </div>
-                ))}
+            <div className={styles.events}>
+                {
+                    eventList.map((event, index) => (
+                        <EventItem
+                            key={`${index}-${event.id}`}
+                            event={event}
+                        />
+                    ))
+                }
             </div>
         </div>
     );
