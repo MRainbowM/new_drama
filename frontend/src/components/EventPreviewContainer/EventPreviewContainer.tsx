@@ -2,7 +2,7 @@
 import styles from './EventPreviewContainer.module.scss'
 import { components } from '../../api/schema'
 import EventPreview from '../EventPreview/EventPreview';
-import { useState } from "react"
+import { useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react'
 import ArrowLeft from '../ArrowLeft/ArrowLeft';
 import ArrowRight from '../ArrowRight/ArrowRight';

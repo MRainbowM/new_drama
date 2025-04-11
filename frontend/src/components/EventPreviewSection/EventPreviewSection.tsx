@@ -1,27 +1,19 @@
-import styles from './EventPreviewSection.module.scss'
-import { apiClient } from '../../api/client'
+import styles from './EventPreviewSection.module.scss';
 import EventPreviewList from '../EventPreviewContainer/EventPreviewContainer';
+import { getEventList } from '../../services/getEventList';
 
 export default async function EventPreviewSection() {
     // Репертуар
-    const response = await apiClient.GET('/event/event/list', {
-        params: {
-            query: {
-                is_enable: true
-            }
-        }
+    const { events } = await getEventList({
+        show_on_main_page: true,
+        order_by: 'name'
     });
-
-    if (response.error) {
-        console.log(response.error);
-        throw new Error('error'); //TODO
-    }
 
     return (
         <section className={styles.root} id="events">
             <h2>Все спектакли</h2>
             <EventPreviewList
-                eventList={response.data}
+                eventList={events}
             />
         </section>
     )

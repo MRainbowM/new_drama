@@ -30,9 +30,30 @@ class Event(DatesAbstract):
         blank=True,
         related_name='producer'
     )
-    is_enable = models.BooleanField(_('Показывать в репертуаре'), default=True)
+    is_enable = models.BooleanField(
+        _('Показывать на сайте'),
+        help_text='При выключенном параметре спектакль будь скрыт на сайте',
+        default=True
+    )
+    show_on_main_page = models.BooleanField(
+        _('Показывать на главной странице'),
+        help_text='При включенном параметре спектакль будет показан на слайдере главной страницы',
+        default=True
+    )
+    is_archival = models.BooleanField(
+        _('Архив'),
+        help_text='Спектакль архивный, на текущий момент его не ставят',
+        default=False
+    )
     cover = models.ImageField(
-        _('Обложка спектакля'),
+        _('Обложка спектакля на главной'),
+        upload_to=event_cover_path,
+        help_text='Изображение в списке спектаклей в слайдере на главной',
+        blank=True,
+        null=True
+    )
+    cover_in_list = models.ImageField(
+        _('Обложка спектакля в списке спектаклей'),
         upload_to=event_cover_path,
         help_text='Изображение в списке спектаклей',
         blank=True,

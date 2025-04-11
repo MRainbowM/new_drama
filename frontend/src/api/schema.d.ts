@@ -11,7 +11,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Получить список спектаклей в афише */
+        /** Получить список спектаклей в афише c текущего месяца */
         get: operations["event_api_get_event_show_list"];
         put?: never;
         post?: never;
@@ -195,15 +195,6 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        /** EventShowFilterSchema */
-        EventShowFilterSchema: {
-            /** Is Enable */
-            is_enable?: boolean | null;
-            /** Event Id */
-            event_id?: number | null;
-            /** From Current Month */
-            from_current_month?: boolean | null;
-        };
         /** EventPreviewSchema */
         EventPreviewSchema: {
             producer: components["schemas"]["PeoplePreviewSchema"] | null;
@@ -221,8 +212,8 @@ export interface components {
             /** Краткое описание */
             short_description: string;
             /**
-             * Обложка спектакля
-             * @description Изображение в списке спектаклей
+             * Обложка спектакля на главной
+             * @description Изображение в списке спектаклей в слайдере на главной
              */
             cover?: string | null;
             /**
@@ -236,6 +227,17 @@ export interface components {
              * @default 0
              */
             min_age_limit: number;
+            /**
+             * Архив
+             * @description Спектакль архивный, на текущий момент его не ставят
+             * @default false
+             */
+            is_archival: boolean;
+            /**
+             * Обложка спектакля в списке спектаклей
+             * @description Изображение в списке спектаклей
+             */
+            cover_in_list?: string | null;
         };
         /** EventShowOutSchema */
         EventShowOutSchema: {
@@ -272,22 +274,6 @@ export interface components {
              * @default
              */
             photo: string | null;
-        };
-        /** EventProgramSchema */
-        EventProgramSchema: {
-            /**
-             * Программка спектакля
-             * @description PDF файл с программой спектакля
-             * @default
-             */
-            program_pdf: string | null;
-            /** Название спектакля */
-            name: string;
-        };
-        /** EventFilterSchema */
-        EventFilterSchema: {
-            /** Is Enable */
-            is_enable?: boolean | null;
         };
         /** EventDetailSchema */
         EventDetailSchema: {
@@ -330,10 +316,15 @@ export interface components {
              */
             dramatist: string | null;
             /**
-             * Обложка спектакля
-             * @description Изображение в списке спектаклей
+             * Обложка спектакля на главной
+             * @description Изображение в списке спектаклей в слайдере на главной
              */
             cover?: string | null;
+            /**
+             * Обложка спектакля в списке спектаклей
+             * @description Изображение в списке спектаклей
+             */
+            cover_in_list?: string | null;
             /**
              * Обложка в афише
              * @description Изображение курсора при наведении на спектакль в афише
@@ -354,6 +345,12 @@ export interface components {
              * @description Изображение в карточке спектакля
              */
             actor_cover?: string | null;
+            /**
+             * Архив
+             * @description Спектакль архивный, на текущий момент его не ставят
+             * @default false
+             */
+            is_archival: boolean;
         };
         /** EventImageOutSchema */
         EventImageOutSchema: {
@@ -527,8 +524,12 @@ export interface components {
         PopupOutSchema: {
             /** ID */
             id?: number | null;
-            /** Подзаголовок */
-            subtitle: string;
+            /**
+             * Подзаголовок
+             * @description Будет отображаться в развернутом пап-апе
+             * @default
+             */
+            subtitle: string | null;
             /**
              * Заголовок
              * @description Будет отображаться в развернутом пап-апе
@@ -574,9 +575,7 @@ export interface operations {
     event_api_get_event_show_list: {
         parameters: {
             query?: {
-                is_enable?: boolean | null;
                 event_id?: number | null;
-                from_current_month?: boolean | null;
             };
             header?: never;
             path?: never;
@@ -611,16 +610,15 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content: {
-                    "application/json": components["schemas"]["EventProgramSchema"];
-                };
+                content?: never;
             };
         };
     };
     event_api_get_event_list: {
         parameters: {
             query?: {
-                is_enable?: boolean | null;
+                show_on_main_page?: boolean;
+                order_by?: "?" | "name";
             };
             header?: never;
             path?: never;

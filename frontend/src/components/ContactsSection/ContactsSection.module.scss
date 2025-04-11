@@ -72,12 +72,66 @@
     height: var(--circle-height);
     border-radius: 100%;
     border: 1px solid var(--color-white);
+}
 
+.pictureList {
+    position: relative;
+    overflow: hidden;
+    height: calc(100% - 40px);
+    width: calc(100% - 40px);
 }
 
 .picture {
-    height: calc(100% - 40px);
-    width: calc(100% - 40px);
+    height: 100%;
+    width: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    animation-name: animation;
+    animation-duration: 12s;
+    animation-iteration-count: infinite;
+
+    opacity: 0;
+}
+
+.picture1 {
+    animation-delay: 0s;
+}
+
+.picture2 {
+    animation-delay: 4s;
+}
+
+.picture3 {
+    animation-delay: 7s;
+}
+
+.picture4 {
+    animation-delay: 10s;
+}
+
+@keyframes animation {
+    0% {
+        opacity: 0;
+    }
+
+    12.12% {
+        opacity: 1;
+    }
+
+    35.35% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
 
 .btnTicket {
@@ -91,6 +145,7 @@
     height: var(--btn-ticket-height);
     width: var(--btn-ticket-height);
     border-radius: 100%;
+    z-index: 3;
 
     span {
         text-transform: uppercase;
@@ -160,7 +215,7 @@
         font-size: 20px;
     }
 
-    .picture {
+    .pictureList {
         height: calc(100% - 20px);
         width: calc(100% - 20px);
     }
