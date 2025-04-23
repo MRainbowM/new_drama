@@ -8,6 +8,7 @@ import picture3 from 'public/images/contacts-3.png';
 import picture4 from 'public/images/contacts-4.png';
 import Image from 'next/image';
 
+
 export default async function ContactsSection() {
 
     return (
@@ -99,8 +100,6 @@ export default async function ContactsSection() {
                             alt={'Контакты'}
                         />
                     </div>
-
-
                     <Link
                         href={contactTicketBuy}
                         className={styles.btnTicket}
