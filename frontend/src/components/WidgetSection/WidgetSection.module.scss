@@ -1,0 +1,23 @@
+.root {
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+        width: 100%;
+        text-transform: uppercase;
+        color: var(--color-red);
+        font-size: var(--font-size-h2-main);
+        margin-bottom: 30px;
+    }
+}
+
+.widgets {
+    display: flex;
+    gap: 25px;
+}
+
+@media (max-width: 900px) {
+    .widgets {
+        flex-direction: column;
+    }
+}

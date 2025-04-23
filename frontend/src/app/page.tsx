@@ -9,6 +9,8 @@ import { metadataMainPageDescription, metadataMainPageJsonLd, metadataMainPageTi
 import '../styles/page.scss'
 import ContactsSection from '../components/ContactsSection/ContactsSection';
 import Popup from '../components/Popup/Popup';
+import WidgetSection from '../components/WidgetSection/WidgetSection';
+
 export const dynamic = 'force-dynamic';
 
 
@@ -45,7 +47,7 @@ export default function MainPage() {
                     metadataMainPageJsonLd
                 )
             }}
-        />  
+        />
         <Hero />
         <ScheduleSection />
         <EventPreviewSection />
@@ -54,6 +56,7 @@ export default function MainPage() {
         <PartnerSection />
         <TheaterSection />
         <ContactsSection />
+        <WidgetSection />
         <Popup />
     </>);
 }
