@@ -14,6 +14,7 @@ export const metadataMainPageJsonLd = {
             "url": `${process.env.BASE_URL}/`,
             "logo": `${process.env.BASE_URL}/static/logo.png`,
             "image": `${process.env.BASE_URL}/static/theater.png`,
+            "description": metadataMainPageDescription,
             "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "ул. Кожова, 38",
@@ -28,7 +29,10 @@ export const metadataMainPageJsonLd = {
                 socialTG,
                 socialYT
             ],
-            "description": metadataMainPageDescription,
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": `${process.env.BASE_URL}/`
+            } 
         },
         {
             "@type": "Organization",
@@ -38,7 +42,8 @@ export const metadataMainPageJsonLd = {
             "founder": {
                 "@type": "Person",
                 "name": "Вадим Карионов"
-            }
+            },
+            "url": `${process.env.BASE_URL}/`
         }
     ]
 };
