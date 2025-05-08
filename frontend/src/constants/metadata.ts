@@ -9,7 +9,8 @@ export const metadataMainPageJsonLd = {
     "@context": "https://schema.org",
     "@graph": [
         {
-            "@type": "PerformingArtsTheater",
+            "@type": ["LocalBusiness", "PerformingArtsTheater"],
+            "@id": `${process.env.BASE_URL}/#business`,
             "name": metadataMainPageTitle,
             "url": `${process.env.BASE_URL}/`,
             "logo": `${process.env.BASE_URL}/static/logo.png`,
@@ -36,6 +37,7 @@ export const metadataMainPageJsonLd = {
         },
         {
             "@type": "Organization",
+            "@id": `${process.env.BASE_URL}/#organization`,
             "name": metadataMainPageTitle,
             "email": contactEmail,
             "foundingDate": "2016",
