@@ -1,9 +1,11 @@
 from typing import List, Optional
 
 from asgiref.sync import sync_to_async
+from django.db.models import Prefetch
 from django.db.models import Q
 from django.db.models.sql import Query
 
+from people.models import EventPeople
 from ..event_model import Event
 
 
@@ -36,16 +38,17 @@ class EventDBService:
         return await sync_to_async(list)(query())
 
     async def get_by_slug(self, slug: str) -> Optional[Event]:
-        def query() -> Query:
-            return Event.objects.filter(
-                slug=slug
-            ).select_related(
-                'producer'
-            ).prefetch_related(
-                'images', 'peoples__people'
-            ).first()
-
-        return await sync_to_async(query)()
+        return await Event.objects.filter(
+            slug=slug
+        ).select_related(
+            'producer'
+        ).prefetch_related(
+            'images',
+            Prefetch(
+                'peoples',
+                queryset=EventPeople.objects.select_related('people').order_by('sort')
+            )
+        ).afirst()
 
 
 event_db_service = EventDBService()
