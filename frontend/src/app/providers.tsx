@@ -14,11 +14,10 @@ const YM_COUNTER = Number(process.env.YM_COUNTER);
 
 
 const useYandexMetrika = (metrikaId: number) => {
-    if (!metrikaId) return;
-
     const pathname = usePathname();
 
     useEffect(() => {
+        if (!metrikaId) return;
         if (typeof window !== "undefined") {
             // Подключаем Яндекс Метрику, если её ещё нет
             if (!window.ym) {

@@ -2,7 +2,7 @@
 import { components } from '../../api/schema';
 import styles from './PopupModal.module.scss';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 import PopupTimer from '../PopupTimer/PopupTimer';
@@ -31,10 +31,10 @@ export default function PopupModal(
         Cookies.set('isClosePopup', isClose, { expires: 1, path: "/" });
     };
 
-    const onClickClose = () => {
+    const onClickClose = useCallback(() => {
         setClose(true);
         saveToCookies();
-    }
+    }, []);
 
     // При клике вне модалки - закрывать ее
     const refModal = useRef<HTMLDivElement>();
