@@ -25,10 +25,10 @@ export default async function EventDetail(
         <div className={styles.root}>
             <div className={styles.grid}>
                 {
-                    event.detail_cover ? (
+                    event.detail_cover_compressed_url ? (
                         <div className={styles.cover}>
                             <Image
-                                src={event.detail_cover}
+                                src={event.detail_cover_compressed_url}
                                 layout='fill'
                                 priority={true}
                                 alt={event.name}
@@ -118,9 +118,9 @@ export default async function EventDetail(
                             </div>
                             <div className={clsx(styles.gridItem, styles.gridImg)}>
                                 {
-                                    event.description_cover ? (
+                                    event.description_cover_compressed_url ? (
                                         <Image
-                                            src={event.description_cover}
+                                            src={event.description_cover_compressed_url}
                                             layout='fill'
                                             priority={true}
                                             alt={event.name}
@@ -146,7 +146,6 @@ export default async function EventDetail(
                                                     <span></span>
                                                 )
                                             }
-
                                             <span>
                                                 {`${people.people.first_name} ${people.people.last_name}`}
                                             </span>
@@ -157,9 +156,9 @@ export default async function EventDetail(
                         </div>
                         <div className={clsx(styles.gridItem, styles.gridImg)}>
                             {
-                                event.actor_cover ? (
+                                event.actor_cover_compressed_url ? (
                                     <Image
-                                        src={event.actor_cover}
+                                        src={event.actor_cover_compressed_url}
                                         layout='fill'
                                         priority={true}
                                         alt={event.name}

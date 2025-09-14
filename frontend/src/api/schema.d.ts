@@ -290,6 +290,10 @@ export interface components {
             cover_compressed_url?: string | null;
             /** Detail Cover Compressed Url */
             detail_cover_compressed_url?: string | null;
+            /** Description Cover Compressed Url */
+            description_cover_compressed_url?: string | null;
+            /** Actor Cover Compressed Url */
+            actor_cover_compressed_url?: string | null;
             /** ID */
             id?: number | null;
             /** Название спектакля */

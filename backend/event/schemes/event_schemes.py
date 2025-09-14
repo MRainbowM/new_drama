@@ -15,6 +15,8 @@ class EventDetailSchema(ModelSchema):
     duration_format: Optional[str]
     cover_compressed_url: Optional[str] = None
     detail_cover_compressed_url: Optional[str] = None
+    description_cover_compressed_url: Optional[str] = None
+    actor_cover_compressed_url: Optional[str] = None
 
     class Config:
         model = Event

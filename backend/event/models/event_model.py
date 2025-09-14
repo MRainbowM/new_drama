@@ -98,12 +98,24 @@ class Event(DatesAbstract):
         blank=True,
         null=True
     )
+    description_cover_compressed = ImageSpecField(
+        source='description_cover',
+        processors=[ResizeToFit(1000, 1000)],
+        format='JPEG',
+        options={'quality': IMAGE_QUALITY}
+    )
     actor_cover = models.ImageField(
         _('Фотография напротив списка действующих лиц спектакля'),
         upload_to=event_cover_path,
         help_text='Изображение в карточке спектакля',
         blank=True,
         null=True
+    )
+    actor_cover_compressed = ImageSpecField(
+        source='actor_cover',
+        processors=[ResizeToFit(1000, 1000)],
+        format='JPEG',
+        options={'quality': IMAGE_QUALITY}
     )
     min_age_limit = models.IntegerField(
         _('Возрастное ограничение'),
@@ -157,4 +169,18 @@ class Event(DatesAbstract):
         """Возвращает URL сжатого изображения"""
         if self.detail_cover_compressed:
             return self.detail_cover_compressed.url
+        return None
+
+    @property
+    def description_cover_compressed_url(self) -> str | None:
+        """Возвращает URL сжатого изображения"""
+        if self.description_cover_compressed:
+            return self.description_cover_compressed.url
+        return None
+
+    @property
+    def actor_cover_compressed_url(self) -> str | None:
+        """Возвращает URL сжатого изображения"""
+        if self.actor_cover_compressed:
+            return self.actor_cover_compressed.url
         return None

@@ -54,7 +54,7 @@ export default function EventDetailGallery(
                         >
                             <div className={styles.item}>
                                 <Image
-                                    src={item.image}
+                                    src={item.image_compressed_url}
                                     layout='fill'
                                     priority={true}
                                     alt={'Фотография спектакля'}

@@ -14,6 +14,8 @@ const YM_COUNTER = Number(process.env.YM_COUNTER);
 
 
 const useYandexMetrika = (metrikaId: number) => {
+    if (!metrikaId) return;
+
     const pathname = usePathname();
 
     useEffect(() => {
