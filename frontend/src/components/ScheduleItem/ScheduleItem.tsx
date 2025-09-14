@@ -47,6 +47,9 @@ export default function ScheduleItem(
                                     new Date(event.start_at)
                                 )}
                             </span>
+                            <span className={styles.dayOfWeek}>
+                                {event.day_of_week}
+                            </span>
                             <div className={styles.time}>
                                 <span>
                                     {new Intl.DateTimeFormat('ru-RU', {

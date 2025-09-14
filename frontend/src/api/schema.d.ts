@@ -253,6 +253,8 @@ export interface components {
             is_premiere: boolean;
             /** Link To Buy Ticket */
             link_to_buy_ticket: string;
+            /** Day Of Week */
+            day_of_week: string;
         };
         /** PeoplePreviewSchema */
         PeoplePreviewSchema: {
@@ -284,6 +286,14 @@ export interface components {
             producer: components["schemas"]["PeopleShortSchema"] | null;
             /** Duration Format */
             duration_format: string | null;
+            /** Cover Compressed Url */
+            cover_compressed_url?: string | null;
+            /** Detail Cover Compressed Url */
+            detail_cover_compressed_url?: string | null;
+            /** Description Cover Compressed Url */
+            description_cover_compressed_url?: string | null;
+            /** Actor Cover Compressed Url */
+            actor_cover_compressed_url?: string | null;
             /** ID */
             id?: number | null;
             /** Название спектакля */
@@ -354,6 +364,8 @@ export interface components {
         };
         /** EventImageOutSchema */
         EventImageOutSchema: {
+            /** Image Compressed Url */
+            image_compressed_url?: string | null;
             /** ID */
             id?: number | null;
             /** Фото */

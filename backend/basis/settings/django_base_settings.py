@@ -9,7 +9,10 @@ env.read_env()
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env.bool('DEBUG')
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
-SECURE_CROSS_ORIGIN_OPENER_POLICY = env('SECURE_CROSS_ORIGIN_OPENER_POLICY', 'same-origin')
+SECURE_CROSS_ORIGIN_OPENER_POLICY = env(
+    'SECURE_CROSS_ORIGIN_OPENER_POLICY',
+    'same-origin'
+)
 
 if not DEBUG:
     USE_X_FORWARDED_HOST = True
@@ -111,7 +114,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 STATIC_URL = '/static/'
-STATIC_ROOT =  BASE_DIR / 'static'
+STATIC_ROOT = BASE_DIR / 'static'
 
 if DEBUG:
     # STATIC_ROOT = ''
@@ -130,3 +133,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Базовая ссылка на сервис покупки билетов
 TICKET_SERVICE_BASE_URL = env('TICKET_SERVICE_BASE_URL')
+
+# Максимальный размер изображения
+MAX_IMAGE_SIZE = tuple(map(int, env('MAX_IMAGE_SIZE', '800,800').split(',')))
+
+# Качество изображения
+IMAGE_QUALITY = env.int('IMAGE_QUALITY', 75)

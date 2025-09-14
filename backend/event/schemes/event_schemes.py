@@ -5,6 +5,7 @@ from ninja import ModelSchema, FilterSchema, Field
 from people.schemes import PeoplePreviewSchema, PeopleShortSchema, EventPeopleOutSchema
 from .event_image_schemes import EventImageOutSchema
 from ..models import Event
+from typing import Optional
 
 
 class EventDetailSchema(ModelSchema):
@@ -12,6 +13,10 @@ class EventDetailSchema(ModelSchema):
     images: List[EventImageOutSchema]
     producer: Optional[PeopleShortSchema]
     duration_format: Optional[str]
+    cover_compressed_url: Optional[str] = None
+    detail_cover_compressed_url: Optional[str] = None
+    description_cover_compressed_url: Optional[str] = None
+    actor_cover_compressed_url: Optional[str] = None
 
     class Config:
         model = Event
