@@ -50,3 +50,19 @@ class EventShow(DatesAbstract):
                     f'с "{settings.TICKET_SERVICE_BASE_URL}/"'
                 )
             })
+
+    @property
+    def day_of_week(self) -> str:
+        """
+        День недели спектакля.
+        """
+        day_of_week_dict = {
+            'Monday': 'ПН',
+            'Tuesday': 'ВТ',
+            'Wednesday': 'СР',
+            'Thursday': 'ЧТ',
+            'Friday': 'ПТ',
+            'Saturday': 'СБ',
+            'Sunday': 'ВС'
+        }
+        return day_of_week_dict[self.start_at.strftime('%A')]
