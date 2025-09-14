@@ -25,6 +25,13 @@
         font-size: var(--font-size-subtitle-schedule);
     }
 
+    .dayOfWeek {
+        font-weight: bold;
+        font-size: 13px;
+        margin-left: 3px;
+        margin-top: 4px;
+    }
+
     .time {
         display: flex;
         align-items: center;

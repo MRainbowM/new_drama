@@ -253,6 +253,8 @@ export interface components {
             is_premiere: boolean;
             /** Link To Buy Ticket */
             link_to_buy_ticket: string;
+            /** Day Of Week */
+            day_of_week: string;
         };
         /** PeoplePreviewSchema */
         PeoplePreviewSchema: {
