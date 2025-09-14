@@ -7,12 +7,19 @@ from slugify import slugify
 from basis.models.dates_abstract_model import DatesAbstract
 from .services.path.event_cover_path import event_cover_path
 from .services.path.event_program_pdf_path import event_program_pdf_path
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFit
+from basis.settings.django_base_settings import IMAGE_QUALITY
 
 
 class Event(DatesAbstract):
     """Репертуар"""
 
-    name = models.CharField(_('Название спектакля'), max_length=256, unique=True)
+    name = models.CharField(
+        _('Название спектакля'),
+        max_length=256,
+        unique=True
+    )
     slug = models.CharField(_('Слаг названия'), max_length=256, unique=True)
     short_description = models.CharField(_('Краткое описание'))
     description = CKEditor5Field(
@@ -52,6 +59,12 @@ class Event(DatesAbstract):
         blank=True,
         null=True
     )
+    cover_compressed = ImageSpecField(
+        source='cover',
+        processors=[ResizeToFit(1000, 1000)],
+        format='JPEG',
+        options={'quality': IMAGE_QUALITY}
+    )
     cover_in_list = models.ImageField(
         _('Обложка спектакля в списке спектаклей'),
         upload_to=event_cover_path,
@@ -72,6 +85,11 @@ class Event(DatesAbstract):
         help_text='Главное изображение в карточке спектакля',
         blank=True,
         null=True
+    )
+    detail_cover_compressed = ImageSpecField(
+        source='detail_cover',
+        format='JPEG',
+        options={'quality': IMAGE_QUALITY}
     )
     description_cover = models.ImageField(
         _('Фотография напротив описания спектакля'),
@@ -126,3 +144,17 @@ class Event(DatesAbstract):
             raise ValidationError({
                 'name': _('Спектакль с таким названием уже создан')
             })
+
+    @property
+    def cover_compressed_url(self) -> str | None:
+        """Возвращает URL сжатого изображения"""
+        if self.cover_compressed:
+            return self.cover_compressed.url
+        return None
+
+    @property
+    def detail_cover_compressed_url(self) -> str | None:
+        """Возвращает URL сжатого изображения"""
+        if self.detail_cover_compressed:
+            return self.detail_cover_compressed.url
+        return None
