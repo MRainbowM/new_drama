@@ -59,7 +59,16 @@ docker-compose exec django-new-drama python3 manage.py collectstatic
 docker-compose exec django-new-drama python3 -m pytest
 ```
 
+### Бэкап бд
 
+```sh
+docker exec -t postgres-new-drama pg_dumpall -c -U postgres > dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql
+```
+
+### Накатить бэкап
+```sh
+cat dump_14-09-2025_06_54_30.sql | docker exec -i postgres-new-drama psql -U postgres
+```
 ## Frontend
 
 ### Запуск фронтенда
