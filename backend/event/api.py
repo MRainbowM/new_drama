@@ -28,11 +28,11 @@ router = Router()
 )
 async def get_event_show_list(request, event_id: Optional[int] = None):
     today = timezone.localtime().date()
+    start_date = today.replace(day=1)
     return await event_show_db_service.get_list(
         is_enable=True,
         event_id=event_id,
-        start_at__month__gte=today.month,
-        start_at__year__gte=today.year
+        start_at__date__gte=start_date
     )
 
 
@@ -55,15 +55,18 @@ async def get_event_program_by_date(request, event_date: date = timezone.localti
 
     if not event_show.event.program_pdf:
         # Спектакль найден, но у него нет файла с программкой
-        raise Http404(_(f"Программка не найдена, event_id={event_show.event.id}"))
+        raise Http404(
+            _(f"Программка не найдена, event_id={event_show.event.id}"))
 
-    file_path = os.path.join(settings.MEDIA_ROOT, str(event_show.event.program_pdf))
+    file_path = os.path.join(
+        settings.MEDIA_ROOT, str(event_show.event.program_pdf))
 
     if not os.path.exists(file_path):
         # Файл физически не существует на сервере
         raise Http404(_("Файл не найден"))
 
-    response = FileResponse(open(file_path, "rb"), content_type="application/pdf")
+    response = FileResponse(open(file_path, "rb"),
+                            content_type="application/pdf")
     # response["Content-Disposition"] = 'attachment; filename="program.pdf"'  # Файл будет скачиваться
     response["Content-Disposition"] = 'inline; filename="program.pdf"'
     return response

@@ -13,7 +13,8 @@ class EventShowDBService:
             is_enable: bool = None,
             event_id: int = None,
             start_at__month__gte: int = None,
-            start_at__year__gte: int = None
+            start_at__year__gte: int = None,
+            start_at__date__gte: int = None
     ) -> List[EventShow]:
         def query() -> Query:
             filters = Q()
@@ -29,6 +30,9 @@ class EventShowDBService:
 
             if start_at__year__gte is not None:
                 filters &= Q(start_at__year__gte=start_at__year__gte)
+
+            if start_at__date__gte is not None:
+                filters &= Q(start_at__date__gte=start_at__date__gte)
 
             return EventShow.objects.filter(
                 filters
