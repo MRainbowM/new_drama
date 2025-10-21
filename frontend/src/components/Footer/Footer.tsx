@@ -70,12 +70,18 @@ export default async function Footer(
                                 target='_blank'
                             ><VK /></Link>
                         </div>
+                        <Link href="/pdf/ticket_refund.pdf" target="_blank" rel="noopener noreferrer"
+                        className={styles.ticketRefundLink}>
+                            <span>Правила возврата билетов</span>
+                        </Link>
                     </div>
                 </div>
+
+                
             </div>
 
             <div className={styles.row}>
-                <span>© 2016 Новая Драма</span>
+                <span>© 2016 Новая Драма</span>   
             </div>
 
         </footer>
