@@ -86,6 +86,26 @@
     font-size: 14px;
 }
 
+.ticketRefundLink{
+    text-decoration: underline;
+    margin-left: auto;
+    opacity: 1;
+    font-size: 16px;
+    width: 100%;
+    display: flex   ;
+    margin-top: 15px;
+
+    @media not all and (hover: none) {
+        // Только НЕ для тач устройств
+        opacity: 0.6;
+
+        &:hover {
+            opacity: 1;
+        }
+
+    }
+}
+
 @media not all and (hover: none) {
 
     // Только НЕ для тач устройств
