@@ -17,10 +17,25 @@ function declensionOfNumerals(
     ];
 }
 
+interface DeclensionOfDaysParams {
+    /* Склоняемое число */
+    currentNumber: number
+}
+
+export function declensionOfDays(
+    { currentNumber }: DeclensionOfDaysParams
+) {
+    return declensionOfNumerals({
+        currentNumber: currentNumber,
+        titles: ['день', 'дня', 'дней']
+    })
+}
+
 interface DeclensionOfHoursParams {
     /* Склоняемое число */
     currentNumber: number
 }
+
 
 export function declensionOfHours(
     { currentNumber }: DeclensionOfHoursParams
