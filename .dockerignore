@@ -1,0 +1,12 @@
+node_modules
+frontend/node_modules
+frontend/.next
+frontend/.turbo
+.git
+.gitignore
+backend/venv
+venv
+__pycache__
+*.pyc
+
+

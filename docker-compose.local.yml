@@ -1,0 +1,112 @@
+version: "3.8"
+
+networks:
+  new-drama:
+
+services:
+    nginx-new-drama:
+        container_name: nginx-new-drama
+        image: nginx:stable-alpine
+        # restart: always
+        ports:
+          - ${NGINX_HOST_PORT:-80}:80
+          - ${NGINX_HOST_PORT_SSL:-443}:443
+        volumes:
+          - ./conf/nginx.conf.template:/etc/nginx/nginx.conf.template
+          - ./conf/nginx-ssl.conf.template:/etc/nginx/nginx-ssl.conf.template
+          - ./conf/nginx-entrypoint.sh:/docker-entrypoint.sh
+          - static_volume:/static
+          # Локальная разработка: медиа берём из каталога проекта
+          - ./backend/media:/backend/media      
+        environment:
+          - NGINX_SERVER_NAME=${NGINX_SERVER_NAME:-localhost}
+          - FRONTEND_URL=${FRONTEND_URL}
+          - BACKEND_URL=${BACKEND_URL}
+          - NGINX_STATIC_PATH=${NGINX_STATIC_PATH:-/static}
+          - NGINX_MEDIA_PATH=${NGINX_MEDIA_PATH:-/backend/media/}
+          - NGINX_CLIENT_MAX_BODY_SIZE=${NGINX_CLIENT_MAX_BODY_SIZE:-100M}
+          - NODE_ENV=${NODE_ENV:-development}
+          - NGINX_SSL_CERT_PATH=${NGINX_SSL_CERT_PATH}
+          - NGINX_SSL_KEY_PATH=${NGINX_SSL_KEY_PATH}
+        depends_on:
+          - django-new-drama
+          - frontend-new-drama
+        networks:
+          - new-drama
+    django-new-drama:
+        container_name: django-new-drama
+        build:
+            dockerfile: conf/django.Dockerfile
+            context: .
+        command: bash -c "while true; do echo 'I am alive!'; sleep 3600; done"
+        working_dir: /backend
+        expose:
+          - ${DJANGO_PORT}
+        environment:
+          - C_FORCE_ROOT=true
+          - PORT=${DJANGO_PORT}
+          - PYTHONPATH=/backend
+          - DJANGO_SETTINGS_MODULE=basis.settings
+        volumes:
+          - static_volume:/backend/static
+          # Медиа файлы берём напрямую из проекта
+          - ./backend/media:/backend/media
+          - ./backend:/backend
+        depends_on:
+          postgres-new-drama:
+            condition: service_started
+        networks:
+          - new-drama
+
+        
+ 
+    postgres-new-drama:
+        container_name: postgres-new-drama
+        image: postgres:15.3
+        environment:
+          - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+          - POSTGRES_USER=${POSTGRES_USER}
+          - POSTGRES_DB=${POSTGRES_DB}
+        volumes:
+          - ./conf/init.sql:/docker-entrypoint-initdb.d/init.sql
+          - postgres-volume-new-drama:/var/lib/postgresql/data
+        networks:
+          - new-drama
+
+    frontend-new-drama:
+      container_name: frontend-new-drama
+      build:
+        dockerfile: conf/frontend.Dockerfile
+        context: .
+        args:
+          - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+          - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
+          - NEXT_PUBLIC_YANDEX_METRIKA_ID=${NEXT_PUBLIC_YANDEX_METRIKA_ID}
+          - NEXT_PUBLIC_YANDEX_VERIFICATION=${NEXT_PUBLIC_YANDEX_VERIFICATION}
+          - PORT=${FRONTEND_PORT}
+          - API_URL=${API_URL}
+      # restart: always
+      command: npm run dev
+      expose:
+        - ${FRONTEND_PORT}
+      environment:
+        - PORT=${FRONTEND_PORT}
+        - NODE_ENV=${NODE_ENV}
+        - WATCHPACK_POLLING=true
+        - API_URL=${API_URL}
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+        - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
+        - NEXT_PUBLIC_YANDEX_METRIKA_ID=${NEXT_PUBLIC_YANDEX_METRIKA_ID}
+        - NEXT_PUBLIC_YANDEX_VERIFICATION=${NEXT_PUBLIC_YANDEX_VERIFICATION}
+      depends_on:
+        - django-new-drama
+      networks:
+        - new-drama
+
+volumes:
+    postgres-volume-new-drama:
+    pgadmin-volume-new-drama:
+    static_volume:
+   
+
+                   

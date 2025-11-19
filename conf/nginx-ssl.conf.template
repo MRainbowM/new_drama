@@ -1,0 +1,111 @@
+user  ${NGINX_USER};
+worker_processes  ${NGINX_WORKER_PROCESSES};
+
+events {
+    worker_connections ${NGINX_WORKER_CONNECTIONS};
+}
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    # HTTP -> HTTPS redirect (кроме ACME challenge)
+    server {
+        listen       80;
+        server_name  ${NGINX_SERVER_NAME};
+
+        # Обслуживание webroot для certbot HTTP-01
+        location ^~ /.well-known/acme-challenge/ {
+            root /var/www/certbot;
+            default_type "text/plain";
+            try_files $uri =404;
+        }
+
+        location / {
+            return 301 https://$host$request_uri;
+        }
+    }
+
+    server {
+        listen              443 ssl http2;
+        server_name         ${NGINX_SERVER_NAME};
+
+        ssl_certificate     ${NGINX_SSL_CERT_PATH};
+        ssl_certificate_key ${NGINX_SSL_KEY_PATH};
+        ssl_session_timeout 1d;
+        ssl_session_cache   shared:SSL:10m;
+        ssl_session_tickets off;
+
+        # modern TLS config
+        ssl_protocols       TLSv1.2 TLSv1.3;
+        ssl_prefer_server_ciphers off;
+
+        # HSTS (опционально):
+        add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+        location / {
+            proxy_pass ${FRONTEND_URL}/;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-Host $host;
+        }
+
+        location /admin {
+            proxy_pass ${BACKEND_URL};
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Forwarded-Host $host;
+            proxy_redirect off;
+            proxy_buffering off;
+
+            proxy_connect_timeout       ${NGINX_PROXY_CONNECT_TIMEOUT};
+            proxy_send_timeout          ${NGINX_PROXY_SEND_TIMEOUT};
+            proxy_read_timeout          ${NGINX_PROXY_READ_TIMEOUT};
+            send_timeout                ${NGINX_SEND_TIMEOUT};
+        }
+
+        location /api/ {
+            proxy_pass ${BACKEND_URL}/api/;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-Host $host;
+            proxy_redirect off;
+
+            proxy_connect_timeout       ${NGINX_PROXY_CONNECT_TIMEOUT};
+            proxy_send_timeout          ${NGINX_PROXY_SEND_TIMEOUT};
+            proxy_read_timeout          ${NGINX_PROXY_READ_TIMEOUT};
+            send_timeout                ${NGINX_SEND_TIMEOUT};
+        }
+
+        location /api/video {
+            proxy_pass ${FRONTEND_URL}/api/video;
+        }
+
+        location /static/ {
+            root /;
+            expires 30d;
+            add_header Pragma public;
+            add_header Cache-Control "public";
+            
+            # Правильная обработка SVG файлов
+            location ~* \.svg$ {
+                add_header Content-Type image/svg+xml;
+                expires 30d;
+            }
+        }
+
+        location /media/ {
+            alias ${NGINX_MEDIA_PATH}/;
+            expires 30d;
+            add_header Pragma public;
+            add_header Cache-Control "public";
+        }
+
+        client_max_body_size ${NGINX_CLIENT_MAX_BODY_SIZE};
+    }
+}
+

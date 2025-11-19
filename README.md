@@ -9,6 +9,10 @@
 docker-compose up --build -d django-new-drama
 ```
 
+```sh
+docker compose -f docker-compose.local.yml up --build
+```
+
 ### Остановка контейнера
 ```sh
 docker-compose stop django-new-drama
