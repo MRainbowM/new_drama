@@ -14,9 +14,9 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = env(
     'same-origin'
 )
 
-if not DEBUG:
-    USE_X_FORWARDED_HOST = True
-    FORCE_SCRIPT_NAME = '/api'
+# if not DEBUG:
+#     USE_X_FORWARDED_HOST = True
+#     FORCE_SCRIPT_NAME = '/api'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -121,7 +121,6 @@ if DEBUG:
     STATICFILES_DIRS = [
         BASE_DIR / 'staticfiles',
     ]
-
 
 MEDIA_URL = env('MEDIA_URL')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

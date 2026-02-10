@@ -20,17 +20,21 @@ services:
             # - /docker/certbot/www:/var/www/certbot
         environment:
             - NGINX_SERVER_NAME=${NGINX_SERVER_NAME:-localhost}
-            - FRONTEND_URL=${FRONTEND_URL:-http://frontend-new-drama:3000}
-            - BACKEND_URL=${BACKEND_URL:-http://django-new-drama:8000}
+            # Используем тот же порт, что и у frontend сервиса (FRONTEND_PORT)
+            - FRONTEND_URL=http://frontend-new-drama:${FRONTEND_PORT:-3000}
+            # Backend внутри docker-сети доступен по контейнерному порту DJANGO_PORT
+            - BACKEND_URL=http://django-new-drama:${DJANGO_PORT:-8001}
             - NGINX_STATIC_PATH=${NGINX_STATIC_PATH:-/static}
             - NGINX_MEDIA_PATH=${NGINX_MEDIA_PATH:-/backend/media/}
             - NGINX_CLIENT_MAX_BODY_SIZE=${NGINX_CLIENT_MAX_BODY_SIZE:-100M}
             - NODE_ENV=${NODE_ENV:-development}
             - NGINX_SSL_CERT_PATH=${NGINX_SSL_CERT_PATH}
             - NGINX_SSL_KEY_PATH=${NGINX_SSL_KEY_PATH}
-        entrypoint: /docker-entrypoint.sh
+        # На macOS bind-mount скрипта иногда не исполняется напрямую, запускаем через /bin/sh
+        entrypoint: ["/bin/sh", "/docker-entrypoint.sh"]
         depends_on:
             - django-new-drama
+            - frontend-new-drama
 
         networks:
             - new_drama
@@ -65,6 +69,12 @@ services:
             - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
             - POSTGRES_USER=${POSTGRES_USER:-postgres}
             - POSTGRES_DB=${POSTGRES_DB:-new_drama}
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 10s
         volumes:
             - ./conf/init.sql:/docker-entrypoint-initdb.d/init.sql
             - postgres-volume-new-drama:/var/lib/postgresql/data
@@ -83,14 +93,14 @@ services:
                 - NEXT_PUBLIC_YANDEX_VERIFICATION=${NEXT_PUBLIC_YANDEX_VERIFICATION}
                 - PORT=${FRONTEND_PORT:-3000}
                 - API_URL=${API_URL}
-        command: npm run dev
+        command: sh -c "npm run dev -- -p ${FRONTEND_PORT:-3000} -H 0.0.0.0"
         expose:
             - ${FRONTEND_PORT:-3000}
         environment:
             - PORT=${FRONTEND_PORT:-3000}
             - NODE_ENV=${NODE_ENV}
             - WATCHPACK_POLLING=true
-            - API_URL=${API_URL:-http://django-new-drama:${DJANGO_PORT:-8011}}
+            - API_URL=${API_URL:-http://django-new-drama:${DJANGO_PORT:-8001}}
             - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
             - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
             - NEXT_PUBLIC_YANDEX_METRIKA_ID=${NEXT_PUBLIC_YANDEX_METRIKA_ID}
