@@ -99,7 +99,7 @@ services:
             - PORT=${FRONTEND_PORT:-3000}
             - NODE_ENV=${NODE_ENV}
             - WATCHPACK_POLLING=true
-            - API_URL=${API_URL:-http://django-new-drama:${DJANGO_PORT:-8001}}
+            - API_URL=${API_URL}
             - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
             - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
             - NEXT_PUBLIC_YANDEX_METRIKA_ID=${NEXT_PUBLIC_YANDEX_METRIKA_ID}
