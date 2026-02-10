@@ -6,9 +6,10 @@ from django.urls import path, include
 from .api import api
 
 urlpatterns = [
-    path('', api.urls),
+    path('api/', api.urls),
+    # path('', api.urls),
     path('ckeditor5/', include('django_ckeditor_5.urls')),
-    path('grappelli/', include('grappelli.urls')), # grappelli URLS
+    path('grappelli/', include('grappelli.urls')),  # grappelli URLS
     path('admin/', admin.site.urls),
     # path('api/', api.urls),
 ]

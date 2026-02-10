@@ -1,0 +1,103 @@
+user  ${NGINX_USER};
+worker_processes  ${NGINX_WORKER_PROCESSES};
+
+events {
+    worker_connections ${NGINX_WORKER_CONNECTIONS};
+}
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    server {
+        listen 80;
+        server_name ${NGINX_SERVER_NAME};
+
+        # Обслуживание webroot для certbot HTTP-01
+        location ^~ /.well-known/acme-challenge/ {
+            root /var/www/certbot;
+            default_type "text/plain";
+            try_files $uri =404;
+        }
+
+        location / {
+            proxy_pass ${FRONTEND_URL}/;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-Host $host;
+        }
+    
+        location / {
+            proxy_pass ${FRONTEND_URL}/;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-Host $host;
+        }
+
+        location /api/ {
+            proxy_pass ${BACKEND_URL}/api/;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-Host $host;
+            proxy_redirect off;
+
+            proxy_connect_timeout       ${NGINX_PROXY_CONNECT_TIMEOUT};
+            proxy_send_timeout          ${NGINX_PROXY_SEND_TIMEOUT};
+            proxy_read_timeout          ${NGINX_PROXY_READ_TIMEOUT};
+            send_timeout                ${NGINX_SEND_TIMEOUT};
+        }
+
+        location /admin {
+            proxy_pass ${BACKEND_URL};
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Forwarded-Host $host;
+            proxy_redirect off;
+            proxy_buffering off;
+
+            proxy_connect_timeout       ${NGINX_PROXY_CONNECT_TIMEOUT};
+            proxy_send_timeout          ${NGINX_PROXY_SEND_TIMEOUT};
+            proxy_read_timeout          ${NGINX_PROXY_READ_TIMEOUT};
+            send_timeout                ${NGINX_SEND_TIMEOUT};
+        }
+
+        location /api/video {
+            proxy_pass ${FRONTEND_URL}/api/video;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+
+        location /static/ {
+            root /;
+            expires 30d;
+            add_header Pragma public;
+            add_header Cache-Control "public";
+            
+            # Правильная обработка SVG файлов
+            location ~* \.svg$ {
+                add_header Content-Type image/svg+xml;
+                expires 30d;
+            }
+        }
+
+        location /media/ {
+            alias ${NGINX_MEDIA_PATH}/;
+            expires 30d;
+            add_header Pragma public;
+            add_header Cache-Control "public";
+        }
+
+        client_max_body_size ${NGINX_CLIENT_MAX_BODY_SIZE};
+    }
+}
+
