@@ -1,26 +1,22 @@
-from django.core.exceptions import ValidationError
+from basis.models import DatesAbstract, SlugAbstractModel
+from basis.settings.django_base_settings import IMAGE_QUALITY
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_ckeditor_5.fields import CKEditor5Field
-from slugify import slugify
-
-from basis.models.dates_abstract_model import DatesAbstract
-from .services.path.event_cover_path import event_cover_path
-from .services.path.event_program_pdf_path import event_program_pdf_path
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFit
-from basis.settings.django_base_settings import IMAGE_QUALITY
+
+from .services.path.event_cover_path import event_cover_path
+from .services.path.event_program_pdf_path import event_program_pdf_path
 
 
-class Event(DatesAbstract):
+class Event(DatesAbstract, SlugAbstractModel):
     """Репертуар"""
-
     name = models.CharField(
         _('Название спектакля'),
         max_length=256,
         unique=True
     )
-    slug = models.CharField(_('Слаг названия'), max_length=256, unique=True)
     short_description = models.CharField(_('Краткое описание'))
     description = CKEditor5Field(
         _('Подробное описание'),
@@ -145,17 +141,6 @@ class Event(DatesAbstract):
 
     def __str__(self) -> str:
         return str(self.name)
-
-    def clean(self) -> None:
-        """Валидация для админки"""
-        slug = slugify(self.name)
-        is_exists = Event.objects.filter(
-            slug=slug
-        ).exclude(id=self.id).exists()
-        if is_exists:
-            raise ValidationError({
-                'name': _('Спектакль с таким названием уже создан')
-            })
 
     @property
     def cover_compressed_url(self) -> str | None:

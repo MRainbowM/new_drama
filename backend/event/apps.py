@@ -6,6 +6,3 @@ class EventConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'event'
     verbose_name = _('Спектакли')
-
-    def ready(self):
-        import event.signals  # noqa
