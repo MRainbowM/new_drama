@@ -43,7 +43,6 @@ services:
         build:
             dockerfile: conf/django.Dockerfile
             context: .
-        command: bash -c "while true; do echo 'I am alive!'; sleep 3600; done"
         working_dir: /backend
         ports:
             - ${DJANGO_PORT:-8001}
