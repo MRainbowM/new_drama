@@ -1,31 +1,14 @@
 from typing import List
 
-from django.http import Http404
 from django.utils.translation import gettext_lazy as _
 from ninja import Query, Router
 
-from .models import InfoBlock, Review, Partner
-from .models.services.popup_db_service import popup_db_service
+from .models import Partner
 from .schemes import (
-    ReviewOutSchema, ReviewFilterSchema,
-    PartnerFilterSchema, PartnerOutSchema,
-    PopupOutSchema
+    PartnerFilterSchema, PartnerOutSchema
 )
 
 router = Router()
-
-
-@router.get(
-    '/review/list',
-    response=List[ReviewOutSchema],
-    tags=[_('Инфо-блоки')],
-    summary=_('Получить список отзывов')
-)
-def get_review_list(request, filters: ReviewFilterSchema = Query(...)):
-    review_list = Review.objects.all()
-    review_list = filters.filter(review_list).order_by('sort')
-
-    return review_list
 
 
 @router.get(
@@ -39,18 +22,3 @@ def get_partner_list(request, filters: PartnerFilterSchema = Query(...)):
     partner_list = filters.filter(partner_list).order_by('sort')
 
     return partner_list
-
-
-@router.get(
-    '/popup',
-    response=PopupOutSchema,
-    tags=[_('Поп-ап')],
-    summary=_('Получить активный поп-ап на текущий момент времени')
-)
-def get_active_popup(request):
-    popup = popup_db_service.get_active()
-
-    if popup is None:
-        raise Http404
-
-    return popup

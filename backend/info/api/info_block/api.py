@@ -5,13 +5,12 @@ from ninja import Router, Query
 from .api_service import info_block_api_service
 from .schemas import InfoBlockOutSchema, InfoBlockFilterSchema
 
-router = Router()
+router = Router(tags=['Инфо-блоки'])
 
 
 @router.get(
-    '/info_block/list',
+    '/info-blocks/',
     response=List[InfoBlockOutSchema],
-    tags=['Инфо-блоки'],
     summary='Получить список инфо-блоков'
 )
 async def get_info_block_list(request, params: InfoBlockFilterSchema = Query(...)):
