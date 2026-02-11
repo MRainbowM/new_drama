@@ -15,7 +15,9 @@ class ReviewApiService:
         return await review_db_service.get_list(
             is_enable_main=is_enable_main,
             is_enable_event=is_enable_event,
-            event_id=event_id
+            event_id=event_id,
+            order_by='sort',
+            return_fields=['id', 'image', 'nickname']
         )
 
 
