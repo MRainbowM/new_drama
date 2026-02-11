@@ -1,5 +1,5 @@
-import { apiClient } from '../api/client'
-import { components } from '../api/schema'
+import { apiClient } from '../../api/client'
+import { components } from '../../api/schema'
 
 interface GetEventShowListParams {
     /* id спектакля - получение афиши только для одного спектакля */
@@ -17,7 +17,7 @@ export async function getEventShowList(
     { event_id }: GetEventShowListParams = {}
 ): Promise<GetEventShowListResult> {
     /* Получение списка спектаклей в афише */
-    const response = await apiClient.GET('/event/event_show/list', {
+    const response = await apiClient.GET('/api/event/event_show/list', {
         params: {
             query: {
                 is_enable: true,
