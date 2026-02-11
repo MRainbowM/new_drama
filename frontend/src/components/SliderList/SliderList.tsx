@@ -22,16 +22,27 @@ export default function SliderList(
                 data={data}
             />
             <div className={styles.right}>
-                {data.map((item, index) => (
+                <div className={styles.rightSticky}>
                     <SliderItem
-                        key={item.id}
-                        onView={() => {
-                            setActiveItem(index)
-                        }}
-                        data={item}
-                        isActive={index == activeItem}
+                        key={data[activeItem].id}
+                        data={data[activeItem]}
+                        isActive={true}
                     />
-                ))}
+                </div>
+
+                <div className={styles.rightTriggers} aria-hidden="true">
+                    {data.map((item, index) => (
+                        <SliderItem
+                            key={item.id}
+                            onView={() => {
+                                setActiveItem(index)
+                            }}
+                            data={item}
+                            isActive={index == activeItem}
+                            variant="trigger"
+                        />
+                    ))}
+                </div>
             </div>
         </div>
     );

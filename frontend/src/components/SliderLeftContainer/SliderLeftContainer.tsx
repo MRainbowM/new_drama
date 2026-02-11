@@ -25,7 +25,7 @@ export default function SliderLeftContainer(
                         <div
                             className={clsx(
                                 styles.picture,
-                                { [styles.active]: index <= activeItem },
+                                { [styles.active]: index === activeItem },
                             )}
                             key={item.id}
                         >
