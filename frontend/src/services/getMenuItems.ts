@@ -16,10 +16,9 @@ export async function getMenuItems(): Promise<getMenuItemsResult> {
     ];
 
     // Инфо-блоки в меню
-    const response = await apiClient.GET('/info/info_block/menu/list', {
+    const response = await apiClient.GET('/info/info_block/list', {
         params: {
             query: {
-                is_enable: true,
                 in_menu: true
             }
         }

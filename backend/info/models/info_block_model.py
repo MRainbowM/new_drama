@@ -1,6 +1,10 @@
+from basis.constants import MAX_IMAGE_SIZE_500_500
 from basis.models.dates_abstract_model import DatesAbstract
+from basis.settings.django_base_settings import IMAGE_QUALITY
 from django.db import models
 from django_ckeditor_5.fields import CKEditor5Field
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFit
 
 from .services.info_block_cover_path import info_block_cover_path
 
@@ -24,6 +28,13 @@ class InfoBlock(DatesAbstract):
         'Обложка',
         upload_to=info_block_cover_path,
         help_text='Картинка инфо-блока'
+    )
+    # Сжатая версия
+    cover_compressed = ImageSpecField(
+        source='cover',
+        processors=[ResizeToFit(*MAX_IMAGE_SIZE_500_500)],
+        format='JPEG',
+        options={'quality': IMAGE_QUALITY}
     )
     is_enable = models.BooleanField('Показывать на сайте', default=True)
     in_menu = models.BooleanField(

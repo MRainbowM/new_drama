@@ -134,8 +134,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Базовая ссылка на сервис покупки билетов
 TICKET_SERVICE_BASE_URL = env('TICKET_SERVICE_BASE_URL')
 
-# Максимальный размер изображения
-MAX_IMAGE_SIZE = tuple(map(int, env('MAX_IMAGE_SIZE', '800,800').split(',')))
-
 # Качество изображения
 IMAGE_QUALITY = env.int('IMAGE_QUALITY', 75)

@@ -7,40 +7,12 @@ from ninja import Query, Router
 from .models import InfoBlock, Review, Partner
 from .models.services.popup_db_service import popup_db_service
 from .schemes import (
-    InfoBlockOutSchema, InfoBlockFilterSchema,
-    MenuInfoBlockOutSchema,
     ReviewOutSchema, ReviewFilterSchema,
     PartnerFilterSchema, PartnerOutSchema,
     PopupOutSchema
 )
 
 router = Router()
-
-
-@router.get(
-    '/info_block/list',
-    response=List[InfoBlockOutSchema],
-    tags=[_('Инфо-блоки')],
-    summary=_('Получить список инфо-блоков')
-)
-def get_info_block_list(request, filters: InfoBlockFilterSchema = Query(...)):
-    info_block_list = InfoBlock.objects.all()
-    info_block_list = filters.filter(info_block_list).order_by('sort')
-
-    return info_block_list
-
-
-@router.get(
-    '/info_block/menu/list',
-    response=List[MenuInfoBlockOutSchema],
-    tags=[_('Инфо-блоки')],
-    summary=_('Получить список инфо-блоков в меню')
-)
-def get_menu_info_block_list(request, filters: InfoBlockFilterSchema = Query(...)):
-    info_block_list = InfoBlock.objects.all()
-    info_block_list = filters.filter(info_block_list).order_by('sort')
-
-    return info_block_list
 
 
 @router.get(
