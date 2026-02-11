@@ -11,7 +11,7 @@ interface EventPageProps {
 export default async function EventPage(
     { params: { slug } }: EventPageProps
 ) {
-    const response = await apiClient.GET('/event/event/{slug}', {
+    const response = await apiClient.GET('/api/event/event/{slug}', {
         params: {
             path: { slug }
         }
