@@ -1,6 +1,6 @@
 import styles from './EventPreviewSection.module.scss';
 import EventPreviewList from '../EventPreviewContainer/EventPreviewContainer';
-import { getEventList } from '../../services/getEventList';
+import { getEventList } from '../../services/api/getEventList';
 
 export default async function EventPreviewSection() {
     // Репертуар

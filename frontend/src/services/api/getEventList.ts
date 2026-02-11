@@ -1,5 +1,5 @@
-import { apiClient } from '../api/client';
-import { components } from '../api/schema';
+import { apiClient } from '../../api/client';
+import { components } from '../../api/schema';
 
 interface GetEventListParams {
     /* Спектакли в слайдере на главной странице */
@@ -17,7 +17,7 @@ export async function getEventList(
     { show_on_main_page, order_by }: GetEventListParams = {}
 ): Promise<GetEventListResult> {
     /* Получение списка спектаклей */
-    const response = await apiClient.GET('/event/event/list', {
+    const response = await apiClient.GET('/api/event/event/list', {
         params: {
             query: {
                 show_on_main_page: show_on_main_page ? show_on_main_page : undefined,
@@ -31,7 +31,6 @@ export async function getEventList(
         return {
             events: []
         };
-        // throw new Error('error');
     }
 
     return { events: response.data };
