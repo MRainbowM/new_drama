@@ -136,12 +136,13 @@
     position: absolute;
     z-index: 0;
     opacity: 0;
-    top: 100px;
-    transition: 0.3s top, 0.5s opacity;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: none;
 
     &.active {
         opacity: 1;
-        top: 0;
         z-index: 1;
     }
 
@@ -152,6 +153,28 @@
         font-family: var(--font-montserrat);
         font-weight: 400;
         font-size: 14px;
+        gap: 10px;
+    }
+
+    .mobileLineMask {
+        overflow: hidden;
+    }
+
+    .mobileLineInner {
+        // Фоллбек: без clip-path просто показываем (анимация ниже в @supports).
+        clip-path: none;
+        opacity: 1;
+        will-change: clip-path;
+        display: block;
+    }
+
+    .mobileBullet {
+        margin-right: 8px;
+        opacity: 0.9;
+    }
+
+    .mobileLineContent {
+        display: inline;
     }
 
     .mobileBtn {
@@ -173,6 +196,41 @@
                 font-family: var(--font-sans-caption);
             }
         }
+    }
+}
+
+@supports (clip-path: inset(0 0 100% 0)) {
+    .mobileData {
+        // В неактивном состоянии — прячем мгновенно, чтобы не “просвечивало”.
+        opacity: 0;
+        transition: none;
+
+        .mobileLineInner {
+            clip-path: inset(0 0 100% 0);
+            opacity: 0;
+            transition: none;
+            will-change: clip-path, opacity;
+        }
+
+        &.active {
+            opacity: 1;
+
+            .mobileLineInner {
+                clip-path: inset(0 0 0 0);
+                opacity: 1;
+                transition:
+                    clip-path 850ms cubic-bezier(0.22, 1, 0.36, 1) var(--line-delay),
+                    opacity 650ms ease var(--line-delay);
+            }
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mobileLineInner {
+        transition: none !important;
+        clip-path: none !important;
+        opacity: 1 !important;
     }
 }
 
@@ -207,6 +265,20 @@
 
     .title {
         padding-top: 0;
+    }
+
+    // Мобилка: без “шторки”, только плавная смена прозрачности картинки
+    .picture {
+        clip-path: none !important;
+        opacity: 0;
+        z-index: 0;
+        transition: opacity 650ms ease !important;
+        will-change: opacity;
+
+        &.active {
+            opacity: 1;
+            z-index: 1;
+        }
     }
 }
 

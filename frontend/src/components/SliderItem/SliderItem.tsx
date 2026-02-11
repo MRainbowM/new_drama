@@ -74,6 +74,8 @@ export default function SliderItem(
         return hasBeenInView || inView || isActive;
     }, [hasBeenInView, inView, isActive, isTrigger, shouldReveal]);
 
+    const lines = useMemo(() => splitRichTextToLines(data.content), [data.content]);
+
     if (isTrigger) {
         return (
             <div
@@ -83,8 +85,6 @@ export default function SliderItem(
             />
         );
     }
-
-    const lines = useMemo(() => splitRichTextToLines(data.content), [data.content]);
 
     return (
         <div className={clsx(styles.root,
