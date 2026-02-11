@@ -9,7 +9,7 @@ class InfoBlockOutSchema(Schema):
     content: str
     btn_text: str
     btn_link: str
-    cover: str
+    cover_compressed_url: str
     menu_title_slug: str
     menu_title: str
 

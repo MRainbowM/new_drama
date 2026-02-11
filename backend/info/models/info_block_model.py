@@ -4,7 +4,7 @@ from basis.settings.django_base_settings import IMAGE_QUALITY
 from django.db import models
 from django_ckeditor_5.fields import CKEditor5Field
 from imagekit.models import ImageSpecField
-from imagekit.processors import ResizeToFit
+from imagekit.processors import ResizeToFill
 
 from .services.info_block_cover_path import info_block_cover_path
 
@@ -32,9 +32,20 @@ class InfoBlock(DatesAbstract):
     # Сжатая версия
     cover_compressed = ImageSpecField(
         source='cover',
-        processors=[ResizeToFit(*MAX_IMAGE_SIZE_500_500)],
+        # ResizeToFill делает кроп под точный размер (в отличие от ResizeToFit)
+        processors=[ResizeToFill(*MAX_IMAGE_SIZE_500_500)],
         format='JPEG',
-        options={'quality': IMAGE_QUALITY}
+        # Pillow-опции при сохранении JPEG:
+        # - quality: основной рычаг "вес/качество" (обычно 80-90 достаточно хорошо)
+        # - optimize: чуть дольше сохраняет, но уменьшает размер
+        # - progressive: прогрессивный JPEG (часто меньше и быстрее грузится "визуально")
+        # - subsampling=0: 4:4:4 (меньше потерь на цвете, но чуть больше размер)
+        options={
+            'quality': IMAGE_QUALITY,
+            'optimize': True,
+            'progressive': True,
+            'subsampling': 0,
+        },
     )
     is_enable = models.BooleanField('Показывать на сайте', default=True)
     in_menu = models.BooleanField(
@@ -61,3 +72,10 @@ class InfoBlock(DatesAbstract):
 
     def __str__(self) -> str:
         return str(self.title)
+
+    @property
+    def cover_compressed_url(self) -> str | None:
+        """Возвращает URL сжатого изображения"""
+        if self.cover_compressed:
+            return self.cover_compressed.url
+        return None
