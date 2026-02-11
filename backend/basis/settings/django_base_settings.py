@@ -14,9 +14,10 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = env(
     'same-origin'
 )
 
-# if not DEBUG:
-#     USE_X_FORWARDED_HOST = True
-#     FORCE_SCRIPT_NAME = '/api'
+CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[])
+
+CSRF_COOKIE_SECURE = env.bool('CSRF_COOKIE_SECURE', default=not DEBUG)
+SESSION_COOKIE_SECURE = env.bool('SESSION_COOKIE_SECURE', default=not DEBUG)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
