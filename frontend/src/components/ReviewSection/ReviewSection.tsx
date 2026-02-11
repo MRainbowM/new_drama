@@ -1,4 +1,4 @@
-import { getReviewList } from '../../services/getReviewList';
+import { getReviewList } from '../../services/api/getReviewList';
 import { ReviewContent } from '../ReviewContent/ReviewContent';
 import styles from './ReviewSection.module.scss'
 

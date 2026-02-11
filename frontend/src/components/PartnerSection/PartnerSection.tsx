@@ -1,24 +1,14 @@
 import styles from './PartnerSection.module.scss'
-import { apiClient } from '../../api/client'
+import { getPartnerList } from '../../services/api/getPartnerList'
 import { contactEmail } from '../../constants/links';
 import PartnerList from '../PartnerList/PartnerList';
 
 
 export default async function PartnerSection() {
-    const response = await apiClient.GET('/info/partner/list', {
-        params: {
-            query: {
-                is_enable: true
-            }
-        }
-    });
 
-    if (response.error) {
-        console.log(response.error);
-        throw new Error('error'); //TODO
-    }
+    const { partnerList } = await getPartnerList();
 
-    if (response.data.length == 0) {
+    if (partnerList.length == 0) {
         return <></>;
     }
 
@@ -32,7 +22,7 @@ export default async function PartnerSection() {
                     <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
                 </div>
 
-                <PartnerList partnerList={response.data} />
+                <PartnerList partnerList={partnerList} />
             </div>
         </section>
     );

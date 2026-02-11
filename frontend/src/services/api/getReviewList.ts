@@ -1,5 +1,5 @@
-import { apiClient } from '../api/client'
-import { components } from '../api/schema'
+import { apiClient } from '../../api/client'
+import { components } from '../../api/schema'
 
 interface GetReviewListParams {
     /* id спектакля - получение отзывов только для одного спектакля */
@@ -17,7 +17,7 @@ export async function getReviewList(
     { event_id, is_enable_main, is_enable_event }: GetReviewListParams = {}
 ): Promise<GetReviewListResult> {
     /* Получение списка спектаклей в афише */
-    const response = await apiClient.GET('/info/review/list', {
+    const response = await apiClient.GET('/api/info/reviews/', {
         params: {
             query: {
                 event_id: event_id ? event_id : undefined,
