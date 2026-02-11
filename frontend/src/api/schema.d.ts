@@ -440,8 +440,8 @@ export interface components {
             btn_text: string;
             /** Btn Link */
             btn_link: string;
-            /** Cover */
-            cover: string;
+            /** Cover Compressed Url */
+            cover_compressed_url: string;
             /** Menu Title Slug */
             menu_title_slug: string;
             /** Menu Title */

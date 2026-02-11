@@ -57,7 +57,7 @@ export default function SliderLeftContainer(
                         >
                             <Image
                                 className={styles.pictureImg}
-                                src={item.cover}
+                                src={item.cover_compressed_url}
                                 layout='fill'
                                 alt={item.title}
                             />

@@ -27,12 +27,12 @@ docker-compose -f docker-compose.local.yml exec django-new-drama python3 -m uvic
 
 ### Создание миграций
 ```sh
-docker-compose exec django-new-drama python3 manage.py makemigrations
+docker-compose -f docker-compose.local.yml exec django-new-drama python3 manage.py makemigrations
 ```
 
 ### Применение миграций
 ```sh
-docker-compose exec django-new-drama python3 manage.py migrate
+docker-compose -f docker-compose.local.yml exec django-new-drama python3 manage.py migrate
 ```
 
 ### Cоздание супер-пользователя
