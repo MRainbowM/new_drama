@@ -64,6 +64,7 @@
 
     .pictureImg {
         object-fit: cover;
+        background-color: var(--color-black);
     }
 
     &.active {
