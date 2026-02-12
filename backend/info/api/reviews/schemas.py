@@ -6,6 +6,7 @@ from ninja import Schema
 class ReviewOutSchema(Schema):
     id: int
     image: str
+    image_compressed_url: str
     nickname: Optional[str] = None
 
 

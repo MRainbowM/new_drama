@@ -462,6 +462,8 @@ export interface components {
             id: number;
             /** Image */
             image: string;
+            /** Image Compressed Url */
+            image_compressed_url: string;
             /** Nickname */
             nickname?: string | null;
         };

@@ -1,6 +1,10 @@
+from basis.constants import MAX_IMAGE_SIZE_250_350
 from basis.models.dates_abstract_model import DatesAbstract
+from basis.settings.django_base_settings import IMAGE_QUALITY
 from django.db import models
 from event.models import Event
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 
 from .services.review_image_path import review_image_path
 
@@ -10,6 +14,17 @@ class Review(DatesAbstract):
         'Фотография',
         upload_to=review_image_path,
         help_text='Фото/скрин отзыва'
+    )
+    image_compressed = ImageSpecField(
+        source='image',
+        format='JPEG',
+        options={
+            'quality': IMAGE_QUALITY,
+            'optimize': True,
+            'progressive': True,
+            'subsampling': 0,
+        },
+        processors=[ResizeToFill(*MAX_IMAGE_SIZE_250_350)]
     )
     nickname = models.CharField(
         'Никнейм',
@@ -39,3 +54,10 @@ class Review(DatesAbstract):
     class Meta:
         verbose_name = 'Отзыв'
         verbose_name_plural = 'Отзывы'
+
+    @property
+    def image_compressed_url(self) -> str | None:
+        """Возвращает URL сжатого изображения"""
+        if self.image_compressed:
+            return self.image_compressed.url
+        return None
