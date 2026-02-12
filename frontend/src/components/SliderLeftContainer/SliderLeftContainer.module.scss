@@ -1,6 +1,6 @@
 .root {
-    --picture-height: 460px;
-    --picture-width: 460px;
+    --picture-height: min(460px, calc(100vh - var(--header-height) - var(--container-margin-lr) * 3));;
+    --picture-width: min(460px, calc(100vh - var(--header-height) - var(--container-margin-lr) * 3));;
 
     display: flex;
     flex-direction: column;
