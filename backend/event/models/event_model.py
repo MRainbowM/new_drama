@@ -1,10 +1,14 @@
-from basis.constants import MAX_IMAGE_SIZE_750_650, MAX_IMAGE_SIZE_1680_800
+from basis.constants import (
+    MAX_IMAGE_SIZE_750_650,
+    MAX_IMAGE_SIZE_1680_800,
+    MAX_IMAGE_SIZE_850_550
+)
 from basis.models import DatesAbstract, SlugAbstractModel
 from basis.settings.django_base_settings import IMAGE_QUALITY
 from django.db import models
 from django_ckeditor_5.fields import CKEditor5Field
 from imagekit.models import ImageSpecField
-from imagekit.processors import ResizeToFill, ResizeToFit
+from imagekit.processors import ResizeToFill
 
 from .services.path.event_cover_path import event_cover_path
 from .services.path.event_program_pdf_path import event_program_pdf_path
@@ -107,9 +111,14 @@ class Event(DatesAbstract, SlugAbstractModel):
     )
     description_cover_compressed = ImageSpecField(
         source='description_cover',
-        processors=[ResizeToFit(1000, 1000)],
+        processors=[ResizeToFill(*MAX_IMAGE_SIZE_850_550)],
         format='JPEG',
-        options={'quality': IMAGE_QUALITY}
+        options={
+            'quality': IMAGE_QUALITY,
+            'optimize': True,
+            'progressive': True,
+            'subsampling': 0,
+        }
     )
     actor_cover = models.ImageField(
         'Фотография напротив списка действующих лиц спектакля',
@@ -120,9 +129,14 @@ class Event(DatesAbstract, SlugAbstractModel):
     )
     actor_cover_compressed = ImageSpecField(
         source='actor_cover',
-        processors=[ResizeToFit(1000, 1000)],
+        processors=[ResizeToFill(*MAX_IMAGE_SIZE_850_550)],
         format='JPEG',
-        options={'quality': IMAGE_QUALITY}
+        options={
+            'quality': IMAGE_QUALITY,
+            'optimize': True,
+            'progressive': True,
+            'subsampling': 0,
+        }
     )
     min_age_limit = models.IntegerField(
         'Возрастное ограничение',
