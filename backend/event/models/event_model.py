@@ -1,4 +1,4 @@
-from basis.constants import MAX_IMAGE_SIZE_750_650
+from basis.constants import MAX_IMAGE_SIZE_750_650, MAX_IMAGE_SIZE_1680_800
 from basis.models import DatesAbstract, SlugAbstractModel
 from basis.settings.django_base_settings import IMAGE_QUALITY
 from django.db import models
@@ -89,8 +89,14 @@ class Event(DatesAbstract, SlugAbstractModel):
     )
     detail_cover_compressed = ImageSpecField(
         source='detail_cover',
+        processors=[ResizeToFill(*MAX_IMAGE_SIZE_1680_800)],
         format='JPEG',
-        options={'quality': IMAGE_QUALITY}
+        options={
+            'quality': IMAGE_QUALITY,
+            'optimize': True,
+            'progressive': True,
+            'subsampling': 0,
+        }
     )
     description_cover = models.ImageField(
         'Фотография напротив описания спектакля',

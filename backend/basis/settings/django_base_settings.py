@@ -135,4 +135,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 TICKET_SERVICE_BASE_URL = env('TICKET_SERVICE_BASE_URL')
 
 # Качество изображения
-IMAGE_QUALITY = env.int('IMAGE_QUALITY', 75)
+IMAGE_QUALITY = env.int('IMAGE_QUALITY', 80)
