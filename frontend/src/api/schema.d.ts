@@ -181,6 +181,8 @@ export interface components {
         /** EventPreviewSchema */
         EventPreviewSchema: {
             producer: components["schemas"]["PeoplePreviewSchema"] | null;
+            /** Cover Compressed Url */
+            cover_compressed_url: string;
             /** ID */
             id?: number | null;
             /** Название спектакля */

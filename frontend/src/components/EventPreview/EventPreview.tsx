@@ -15,7 +15,7 @@ interface EventPreviewProps {
 export default function EventPreview(
     { event, isActiveContainer, isActive, onMouseOver }: EventPreviewProps
 ) {
-    const backgroundImageSrc = event.cover ? myImageLoader({ src: event.cover }) : '';
+    const backgroundImageSrc = event.cover_compressed_url ? myImageLoader({ src: event.cover_compressed_url }) : '';
 
     const eventDetailLink = `/events/${event.slug}`;
     const openEventDetail = () => {

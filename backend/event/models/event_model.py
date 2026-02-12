@@ -1,10 +1,10 @@
+from basis.constants import MAX_IMAGE_SIZE_750_650
 from basis.models import DatesAbstract, SlugAbstractModel
 from basis.settings.django_base_settings import IMAGE_QUALITY
 from django.db import models
-from django.utils.translation import gettext_lazy as _
 from django_ckeditor_5.fields import CKEditor5Field
 from imagekit.models import ImageSpecField
-from imagekit.processors import ResizeToFit
+from imagekit.processors import ResizeToFill, ResizeToFit
 
 from .services.path.event_cover_path import event_cover_path
 from .services.path.event_program_pdf_path import event_program_pdf_path
@@ -13,43 +13,43 @@ from .services.path.event_program_pdf_path import event_program_pdf_path
 class Event(DatesAbstract, SlugAbstractModel):
     """Репертуар"""
     name = models.CharField(
-        _('Название спектакля'),
+        'Название спектакля',
         max_length=256,
         unique=True
     )
-    short_description = models.CharField(_('Краткое описание'))
+    short_description = models.CharField('Краткое описание')
     description = CKEditor5Field(
-        _('Подробное описание'),
+        'Подробное описание',
         default='',
         blank=True,
         config_name='extends'
     )
-    dramatist = models.CharField(_('Драматург'), default='', blank=True)
+    dramatist = models.CharField('Драматург', default='', blank=True)
     producer = models.ForeignKey(
         to='people.People',
         on_delete=models.SET_NULL,
-        verbose_name=_('Режиссер'),
+        verbose_name='Режиссер',
         null=True,
         blank=True,
         related_name='producer'
     )
     is_enable = models.BooleanField(
-        _('Показывать на сайте'),
+        'Показывать на сайте',
         help_text='При выключенном параметре спектакль будь скрыт на сайте',
         default=True
     )
     show_on_main_page = models.BooleanField(
-        _('Показывать на главной странице'),
+        'Показывать на главной странице',
         help_text='При включенном параметре спектакль будет показан на слайдере главной страницы',
         default=True
     )
     is_archival = models.BooleanField(
-        _('Архив'),
+        'Архив',
         help_text='Спектакль архивный, на текущий момент его не ставят',
         default=False
     )
     cover = models.ImageField(
-        _('Обложка спектакля на главной'),
+        'Обложка спектакля на главной',
         upload_to=event_cover_path,
         help_text='Изображение в списке спектаклей в слайдере на главной',
         blank=True,
@@ -57,26 +57,31 @@ class Event(DatesAbstract, SlugAbstractModel):
     )
     cover_compressed = ImageSpecField(
         source='cover',
-        processors=[ResizeToFit(1000, 1000)],
+        processors=[ResizeToFill(*MAX_IMAGE_SIZE_750_650)],
         format='JPEG',
-        options={'quality': IMAGE_QUALITY}
+        options={
+            'quality': IMAGE_QUALITY,
+            'optimize': True,
+            'progressive': True,
+            'subsampling': 0,
+        }
     )
     cover_in_list = models.ImageField(
-        _('Обложка спектакля в списке спектаклей'),
+        'Обложка спектакля в списке спектаклей',
         upload_to=event_cover_path,
         help_text='Изображение в списке спектаклей',
         blank=True,
         null=True
     )
     preview_cover = models.ImageField(
-        _('Обложка в афише'),
+        'Обложка в афише',
         upload_to=event_cover_path,
         help_text='Изображение курсора при наведении на спектакль в афише',
         blank=True,
         null=True
     )
     detail_cover = models.ImageField(
-        _('Обложка спектакля в карточке спектакля'),
+        'Обложка спектакля в карточке спектакля',
         upload_to=event_cover_path,
         help_text='Главное изображение в карточке спектакля',
         blank=True,
@@ -88,7 +93,7 @@ class Event(DatesAbstract, SlugAbstractModel):
         options={'quality': IMAGE_QUALITY}
     )
     description_cover = models.ImageField(
-        _('Фотография напротив описания спектакля'),
+        'Фотография напротив описания спектакля',
         upload_to=event_cover_path,
         help_text='Изображение в карточке спектакля',
         blank=True,
@@ -101,7 +106,7 @@ class Event(DatesAbstract, SlugAbstractModel):
         options={'quality': IMAGE_QUALITY}
     )
     actor_cover = models.ImageField(
-        _('Фотография напротив списка действующих лиц спектакля'),
+        'Фотография напротив списка действующих лиц спектакля',
         upload_to=event_cover_path,
         help_text='Изображение в карточке спектакля',
         blank=True,
@@ -114,20 +119,20 @@ class Event(DatesAbstract, SlugAbstractModel):
         options={'quality': IMAGE_QUALITY}
     )
     min_age_limit = models.IntegerField(
-        _('Возрастное ограничение'),
+        'Возрастное ограничение',
         help_text='Минимальный разрешенный возраст зрителя, например, 18 лет',
         default=0
     )
-    premiere_at = models.DateField(_('Дата премьеры'), null=True, blank=True)
+    premiere_at = models.DateField('Дата премьеры', null=True, blank=True)
     duration = models.DurationField(
-        _('Длительность спектакля'),
+        'Длительность спектакля',
         help_text='Формат: чч:мм:сс',
         null=True,
         blank=True
     )
-    has_intermission = models.BooleanField(_('Есть антракт'), default=False)
+    has_intermission = models.BooleanField('Есть антракт', default=False)
     program_pdf = models.FileField(
-        _('Программка спектакля'),
+        'Программка спектакля',
         upload_to=event_program_pdf_path,
         help_text='PDF файл с программой спектакля',
         default='',
@@ -136,8 +141,8 @@ class Event(DatesAbstract, SlugAbstractModel):
     )
 
     class Meta:
-        verbose_name = _('Спектакль')
-        verbose_name_plural = _('Спектакли')
+        verbose_name = 'Спектакль'
+        verbose_name_plural = 'Спектакли'
 
     def __str__(self) -> str:
         return str(self.name)

@@ -1,11 +1,11 @@
-from typing import Optional, List
+from typing import List
+from typing import Optional
 
 from ninja import ModelSchema, FilterSchema, Field
-
 from people.schemes import PeoplePreviewSchema, PeopleShortSchema, EventPeopleOutSchema
+
 from .event_image_schemes import EventImageOutSchema
 from ..models import Event
-from typing import Optional
 
 
 class EventDetailSchema(ModelSchema):
@@ -40,6 +40,7 @@ class EventDetailSchema(ModelSchema):
 
 class EventPreviewSchema(ModelSchema):
     producer: Optional[PeoplePreviewSchema]
+    cover_compressed_url: str
 
     class Config:
         model = Event
