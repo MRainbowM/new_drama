@@ -559,7 +559,7 @@ export interface operations {
         parameters: {
             query?: {
                 show_on_main_page?: boolean;
-                order_by?: "?" | "name";
+                order_by?: "?" | "name" | "sort";
             };
             header?: never;
             path?: never;

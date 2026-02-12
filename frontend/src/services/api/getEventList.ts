@@ -5,7 +5,7 @@ interface GetEventListParams {
     /* Спектакли в слайдере на главной странице */
     show_on_main_page?: boolean,
     /* Сортировка спектаклей */
-    order_by?: '?' | 'name'
+    order_by?: '?' | 'name' | 'sort'
 }
 
 interface GetEventListResult {

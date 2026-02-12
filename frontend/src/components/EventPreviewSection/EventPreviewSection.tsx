@@ -6,7 +6,7 @@ export default async function EventPreviewSection() {
     // Репертуар
     const { events } = await getEventList({
         show_on_main_page: true,
-        order_by: 'name'
+        order_by: 'sort'
     });
 
     return (

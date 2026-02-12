@@ -140,6 +140,12 @@ class Event(DatesAbstract, SlugAbstractModel):
         blank=True
     )
 
+    sort = models.PositiveIntegerField(
+        'Сортировка',
+        help_text='Порядок отображения спектаклей в списке спектаклей (в слайдере) на главной странице',
+        default=1000000
+    )
+
     class Meta:
         verbose_name = 'Спектакль'
         verbose_name_plural = 'Спектакли'
