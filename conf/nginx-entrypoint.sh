@@ -18,8 +18,32 @@ export NGINX_MEDIA_PATH=${NGINX_MEDIA_PATH:-/backend/media}
 export NGINX_CLIENT_MAX_BODY_SIZE=${NGINX_CLIENT_MAX_BODY_SIZE:-100M}
 
 # SSL
-export NGINX_SSL_CERT_PATH=${NGINX_SSL_CERT_PATH:-/etc/nginx/certs/fullchain.pem}
-export NGINX_SSL_KEY_PATH=${NGINX_SSL_KEY_PATH:-/etc/nginx/certs/privkey.pem}
+export NGINX_SSL_CERT_PATH=${NGINX_SSL_CERT_PATH:-}
+export NGINX_SSL_KEY_PATH=${NGINX_SSL_KEY_PATH:-}
+
+detect_letsencrypt_certs() {
+  # Берём первый server_name (в NGINX_SERVER_NAME могут быть несколько доменов через пробел)
+  primary_name="$(printf '%s' "$NGINX_SERVER_NAME" | awk '{print $1}')"
+
+  # Пытаемся найти сертификаты по самому домену и вариантам с/без www
+  # (если primary_name = www.example.com, пробуем example.com и наоборот)
+  primary_no_www="$(printf '%s' "$primary_name" | sed 's/^www\\.//')"
+
+  for domain in "$primary_name" "$primary_no_www" "www.$primary_no_www"; do
+    cert="/etc/letsencrypt/live/$domain/fullchain.pem"
+    key="/etc/letsencrypt/live/$domain/privkey.pem"
+    if [ -s "$cert" ] && [ -s "$key" ]; then
+      export NGINX_SSL_CERT_PATH="$cert"
+      export NGINX_SSL_KEY_PATH="$key"
+      echo "[nginx-entrypoint] Авто-детект SSL: domain=$domain"
+      echo "[nginx-entrypoint] NGINX_SSL_CERT_PATH=$NGINX_SSL_CERT_PATH"
+      echo "[nginx-entrypoint] NGINX_SSL_KEY_PATH=$NGINX_SSL_KEY_PATH"
+      return 0
+    fi
+  done
+
+  return 1
+}
 
 # Выбор шаблона: если сертификаты существуют, используем SSL-конфиг
 TEMPLATE_PATH="/etc/nginx/nginx.conf.template"
@@ -27,14 +51,20 @@ TEMPLATE_PATH="/etc/nginx/nginx.conf.template"
 echo "[nginx-entrypoint] Проверяем содержимое /etc/letsencrypt/live/:"
 ls -R /etc/letsencrypt/live/
 
-if [ -s "$NGINX_SSL_CERT_PATH" ] && [ -s "$NGINX_SSL_KEY_PATH" ]; then
+if [ -n "$NGINX_SSL_CERT_PATH" ] && [ -n "$NGINX_SSL_KEY_PATH" ] && [ -s "$NGINX_SSL_CERT_PATH" ] && [ -s "$NGINX_SSL_KEY_PATH" ]; then
   TEMPLATE_PATH="/etc/nginx/nginx-ssl.conf.template"
   echo "[nginx-entrypoint] SSL сертификаты найдены, используем конфиг: $TEMPLATE_PATH"
 else
-  echo "[nginx-entrypoint] SSL сертификаты не найдены, используем HTTP конфиг: $TEMPLATE_PATH"
-  echo "[nginx-entrypoint] Значения переменных:"
-  echo "NGINX_SSL_CERT_PATH=$NGINX_SSL_CERT_PATH"
-  echo "NGINX_SSL_KEY_PATH=$NGINX_SSL_KEY_PATH"
+  echo "[nginx-entrypoint] SSL сертификаты по переменным окружения не найдены."
+  echo "[nginx-entrypoint] NGINX_SSL_CERT_PATH=$NGINX_SSL_CERT_PATH"
+  echo "[nginx-entrypoint] NGINX_SSL_KEY_PATH=$NGINX_SSL_KEY_PATH"
+
+  if detect_letsencrypt_certs; then
+    TEMPLATE_PATH="/etc/nginx/nginx-ssl.conf.template"
+    echo "[nginx-entrypoint] SSL сертификаты найдены (auto-detect), используем конфиг: $TEMPLATE_PATH"
+  else
+    echo "[nginx-entrypoint] SSL сертификаты не найдены, используем HTTP конфиг: $TEMPLATE_PATH"
+  fi
 fi
 echo "[nginx-entrypoint] Значение переменной NODE_ENV:"
 echo "NODE_ENV=$NODE_ENV"
