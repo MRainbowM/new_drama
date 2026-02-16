@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-    "/event/event_show/list": {
+    "/api/event/event_show/list": {
         parameters: {
             query?: never;
             header?: never;
@@ -21,7 +21,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/event/program": {
+    "/api/event/program": {
         parameters: {
             query?: never;
             header?: never;
@@ -38,7 +38,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/event/event/list": {
+    "/api/event/event/list": {
         parameters: {
             query?: never;
             header?: never;
@@ -55,7 +55,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/event/event/{slug}": {
+    "/api/event/event/{slug}": {
         parameters: {
             query?: never;
             header?: never;
@@ -72,7 +72,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/people/list": {
+    "/api/people/list": {
         parameters: {
             query?: never;
             header?: never;
@@ -89,7 +89,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/people/{slug}": {
+    "/api/people/{slug}": {
         parameters: {
             query?: never;
             header?: never;
@@ -106,7 +106,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/info/info_block/list": {
+    "/api/info/info-blocks/": {
         parameters: {
             query?: never;
             header?: never;
@@ -114,7 +114,7 @@ export interface paths {
             cookie?: never;
         };
         /** Получить список инфо-блоков */
-        get: operations["info_api_get_info_block_list"];
+        get: operations["info_api_info_blocks_api_get_info_block_list"];
         put?: never;
         post?: never;
         delete?: never;
@@ -123,24 +123,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/info/info_block/menu/list": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Получить список инфо-блоков в меню */
-        get: operations["info_api_get_menu_info_block_list"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/info/review/list": {
+    "/api/info/reviews/": {
         parameters: {
             query?: never;
             header?: never;
@@ -148,7 +131,7 @@ export interface paths {
             cookie?: never;
         };
         /** Получить список отзывов */
-        get: operations["info_api_get_review_list"];
+        get: operations["info_api_reviews_api_get_review_list"];
         put?: never;
         post?: never;
         delete?: never;
@@ -157,24 +140,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/info/partner/list": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Получить список партнеров */
-        get: operations["info_api_get_partner_list"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/info/popup": {
+    "/api/info/popups/active/": {
         parameters: {
             query?: never;
             header?: never;
@@ -182,7 +148,24 @@ export interface paths {
             cookie?: never;
         };
         /** Получить активный поп-ап на текущий момент времени */
-        get: operations["info_api_get_active_popup"];
+        get: operations["info_api_popups_api_get_active_popup"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/info/partners/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Получить список партнеров */
+        get: operations["info_api_partners_api_get_partner_list"];
         put?: never;
         post?: never;
         delete?: never;
@@ -198,11 +181,13 @@ export interface components {
         /** EventPreviewSchema */
         EventPreviewSchema: {
             producer: components["schemas"]["PeoplePreviewSchema"] | null;
+            /** Cover Compressed Url */
+            cover_compressed_url: string;
             /** ID */
             id?: number | null;
             /** Название спектакля */
             name: string;
-            /** Слаг названия */
+            /** Слаг */
             slug: string;
             /**
              * Драматург
@@ -298,7 +283,7 @@ export interface components {
             id?: number | null;
             /** Название спектакля */
             name: string;
-            /** Слаг названия */
+            /** Слаг */
             slug: string;
             /** Краткое описание */
             short_description: string;
@@ -442,48 +427,27 @@ export interface components {
         };
         /** InfoBlockFilterSchema */
         InfoBlockFilterSchema: {
-            /** Is Enable */
-            is_enable?: boolean | null;
             /** In Menu */
             in_menu?: boolean | null;
         };
         /** InfoBlockOutSchema */
         InfoBlockOutSchema: {
-            /** ID */
-            id?: number | null;
-            /** Заголовок */
+            /** Id */
+            id: number;
+            /** Title */
             title: string;
-            /** Текст */
+            /** Content */
             content: string;
-            /**
-             * Текст кнопки действия
-             * @description Текст будет отображаться внутри кнопки. Примеры: "написать в telegram", "перейти на сайт"
-             */
+            /** Btn Text */
             btn_text: string;
-            /**
-             * Ссылка кнопки
-             * @description Ресурс, на который будет перенаправлен пользователь при клике по кнопке
-             */
+            /** Btn Link */
             btn_link: string;
-            /**
-             * Обложка
-             * @description Картинка инфо-блока
-             */
-            cover: string;
-            /** Якорная ссылка */
+            /** Cover Compressed Url */
+            cover_compressed_url: string;
+            /** Menu Title Slug */
             menu_title_slug: string;
-        };
-        /** MenuInfoBlockOutSchema */
-        MenuInfoBlockOutSchema: {
-            /** ID */
-            id?: number | null;
-            /**
-             * Заголовок в меню
-             * @description Текст якорной ссылки, который будет отображаться в меню (хедере)
-             */
+            /** Menu Title */
             menu_title: string;
-            /** Якорная ссылка */
-            menu_title_slug: string;
         };
         /** ReviewFilterSchema */
         ReviewFilterSchema: {
@@ -496,84 +460,51 @@ export interface components {
         };
         /** ReviewOutSchema */
         ReviewOutSchema: {
-            /** ID */
-            id?: number | null;
-            /**
-             * Фотография
-             * @description Фото/скрин отзыва
-             */
+            /** Id */
+            id: number;
+            /** Image */
             image: string;
-            /**
-             * Никнейм
-             * @default
-             */
-            nickname: string | null;
-        };
-        /** PartnerFilterSchema */
-        PartnerFilterSchema: {
-            /** Is Enable */
-            is_enable?: boolean | null;
-        };
-        /** PartnerOutSchema */
-        PartnerOutSchema: {
-            /** ID */
-            id?: number | null;
-            /** Название */
-            name: string;
-            /**
-             * Логотип
-             * @description Логотип компании на главной
-             */
-            logo: string;
-            /**
-             * Ссылка на сайт партнера
-             * @description По этой ссылке пользователь переходит при клике на логотип партнера
-             * @default
-             */
-            link: string;
+            /** Image Compressed Url */
+            image_compressed_url: string;
+            /** Nickname */
+            nickname?: string | null;
         };
         /** PopupOutSchema */
         PopupOutSchema: {
-            /** ID */
-            id?: number | null;
-            /**
-             * Подзаголовок
-             * @description Будет отображаться в развернутом пап-апе
-             * @default
-             */
-            subtitle: string | null;
-            /**
-             * Заголовок
-             * @description Будет отображаться в развернутом пап-апе
-             */
+            /** Id */
+            id: number;
+            /** Subtitle */
+            subtitle?: string | null;
+            /** Title */
             title: string;
-            /**
-             * Короткий заголовок
-             * @description Будет отображаться в свернутом пап-апе
-             */
+            /** Short Title */
             short_title: string;
-            /** Текст */
+            /** Content */
             content: string;
-            /**
-             * Текст кнопки действия
-             * @description Текст будет отображаться внутри кнопки. Примеры: "Купить билет", "Перейти на сайт"
-             */
+            /** Btn Text */
             btn_text: string;
-            /**
-             * Ссылка кнопки
-             * @description Ресурс, на который будет перенаправлен пользователь при клике по кнопке
-             */
+            /** Btn Link */
             btn_link: string;
-            /**
-             * Обложка
-             * @description Картинка в поп-апе
-             */
+            /** Cover */
             cover: string;
+            /** Cover Compressed Url */
+            cover_compressed_url: string;
             /**
-             * Дата и время окончания показа
+             * End At
              * Format: date-time
              */
             end_at: string;
+        };
+        /** PartnerOutSchema */
+        PartnerOutSchema: {
+            /** Id */
+            id: number;
+            /** Name */
+            name: string;
+            /** Logo */
+            logo: string;
+            /** Link */
+            link: string;
         };
     };
     responses: never;
@@ -630,7 +561,7 @@ export interface operations {
         parameters: {
             query?: {
                 show_on_main_page?: boolean;
-                order_by?: "?" | "name";
+                order_by?: "?" | "name" | "sort";
             };
             header?: never;
             path?: never;
@@ -713,10 +644,9 @@ export interface operations {
             };
         };
     };
-    info_api_get_info_block_list: {
+    info_api_info_blocks_api_get_info_block_list: {
         parameters: {
             query?: {
-                is_enable?: boolean | null;
                 in_menu?: boolean | null;
             };
             header?: never;
@@ -736,30 +666,7 @@ export interface operations {
             };
         };
     };
-    info_api_get_menu_info_block_list: {
-        parameters: {
-            query?: {
-                is_enable?: boolean | null;
-                in_menu?: boolean | null;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MenuInfoBlockOutSchema"][];
-                };
-            };
-        };
-    };
-    info_api_get_review_list: {
+    info_api_reviews_api_get_review_list: {
         parameters: {
             query?: {
                 is_enable_main?: boolean | null;
@@ -783,29 +690,7 @@ export interface operations {
             };
         };
     };
-    info_api_get_partner_list: {
-        parameters: {
-            query?: {
-                is_enable?: boolean | null;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PartnerOutSchema"][];
-                };
-            };
-        };
-    };
-    info_api_get_active_popup: {
+    info_api_popups_api_get_active_popup: {
         parameters: {
             query?: never;
             header?: never;
@@ -821,6 +706,33 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PopupOutSchema"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    info_api_partners_api_get_partner_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PartnerOutSchema"][];
                 };
             };
         };

@@ -1,4 +1,4 @@
-import { getReviewList } from '../../services/getReviewList';
+import { getReviewList } from '../../services/api/getReviewList';
 import { ReviewContent } from '../ReviewContent/ReviewContent';
 import styles from './EventDetailReview.module.scss';
 
@@ -12,12 +12,10 @@ export async function EventDetailReview(
     { event_id }: EventDetailReviewParams
 ) {
     // Получение списка отзывов на главной
-    const { reviewList } = await getReviewList(
-        {
+    const { reviewList } = await getReviewList({
             is_enable_event: true,
             event_id: event_id
-        }
-    );
+    });
 
     if (reviewList.length == 0) {
         return (<></>);

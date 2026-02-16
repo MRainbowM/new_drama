@@ -82,7 +82,7 @@ async def get_event_program_by_date(request, event_date: date = timezone.localti
 async def get_event_list(
         request,
         show_on_main_page: bool = None,
-        order_by: Literal['?', 'name'] = None
+        order_by: Literal['?', 'name', 'sort'] = None
 ):
     return await event_db_service.get_list(
         show_on_main_page=show_on_main_page,

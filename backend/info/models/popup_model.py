@@ -1,15 +1,18 @@
-from django.db import models
-from django.utils.translation import gettext_lazy as _
-from django_ckeditor_5.fields import CKEditor5Field
-
+from basis.constants import MAX_IMAGE_SIZE_400_520
 from basis.models.dates_abstract_model import DatesAbstract
+from basis.settings.django_base_settings import IMAGE_QUALITY
+from django.db import models
+from django_ckeditor_5.fields import CKEditor5Field
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
+
 from .services.path.popup_cover_path import popup_cover_path
 
 
 class Popup(DatesAbstract):
     """Поп-ап на главной"""
     subtitle = models.CharField(
-        _('Подзаголовок'),
+        'Подзаголовок',
         max_length=512,
         null=True,
         blank=True,
@@ -17,43 +20,60 @@ class Popup(DatesAbstract):
         help_text='Будет отображаться в развернутом пап-апе'
     )
     title = models.CharField(
-        _('Заголовок'),
+        'Заголовок',
         max_length=512,
         help_text='Будет отображаться в развернутом пап-апе'
     )
     short_title = models.CharField(
-        _('Короткий заголовок'),
+        'Короткий заголовок',
         max_length=256,
         help_text='Будет отображаться в свернутом пап-апе'
     )
-    content = CKEditor5Field(_('Текст'), config_name='extends')
+    content = CKEditor5Field('Текст', config_name='extends')
     btn_text = models.CharField(
-        _('Текст кнопки действия'),
+        'Текст кнопки действия',
         max_length=256,
         help_text='Текст будет отображаться внутри кнопки. ' +
                   'Примеры: "Купить билет", "Перейти на сайт"'
     )
     btn_link = models.CharField(
-        _('Ссылка кнопки'),
+        'Ссылка кнопки',
         max_length=512,
         help_text='Ресурс, на который будет перенаправлен пользователь ' +
                   'при клике по кнопке'
     )
 
-    start_at = models.DateTimeField(_('Дата и время начала показа'))
-    end_at = models.DateTimeField(_('Дата и время окончания показа'))
+    start_at = models.DateTimeField('Дата и время начала показа')
+    end_at = models.DateTimeField('Дата и время окончания показа')
 
-    is_enable = models.BooleanField(_('Показывать на сайте'), default=True)
+    is_enable = models.BooleanField('Показывать на сайте', default=True)
 
     cover = models.FileField(
-        _('Обложка'),
+        'Обложка',
         upload_to=popup_cover_path,
         help_text='Картинка в поп-апе'
     )
+    cover_compressed = ImageSpecField(
+        source='cover',
+        format='JPEG',
+        options={
+            'quality': IMAGE_QUALITY,
+            'optimize': True,
+            'progressive': True,
+            'subsampling': 0,
+        },
+        processors=[ResizeToFill(*MAX_IMAGE_SIZE_400_520)]
+    )
 
     class Meta:
-        verbose_name = _('Поп-ап')
-        verbose_name_plural = _('Поп-апы')
+        verbose_name = 'Поп-ап'
+        verbose_name_plural = 'Поп-апы'
 
     def __str__(self) -> str:
         return f"{str(self.id)} - {str(self.title)}"
+
+    @property
+    def cover_compressed_url(self) -> str:
+        if self.cover_compressed:
+            return self.cover_compressed.url
+        return self.cover.url

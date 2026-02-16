@@ -1,1 +1,2 @@
 from .dates_abstract_model import DatesAbstract
+from .slug_abstract_model import SlugAbstractModel

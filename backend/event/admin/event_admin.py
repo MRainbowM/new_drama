@@ -1,6 +1,6 @@
 from django.contrib import admin
-
 from people.models import EventPeople
+
 from ..models import Event, EventImage
 
 
@@ -31,7 +31,8 @@ class EventAdmin(admin.ModelAdmin):
             'fields': (
                 'name', 'short_description', 'description',
                 'min_age_limit', 'premiere_at', 'duration',
-                'has_intermission', 'is_enable', 'show_on_main_page',
+                'has_intermission', 'is_enable',
+                'show_on_main_page', 'sort',
                 'is_archival'
             )
         }),

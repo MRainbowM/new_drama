@@ -14,9 +14,10 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = env(
     'same-origin'
 )
 
-if not DEBUG:
-    USE_X_FORWARDED_HOST = True
-    FORCE_SCRIPT_NAME = '/api'
+CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[])
+
+CSRF_COOKIE_SECURE = env.bool('CSRF_COOKIE_SECURE', default=not DEBUG)
+SESSION_COOKIE_SECURE = env.bool('SESSION_COOKIE_SECURE', default=not DEBUG)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -122,7 +123,6 @@ if DEBUG:
         BASE_DIR / 'staticfiles',
     ]
 
-
 MEDIA_URL = env('MEDIA_URL')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -134,8 +134,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Базовая ссылка на сервис покупки билетов
 TICKET_SERVICE_BASE_URL = env('TICKET_SERVICE_BASE_URL')
 
-# Максимальный размер изображения
-MAX_IMAGE_SIZE = tuple(map(int, env('MAX_IMAGE_SIZE', '800,800').split(',')))
-
 # Качество изображения
-IMAGE_QUALITY = env.int('IMAGE_QUALITY', 75)
+IMAGE_QUALITY = env.int('IMAGE_QUALITY', 80)

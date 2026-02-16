@@ -8,7 +8,9 @@
 ```sh
 docker-compose up --build -d django-new-drama
 ```
-
+```sh
+docker-compose -f docker-compose.local.yml up --build 
+```
 ### Остановка контейнера
 ```sh
 docker-compose stop django-new-drama
@@ -17,23 +19,20 @@ docker-compose stop django-new-drama
 ## Backend
 
 ### Запуск сервера
-```sh
-docker-compose exec django-new-drama python3 manage.py runserver 0.0.0.0:8011
-```
 
 #### with uvicorn
 ```sh
-docker-compose exec django-new-drama python3 -m uvicorn basis.asgi:application --reload --host 0.0.0.0 --port 8011
+docker-compose -f docker-compose.local.yml exec django-new-drama python3 -m uvicorn basis.asgi:application --reload --host 0.0.0.0 --port 8001
 ```
 
 ### Создание миграций
 ```sh
-docker-compose exec django-new-drama python3 manage.py makemigrations
+docker-compose -f docker-compose.local.yml exec django-new-drama python3 manage.py makemigrations
 ```
 
 ### Применение миграций
 ```sh
-docker-compose exec django-new-drama python3 manage.py migrate
+docker-compose -f docker-compose.local.yml exec django-new-drama python3 manage.py migrate
 ```
 
 ### Cоздание супер-пользователя
@@ -67,7 +66,7 @@ docker exec -t postgres-new-drama pg_dumpall -c -U postgres > dump_`date +%d-%m-
 
 ### Накатить бэкап
 ```sh
-cat dump_14-09-2025_06_54_30.sql | docker exec -i postgres-new-drama psql -U postgres
+cat dump_10-02-2026_11_55_12.sql | docker exec -i postgres-new-drama psql -U postgres
 ```
 ## Frontend
 
@@ -91,6 +90,20 @@ npm install
 ### Генерация схем данных api из сваггера
 ```sh
 npm run api-generate
+```
+
+## Docker
+
+### Скопировать файлы из контейнера
+
+```
+docker cp django-new-drama:/backend/media/ /root/new_drama/media/
+```
+обратно так же, только поменять местами пути
+
+Локально
+```sh
+docker cp  media/ django-new-drama:/backend/
 ```
 
 # Продакшен

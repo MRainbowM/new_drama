@@ -18,7 +18,7 @@ export default function ReviewItem(
             onClick={() => onClickImg(index)}
         >
             <Image
-                src={review.image}
+                src={review.image_compressed_url}
                 width={500}
                 height={500}
                 alt={review.nickname}

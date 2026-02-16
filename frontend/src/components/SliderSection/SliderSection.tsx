@@ -1,24 +1,12 @@
 import SliderList from '../SliderList/SliderList';
 import styles from './SliderSection.module.scss'
-import { apiClient } from '../../api/client'
+import { getInfoBlocks } from '../../services/api/getInfoBlocks'
 
 
 export default async function SliderSection() {
+    const { infoBlocks } = await getInfoBlocks();
 
-    const response = await apiClient.GET('/info/info_block/list', {
-        params: {
-            query: {
-                is_enable: true
-            }
-        }
-    });
-
-    if (response.error) {
-        console.log(response.error);
-        throw new Error('error'); //TODO
-    }
-
-    if (response.data.length == 0) {
+    if (infoBlocks.length == 0) {
         return <></>;
     }
     
@@ -26,7 +14,7 @@ export default async function SliderSection() {
 
         <section className={styles.root}>
             <SliderList
-                data={response.data}
+                data={infoBlocks}
             />
         </section>
 

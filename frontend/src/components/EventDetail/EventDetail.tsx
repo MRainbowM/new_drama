@@ -15,7 +15,15 @@ export default async function EventDetail(
     { event }: EventDetailProps
 ) {
     const intermission = event.has_intermission === true ? 'с антрактом' : 'без антракта';
-    const peoplesGroupTag = Object.groupBy(event.peoples, ({ tag }) => tag);
+    const peoplesGroupTag = (event.peoples ?? []).reduce<Record<string, typeof event.peoples>>(
+        (acc, item) => {
+            const key = item?.tag ?? 'unknown'
+            if (!acc[key]) acc[key] = []
+            acc[key].push(item)
+            return acc
+        },
+        {}
+    );
     const minAgeLimit = event.min_age_limit > 0 ? `${event.min_age_limit}+` : undefined;
     const premiereAt = event.premiere_at ? new Intl.DateTimeFormat('ru-RU', {
         dateStyle: 'long'

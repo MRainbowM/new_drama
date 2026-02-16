@@ -1,6 +1,6 @@
 import styles from './EventDetailTickets.module.scss';
 import ScheduleList from '../ScheduleList/ScheduleList';
-import { getEventShowList } from '../../services/getEventShowList';
+import { getEventShowList } from '../../services/api/getEventShowList';
 
 interface EventDetailTicketsProps {
     event_id: number

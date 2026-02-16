@@ -3,7 +3,8 @@
 export default function myImageLoader({ src }) {
 
     if (src.indexOf('/media') === 0) {
-        return `${process.env.NEXT_PUBLIC_API_URL}${src}`;
+        const base = (process.env.NEXT_PUBLIC_SITE_URL || '').replace(/\/$/, '')
+        return base ? `${base}${src}` : src
     }
     return src;
 

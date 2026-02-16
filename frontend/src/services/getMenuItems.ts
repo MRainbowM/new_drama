@@ -1,5 +1,4 @@
-import { apiClient } from '../api/client'
-
+import { getInfoBlocks } from './api/getInfoBlocks'
 interface getMenuItemsResult {
     /* Массив элементов меню */
     menuItems: { href: string, title: string }[]
@@ -16,23 +15,10 @@ export async function getMenuItems(): Promise<getMenuItemsResult> {
     ];
 
     // Инфо-блоки в меню
-    const response = await apiClient.GET('/info/info_block/menu/list', {
-        params: {
-            query: {
-                is_enable: true,
-                in_menu: true
-            }
-        }
-    });
+    const { infoBlocks } = await getInfoBlocks({ in_menu: true });
 
-    if (response.error) {
-        console.log(response.error);
-        // throw new Error('error'); //TODO
-        return { menuItems };
-    }
-
-    if (response.data.length > 0) {
-        response.data.map(item => (
+    if (infoBlocks.length > 0) {
+        infoBlocks.map(item => (
             menuItems.push({
                 href: `/#${item.menu_title_slug}`,
                 title: item.menu_title

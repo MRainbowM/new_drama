@@ -9,6 +9,21 @@
     display: flex;
     flex-direction: column;
     border-left: 1px solid var(--color-white-with-alpha-50);
+    position: relative;
+}
+
+.rightSticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    z-index: 2;
+    // background-color: var(--color-background);
+}
+
+.rightTriggers {
+    position: relative;
+    z-index: 1;
+    margin-top: -100vh;
 }
 
 
@@ -21,6 +36,14 @@
         width: 100%;
         margin-top: -100vh;
         border-left: unset;
+    }
+
+    .rightSticky {
+        display: none;
+    }
+
+    .rightTriggers {
+        margin-top: 0;
     }
 
 }

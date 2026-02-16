@@ -1,6 +1,6 @@
 import styles from './ScheduleSection.module.scss'
 import ScheduleList from '../ScheduleList/ScheduleList';
-import { getEventShowList } from '../../services/getEventShowList';
+import { getEventShowList } from '../../services/api/getEventShowList';
 
 
 export default async function ScheduleSection() {

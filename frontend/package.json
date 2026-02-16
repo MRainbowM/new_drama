@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "api-generate": "npx openapi-typescript http://0.0.0.0:8011/openapi.json -o ./src/api/schema.d.ts"
+    "api-generate": "npx openapi-typescript http://0.0.0.0:8011/api/openapi.json -o ./src/api/schema.d.ts"
   },
   "dependencies": {
     "@types/react-dom": "^18.3.1",
@@ -16,7 +16,6 @@
     "embla-carousel-react": "^8.5.2",
     "js-cookie": "^3.0.5",
     "next": "^14.2.26",
-    "node": "^22.9.0",
     "openapi-fetch": "^0.12.2",
     "react": "^18",
     "react-dom": "^18.3.1",

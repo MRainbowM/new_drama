@@ -1,5 +1,5 @@
 import EvenList from "../../components/EventList/EventList";
-import { getEventList } from "../../services/getEventList";
+import { getEventList } from "../../services/api/getEventList";
 
 export default async function EventListPage() {
     const { events } = await getEventList({ order_by: 'name' });
