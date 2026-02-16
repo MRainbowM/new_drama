@@ -65,7 +65,7 @@ export default function PopupModal(
                     <div className={styles.coverCol} >
                         <Image
                             className={styles.cover}
-                            src={popup.cover}
+                            src={popup.cover_compressed_url}
                             width={500}
                             height={500}
                             priority={true}

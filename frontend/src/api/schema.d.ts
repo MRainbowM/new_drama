@@ -487,6 +487,8 @@ export interface components {
             btn_link: string;
             /** Cover */
             cover: string;
+            /** Cover Compressed Url */
+            cover_compressed_url: string;
             /**
              * End At
              * Format: date-time

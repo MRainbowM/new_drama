@@ -13,4 +13,5 @@ class PopupOutSchema(Schema):
     btn_text: str
     btn_link: str
     cover: str
+    cover_compressed_url: str
     end_at: datetime
