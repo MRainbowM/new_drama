@@ -17,8 +17,7 @@ export default async function EventPage(
         }
     })
 
-    if (response.error) { // TODO: error
-        // throw new Error('error');
+    if (response.error) {
         return (<></>);
     }
 

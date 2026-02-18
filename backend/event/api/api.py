@@ -1,6 +1,6 @@
 import os
 from datetime import date
-from typing import List, Optional
+from typing import List
 from typing import Literal
 
 from django.conf import settings
@@ -12,28 +12,11 @@ from ninja import Router
 from ..models.services.event_db_service import event_db_service
 from ..models.services.event_show_db_service import event_show_db_service
 from ..schemes import (
-    EventShowOutSchema,
     EventDetailSchema,
     EventPreviewSchema
 )
 
 router = Router()
-
-
-@router.get(
-    '/event_show/list',
-    response=List[EventShowOutSchema],
-    tags=[_('Афиша')],
-    summary=_('Получить список спектаклей в афише c текущего месяца')
-)
-async def get_event_show_list(request, event_id: Optional[int] = None):
-    today = timezone.localtime().date()
-    start_date = today.replace(day=1)
-    return await event_show_db_service.get_list(
-        is_enable=True,
-        event_id=event_id,
-        start_at__date__gte=start_date
-    )
 
 
 @router.get(

@@ -10,7 +10,7 @@ router = Router(tags=['Афиша'])
 
 @router.get(
     '/',
-    response=List[EventShowOutSchema],
+    response={200: List[EventShowOutSchema]},
     summary='Получить список спектаклей в афише c текущего месяца'
 )
 async def get_event_shows(request, params: EventShowFilterSchema = Query(...)):

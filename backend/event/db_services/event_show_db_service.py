@@ -1,3 +1,5 @@
+from typing import Optional, List
+
 from basis.services.abstract_db_service import AbstractDBService
 from django.db.models import Q
 from event.models.event_show_model import EventShow
@@ -13,6 +15,7 @@ class EventShowDBService(AbstractDBService):
             is_enable: bool = None,
             event_id: int = None,
             start_at__date__gte: int = None,
+            **kwargs
     ) -> Q:
         """
         Получить фильтры для запроса.
@@ -35,6 +38,24 @@ class EventShowDBService(AbstractDBService):
             filters &= Q(start_at__date__gte=start_at__date__gte)
 
         return filters
+
+    async def _get_select_related(
+            self,
+            join_event: Optional[bool] = None,
+            **kwargs
+    ) -> List[str]:
+        """
+        Получить select_related для запроса.
+
+        :param join_event: Объединять с моделью Event
+        :return: Select_related
+        """
+        select_related = []
+
+        if join_event:
+            select_related.append('event')
+
+        return select_related
 
 
 event_show_db_service = EventShowDBService()

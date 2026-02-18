@@ -12,9 +12,7 @@ class EventInEventShowSchema(Schema):
     id: int
     name: str
     slug: str
-    dramatist: str
     short_description: str
-    cover: str
     preview_cover: Optional[str] = None
     min_age_limit: int
 

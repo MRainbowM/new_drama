@@ -12,7 +12,7 @@ export interface paths {
             cookie?: never;
         };
         /** Получить список спектаклей в афише c текущего месяца */
-        get: operations["event_api_get_event_show_list"];
+        get: operations["event_api_api_get_event_show_list"];
         put?: never;
         post?: never;
         delete?: never;
@@ -29,7 +29,7 @@ export interface paths {
             cookie?: never;
         };
         /** Получить программку спектакля по текущей дате */
-        get: operations["event_api_get_event_program_by_date"];
+        get: operations["event_api_api_get_event_program_by_date"];
         put?: never;
         post?: never;
         delete?: never;
@@ -46,7 +46,7 @@ export interface paths {
             cookie?: never;
         };
         /** Получить список всех спектаклей: репертуар */
-        get: operations["event_api_get_event_list"];
+        get: operations["event_api_api_get_event_list"];
         put?: never;
         post?: never;
         delete?: never;
@@ -63,7 +63,41 @@ export interface paths {
             cookie?: never;
         };
         /** Получить данные спектакля по slug */
-        get: operations["event_api_get_event_by_slug"];
+        get: operations["event_api_api_get_event_by_slug"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/event-shows/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Получить список спектаклей в афише c текущего месяца */
+        get: operations["event_api_event_shows_api_get_event_shows"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/events/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Получить список всех спектаклей: репертуар */
+        get: operations["event_api_events_api_get_events"];
         put?: never;
         post?: never;
         delete?: never;
@@ -180,55 +214,35 @@ export interface components {
     schemas: {
         /** EventPreviewSchema */
         EventPreviewSchema: {
-            producer: components["schemas"]["PeoplePreviewSchema"] | null;
+            /** Id */
+            id: number;
+            /** Name */
+            name: string;
+            /** Slug */
+            slug: string;
+            /** Dramatist */
+            dramatist: string;
+            /** Short Description */
+            short_description: string;
+            /** Cover */
+            cover: string;
+            /** Preview Cover */
+            preview_cover?: string | null;
+            /** Min Age Limit */
+            min_age_limit: number;
+            /** Is Archival */
+            is_archival: boolean;
+            /** Cover In List */
+            cover_in_list?: string | null;
+            producer: components["schemas"]["PeoplePreviewInEventPreviewSchema"] | null;
             /** Cover Compressed Url */
             cover_compressed_url: string;
-            /** ID */
-            id?: number | null;
-            /** Название спектакля */
-            name: string;
-            /** Слаг */
-            slug: string;
-            /**
-             * Драматург
-             * @default
-             */
-            dramatist: string | null;
-            /** Краткое описание */
-            short_description: string;
-            /**
-             * Обложка спектакля на главной
-             * @description Изображение в списке спектаклей в слайдере на главной
-             */
-            cover?: string | null;
-            /**
-             * Обложка в афише
-             * @description Изображение курсора при наведении на спектакль в афише
-             */
-            preview_cover?: string | null;
-            /**
-             * Возрастное ограничение
-             * @description Минимальный разрешенный возраст зрителя, например, 18 лет
-             * @default 0
-             */
-            min_age_limit: number;
-            /**
-             * Архив
-             * @description Спектакль архивный, на текущий момент его не ставят
-             * @default false
-             */
-            is_archival: boolean;
-            /**
-             * Обложка спектакля в списке спектаклей
-             * @description Изображение в списке спектаклей
-             */
-            cover_in_list?: string | null;
         };
         /** EventShowOutSchema */
         EventShowOutSchema: {
             /** Id */
             id: number;
-            event: components["schemas"]["EventPreviewSchema"];
+            event: components["schemas"]["EventInEventShowSchema"];
             /**
              * Start At
              * Format: date-time
@@ -387,6 +401,55 @@ export interface components {
             /** Фамилия */
             last_name: string;
         };
+        /** EventShowFilterSchema */
+        EventShowFilterSchema: {
+            /** Event Id */
+            event_id?: number | null;
+        };
+        /** EventInEventShowSchema */
+        EventInEventShowSchema: {
+            /** Id */
+            id: number;
+            /** Name */
+            name: string;
+            /** Slug */
+            slug: string;
+            /** Short Description */
+            short_description: string;
+            /** Preview Cover */
+            preview_cover?: string | null;
+            /** Min Age Limit */
+            min_age_limit: number;
+        };
+        /** EventFilterSchema */
+        EventFilterSchema: {
+            /**
+             * Show On Main Page
+             * @description Показывать на главной странице
+             */
+            show_on_main_page?: boolean;
+            /**
+             * Order By
+             * @description Сортировка
+             * @enum {string}
+             */
+            order_by?: "?" | "name" | "sort";
+        };
+        /** PeoplePreviewInEventPreviewSchema */
+        PeoplePreviewInEventPreviewSchema: {
+            /** Id */
+            id: number;
+            /** First Name */
+            first_name: string;
+            /** Last Name */
+            last_name: string;
+            /** Slug */
+            slug: string;
+            /** Tag */
+            tag?: string | null;
+            /** Photo */
+            photo?: string | null;
+        };
         /** PeopleDetailSchema */
         PeopleDetailSchema: {
             /** ID */
@@ -515,7 +578,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    event_api_get_event_show_list: {
+    event_api_api_get_event_show_list: {
         parameters: {
             query?: {
                 event_id?: number | null;
@@ -537,7 +600,7 @@ export interface operations {
             };
         };
     };
-    event_api_get_event_program_by_date: {
+    event_api_api_get_event_program_by_date: {
         parameters: {
             query?: {
                 event_date?: string;
@@ -557,7 +620,7 @@ export interface operations {
             };
         };
     };
-    event_api_get_event_list: {
+    event_api_api_get_event_list: {
         parameters: {
             query?: {
                 show_on_main_page?: boolean;
@@ -580,7 +643,7 @@ export interface operations {
             };
         };
     };
-    event_api_get_event_by_slug: {
+    event_api_api_get_event_by_slug: {
         parameters: {
             query?: never;
             header?: never;
@@ -598,6 +661,53 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["EventDetailSchema"];
+                };
+            };
+        };
+    };
+    event_api_event_shows_api_get_event_shows: {
+        parameters: {
+            query?: {
+                event_id?: number | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventShowOutSchema"][];
+                };
+            };
+        };
+    };
+    event_api_events_api_get_events: {
+        parameters: {
+            query?: {
+                /** @description Показывать на главной странице */
+                show_on_main_page?: boolean;
+                /** @description Сортировка */
+                order_by?: "?" | "name" | "sort";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventPreviewSchema"][];
                 };
             };
         };

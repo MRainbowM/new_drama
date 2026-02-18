@@ -6,8 +6,6 @@ import { getInfoBlocks } from '../../services/api/getInfoBlocks'
 export default async function SliderSection() {
     const { infoBlocks } = await getInfoBlocks();
 
-    console.log({infoBlocks});
-
     if (infoBlocks.length == 0) {
         return <></>;
     }

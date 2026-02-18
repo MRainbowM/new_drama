@@ -19,7 +19,8 @@ export async function getInfoBlocks({ in_menu }: GetInfoBlocksParams = {}): Prom
     });
    
     if (response.error) {
-        console.log(response.error); //TODO
+        //TODO
+        console.log('getInfoBlocks response.error', response.error);
         return { infoBlocks: [] };
     }
 
