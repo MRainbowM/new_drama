@@ -9,9 +9,9 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from ninja import Router
 
-from .models.services.event_db_service import event_db_service
-from .models.services.event_show_db_service import event_show_db_service
-from .schemes import (
+from ..models.services.event_db_service import event_db_service
+from ..models.services.event_show_db_service import event_show_db_service
+from ..schemes import (
     EventShowOutSchema,
     EventDetailSchema,
     EventPreviewSchema
