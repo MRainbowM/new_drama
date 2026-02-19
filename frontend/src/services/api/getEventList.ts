@@ -17,7 +17,7 @@ export async function getEventList(
     { show_on_main_page, order_by }: GetEventListParams = {}
 ): Promise<GetEventListResult> {
     /* Получение списка спектаклей */
-    const response = await apiClient.GET('/api/event/event/list', {
+    const response = await apiClient.GET('/api/events/', {
         params: {
             query: {
                 show_on_main_page: show_on_main_page ? show_on_main_page : undefined,

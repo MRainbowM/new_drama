@@ -14,14 +14,16 @@ class EventDBService(AbstractDBService):
             self,
             show_on_main_page: Optional[bool] = None,
             is_enable: Optional[bool] = None,
+            slug: Optional[str] = None,
             **kwargs
     ) -> Q:
         """
-        Получить фильтры для запроса
+        Получить фильтры для запроса.
 
-        :param show_on_main_page: Показывать на главной странице
-        :param is_enable: Показывать на сайте
-        :return: Фильтры
+        :param show_on_main_page: Показывать на главной странице.
+        :param is_enable: Показывать на сайте.
+        :param slug: Slug спектакля.
+        :return: Фильтры.
         """
         filters = Q()
 
@@ -30,6 +32,9 @@ class EventDBService(AbstractDBService):
 
         if is_enable is not None:
             filters &= Q(is_enable=is_enable)
+
+        if slug is not None:
+            filters &= Q(slug=slug)
 
         return filters
 
@@ -50,6 +55,24 @@ class EventDBService(AbstractDBService):
             select_related.append('producer')
 
         return select_related
+
+    async def _get_prefetch_related(
+            self,
+            prefetch_images: Optional[bool] = None,
+            **kwargs
+    ) -> List[str]:
+        """
+        Получить prefetch_related для запроса.
+
+        :param prefetch_images: Объединить с таблицей event.EventImage
+        :return: prefetch_related
+        """
+        prefetch_related = []
+
+        if prefetch_images:
+            prefetch_related.append('images')
+
+        return prefetch_related
 
 
 event_db_service = EventDBService()

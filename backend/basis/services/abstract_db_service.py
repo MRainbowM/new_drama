@@ -1,15 +1,11 @@
 from abc import ABC, abstractmethod
-from typing import Any, Dict, Generic, List, Optional, Type, TypeVar, Union
+from typing import Any, Dict, Generic, List, Optional, Tuple, Type, TypeVar, Union
 from uuid import UUID
 
-from asgiref.sync import sync_to_async
 from basis.schemas import PageSchema
 from basis.utils.paginator import Paginator
-from django.core.files.storage import default_storage
 from django.db import models
 from django.db.models import Q, QuerySet
-from ninja import Schema
-from ninja.files import UploadedFile
 
 ModelType = TypeVar('ModelType', bound=models.Model)
 
@@ -43,6 +39,50 @@ class AbstractDBService(ABC, Generic[ModelType]):
         Абстрактный метод для получения prefetch_related, таблиц m-m.
         """
         return []
+
+    async def _get_annotations_fields(self, **kwargs) -> Dict[str, Any]:
+        """
+        Возвращает вычисляемые поля (аннотации), которые нужно добавить в QuerySet.
+
+        Пример:
+            return {"has_media": Exists(MediaTag.objects.filter(tag_id=OuterRef("pk")))}
+
+        Важно:
+        - Эти поля добавляются через annotate(**annotations_fields)
+        - Их нельзя передавать в only(), поэтому базовый сервис автоматически
+          исключит их из return_fields перед вызовом only()
+        """
+        return {}
+
+    def _apply_annotations_fields(
+            self,
+            queryset: QuerySet[ModelType],
+            annotations_fields: Dict[str, Any],
+            return_fields: List[str],
+    ) -> Tuple[QuerySet[ModelType], List[str]]:
+        """
+        Универсально добавляет annotations_fields в SQL (annotate) и возвращает безопасный
+        список return_fields для only() (без имён аннотаций).
+
+        :param queryset: QuerySet.
+        :param annotations_fields: Вычисляемые поля.
+        :param return_fields: Возвращаемые поля.
+        :return: Tuple[QuerySet[ModelType], List[str]].
+        :raise ValueError: Если annotations_fields пустой.
+        """
+        if not annotations_fields:
+            return queryset, return_fields
+
+        queryset = queryset.annotate(**annotations_fields)
+        safe_return_fields = [
+            f for f in return_fields if f not in annotations_fields]
+
+        # Если в return_fields были только аннотации — оставим хотя бы pk,
+        # чтобы only() не ломался и модель могла корректно материализоваться.
+        if not safe_return_fields:
+            safe_return_fields = ['id']
+
+        return queryset, safe_return_fields
 
     async def _exclude(self, queryset: QuerySet[ModelType], **kwargs) -> QuerySet:
         """
@@ -78,6 +118,19 @@ class AbstractDBService(ABC, Generic[ModelType]):
         prefetch_related_array = await self._get_prefetch_related(**kwargs)
         if prefetch_related_array:
             queryset = queryset.prefetch_related(*prefetch_related_array)
+
+        # Вычисляемые поля (аннотации) — должны быть добавлены до сортировки,
+        # чтобы можно было order_by по ним.
+        annotations_fields = await self._get_annotations_fields(
+            return_fields=return_fields,
+            order_by=order_by,
+            **kwargs,
+        )
+        queryset, return_fields = self._apply_annotations_fields(
+            queryset=queryset,
+            annotations_fields=annotations_fields,
+            return_fields=return_fields,
+        )
 
         # Сортировка
         if order_by is not None:
@@ -134,69 +187,6 @@ class AbstractDBService(ABC, Generic[ModelType]):
 
         return await paginator.paginate(data=queryset)
 
-    async def create(
-            self,
-            data: Union[Dict[str, Any], Schema],
-            exclude_none: bool = False
-    ) -> ModelType:
-        """
-        Создает объект.
-        :param data: Словарь / Схема с данными объекта.
-        :param exclude_none: Исключать ли поля со значением None.
-        :return: Созданный объект.
-        """
-        if isinstance(data, Schema):
-            data = data.dict(
-                exclude_unset=True,
-                exclude_none=exclude_none
-            )
-
-        return await self.model.objects.acreate(**data)
-
-    async def delete(self, object_id: UUID) -> None:
-        """
-        Удаляет объект по ID.
-        """
-        await self.model.objects.filter(id=object_id).adelete()
-
-    async def delete_by_filters(self, **kwargs) -> None:
-        """
-        Удаляет объекты по фильтрам.
-        """
-        queryset = await self._filter_queryset(**kwargs)
-        await queryset.adelete()
-
-    async def update_by_id(
-            self,
-            object_id: UUID,
-            data: Union[Dict[str, Any], Schema],
-            exclude_none: bool = False
-    ) -> bool:
-        """
-        Обновляет объект по ID.
-
-        :param object_id: ID изменяемого объекта.
-        :param data: Схема с новыми данными объекта.
-        :param exclude_none: Исключать ли поля со значением None.
-        :return: Обновлен ли объект.
-        """
-        if isinstance(data, Schema):
-            update_data = data.dict(
-                exclude_unset=True,
-                exclude_none=exclude_none
-            )
-        else:
-            if exclude_none is True:
-                data = {k: v for k, v in data.items() if v is not None}
-
-            update_data = data
-
-        count_updated = await self.model.objects.filter(
-            id=object_id
-        ).aupdate(**update_data)
-
-        return bool(count_updated)
-
     async def get_count(self, **kwargs) -> int:
         """
         Возвращает количество объектов после фильтрации.
@@ -211,59 +201,3 @@ class AbstractDBService(ABC, Generic[ModelType]):
         """
         queryset = await self._filter_queryset(**kwargs)
         return await queryset.afirst()
-
-    async def upload_file(
-            self,
-            instance: ModelType,
-            file: UploadedFile,
-            field_name: str,
-            delete_old_file: bool = False
-    ) -> ModelType:
-        """
-        Загрузка файла.
-
-        :param instance: Объект, в который будет загружен файл.
-        :param file: Загружаемый файл.
-        :param field_name: Название поля, в которое будет загружен файл.
-        :param delete_old_file: Удалять ли старый файл.
-        :return: Путь к загруженному файлу.
-        """
-        old_file_path = getattr(instance, field_name)
-
-        if old_file_path and delete_old_file:
-            try:
-                await sync_to_async(default_storage.delete)(old_file_path)
-            except Exception as e:
-                print(f'Ошибка при удалении файла {old_file_path}: {e}')
-
-        try:
-            setattr(instance, field_name, file)
-            await instance.asave()
-        except Exception as e:
-            print(f'Ошибка при сохранении файла {file.name}: {e}')
-
-        return instance
-
-    async def delete_file(
-            self,
-            instance: ModelType,
-            field_name: str,
-            delete_from_disk: bool = True
-    ) -> None:
-        """
-        Удаление файла.
-
-        :param instance: Объект, из которого будет удален файл.
-        :param field_name: Название поля, из которого будет удален файл.
-        :param delete_from_disk: Удалять ли файл с диска.
-        """
-        file_path = getattr(instance, field_name)
-
-        if file_path and delete_from_disk is True:
-            try:
-                await sync_to_async(default_storage.delete)(file_path)
-            except Exception as e:
-                print(f'Ошибка при удалении файла {file_path}: {str(e)}')
-
-        setattr(instance, field_name, None)
-        await instance.asave()

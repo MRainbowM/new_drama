@@ -1,7 +1,5 @@
 import os
 from datetime import date
-from typing import List
-from typing import Literal
 
 from django.conf import settings
 from django.http import Http404, FileResponse
@@ -9,12 +7,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from ninja import Router
 
-from ..models.services.event_db_service import event_db_service
 from ..models.services.event_show_db_service import event_show_db_service
-from ..schemes import (
-    EventDetailSchema,
-    EventPreviewSchema
-)
 
 router = Router()
 
@@ -53,36 +46,3 @@ async def get_event_program_by_date(request, event_date: date = timezone.localti
     # response["Content-Disposition"] = 'attachment; filename="program.pdf"'  # Файл будет скачиваться
     response["Content-Disposition"] = 'inline; filename="program.pdf"'
     return response
-
-
-@router.get(
-    '/event/list',
-    response=List[EventPreviewSchema],
-    tags=[_('Спектакли')],
-    summary=_('Получить список всех спектаклей: репертуар'),
-    url_name='get-event-list'
-)
-async def get_event_list(
-        request,
-        show_on_main_page: bool = None,
-        order_by: Literal['?', 'name', 'sort'] = None
-):
-    return await event_db_service.get_list(
-        show_on_main_page=show_on_main_page,
-        is_enable=True,
-        order_by=order_by
-    )
-
-
-@router.get(
-    '/event/{slug}',
-    response=EventDetailSchema,
-    tags=[_('Спектакли')],
-    summary=_('Получить данные спектакля по slug')
-)
-async def get_event_by_slug(request, slug: str):
-    event = await event_db_service.get_by_slug(slug=slug)
-    if not event:
-        raise Http404(_('Событие не найдено'))
-
-    return event

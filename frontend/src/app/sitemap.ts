@@ -28,7 +28,7 @@ async function fetchAllEventSlugs(): Promise<EventPreview[]> {
   // и во избежание лишних зависимостей от UI-слоёв
   // eslint-disable-next-line no-constant-condition
 
-  const response = await apiClient.GET('/api/event/event/list', {
+  const response = await apiClient.GET('/api/events/', {
     params: {}
   });
 

@@ -174,6 +174,15 @@ class Event(DatesAbstract, SlugAbstractModel):
         return str(self.name)
 
     @property
+    def duration_format(self) -> str:
+        """Возвращает формат длительности спектакля"""
+        if not self.duration:
+            return ''
+
+        duration = str(self.duration).split(':')
+        return f'{duration[0]}:{duration[1]}'
+
+    @property
     def cover_compressed_url(self) -> str | None:
         """Возвращает URL сжатого изображения"""
         if self.cover_compressed:

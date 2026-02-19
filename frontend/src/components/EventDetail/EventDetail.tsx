@@ -88,7 +88,7 @@ export default async function EventDetail(
                                     <div className={styles.row} key={index}>
                                         <span>{`${people.role}:`}</span>
                                         <span>
-                                            {`${people.people.first_name} ${people.people.last_name}`}
+                                            {`${people.first_name} ${people.last_name}`}
                                         </span>
                                     </div>
                                 ))
@@ -155,7 +155,7 @@ export default async function EventDetail(
                                                 )
                                             }
                                             <span>
-                                                {`${people.people.first_name} ${people.people.last_name}`}
+                                                {`${people.first_name} ${people.last_name}`}
                                             </span>
                                         </div>
                                     ))
