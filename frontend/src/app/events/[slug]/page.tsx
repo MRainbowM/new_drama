@@ -10,11 +10,11 @@ interface EventPageProps {
 export default async function EventPage(
     { params: { slug } }: EventPageProps
 ) {
-    const { event } = await getEventBySlug({ slug })
+    const { data } = await getEventBySlug({ slug })
 
-    if (!event) {
+    if (!data) {
         return (<></>);
     }
 
-    return (<EventDetail event={event}/>)
+    return (<EventDetail data={data}/>)
 }

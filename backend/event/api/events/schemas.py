@@ -18,18 +18,17 @@ class EventFilterSchema(Schema):
     )
 
 
-class PeoplePreviewInEventPreviewSchema(Schema):
+class PeopleInEventOutSchema(Schema):
     id: int
     first_name: str
     last_name: str
+
+
+class EventPeopleInEventOutSchema(Schema):
+    id: int
     tag: Optional[str] = None
     role: Optional[str] = None
-
-
-class ProducerPreviewInEventPreviewSchema(Schema):
-    id: int
-    first_name: str
-    last_name: str
+    people: PeopleInEventOutSchema
 
 
 class EventPreviewSchema(Schema):
@@ -44,7 +43,7 @@ class EventPreviewSchema(Schema):
     is_archival: bool
     cover_in_list: Optional[str] = None
 
-    producer: Optional[ProducerPreviewInEventPreviewSchema] = None
+    producer: Optional[PeopleInEventOutSchema] = None
     cover_compressed_url: str
 
 
@@ -72,6 +71,10 @@ class EventDetailSchema(Schema):
     description_cover_compressed_url: Optional[str] = None
     actor_cover_compressed_url: Optional[str] = None
 
-    peoples: List[PeoplePreviewInEventPreviewSchema]
+    producer: Optional[PeopleInEventOutSchema] = None
+
+
+class EventDetailResponseSchema(Schema):
+    event: EventDetailSchema
+    peoples: List[EventPeopleInEventOutSchema]
     images: List[EventImageOutSchema]
-    producer: Optional[ProducerPreviewInEventPreviewSchema] = None

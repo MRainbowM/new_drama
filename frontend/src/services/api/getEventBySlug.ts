@@ -7,7 +7,7 @@ interface GetEventBySlugParams {
 }
 
 interface GetEventBySlugResult {
-    event: components['schemas']['EventDetailSchema'] | null
+    data: components['schemas']['EventDetailResponseSchema'] | null
 }
 
 export async function getEventBySlug(
@@ -23,5 +23,5 @@ export async function getEventBySlug(
         return { event: null }
     }
 
-    return { event: response.data }
+    return { data: response.data }
 }

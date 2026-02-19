@@ -5,6 +5,11 @@ import django.utils.timezone
 from django.db import migrations, models
 
 
+def delete_eventpeople_without_people(apps, schema_editor):
+    EventPeople = apps.get_model('people', 'EventPeople')
+    EventPeople.objects.filter(people__isnull=True).delete()
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -12,10 +17,15 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RunPython(
+            delete_eventpeople_without_people,
+            reverse_code=migrations.RunPython.noop,
+        ),
         migrations.AlterField(
             model_name='eventpeople',
             name='people',
-            field=models.ForeignKey(default=django.utils.timezone.now, on_delete=django.db.models.deletion.CASCADE, related_name='events', to='people.people', verbose_name='Участник'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                    related_name='events', to='people.people', verbose_name='Участник'),
             preserve_default=False,
         ),
     ]

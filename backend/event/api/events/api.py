@@ -6,7 +6,7 @@ from .api_service import event_api_service
 from .schemas import (
     EventFilterSchema,
     EventPreviewSchema,
-    EventDetailSchema,
+    EventDetailResponseSchema,
 )
 
 router = Router(tags=['Спектакли'])
@@ -25,7 +25,7 @@ async def get_events(request, params: EventFilterSchema = Query(...)):
 
 @router.get(
     '/{slug}/',
-    response={200: EventDetailSchema, 404: dict},
+    response={200: EventDetailResponseSchema, 404: dict},
     summary='Получить данные спектакля по slug',
 )
 async def get_event_by_slug(request, slug: str):

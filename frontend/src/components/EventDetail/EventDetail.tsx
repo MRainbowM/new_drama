@@ -7,15 +7,15 @@ import { EventDetailReview } from '../EventDetailReview/EventDetailReview'
 import EventDetailGallery from '../EventDetailGallery/EventDetailGallery'
 
 interface EventDetailProps {
-    event: components['schemas']['EventDetailSchema']
+    data: components['schemas']['EventDetailResponseSchema']
 }
 
 
 export default async function EventDetail(
-    { event }: EventDetailProps
+    { data }: EventDetailProps
 ) {
-    const intermission = event.has_intermission === true ? 'с антрактом' : 'без антракта';
-    const peoplesGroupTag = (event.peoples ?? []).reduce<Record<string, typeof event.peoples>>(
+    const intermission = data.event.has_intermission === true ? 'с антрактом' : 'без антракта';
+    const peoplesGroupTag = (data.peoples ?? []).reduce<Record<string, typeof data.peoples>>(
         (acc, item) => {
             const key = item?.tag ?? 'unknown'
             if (!acc[key]) acc[key] = []
@@ -24,22 +24,22 @@ export default async function EventDetail(
         },
         {}
     );
-    const minAgeLimit = event.min_age_limit > 0 ? `${event.min_age_limit}+` : undefined;
-    const premiereAt = event.premiere_at ? new Intl.DateTimeFormat('ru-RU', {
+    const minAgeLimit = data.event.min_age_limit > 0 ? `${data.event.min_age_limit}+` : undefined;
+    const premiereAt = data.event.premiere_at ? new Intl.DateTimeFormat('ru-RU', {
         dateStyle: 'long'
-    }).format(new Date(event.premiere_at)) : null;
+    }).format(new Date(data.event.premiere_at)) : null;
 
     return (
         <div className={styles.root}>
             <div className={styles.grid}>
                 {
-                    event.detail_cover_compressed_url ? (
+                    data.event.detail_cover_compressed_url ? (
                         <div className={styles.cover}>
                             <Image
-                                src={event.detail_cover_compressed_url}
+                                src={data.event.detail_cover_compressed_url}
                                 layout='fill'
                                 priority={true}
-                                alt={event.name}
+                                alt={data.event.name}
                             />
                         </div>
                     ) : (
@@ -49,12 +49,12 @@ export default async function EventDetail(
 
                 <div className={styles.gridItem}>
                     <div className={styles.title}>
-                        <h1>{event.name}</h1>
+                        <h1>{data.event.name}</h1>
                         <div className={styles.row}>
-                            <span>{event.short_description}</span>
+                            <span>{data.event.short_description}</span>
                             <div>
                                 <span className={styles.duration}>
-                                    {event.duration_format}
+                                    {data.event.duration_format}
                                 </span>
                                 <span>{intermission}</span>
                             </div>
@@ -65,19 +65,19 @@ export default async function EventDetail(
                 <div className={clsx(styles.gridItem, styles.textFont)}>
                     <div className={styles.peoples}>
                         {
-                            event.dramatist ? (
+                            data.event.dramatist ? (
                                 <div className={styles.row}>
                                     <span>Драматург:</span>
-                                    <span>{event.dramatist}</span>
+                                    <span>{data.event.dramatist}</span>
                                 </div>
                             ) : (<></>)
                         }
                         {
-                            event.producer ? (
+                            data.event.producer ? (
                                 <div className={styles.row}>
                                     <span>Режиссер:</span>
                                     <span>
-                                        {`${event.producer.first_name} ${event.producer.last_name}`}
+                                        {`${data.event.producer.first_name} ${data.event.producer.last_name}`}
                                     </span>
                                 </div>
                             ) : (<></>)
@@ -88,7 +88,7 @@ export default async function EventDetail(
                                     <div className={styles.row} key={index}>
                                         <span>{`${people.role}:`}</span>
                                         <span>
-                                            {`${people.first_name} ${people.last_name}`}
+                                            {`${people.people.first_name} ${people.people.last_name}`}
                                         </span>
                                     </div>
                                 ))
@@ -107,7 +107,7 @@ export default async function EventDetail(
                     </div>
                 </div>
                 {
-                    event.description ? (
+                    data.event.description ? (
                         <>
                             <div className={
                                 clsx(styles.gridItem,
@@ -115,7 +115,7 @@ export default async function EventDetail(
                                     styles.description
                                 )}
                             >
-                                <div dangerouslySetInnerHTML={{ __html: event.description }}></div>
+                                <div dangerouslySetInnerHTML={{ __html: data.event.description }}></div>
                                 {
                                     minAgeLimit ? (
                                         <span className={styles.ageLimit}  >
@@ -126,12 +126,12 @@ export default async function EventDetail(
                             </div>
                             <div className={clsx(styles.gridItem, styles.gridImg)}>
                                 {
-                                    event.description_cover_compressed_url ? (
+                                    data.event.description_cover_compressed_url ? (
                                         <Image
-                                            src={event.description_cover_compressed_url}
+                                            src={data.event.description_cover_compressed_url}
                                             layout='fill'
                                             priority={true}
-                                            alt={event.name}
+                                            alt={data.event.name}
                                         />
                                     ) : (<></>)
                                 }
@@ -155,7 +155,7 @@ export default async function EventDetail(
                                                 )
                                             }
                                             <span>
-                                                {`${people.first_name} ${people.last_name}`}
+                                                {`${people.people.first_name} ${people.people.last_name}`}
                                             </span>
                                         </div>
                                     ))
@@ -164,12 +164,12 @@ export default async function EventDetail(
                         </div>
                         <div className={clsx(styles.gridItem, styles.gridImg)}>
                             {
-                                event.actor_cover_compressed_url ? (
+                                data.event.actor_cover_compressed_url ? (
                                     <Image
-                                        src={event.actor_cover_compressed_url}
+                                        src={data.event.actor_cover_compressed_url}
                                         layout='fill'
                                         priority={true}
-                                        alt={event.name}
+                                        alt={data.event.name}
                                     />
                                 ) : (<></>)
                             }
@@ -180,12 +180,12 @@ export default async function EventDetail(
 
             </div>
             {
-                event.images && event.images.length > 0 ? (
-                    <EventDetailGallery images={event.images} />
+                data.images && data.images.length > 0 ? (
+                    <EventDetailGallery images={data.images} />
                 ) : (<></>)
             }
-            <EventDetailTickets event_id={event.id} />
-            <EventDetailReview event_id={event.id} />
+            <EventDetailTickets event_id={data.event.id} />
+            <EventDetailReview event_id={data.event.id} />
         </div >
     );
 }

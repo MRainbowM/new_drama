@@ -251,18 +251,26 @@ export interface components {
             is_archival: boolean;
             /** Cover In List */
             cover_in_list?: string | null;
-            producer?: components["schemas"]["ProducerPreviewInEventPreviewSchema"] | null;
+            producer?: components["schemas"]["PeopleInEventOutSchema"] | null;
             /** Cover Compressed Url */
             cover_compressed_url: string;
         };
-        /** ProducerPreviewInEventPreviewSchema */
-        ProducerPreviewInEventPreviewSchema: {
+        /** PeopleInEventOutSchema */
+        PeopleInEventOutSchema: {
             /** Id */
             id: number;
             /** First Name */
             first_name: string;
             /** Last Name */
             last_name: string;
+        };
+        /** EventDetailResponseSchema */
+        EventDetailResponseSchema: {
+            event: components["schemas"]["EventDetailSchema"];
+            /** Peoples */
+            peoples: components["schemas"]["EventPeopleInEventOutSchema"][];
+            /** Images */
+            images: components["schemas"]["EventImageOutSchema"][];
         };
         /** EventDetailSchema */
         EventDetailSchema: {
@@ -294,11 +302,7 @@ export interface components {
             description_cover_compressed_url?: string | null;
             /** Actor Cover Compressed Url */
             actor_cover_compressed_url?: string | null;
-            /** Peoples */
-            peoples: components["schemas"]["PeoplePreviewInEventPreviewSchema"][];
-            /** Images */
-            images: components["schemas"]["EventImageOutSchema"][];
-            producer?: components["schemas"]["ProducerPreviewInEventPreviewSchema"] | null;
+            producer?: components["schemas"]["PeopleInEventOutSchema"] | null;
         };
         /** EventImageOutSchema */
         EventImageOutSchema: {
@@ -309,18 +313,15 @@ export interface components {
             /** Image Compressed Url */
             image_compressed_url?: string | null;
         };
-        /** PeoplePreviewInEventPreviewSchema */
-        PeoplePreviewInEventPreviewSchema: {
+        /** EventPeopleInEventOutSchema */
+        EventPeopleInEventOutSchema: {
             /** Id */
             id: number;
-            /** First Name */
-            first_name: string;
-            /** Last Name */
-            last_name: string;
             /** Tag */
             tag?: string | null;
             /** Role */
             role?: string | null;
+            people: components["schemas"]["PeopleInEventOutSchema"];
         };
         /** PeoplePreviewSchema */
         PeoplePreviewSchema: {
@@ -555,7 +556,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["EventDetailSchema"];
+                    "application/json": components["schemas"]["EventDetailResponseSchema"];
                 };
             };
             /** @description Not Found */

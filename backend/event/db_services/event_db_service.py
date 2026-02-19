@@ -56,23 +56,5 @@ class EventDBService(AbstractDBService):
 
         return select_related
 
-    async def _get_prefetch_related(
-            self,
-            prefetch_images: Optional[bool] = None,
-            **kwargs
-    ) -> List[str]:
-        """
-        Получить prefetch_related для запроса.
-
-        :param prefetch_images: Объединить с таблицей event.EventImage
-        :return: prefetch_related
-        """
-        prefetch_related = []
-
-        if prefetch_images:
-            prefetch_related.append('images')
-
-        return prefetch_related
-
 
 event_db_service = EventDBService()
