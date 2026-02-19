@@ -10,7 +10,7 @@ class PopupApiService:
         """
         Получение активного поп-апа на текущий момент времени.
         """
-        current_time = timezone.localtime()
+        current_time = timezone.now()
 
         popup = await popup_db_service.get_first(
             is_enable=True,
@@ -25,7 +25,7 @@ class PopupApiService:
         if not popup:
             raise HttpError(
                 status_code=404,
-                message='Поп-ап не найден'
+                message='Поп-ап не найден.'
             )
 
         return popup

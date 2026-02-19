@@ -17,11 +17,9 @@ export async function getEventShowList(
     { event_id }: GetEventShowListParams = {}
 ): Promise<GetEventShowListResult> {
     /* Получение списка спектаклей в афише */
-    const response = await apiClient.GET('/api/event/event_show/list', {
+    const response = await apiClient.GET('/api/event-shows/', {
         params: {
             query: {
-                is_enable: true,
-                from_current_month: true,
                 event_id: event_id ? event_id : undefined
             }
         }
@@ -33,7 +31,6 @@ export async function getEventShowList(
             events: [],
             months: []
         };
-        // throw new Error('error');
     }
 
     const events = response.data;
