@@ -1,21 +1,25 @@
 import os
 
 from django.conf import settings
-from django.http import FileResponse
+from django.http import FileResponse, HttpResponseRedirect
 from django.utils import timezone
 from event.db_services.event_show_db_service import event_show_db_service
-from ninja.errors import HttpError
 
 
 class ProgramsAPIService:
-    async def get_program_today(self) -> FileResponse:
+    def _redirect_to_event(self, host: str, slug: str | None) -> HttpResponseRedirect:
+        base_url = f"https://{host}"
+        path = f"/events/{slug}" if slug else "/events"
+        return HttpResponseRedirect(base_url + path)
+
+    async def get_program_today(self, host: str) -> FileResponse:
         """
         Получить программку спектакля по текущей дате.
         Спектакль сегодня или позже.
-        Если нет подходящего спектакля в афише, то возвращается None.
+        Если нет подходящего спектакля или программки — редирект на карточку спектакля.
 
-        :raises HttpError 404: Если спектакль не найден.
-        :return: Программка спектакля.
+        :param host: Хост, на котором работает сервер.
+        :return: Программка спектакля или редирект на фронтенд.
         """
         event_date = timezone.now().date()
 
@@ -25,35 +29,28 @@ class ProgramsAPIService:
             order_by='start_at',
             join_event=True,
             return_fields=[
-                'id', 'event', 'event__name', 'event__program_pdf'
+                'id', 'event', 'event__name', 'event__slug', 'event__program_pdf'
             ]
         )
-        print('---event_show', event_show.id)
 
         if event_show is None:
-            # Нет подходящего спектакля в афише
-            raise HttpError(status_code=404, message="Спектакль не найден")
+            return self._redirect_to_event(host, slug=None)
 
         if not event_show.event.program_pdf:
-            # Спектакль найден, но у него нет файла с программкой
-            raise HttpError(
-                status_code=404,
-                message=f"Программка не найдена для спектакля {event_show.event.name}"
-            )
+            return self._redirect_to_event(host, slug=event_show.event.slug)
 
         file_path = os.path.join(
             settings.MEDIA_ROOT, str(event_show.event.program_pdf)
         )
 
         if not os.path.exists(file_path):
-            # Файл физически не существует на сервере
-            raise HttpError(
-                status_code=404,
-                message=f"Файл программки не найден для спектакля {event_show.event.name}"
-            )
+            return self._redirect_to_event(host, slug=event_show.event.slug)
 
-        response = FileResponse(open(file_path, "rb"),
-                                content_type="application/pdf")
+        response = FileResponse(
+            open(file_path, "rb"),
+            content_type="application/pdf"
+        )
+
         # response["Content-Disposition"] = 'attachment; filename="program.pdf"'  # Файл будет скачиваться
         response["Content-Disposition"] = 'inline; filename="program.pdf"'
         return response

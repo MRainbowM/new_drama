@@ -10,4 +10,6 @@ router = Router(tags=['Афиша'])
     summary='Получить программку спектакля по текущей дате',
 )
 async def get_event_program_by_date(request):
-    return await programs_api_service.get_program_today()
+    return await programs_api_service.get_program_today(
+        host=request.get_host()
+    )
