@@ -158,8 +158,8 @@
         position: absolute;
         right: 6px;
         top: 3px;
-        height: 20px;
-        width: 20px;
+        height: 30px;
+        width: 30px;
 
         .lineTop,
         .lineBot {
@@ -169,6 +169,7 @@
 
         .lineBot {
             transform: translateY(-3px) rotate(-45deg);
+            margin-bottom: 10px;
         }
     }
 }
