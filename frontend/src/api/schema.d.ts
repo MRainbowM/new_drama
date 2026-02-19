@@ -4,23 +4,6 @@
  */
 
 export interface paths {
-    "/api/event/program": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Получить программку спектакля по текущей дате */
-        get: operations["event_api_api_get_event_program_by_date"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/api/event-shows/": {
         parameters: {
             query?: never;
@@ -98,6 +81,23 @@ export interface paths {
         };
         /** Получить данные человека по slug */
         get: operations["people_api_get_people_by_slug"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/programs/today/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Получить программку спектакля по текущей дате */
+        get: operations["event_api_programs_api_get_event_program_by_date"];
         put?: never;
         post?: never;
         delete?: never;
@@ -249,8 +249,8 @@ export interface components {
             min_age_limit: number;
             /** Is Archival */
             is_archival: boolean;
-            /** Cover In List */
-            cover_in_list?: string | null;
+            /** Cover In List Compressed Url */
+            cover_in_list_compressed_url?: string | null;
             producer?: components["schemas"]["PeopleInEventOutSchema"] | null;
             /** Cover Compressed Url */
             cover_compressed_url: string;
@@ -472,26 +472,6 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    event_api_api_get_event_program_by_date: {
-        parameters: {
-            query?: {
-                event_date?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
     event_api_event_shows_api_get_event_shows: {
         parameters: {
             query?: {
@@ -611,6 +591,24 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["PeopleDetailSchema"];
                 };
+            };
+        };
+    };
+    event_api_programs_api_get_event_program_by_date: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };

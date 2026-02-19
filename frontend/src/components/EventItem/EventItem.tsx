@@ -15,13 +15,13 @@ export default function EventItem(
             <div className={styles.background}>
                 <div className={styles.coverCol}>
                     {
-                        event.cover_in_list ? (
+                        event.cover_in_list_compressed_url ? (
                             <Link
                                 href={`/events/${event.slug}`}
                             >
                                 <Image
                                     className={styles.cover}
-                                    src={event.cover_in_list}
+                                    src={event.cover_in_list_compressed_url}
                                     width={300}
                                     height={380}
                                     alt={event.name}

@@ -41,7 +41,7 @@ class EventPreviewSchema(Schema):
     preview_cover: Optional[str] = None
     min_age_limit: int
     is_archival: bool
-    cover_in_list: Optional[str] = None
+    cover_in_list_compressed_url: Optional[str] = None
 
     producer: Optional[PeopleInEventOutSchema] = None
     cover_compressed_url: str

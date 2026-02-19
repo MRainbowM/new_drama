@@ -1,8 +1,4 @@
-from basis.constants import (
-    MAX_IMAGE_SIZE_750_650,
-    MAX_IMAGE_SIZE_1680_800,
-    MAX_IMAGE_SIZE_850_550
-)
+from basis.constants import *
 from basis.models import DatesAbstract, SlugAbstractModel
 from basis.settings.django_base_settings import IMAGE_QUALITY
 from django.db import models
@@ -73,9 +69,20 @@ class Event(DatesAbstract, SlugAbstractModel):
     cover_in_list = models.ImageField(
         'Обложка спектакля в списке спектаклей',
         upload_to=event_cover_path,
-        help_text='Изображение в списке спектаклей',
+        help_text='Изображение в списке спектаклей (new-drama.ru/events/)',
         blank=True,
         null=True
+    )
+    cover_in_list_compressed = ImageSpecField(
+        source='cover_in_list',
+        processors=[ResizeToFill(*MAX_IMAGE_SIZE_300_400)],
+        format='JPEG',
+        options={
+            'quality': IMAGE_QUALITY,
+            'optimize': True,
+            'progressive': True,
+            'subsampling': 0,
+        }
     )
     preview_cover = models.ImageField(
         'Обложка в афише',
@@ -208,4 +215,11 @@ class Event(DatesAbstract, SlugAbstractModel):
         """Возвращает URL сжатого изображения"""
         if self.actor_cover_compressed:
             return self.actor_cover_compressed.url
+        return None
+
+    @property
+    def cover_in_list_compressed_url(self) -> str | None:
+        """Возвращает URL сжатого изображения"""
+        if self.cover_in_list_compressed:
+            return self.cover_in_list_compressed.url
         return None
