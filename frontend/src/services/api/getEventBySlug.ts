@@ -20,7 +20,7 @@ export async function getEventBySlug(
 
     if (response.error) {
         console.error(response.error);
-        return { event: null }
+        return { data: null }
     }
 
     return { data: response.data }
