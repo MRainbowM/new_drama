@@ -141,10 +141,12 @@
     left: 0;
     right: 0;
     transition: none;
+    pointer-events: none;
 
     &.active {
         opacity: 1;
         z-index: 1;
+        pointer-events: auto;
     }
 
     .mobileText {
@@ -180,16 +182,14 @@
 
     .mobileBtn {
         width: 100%;
-        position: relative;
         margin-top: 20px;
 
         a {
-            position: absolute;
+            display: inline-flex;
             align-items: center;
             font-size: 14px;
             padding: 8px 20px;
             border: 1px solid var(--color-white);
-            width: min-content;
 
             span {
                 white-space: nowrap;
@@ -258,6 +258,7 @@
         // top: calc(var(--header-height) - var(--container-margin-lr));
         top: var(--header-height);
         width: 100%;
+        z-index: 1;
     }
 
     .content {
