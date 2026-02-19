@@ -34,9 +34,11 @@ class ProgramsAPIService:
         )
 
         if event_show is None:
+            # Нет подходящего спектакля в афише
             return self._redirect_to_event(host, slug=None)
 
         if not event_show.event.program_pdf:
+            # Спектакль найден, но у него нет файла с программкой
             return self._redirect_to_event(host, slug=event_show.event.slug)
 
         file_path = os.path.join(
@@ -44,6 +46,11 @@ class ProgramsAPIService:
         )
 
         if not os.path.exists(file_path):
+            # Файл не существует
+            return self._redirect_to_event(host, slug=event_show.event.slug)
+
+        if not file_path.lower().endswith('.pdf'):
+            # Файл не является PDF
             return self._redirect_to_event(host, slug=event_show.event.slug)
 
         response = FileResponse(
