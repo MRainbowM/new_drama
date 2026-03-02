@@ -19,21 +19,22 @@ export async function generateMetadata({
       return { title: metadataMainPageTitle };
     }
   
-    const title = data.event.name;
+    const title = data.event.name;  
     const metaTitle = `${title} | ${metadataMainPageTitle}`;
   
     const description = data.event.short_description;
-    const images = data.event.cover_compressed_url ? [data.event.cover_compressed_url] : undefined;
-  
+    const images = `${process.env.BASE_URL}${data.event.cover_compressed_url}`  ? data.event.cover_compressed_url : []; 
+    const url = `${process.env.BASE_URL}/events/${slug}`
+
     return {
       title: metaTitle,
       description,
-      alternates: { canonical: `/events/${slug}` },
+      alternates: { canonical: url },
       openGraph: {
         type: 'article',
         title,
         description,
-        url: `/events/${slug}`,
+        url: url,
         images,
         siteName: metadataMainPageTitle
       },
