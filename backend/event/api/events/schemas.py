@@ -37,14 +37,14 @@ class EventPreviewSchema(Schema):
     slug: str
     dramatist: str
     short_description: str
-    cover: str
+    cover: Optional[str] = None
     preview_cover: Optional[str] = None
     min_age_limit: int
     is_archival: bool
     cover_in_list_compressed_url: Optional[str] = None
 
     producer: Optional[PeopleInEventOutSchema] = None
-    cover_compressed_url: str
+    cover_compressed_url: Optional[str] = None
 
 
 class EventImageOutSchema(Schema):
