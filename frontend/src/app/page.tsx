@@ -19,11 +19,11 @@ export async function generateMetadata() {
         openGraph: {
             title: metadataMainPageTitle,
             description: metadataMainPageDescription,
-            url: `${process.env.BASE_URL}/`,
+            url: `${process.env.NEXT_PUBLIC_SITE_URL}/`,
             type: 'website',
             images: [
                 {
-                    url: `${process.env.BASE_URL}/static/theater.png`,
+                    url: `${process.env.NEXT_PUBLIC_SITE_URL}/static/theater.png`,
                     width: 1200,
                     height: 630,
                     alt: 'Театр «Новая Драма»'
