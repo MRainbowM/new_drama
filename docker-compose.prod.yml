@@ -50,7 +50,8 @@ services:
             - C_FORCE_ROOT=true
             - PORT=${DJANGO_PORT:-8001}
             - PYTHONPATH=/backend
-            - DJANGO_SETTINGS_MODULE=basis.settings   
+            - DJANGO_SETTINGS_MODULE=basis.settings
+            - MEDIA_URL=${MEDIA_URL}
         volumes:
             - static_volume:/backend/static
             - media_volume:/backend/media
