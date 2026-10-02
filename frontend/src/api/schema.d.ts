@@ -242,7 +242,7 @@ export interface components {
             /** Short Description */
             short_description: string;
             /** Cover */
-            cover: string;
+            cover?: string | null;
             /** Preview Cover */
             preview_cover?: string | null;
             /** Min Age Limit */
@@ -253,7 +253,7 @@ export interface components {
             cover_in_list_compressed_url?: string | null;
             producer?: components["schemas"]["PeopleInEventOutSchema"] | null;
             /** Cover Compressed Url */
-            cover_compressed_url: string;
+            cover_compressed_url?: string | null;
         };
         /** PeopleInEventOutSchema */
         PeopleInEventOutSchema: {
@@ -451,6 +451,8 @@ export interface components {
              * Format: date-time
              */
             end_at: string;
+            /** Is Show Timer */
+            is_show_timer: boolean;
         };
         /** PartnerOutSchema */
         PartnerOutSchema: {

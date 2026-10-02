@@ -15,3 +15,4 @@ class PopupOutSchema(Schema):
     cover: str
     cover_compressed_url: str
     end_at: datetime
+    is_show_timer: bool

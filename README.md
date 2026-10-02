@@ -55,7 +55,7 @@ docker-compose exec django-new-drama python3 manage.py collectstatic
 
 ### Запуск backend тестов
 ```sh
-docker-compose exec django-new-drama python3 -m pytest
+docker-compose -f docker-compose.local.yml exec django-new-drama python3 -m pytest
 ```
 
 ### Бэкап бд

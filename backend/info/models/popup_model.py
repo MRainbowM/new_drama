@@ -47,6 +47,12 @@ class Popup(DatesAbstract):
     end_at = models.DateTimeField('Дата и время окончания показа')
 
     is_enable = models.BooleanField('Показывать на сайте', default=True)
+    is_show_timer = models.BooleanField(
+        'Показывать таймер оставшегося времени',
+        default=True,
+        help_text='Таймер будет отображаться в поп-апе. ' +
+                  'Если выключено, то таймер будет скрыт.'
+    )
 
     cover = models.FileField(
         'Обложка',

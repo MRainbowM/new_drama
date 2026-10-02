@@ -18,7 +18,8 @@ class PopupApiService:
             end_at__gte=current_time,
             return_fields=[
                 'id', 'subtitle', 'title', 'short_title',
-                'content', 'btn_text', 'btn_link', 'cover', 'end_at'
+                'content', 'btn_text', 'btn_link', 'cover', 'end_at',
+                'is_show_timer',
             ]
         )
 
