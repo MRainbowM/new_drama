@@ -3,6 +3,7 @@ from typing import Optional, List
 from basis.services.abstract_db_service import AbstractDBService
 from django.db.models import Q
 from event.models.event_show_model import EventShow
+from datetime import date
 
 
 class EventShowDBService(AbstractDBService):
@@ -12,9 +13,9 @@ class EventShowDBService(AbstractDBService):
 
     async def _get_filters(
             self,
-            is_enable: bool = None,
-            event_id: int = None,
-            start_at__date__gte: int = None,
+            is_enable: Optional[bool] = None,
+            event_id: Optional[int] = None,
+            start_at__date__gte: Optional[date] = None,
             **kwargs
     ) -> Q:
         """

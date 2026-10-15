@@ -214,12 +214,19 @@ class Event(DatesAbstract, SlugAbstractModel):
     def actor_cover_compressed_url(self) -> str | None:
         """Возвращает URL сжатого изображения"""
         if self.actor_cover_compressed:
-            return self.actor_cover_compressed.url
+            try:
+                return self.actor_cover_compressed.url
+            except Exception as e:
+                pass
         return None
 
     @property
     def cover_in_list_compressed_url(self) -> str | None:
         """Возвращает URL сжатого изображения"""
         if self.cover_in_list_compressed:
-            return self.cover_in_list_compressed.url
+            try:
+                return self.cover_in_list_compressed.url
+            except Exception as e:
+                pass
+
         return None
