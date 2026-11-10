@@ -210,6 +210,8 @@ export interface components {
             start_at: string;
             /** Is Premiere */
             is_premiere: boolean;
+            /** Is Sold Out */
+            is_sold_out: boolean;
             /** Link To Buy Ticket */
             link_to_buy_ticket: string;
             /** Day Of Week */

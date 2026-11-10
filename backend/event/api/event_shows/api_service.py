@@ -25,7 +25,8 @@ class EventShowAPIService:
             order_by='start_at',
             join_event=True,
             return_fields=[
-                'id', 'start_at', 'is_premiere', 'link_to_buy_ticket',
+                'id', 'start_at', 'is_premiere', 'is_sold_out',
+                'link_to_buy_ticket',
 
                 'event', 'event__name', 'event__slug',
                 'event__short_description', 'event__preview_cover',

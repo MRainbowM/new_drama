@@ -98,6 +98,17 @@
         border: 1px solid var(--color-white);
         font-family: var(--font-sans-caption);
     }
+
+    .soldOut {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
+        width: var(--btn-buy-width);
+        text-transform: uppercase;
+        font-size: 16px;
+        font-family: var(--font-sans-caption);
+    }
 }
 
 @media not all and (hover: none) {

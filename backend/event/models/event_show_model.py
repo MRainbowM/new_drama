@@ -21,6 +21,7 @@ class EventShow(DatesAbstract):
 
     is_enable = models.BooleanField('Показывать в афише', default=True)
     is_premiere = models.BooleanField('Премьера', default=False)
+    is_sold_out = models.BooleanField('Билетов нет', default=False)
 
     link_to_buy_ticket = models.CharField(
         'Ссылка на покупку билетов',

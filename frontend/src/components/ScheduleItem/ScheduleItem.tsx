@@ -89,13 +89,19 @@ export default function ScheduleItem(
                         <div className={styles.btnCol}>
                             {
                                 showBtnBuyTicket ? (
-                                    <Link
-                                        href={event.link_to_buy_ticket}
-                                        target='_blank'
-                                        className={styles.btnBuy}
-                                    >
-                                        <span>Купить билет</span>
-                                    </Link>
+                                    event.is_sold_out ? (
+                                        <span className={styles.soldOut}>
+                                            Билетов нет
+                                        </span>
+                                    ) : (
+                                        <Link
+                                            href={event.link_to_buy_ticket}
+                                            target='_blank'
+                                            className={styles.btnBuy}
+                                        >
+                                            <span>Купить билет</span>
+                                        </Link>
+                                    )
                                 ) : (<></>)
                             }
                         </div>
