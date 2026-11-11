@@ -94,6 +94,34 @@ npm run api-generate
 
 ## Docker
 
+### Просмотр логов
+
+#### Backend
+```sh
+docker-compose -f docker-compose.local.yml logs -f django-new-drama
+```
+
+#### Frontend
+```sh
+docker-compose -f docker-compose.local.yml logs -f frontend-new-drama
+```
+
+#### Все сервисы
+```sh
+docker-compose -f docker-compose.local.yml logs -f
+```
+
+#### Последние 500 строк
+```sh
+docker-compose -f docker-compose.local.yml logs --tail=500 django-new-drama
+```
+```sh
+docker-compose -f docker-compose.local.yml logs --tail=500 frontend-new-drama
+```
+```sh
+docker-compose -f docker-compose.local.yml logs --tail=500
+```
+
 ### Скопировать файлы из контейнера
 
 ```
