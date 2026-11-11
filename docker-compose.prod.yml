@@ -5,6 +5,7 @@ services:
     nginx-new-drama:
         container_name: nginx-new-drama
         image: nginx:stable-alpine
+        restart: on-failure:5
 
         ports:
             - ${NGINX_HOST_PORT:-80}:80
@@ -43,6 +44,7 @@ services:
         build:
             dockerfile: conf/django.Dockerfile
             context: .
+        restart: on-failure:5
         working_dir: /backend
         ports:
             - ${DJANGO_PORT:-8001}
@@ -65,6 +67,7 @@ services:
     postgres-new-drama:
         container_name: postgres-new-drama
         image: postgres:15.3
+        restart: on-failure:5
         environment:
             - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
             - POSTGRES_USER=${POSTGRES_USER}
@@ -93,6 +96,7 @@ services:
                 - NEXT_PUBLIC_YANDEX_VERIFICATION=${NEXT_PUBLIC_YANDEX_VERIFICATION}
                 - PORT=${FRONTEND_PORT:-3000}
                 - API_URL=${API_URL}
+        restart: on-failure:5
         # command: npm run dev
         expose:
             - ${FRONTEND_PORT:-3000}
