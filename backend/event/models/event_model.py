@@ -192,41 +192,49 @@ class Event(DatesAbstract, SlugAbstractModel):
     @property
     def cover_compressed_url(self) -> str | None:
         """Возвращает URL сжатого изображения"""
-        if self.cover_compressed:
+        if not self.cover:
+            return None
+        try:
             return self.cover_compressed.url
-        return None
+        except Exception:
+            return None
 
     @property
     def detail_cover_compressed_url(self) -> str | None:
         """Возвращает URL сжатого изображения"""
-        if self.detail_cover_compressed:
+        if not self.detail_cover:
+            return None
+        try:
             return self.detail_cover_compressed.url
-        return None
+        except Exception:
+            return None
 
     @property
     def description_cover_compressed_url(self) -> str | None:
         """Возвращает URL сжатого изображения"""
-        if self.description_cover_compressed:
+        if not self.description_cover:
+            return None
+        try:
             return self.description_cover_compressed.url
-        return None
+        except Exception:
+            return None
 
     @property
     def actor_cover_compressed_url(self) -> str | None:
         """Возвращает URL сжатого изображения"""
-        if self.actor_cover_compressed:
-            try:
-                return self.actor_cover_compressed.url
-            except Exception as e:
-                pass
-        return None
+        if not self.actor_cover:
+            return None
+        try:
+            return self.actor_cover_compressed.url
+        except Exception:
+            return None
 
     @property
     def cover_in_list_compressed_url(self) -> str | None:
         """Возвращает URL сжатого изображения"""
-        if self.cover_in_list_compressed:
-            try:
-                return self.cover_in_list_compressed.url
-            except Exception as e:
-                pass
-
-        return None
+        if not self.cover_in_list:
+            return None
+        try:
+            return self.cover_in_list_compressed.url
+        except Exception:
+            return None

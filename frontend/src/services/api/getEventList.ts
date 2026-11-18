@@ -17,21 +17,28 @@ export async function getEventList(
     { show_on_main_page, order_by }: GetEventListParams = {}
 ): Promise<GetEventListResult> {
     /* Получение списка спектаклей */
-    const response = await apiClient.GET('/api/events/', {
-        params: {
-            query: {
-                show_on_main_page: show_on_main_page ? show_on_main_page : undefined,
-                order_by: order_by ? order_by : undefined
+    try {
+        const response = await apiClient.GET('/api/events/', {
+            params: {
+                query: {
+                    show_on_main_page: show_on_main_page ? show_on_main_page : undefined,
+                    order_by: order_by ? order_by : undefined
+                }
             }
-        }
-    });
+        });
 
-    if (response.error) {
-        console.log(response.error); //TODO
+        if (response.error) {
+            console.log(response.error); //TODO
+            return {
+                events: []
+            };
+        }
+
+        return { events: response.data ?? [] };
+    } catch (error) {
+        console.log(error); //TODO
         return {
             events: []
         };
     }
-
-    return { events: response.data };
 }

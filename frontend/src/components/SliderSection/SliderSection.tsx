@@ -11,7 +11,7 @@ export default async function SliderSection() {
     }
     
     return (
-        <section className={styles.root}>
+        <section className={styles.root} id="services">
             <SliderList
                 data={infoBlocks}
             />

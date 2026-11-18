@@ -9,6 +9,10 @@ export default async function EventPreviewSection() {
         order_by: 'sort'
     });
 
+    if (!events.length) {
+        return null;
+    }
+
     return (
         <section className={styles.root} id="events">
             <h2>Все спектакли</h2>

@@ -10,6 +10,8 @@ export async function getMenuItems(): Promise<getMenuItemsResult> {
     const menuItems = [
         { href: '/#schedule', title: 'Афиша' },
         { href: '/events', title: 'Спектакли' },
+        { href: '/#services', title: 'Услуги' },
+        { href: '/#certificates', title: 'Сертификаты' },
         { href: '/#contacts', title: 'Контакты' },
         { href: '/#partner', title: 'Партнеры' },
     ];
