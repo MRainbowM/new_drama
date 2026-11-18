@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import photo from 'public/images/certificate.png';
+import photo from 'public/images/certificate.webp';
 import ticket from 'public/images/certificate-ticket.png';
 import { contactCertificateBuy } from '../../constants/links';
 import styles from './CertificateSection.module.scss';
