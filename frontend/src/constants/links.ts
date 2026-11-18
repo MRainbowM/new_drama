@@ -13,3 +13,4 @@ export const contactPhone = '+79245303336';
 export const contactPhoneFormat = '+7 924 530-33-36';
 export const contactPhoneTitle = '+7 (924) 530-33-36';
 export const contactTicketBuy = 'https://quicktickets.ru/irkutsk-teatr-novaya-drama';
+export const contactCertificateBuy = 'https://quicktickets.ru/irkutsk-teatr-novaya-drama/certificates';

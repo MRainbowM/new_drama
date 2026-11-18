@@ -1,0 +1,341 @@
+.root {
+  padding-top: var(--gap-between-sections);
+  overflow: visible;
+
+  h2 {
+    margin-bottom: 40px;
+    font-size: var(--font-size-h2-main);
+    color: var(--color-h2-main);
+  }
+}
+
+.content {
+  position: relative;
+  display: grid;
+  grid-template-columns: 560px minmax(0, 760px);
+  column-gap: 200px;
+  align-items: start;
+  overflow: visible;
+  /* место под свисающий билет (~125px в макете) */
+  padding-bottom: 125px;
+}
+
+.visual {
+  position: relative;
+  width: 560px;
+  max-width: 100%;
+  overflow: visible;
+}
+
+.photoWrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+  aspect-ratio: 560 / 640;
+  width: 100%;
+}
+
+.photo {
+  object-fit: cover;
+  object-position: center top;
+}
+
+.ticket {
+  position: absolute;
+  left: 55.5%;
+  top: 72.7%;
+  z-index: 2;
+  width: 107.5%;
+  max-width: 538px;
+  height: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.5));
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 760px;
+  height: 640px;
+  /* 28px + features/btn → features ≈446px, кнопка ≈556px от верха фото */
+  padding-bottom: 28px;
+}
+
+.heading {
+  flex: none;
+  align-self: stretch;
+  width: 100%;
+  max-width: 760px;
+  height: 309px;
+  margin: 0 0 28px;
+  font-family: var(--font-sans-narrow), "PT Sans Narrow", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 112px;
+  line-height: 92%;
+  text-transform: uppercase;
+  color: var(--color-red);
+}
+
+.description {
+  margin: 0;
+  font-family: var(--font-montserrat);
+  font-size: var(--font-size-text-base);
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--color-white);
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px 24px;
+  margin-top: auto;
+  margin-bottom: 30px;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 15px;
+  border-top: 2px solid var(--color-red);
+}
+
+.featureTitle {
+  font-size: 27px;
+  font-weight: 700;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.featureDescription {
+  font-family: var(--font-montserrat);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--color-white-with-alpha-70);
+}
+
+.btn {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: row;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  box-sizing: border-box;
+  width: 273px;
+  height: 59px;
+  padding: 18px 40px;
+  border-radius: 100px;
+  background: var(--color-red);
+  color: var(--color-white);
+  font-family: var(--font-sans-caption);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+@media not all and (hover: none) {
+  .btn:hover {
+    background-color: var(--color-white);
+    color: var(--color-red);
+  }
+}
+
+@media (max-width: 1530px) {
+  .heading {
+    height: unset;
+    font-size: 90px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .content {
+    grid-column-gap: 100px;
+  }
+  .ticket {
+    left: 26%;
+  }
+  .heading {
+    font-size: 72px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .content {
+    grid-template-columns: minmax(300px, 480px) minmax(0, 1fr);
+    column-gap: clamp(64px, 10vw, 50px);
+    padding-bottom: 18%;
+  }
+
+  .visual {
+    width: 100%;
+  }
+
+  .info {
+    height: auto;
+    min-height: 0;
+    padding-bottom: 0;
+  }
+
+  .heading {
+    height: auto;
+    font-size: clamp(48px, 5.5vw, 80px);
+  }
+
+  .features {
+    margin-top: 36px;
+  }
+
+  .ticket {
+    width: 112%;
+    left: 3%;
+  }
+}
+
+@media (max-width: 1100px) {
+  .content {
+    grid-template-columns: minmax(260px, 400px) minmax(0, 1fr);
+    column-gap: 48px;
+  }
+
+  .heading {
+    height: auto;
+    max-width: none;
+    font-size: 42px;
+  }
+
+  .btn {
+    width: auto;
+    min-width: 220px;
+    height: 59px;
+    padding: 18px 40px;
+  }
+
+  .featureTitle {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 900px) {
+  .root {
+    h2 {
+      margin-bottom: 24px;
+    }
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    row-gap: 0;
+    padding-bottom: 0;
+  }
+
+  .visual {
+    width: 100%;
+    max-width: none;
+    /* билет свисает поверх фото и заходит на заголовок */
+    padding-bottom: 26%;
+    margin-bottom: 0;
+  }
+
+  .photoWrap {
+    border-radius: 0;
+    aspect-ratio: 343 / 420;
+  }
+
+  .ticket {
+    left: -3%;
+    top: auto;
+    right: auto;
+    bottom: 0;
+    width: 100%;
+    z-index: 2;
+    max-width: unset;
+  }
+
+  .info {
+    position: relative;
+    z-index: 1;
+    height: auto;
+    max-width: none;
+    /* заголовок заходит под билет, как в адаптиве */
+
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .heading {
+    height: auto;
+    margin-bottom: 16px;
+    max-width: none;
+    font-size: 96px;
+  }
+
+  .description {
+    margin-bottom: 28px;
+  }
+
+  .features {
+    gap: 12px;
+    margin-top: 0;
+    margin-bottom: 24px;
+  }
+
+  .featureTitle {
+    font-size: 22px;
+  }
+
+  .featureDescription {
+    font-size: 12px;
+  }
+
+  .btn {
+    align-self: stretch;
+    width: 100%;
+    min-width: 0;
+    height: 59px;
+    padding: 18px 40px;
+  }
+}
+
+@media (max-width: 500px) {
+  .info {
+    margin-top: 50px;
+  }
+
+  .heading {
+    font-size: 49px;
+  }
+
+  .ticket {
+    left: -7%;
+    top: 62%;
+    right: auto;
+    bottom: 0;
+    width: 112%;
+    z-index: 2;
+    max-width: 393px;
+  }
+
+  .features {
+    gap: 10px;
+  }
+
+  .btn {
+    font-size: 14px;
+    height: 52px;
+    padding: 16px 32px;
+  }
+}
