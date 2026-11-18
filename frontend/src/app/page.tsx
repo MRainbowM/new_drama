@@ -4,6 +4,7 @@ import PartnerSection from '../components/PartnerSection/PartnerSection';
 import ScheduleSection from '../components/ScheduleSection/ScheduleSection';
 import SliderSection from '../components/SliderSection/SliderSection';
 import TheaterSection from '../components/TheaterSection/TheaterSection';
+import CertificateSection from '../components/CertificateSection/CertificateSection';
 import { ReviewSection } from '../components/ReviewSection/ReviewSection';
 import { metadataMainPageDescription, metadataMainPageJsonLd, metadataMainPageTitle } from '../constants/metadata';
 import '../styles/page.scss'
@@ -49,6 +50,7 @@ export default function MainPage() {
         <Hero />
         <ScheduleSection />
         <EventPreviewSection />
+        <CertificateSection />
         <SliderSection />
         <ReviewSection />
         <PartnerSection />

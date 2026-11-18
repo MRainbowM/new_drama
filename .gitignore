@@ -21,3 +21,5 @@ backend/static/ninja
 backend/static/grappelli
 
 .idea
+
+.tmp-venv
