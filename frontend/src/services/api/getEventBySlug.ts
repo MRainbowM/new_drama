@@ -13,6 +13,7 @@ interface GetEventBySlugResult {
 export async function getEventBySlug(
     { slug }: GetEventBySlugParams): Promise<GetEventBySlugResult> {
     const response = await apiClient.GET('/api/events/{slug}/', {
+        next: { revalidate: 60 },
         params: {
             path: { slug }
         }

@@ -29,6 +29,7 @@ async function fetchAllEventSlugs(): Promise<EventPreview[]> {
   // eslint-disable-next-line no-constant-condition
 
   const response = await apiClient.GET('/api/events/', {
+    next: { revalidate: 60 },
     params: {}
   });
 

@@ -18,6 +18,7 @@ export async function getEventShowList(
 ): Promise<GetEventShowListResult> {
     /* Получение списка спектаклей в афише */
     const response = await apiClient.GET('/api/event-shows/', {
+        next: { revalidate: 60 },
         params: {
             query: {
                 event_id: event_id ? event_id : undefined

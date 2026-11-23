@@ -18,6 +18,7 @@ export async function getReviewList(
 ): Promise<GetReviewListResult> {
     /* Получение списка спектаклей в афише */
     const response = await apiClient.GET('/api/info/reviews/', {
+        next: { revalidate: 60 },
         params: {
             query: {
                 event_id: event_id ? event_id : undefined,

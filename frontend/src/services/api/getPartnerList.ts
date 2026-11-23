@@ -6,7 +6,9 @@ interface GetPartnerListResult {
 }
 
 export async function getPartnerList(): Promise<GetPartnerListResult> {
-    const response = await apiClient.GET('/api/info/partners/', {});
+    const response = await apiClient.GET('/api/info/partners/', {
+        next: { revalidate: 60 },
+    });
     if (response.error) {
         console.log(response.error); //TODO
         return { partnerList: [] };

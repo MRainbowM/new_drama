@@ -11,6 +11,7 @@ interface GetInfoBlocksResult {
 }
 export async function getInfoBlocks({ in_menu }: GetInfoBlocksParams = {}): Promise<GetInfoBlocksResult> {
     const response = await apiClient.GET('/api/info/info-blocks/', {
+        next: { revalidate: 60 },
         params: {
             query: {
                 in_menu: in_menu ? in_menu : undefined,

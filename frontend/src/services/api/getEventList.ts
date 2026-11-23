@@ -19,6 +19,7 @@ export async function getEventList(
     /* Получение списка спектаклей */
     try {
         const response = await apiClient.GET('/api/events/', {
+            next: { revalidate: 60 },
             params: {
                 query: {
                     show_on_main_page: show_on_main_page ? show_on_main_page : undefined,
