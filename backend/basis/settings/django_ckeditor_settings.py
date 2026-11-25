@@ -31,10 +31,24 @@ customColorPalette = [
 
 # CKEDITOR_5_CUSTOM_CSS = 'path_to.css'  # optional
 # CKEDITOR_5_FILE_STORAGE = "path_to_storage.CustomStorage"  # optional
+link_open_in_new_tab = {
+    'decorators': {
+        'openInNewTab': {
+            'mode': 'manual',
+            'label': 'Open in a new tab',
+            'attributes': {
+                'target': '_blank',
+                'rel': 'noopener noreferrer',
+            },
+        },
+    },
+}
+
 CKEDITOR_5_CONFIGS = {
     'default': {
         'toolbar': ['heading', '|', 'bold', 'italic', 'link',
                     'bulletedList', 'numberedList', 'blockQuote', 'imageUpload', ],
+        'link': link_open_in_new_tab,
 
     },
     'extends': {
@@ -50,6 +64,7 @@ CKEDITOR_5_CONFIGS = {
                     'bulletedList', 'numberedList', 'todoList', '|', 'blockQuote', 'imageUpload', '|',
                     'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat',
                     'insertTable', ],
+        'link': link_open_in_new_tab,
         'image': {
             'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
                         'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side', '|'],
