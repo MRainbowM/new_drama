@@ -23,5 +23,6 @@ class EventShowOutSchema(Schema):
     start_at: datetime
     is_premiere: bool
     is_sold_out: bool
+    is_promo: bool
     link_to_buy_ticket: str
     day_of_week: str

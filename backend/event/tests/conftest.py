@@ -90,6 +90,7 @@ def event_show(event):
         is_enable=True,
         is_premiere=False,
         is_sold_out=False,
+        is_promo=False,
         link_to_buy_ticket=f'{settings.TICKET_SERVICE_BASE_URL}/show/1',
     )
 
@@ -102,5 +103,6 @@ def sold_out_event_show(event):
         is_enable=True,
         is_premiere=True,
         is_sold_out=True,
+        is_promo=True,
         link_to_buy_ticket=f'{settings.TICKET_SERVICE_BASE_URL}/show/2',
     )

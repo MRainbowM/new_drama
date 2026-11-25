@@ -82,6 +82,39 @@
         width: 40px;
         height: 40px;
     }
+
+    .promoIcon {
+        position: relative;
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+        margin-left: auto;
+        margin-right: 12px;
+        color: var(--color-red);
+
+        svg {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    .promoTooltip {
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 6px 10px;
+        background-color: var(--color-black);
+        color: var(--color-white);
+        font-size: 13px;
+        font-weight: normal;
+        white-space: nowrap;
+        pointer-events: none;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.15s ease;
+        z-index: 3;
+    }
 }
 
 .btnCol {
@@ -139,6 +172,11 @@
                 text-decoration: underline;
             }
         }
+    }
+
+    .promoIcon:hover .promoTooltip {
+        opacity: 1;
+        visibility: visible;
     }
 }
 

@@ -4,6 +4,7 @@ import ScheduleCursor from '../ScheduleCursor/ScheduleCursor';
 import { useState } from 'react';
 import clsx from 'clsx';
 import Link from 'next/link';
+import DiscountIcon from 'public/images/discount.svg';
 
 interface ScheduleItemProps {
     event: components['schemas']['EventShowOutSchema']
@@ -86,6 +87,19 @@ export default function ScheduleItem(
                                 ) : (<></>)
                             )}
                         </div>
+                        {(
+                            event.is_promo && showBtnBuyTicket && !event.is_sold_out ? (
+                                <span
+                                    className={styles.promoIcon}
+                                    aria-label="Скидки на билеты"
+                                >
+                                    <DiscountIcon />
+                                    <span className={styles.promoTooltip}>
+                                        Скидки на билеты
+                                    </span>
+                                </span>
+                            ) : (<></>)
+                        )}
                         <div className={styles.btnCol}>
                             {
                                 showBtnBuyTicket ? (

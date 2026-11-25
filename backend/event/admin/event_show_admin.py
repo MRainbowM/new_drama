@@ -7,9 +7,9 @@ from ..models import EventShow
 class EventShowAdmin(admin.ModelAdmin):
     list_display = (
         'get_event_name', 'start_at',
-        'is_sold_out', 'is_premiere', 'is_enable',
+        'is_sold_out', 'is_promo', 'is_premiere', 'is_enable',
     )
-    list_editable = ('is_sold_out',)
+    list_editable = ('is_sold_out', 'is_promo',)
     sortable_by = ('start_at', 'get_event_name')
     ordering = ('-start_at',)
 
