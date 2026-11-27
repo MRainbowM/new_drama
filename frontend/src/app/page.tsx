@@ -1,61 +1,65 @@
-import EventPreviewSection from '../components/EventPreviewSection/EventPreviewSection';
-import Hero from '../components/Hero/Hero';
-import PartnerSection from '../components/PartnerSection/PartnerSection';
-import ScheduleSection from '../components/ScheduleSection/ScheduleSection';
-import SliderSection from '../components/SliderSection/SliderSection';
-import TheaterSection from '../components/TheaterSection/TheaterSection';
-import CertificateSection from '../components/CertificateSection/CertificateSection';
-import { ReviewSection } from '../components/ReviewSection/ReviewSection';
-import { metadataMainPageDescription, metadataMainPageJsonLd, metadataMainPageTitle } from '../constants/metadata';
-import '../styles/page.scss'
-import ContactsSection from '../components/ContactsSection/ContactsSection';
-import Popup from '../components/Popup/Popup';
-export const dynamic = 'force-dynamic';
-
+import EventPreviewSection from "../components/EventPreviewSection/EventPreviewSection";
+import Hero from "../components/Hero/Hero";
+import PartnerSection from "../components/PartnerSection/PartnerSection";
+import ScheduleSection from "../components/ScheduleSection/ScheduleSection";
+import SliderSection from "../components/SliderSection/SliderSection";
+import TheaterSection from "../components/TheaterSection/TheaterSection";
+import CertificateSection from "../components/CertificateSection/CertificateSection";
+import { ReviewSection } from "../components/ReviewSection/ReviewSection";
+import {
+  metadataMainPageDescription,
+  metadataMainPageJsonLd,
+  metadataMainPageTitle,
+} from "../constants/metadata";
+import "../styles/page.scss";
+import ContactsSection from "../components/ContactsSection/ContactsSection";
+import Popup from "../components/Popup/Popup";
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata() {
-    return {
-        title: metadataMainPageTitle,
-        description: metadataMainPageDescription,
-        openGraph: {
-            title: metadataMainPageTitle,
-            description: metadataMainPageDescription,
-            url: `${process.env.NEXT_PUBLIC_SITE_URL}/`,
-            type: 'website',
-            images: [
-                {
-                    url: `${process.env.NEXT_PUBLIC_SITE_URL}/static/theater.png`,
-                    width: 1200,
-                    height: 630,
-                    alt: 'Театр «Новая Драма»'
-                }
-            ]
+  return {
+    title: metadataMainPageTitle,
+    description: metadataMainPageDescription,
+    openGraph: {
+      title: metadataMainPageTitle,
+      description: metadataMainPageDescription,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/`,
+      type: "website",
+      images: [
+        {
+          url: `${process.env.NEXT_PUBLIC_SITE_URL}/static/theater.png`,
+          width: 1200,
+          height: 630,
+          alt: "Театр «Новая Драма»",
         },
-        other: {
-            ['yandex-verification']: `${process.env.YANDEX_VERIFICATION}`
-        },
-    }
+      ],
+    },
+    other: {
+      ["yandex-verification"]: `${process.env.YANDEX_VERIFICATION}`,
+    },
+  };
 }
 
 export default function MainPage() {
-    return (<>
-        <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-                __html: JSON.stringify(
-                    metadataMainPageJsonLd
-                )
-            }}
-        />  
-        <Hero />
-        <ScheduleSection />
-        <EventPreviewSection />
-        <CertificateSection />
-        <SliderSection />
-        <ReviewSection />
-        <PartnerSection />
-        <TheaterSection />
-        <ContactsSection />
-        <Popup />
-    </>);
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(metadataMainPageJsonLd),
+        }}
+      />
+      <Hero />
+      <CertificateSection />
+      <ScheduleSection />
+      <EventPreviewSection />
+      {/* <CertificateSection /> */}
+      <SliderSection />
+      <ReviewSection />
+      <PartnerSection />
+      <TheaterSection />
+      <ContactsSection />
+      <Popup />
+    </>
+  );
 }
