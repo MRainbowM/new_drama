@@ -5,13 +5,15 @@ import Link from 'next/link'
 import clsx from "clsx"
 import { useCallback, useEffect, useRef, useState } from 'react'
 import HeaderBurger from '../HeaderBurger/HeaderBurger'
+import Garland from '../Garland/Garland'
 
 interface HeaderMenuProps {
     items: { href: string, title: string }[]
+    isNewYearTheme?: boolean
 }
 
 export default function HeaderMenu(
-    { items }: HeaderMenuProps
+    { items, isNewYearTheme = false }: HeaderMenuProps
 ) {
     // Распределение пунктов меню по левую и правую стороны от лого
     const middleIdx = Math.floor(items.length / 2);
@@ -71,7 +73,10 @@ export default function HeaderMenu(
     return (
         <header className={clsx(
             styles.root,
-            { [styles.mobileShow]: isOpen }
+            {
+                [styles.mobileShow]: isOpen,
+                [styles.withGarland]: isNewYearTheme && !isOpen,
+            }
         )}>
             <div
                 className={clsx(
@@ -103,6 +108,10 @@ export default function HeaderMenu(
                     ))}
                 </div>
             </div>
+
+            {isNewYearTheme && (
+                <Garland hidden={!isActive || isOpen} />
+            )}
 
             <HeaderBurger
                 onClickBurger={onClickBurger}

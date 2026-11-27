@@ -1,0 +1,65 @@
+.root {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 28px;
+    pointer-events: none;
+    z-index: 11;
+    transition: 0.5s opacity, 0.5s transform;
+}
+
+.hidden {
+    opacity: 0;
+    transform: translateY(-100%);
+}
+
+.wire {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #3d4448;
+}
+
+.bulbs {
+    position: absolute;
+    top: 0;
+    left: 2%;
+    right: 2%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.bulb {
+    width: 8px;
+    height: 12px;
+    margin-top: 2px;
+    border-radius: 50% 50% 45% 45%;
+    box-shadow:
+        0 0 6px 2px currentColor,
+        0 0 14px 4px currentColor;
+    animation: twinkle 2s ease-in-out infinite;
+    opacity: 1;
+
+    @media (max-width: 700px) {
+        width: 6px;
+        height: 9px;
+        box-shadow:
+            0 0 4px 1px currentColor,
+            0 0 10px 3px currentColor;
+    }
+}
+
+@keyframes twinkle {
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.35;
+    }
+}

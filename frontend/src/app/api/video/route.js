@@ -8,12 +8,13 @@ export async function GET(request) {
     // Получаем параметр 'is_mobile' из URL или заголовков
     const { searchParams } = new URL(request.url, `http://${request.headers.get('host')}`);
     const is_mobile = searchParams.get('is_mobile');
+    const isNewYear = process.env.NEXT_PUBLIC_NEW_YEAR_THEME === 'true';
 
-    // Определяем путь к видео в зависимости от версии
+    // Определяем путь к видео в зависимости от версии и темы
     const videoPath = path.resolve(
         is_mobile === 'true'
-            ? 'public/video/hero_mobile.mp4'
-            : 'public/video/hero.mp4'
+            ? (isNewYear ? 'public/video/hero_mobile_ng.mp4' : 'public/video/hero_mobile.mp4')
+            : (isNewYear ? 'public/video/hero_ng.mp4' : 'public/video/hero.mp4')
     );
 
     const stat = fs.statSync(videoPath);

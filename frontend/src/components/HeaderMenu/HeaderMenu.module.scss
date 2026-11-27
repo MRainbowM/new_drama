@@ -12,6 +12,12 @@
     // pointer-events: none;
 }
 
+// Гирлянда свисает ниже шапки — расширяем клип вниз
+.withGarland {
+    overflow: visible;
+    clip-path: inset(0 0 -32px 0);
+}
+
 .menu {
     display: grid;
     grid-template-columns: 1fr 250px 1fr;

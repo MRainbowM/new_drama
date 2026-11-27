@@ -1,5 +1,5 @@
 import HeaderMenu from '../HeaderMenu/HeaderMenu'
-import { getMenuItems } from '../../services/getMenuItems';
+import { isNewYearTheme } from '../../constants/newYear';
 
 interface HeaderProps {
     /* Массив элементов меню */
@@ -10,6 +10,6 @@ export default async function Header(
     { menuItems }: HeaderProps
 ) {
     return (
-        <HeaderMenu items={menuItems} />
+        <HeaderMenu items={menuItems} isNewYearTheme={isNewYearTheme} />
     );
 }

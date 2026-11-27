@@ -9,6 +9,8 @@ import RunningLine from '../components/RunningLine/RunningLine'
 import Noise from '../libs/Noise/Noise'
 import Providers from './providers'
 import Script from "next/script";
+import Snowfall from '../components/Snowfall/Snowfall';
+import { isNewYearTheme } from '../constants/newYear';
 
 export const dynamic = 'force-dynamic';
 
@@ -80,6 +82,7 @@ export default async function RootLayout({
                     patternRefreshInterval={2}
                     patternAlpha={15}
                 />
+                {isNewYearTheme && <Snowfall />}
                 <RunningLine />
                 <Header menuItems={menuItems} />
                 <Container>
